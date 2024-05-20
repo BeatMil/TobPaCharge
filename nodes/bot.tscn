@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcaie6x0r2o7p"]
+
+[ext_resource type="Texture2D" uid="uid://ddsc1u18jewb" path="res://media/SecondChar_holder.png" id="1_7e2jv"]
+[ext_resource type="Script" path="res://scripts/bot.gd" id="1_7ebhj"]
+
+[node name="Bot" type="Node2D"]
+script = ExtResource("1_7ebhj")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_7e2jv")
+flip_h = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -8.0
+offset_top = -271.0
+offset_right = 42.0
+offset_bottom = -245.0
+text = "Action"
