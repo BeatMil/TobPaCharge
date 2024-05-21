@@ -3,8 +3,8 @@ extends Node2D
 
 # configs
 var time_control:int = 1
-var player_choice: int = ActionEnum.actions.CHARGE
-var bot_choice: int = ActionEnum.actions.CHARGE
+# var player_choice: int = ActionEnum.actions.CHARGE
+# var bot_choice: int = ActionEnum.actions.CHARGE
 
 
 # signals
@@ -24,5 +24,24 @@ func _process(_delta):
 
 
 func _on_time_control_timeout():
+	# Resolve this turn battle
+	# Get Player's action
+	# Get Bot's action
+	var result = resolve_action($Player.chosen_action, $Bot.chosen_action)
+	print("P1: %s, P2: %s, %s"%[ActionEnum.actions.keys()[$Player.chosen_action],
+		ActionEnum.actions.keys()[$Bot.chosen_action], result])
 	$TimeControl.start()
 	emit_signal("new_turn")
+
+
+func resolve_action(P1_action, P2_action) -> String:
+	if P1_action == ActionEnum.actions.CHARGE:
+		if P2_action == ActionEnum.actions.FIREBALL:
+			return "P2 Wins!"
+	elif P1_action == ActionEnum.actions.BLOCK:
+			return "Neutral"
+	elif P1_action == ActionEnum.actions.FIREBALL:
+		if P2_action == ActionEnum.actions.CHARGE:
+			return "P1 Wins!"
+
+	return "Neutral"

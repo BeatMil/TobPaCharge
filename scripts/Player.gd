@@ -13,5 +13,21 @@ func random_action():
 
 
 func new_turn():
-	random_action()
-	print("PLAYER: %s"%[ActionEnum.actions.find_key(chosen_action)])
+	pass
+	# random_action()
+	# print("PLAYER: %s"%[ActionEnum.actions.find_key(chosen_action)])
+
+
+func _on_fire_ball_button_pressed():
+	chosen_action = ActionEnum.actions.FIREBALL
+	$ActionLabel.text = ActionEnum.actions.keys()[chosen_action]
+
+
+func _on_block_button_pressed():
+	chosen_action = ActionEnum.actions.BLOCK
+	$ActionLabel.text = ActionEnum.actions.keys()[chosen_action]
+
+
+func _on_charge_button_pressed():
+	chosen_action = ActionEnum.actions.CHARGE
+	$ActionLabel.text = ActionEnum.actions.keys()[chosen_action]

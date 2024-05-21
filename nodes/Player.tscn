@@ -9,9 +9,39 @@ script = ExtResource("1_nivk1")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_mjyin")
 
-[node name="Label" type="Label" parent="."]
+[node name="ActionLabel" type="Label" parent="."]
 offset_left = -32.0
 offset_top = -284.0
 offset_right = 16.0
 offset_bottom = -258.0
 text = "action"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Buttons" type="Node2D" parent="CanvasLayer"]
+position = Vector2(46, 16)
+
+[node name="FireBallButton" type="Button" parent="CanvasLayer/Buttons"]
+offset_left = 356.0
+offset_top = 413.0
+offset_right = 463.0
+offset_bottom = 472.0
+text = "Fireball"
+
+[node name="BlockButton" type="Button" parent="CanvasLayer/Buttons"]
+offset_left = 470.0
+offset_top = 413.0
+offset_right = 577.0
+offset_bottom = 472.0
+text = "Block"
+
+[node name="ChargeButton" type="Button" parent="CanvasLayer/Buttons"]
+offset_left = 585.0
+offset_top = 413.0
+offset_right = 692.0
+offset_bottom = 472.0
+text = "Charge"
+
+[connection signal="pressed" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_pressed"]

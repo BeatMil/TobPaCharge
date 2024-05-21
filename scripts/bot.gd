@@ -15,4 +15,4 @@ func random_action():
 
 func new_turn():
 	random_action()
-	print("BOT: %s"%[ActionEnum.actions.find_key(chosen_action)])
+	# print("BOT: %s"%[ActionEnum.actions.find_key(chosen_action)])
