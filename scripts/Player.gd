@@ -5,16 +5,19 @@ var chosen_action = 0
 
 
 func _ready():
-	pass
+	$"ActionLabel".text = ActionEnum.actions.keys()[chosen_action]
 
 
 func random_action():
 	chosen_action = randi() % ActionEnum.actions.size()
+	$"ActionLabel".text = ActionEnum.actions.keys()[chosen_action]
+	if chosen_action == ActionEnum.actions.FIREBALL:
+		$"AnimationPlayer".play("fireball")
 
 
 func new_turn():
 	pass
-	# random_action()
+	random_action()
 	# print("PLAYER: %s"%[ActionEnum.actions.find_key(chosen_action)])
 
 

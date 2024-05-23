@@ -1,7 +1,62 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1dreux08gbt"]
+[gd_scene load_steps=8 format=3 uid="uid://d1dreux08gbt"]
 
-[ext_resource type="Texture2D" uid="uid://bhilkjo6hnj61" path="res://media/FirstChar_holder.png" id="1_mjyin"]
+[ext_resource type="Texture2D" uid="uid://bhilkjo6hnj61" path="res://media/FirstChar/FirstChar_holder.png" id="1_mjyin"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_nivk1"]
+[ext_resource type="Texture2D" uid="uid://cnelufqm0nn36" path="res://media/FirstChar/FirstChar_fireball.png" id="3_20fhk"]
+
+[sub_resource type="Animation" id="Animation_tv0p2"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_mjyin")]
+}
+
+[sub_resource type="Animation" id="Animation_0vekx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_mjyin")]
+}
+
+[sub_resource type="Animation" id="Animation_n7kqx"]
+resource_name = "fireball"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_20fhk")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wq4l7"]
+_data = {
+"RESET": SubResource("Animation_0vekx"),
+"fireball": SubResource("Animation_n7kqx"),
+"idle": SubResource("Animation_tv0p2")
+}
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_nivk1")
@@ -27,6 +82,7 @@ offset_right = 46.0
 offset_bottom = 16.0
 
 [node name="FireBallButton" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 356.0
 offset_top = 413.0
 offset_right = 463.0
@@ -34,6 +90,7 @@ offset_bottom = 472.0
 text = "Fireball"
 
 [node name="BlockButton" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 470.0
 offset_top = 413.0
 offset_right = 577.0
@@ -41,11 +98,17 @@ offset_bottom = 472.0
 text = "Block"
 
 [node name="ChargeButton" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 585.0
 offset_top = 413.0
 offset_right = 692.0
 offset_bottom = 472.0
 text = "Charge"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wq4l7")
+}
 
 [connection signal="pressed" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_pressed"]
