@@ -18,8 +18,13 @@ text = "action"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Buttons" type="Node2D" parent="CanvasLayer"]
-position = Vector2(46, 16)
+[node name="Buttons" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 46.0
+offset_top = 16.0
+offset_right = 46.0
+offset_bottom = 16.0
 
 [node name="FireBallButton" type="Button" parent="CanvasLayer/Buttons"]
 offset_left = 356.0
