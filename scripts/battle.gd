@@ -36,12 +36,9 @@ func _on_time_control_timeout():
 
 func resolve_action(P1_action, P2_action) -> String:
 	if P1_action == ActionEnum.actions.CHARGE:
-		if P2_action == ActionEnum.actions.FIREBALL:
-			return "P2 Wins!"
+		return "P2 Wins!" if P2_action == ActionEnum.actions.FIREBALL else "Neutral"
 	elif P1_action == ActionEnum.actions.BLOCK:
-			return "Neutral"
+		return "Neutral"
 	elif P1_action == ActionEnum.actions.FIREBALL:
-		if P2_action == ActionEnum.actions.CHARGE:
-			return "P1 Wins!"
-
+		return "P1 Wins!" if P2_action == ActionEnum.actions.CHARGE else "Neutral"
 	return "Neutral"
