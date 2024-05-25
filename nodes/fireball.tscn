@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dy4mt8sfbgevl"]
+
+[ext_resource type="Texture2D" uid="uid://dpniaq1mhsioq" path="res://media/attacks_texture/magic_circle.png" id="1_12tf1"]
+[ext_resource type="Script" path="res://scripts/fireball.gd" id="1_g132v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_33pg2"]
+radius = 128.016
+
+[node name="FireBall" type="RigidBody2D" groups=["fireball"]]
+mass = 0.1
+gravity_scale = 0.0
+script = ExtResource("1_g132v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_33pg2")
+
+[node name="Sprite" type="Sprite2D" parent="CollisionShape2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_12tf1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")

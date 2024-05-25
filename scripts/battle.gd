@@ -2,17 +2,25 @@ extends Node2D
 
 
 # configs
-var time_control:int = 1
+var time_control:int = 1 ## seconds
+var resolve_time:int = 3 ## seconds
 
 
 # signals
+signal resolve_phase
 signal new_turn
 
 
 func _ready():
+	# Connect those signals
 	connect("new_turn", $Bot.new_turn)
 	connect("new_turn", $Player.new_turn)
+	connect("resolve_phase", $Bot.resolve_phase)
+	connect("resolve_phase", $Player.resolve_phase)
+
 	$TimeControl.wait_time = time_control
+	$"ResolveTimer".wait_time = resolve_time
+
 	$TimeControl.start()
 	emit_signal("new_turn")
 
@@ -28,8 +36,8 @@ func _on_time_control_timeout():
 	var result = resolve_action($"Player".chosen_action, $"Bot".chosen_action)
 	print("P1: %s, P2: %s, %s"%[ActionEnum.actions.keys()[$"Player".chosen_action],
 		ActionEnum.actions.keys()[$Bot.chosen_action], result])
-	$TimeControl.start()
-	emit_signal("new_turn")
+	emit_signal("resolve_phase")
+	$"ResolveTimer".start()
 
 
 func resolve_action(P1_action, P2_action) -> String:
@@ -40,3 +48,9 @@ func resolve_action(P1_action, P2_action) -> String:
 	elif P1_action == ActionEnum.actions.FIREBALL:
 		return "P1 Wins!" if P2_action == ActionEnum.actions.CHARGE else "Neutral"
 	return "Neutral"
+
+
+## wait 3 seconds then new turn
+func _on_resolve_timer_timeout():
+	emit_signal("new_turn")
+	$TimeControl.start()

@@ -10,12 +10,12 @@ func _ready():
 
 func random_action():
 	# I don't know how this line work but that's fine XD
-	chosen_action = randi() % ActionEnum.actions.size()
+	## Edited: ohhhh my god that's genius! XD
+	# chosen_action = randi() % ActionEnum.actions.size()
+	chosen_action = ActionEnum.actions.CHARGE
 
 
-func new_turn():
-	random_action()
-
+func resolve_phase():
 	# Update action Label
 	$"Label".text = ActionEnum.actions.keys()[chosen_action]
 
@@ -26,3 +26,14 @@ func new_turn():
 		$"AnimationPlayer".play("block")
 	elif chosen_action == ActionEnum.actions.CHARGE:
 		$"AnimationPlayer".play("charge")
+
+
+func new_turn():
+	random_action()
+	$"AnimationPlayer".play("idle")
+
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("fireball"):
+		body.explode()
+		$"AnimationPlayer".play("hitted")

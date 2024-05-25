@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c75mn6c4kcy72"]
 
 [ext_resource type="Script" path="res://scripts/battle.gd" id="1_o5j4i"]
-[ext_resource type="PackedScene" uid="uid://d1dreux08gbt" path="res://nodes/Player.tscn" id="2_a6fra"]
-[ext_resource type="PackedScene" uid="uid://bcaie6x0r2o7p" path="res://nodes/bot.tscn" id="3_j1cia"]
+[ext_resource type="PackedScene" uid="uid://d1dreux08gbt" path="res://nodes/characters/Player.tscn" id="2_a6fra"]
+[ext_resource type="PackedScene" uid="uid://bcaie6x0r2o7p" path="res://nodes/characters/bot.tscn" id="3_j1cia"]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_o5j4i")
@@ -24,4 +24,8 @@ text = "TimeLeft"
 [node name="TimeControl" type="Timer" parent="."]
 one_shot = true
 
+[node name="ResolveTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
+[connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]
