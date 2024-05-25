@@ -11,14 +11,18 @@ func _ready():
 func random_action():
 	chosen_action = randi() % ActionEnum.actions.size()
 	$"ActionLabel".text = ActionEnum.actions.keys()[chosen_action]
-	if chosen_action == ActionEnum.actions.FIREBALL:
-		$"AnimationPlayer".play("fireball")
 
 
 func new_turn():
 	pass
-	random_action()
+	# random_action()
 	# print("PLAYER: %s"%[ActionEnum.actions.find_key(chosen_action)])
+	if chosen_action == ActionEnum.actions.FIREBALL:
+		$"AnimationPlayer".play("fireball")
+	elif chosen_action == ActionEnum.actions.BLOCK:
+		$"AnimationPlayer".play("block")
+	elif chosen_action == ActionEnum.actions.CHARGE:
+		$"AnimationPlayer".play("charge")
 
 
 func _on_fire_ball_button_pressed():
