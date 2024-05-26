@@ -62,5 +62,7 @@ func _on_charge_button_pressed():
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("fireball"):
-		body.explode()
-		$"AnimationPlayer".play("hitted")
+		if chosen_action == ActionEnum.actions.CHARGE:
+			$"AnimationPlayer".play("hitted")
+		else:
+			body.explode()
