@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1dreux08gbt"]
+[gd_scene load_steps=17 format=3 uid="uid://d1dreux08gbt"]
 
 [ext_resource type="Texture2D" uid="uid://bhilkjo6hnj61" path="res://media/FirstChar/FirstChar_holder.png" id="1_mjyin"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_nivk1"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://pskxmpxq37qc" path="res://media/FirstChar/FirstChar_block.png" id="4_73o7j"]
 [ext_resource type="AudioStream" uid="uid://bocx334wnhp3u" path="res://media/sfx/charge01.wav" id="5_2v0km"]
 [ext_resource type="Texture2D" uid="uid://blsgqkxoawu8e" path="res://media/FirstChar/FirstChar_charge.png" id="5_ye5wi"]
+[ext_resource type="Texture2D" uid="uid://rsk05rcpo5ta" path="res://media/FirstChar/FirstChar_hitted.png" id="7_qagg6"]
+[ext_resource type="AudioStream" uid="uid://ntpovytul8qr" path="res://media/sfx/boss_damaged.wav" id="7_wbjsp"]
 
 [sub_resource type="Animation" id="Animation_0vekx"]
 length = 0.001
@@ -32,6 +34,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-203, 276)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_l5ppu"]
@@ -125,14 +151,72 @@ tracks/0/keys = {
 "values": [ExtResource("1_mjyin")]
 }
 
+[sub_resource type="Animation" id="Animation_m2n50"]
+resource_name = "hitted"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_qagg6")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.456388,
+"start_offset": 0.0,
+"stream": ExtResource("7_wbjsp")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.831373, 0.239216, 0.282353, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-100, 0), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wq4l7"]
 _data = {
 "RESET": SubResource("Animation_0vekx"),
 "block": SubResource("Animation_l5ppu"),
 "charge": SubResource("Animation_pfoks"),
 "fireball": SubResource("Animation_n7kqx"),
+"hitted": SubResource("Animation_m2n50"),
 "idle": SubResource("Animation_tv0p2")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yon4"]
+size = Vector2(152, 454)
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_nivk1")
@@ -199,6 +283,13 @@ libraries = {
 [node name="FireBallSpawnPos" type="Marker2D" parent="."]
 position = Vector2(189, -46)
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_1yon4")
+
 [connection signal="pressed" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_pressed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

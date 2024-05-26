@@ -58,3 +58,9 @@ func _on_block_button_pressed():
 func _on_charge_button_pressed():
 	chosen_action = ActionEnum.actions.CHARGE
 	$ActionLabel.text = ActionEnum.actions.keys()[chosen_action]
+
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("fireball"):
+		body.explode()
+		$"AnimationPlayer".play("hitted")
