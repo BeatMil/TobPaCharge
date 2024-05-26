@@ -23,10 +23,16 @@ func new_turn():
 	# random_action()
 	# print("PLAYER: %s"%[ActionEnum.actions.find_key(chosen_action)])
 	$"AnimationPlayer".play("idle")
+	chosen_action = ActionEnum.actions.CHARGE
+	if charge_count <= 0:
+		# turn off fireball buttons
+		$"CanvasLayer/Buttons/FireBallButton".disabled = true
+	else:
+		$"CanvasLayer/Buttons/FireBallButton".disabled = false
 
 
 func resolve_phase():
-	if chosen_action == ActionEnum.actions.FIREBALL:
+	if chosen_action == ActionEnum.actions.FIREBALL and charge_count:
 		$"AnimationPlayer".play("fireball")
 		spawn_fireball()
 	elif chosen_action == ActionEnum.actions.BLOCK:
@@ -34,6 +40,11 @@ func resolve_phase():
 	elif chosen_action == ActionEnum.actions.CHARGE:
 		$"AnimationPlayer".play("charge")
 		charge_count += 1
+	else:
+		## It shouldn't reach this else...
+		$"AnimationPlayer".play("charge")
+		charge_count += 1
+		printerr("Idle: not enough charges?")
 
 
 func spawn_fireball():
@@ -62,7 +73,7 @@ func _on_charge_button_pressed():
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("fireball"):
-		if chosen_action == ActionEnum.actions.CHARGE:
+		if chosen_action in [ActionEnum.actions.CHARGE, ActionEnum.actions.CHARGE]:
 			$"AnimationPlayer".play("hitted")
 		else:
 			body.explode()
