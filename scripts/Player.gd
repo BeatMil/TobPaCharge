@@ -23,6 +23,7 @@ func new_turn():
 	# random_action()
 	# print("PLAYER: %s"%[ActionEnum.actions.find_key(chosen_action)])
 	$"AnimationPlayer".play("idle")
+	$ActionLabel.text = "Ready"
 	chosen_action = ActionEnum.actions.CHARGE
 	if charge_count <= 0:
 		# turn off fireball buttons
