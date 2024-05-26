@@ -13,7 +13,7 @@ func _ready():
 
 
 func random_action():
-	chosen_action = randi() % ActionEnum.actions.size()
+	chosen_action = ActionEnum.actions.keys()[randi() % ActionEnum.actions.size()]
 	$"ActionLabel".text = ActionEnum.actions.keys()[chosen_action]
 
 
