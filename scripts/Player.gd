@@ -6,6 +6,7 @@ var FIREBALL = preload("res://nodes/fireball.tscn")
 
 # Configs
 var chosen_action = ActionEnum.actions.CHARGE
+var charge_count = 0
 
 
 func _ready():
@@ -32,12 +33,15 @@ func resolve_phase():
 		$"AnimationPlayer".play("block")
 	elif chosen_action == ActionEnum.actions.CHARGE:
 		$"AnimationPlayer".play("charge")
+		charge_count += 1
 
 
 func spawn_fireball():
-	var fireball = FIREBALL.instantiate()
-	fireball.position = $"FireBallSpawnPos".position
-	add_child(fireball)
+	if charge_count:
+		charge_count -= 1
+		var fireball = FIREBALL.instantiate()
+		fireball.position = $"FireBallSpawnPos".position
+		add_child(fireball)
 
 
 func _on_fire_ball_button_pressed():
