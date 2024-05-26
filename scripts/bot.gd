@@ -5,13 +5,8 @@ var chosen_action = 0
 
 
 func _ready():
-	print_rich("[color=green][b]Hello world![/b][/color]")
-	print_rich("[url]https://www.bbcode.org/[/url]")
+	print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
-	print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
-	print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
-
-	pass
 
 
 func random_action():
