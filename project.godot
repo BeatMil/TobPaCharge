@@ -19,6 +19,11 @@ config/icon="res://media/TobPaCharge_icon.png"
 
 ActionEnum="*res://scripts/action_enum.gd"
 
+[layer_names]
+
+2d_physics/layer_1="P1"
+2d_physics/layer_2="P2"
+
 [physics]
 
 common/physics_ticks_per_second=120

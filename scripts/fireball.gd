@@ -11,6 +11,16 @@ func _ready():
 		apply_central_force(Vector2(-speed, 0))
 
 
+func set_target(target: String):
+	if target == "p1":
+		collision_layer = 0b00000000000000000001
+		pass
+	elif target == "p2":
+		collision_layer = 0b00000000000000000010
+	else:
+		printerr("Please choose target!!")
+
+
 func explode():
 	## TODO create explosion effect
 	print("%s explode!"%[name])

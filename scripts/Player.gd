@@ -41,6 +41,7 @@ func spawn_fireball():
 		charge_count -= 1
 		var fireball = FIREBALL.instantiate()
 		fireball.position = $"FireBallSpawnPos".position
+		fireball.set_target("p2")
 		add_child(fireball)
 
 
