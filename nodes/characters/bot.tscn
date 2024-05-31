@@ -242,7 +242,7 @@ tracks/1/keys = {
 "start_offset": 0.253432,
 "stream": ExtResource("7_mvmet")
 }],
-"times": PackedFloat32Array(-0.01)
+"times": PackedFloat32Array(0)
 }
 tracks/1/use_blend = true
 tracks/2/type = "value"
@@ -319,6 +319,8 @@ offset_bottom = -245.0
 text = "Action"
 
 [node name="Area2D" type="Area2D" parent="." groups=["character"]]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_s7wuc")
