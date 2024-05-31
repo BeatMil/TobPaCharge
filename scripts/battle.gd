@@ -52,5 +52,8 @@ func resolve_action(P1_action, P2_action) -> String:
 
 ## wait 3 seconds then new turn
 func _on_resolve_timer_timeout():
-	emit_signal("new_turn")
-	$TimeControl.start()
+	if $"Player".hp <= 0 or $"Bot".hp <= 0:
+		$"CanvasLayer/RestartMenu".open()
+	else:
+		emit_signal("new_turn")
+		$TimeControl.start()

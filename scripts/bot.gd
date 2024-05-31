@@ -6,7 +6,8 @@ var FIREBALL = preload("res://nodes/fireball.tscn")
 
 # Configs
 var chosen_action = ActionEnum.actions.CHARGE
-var charge_count = 30
+var charge_count = 0
+var hp = 1
 
 
 func _ready():
@@ -18,7 +19,7 @@ func random_action():
 	# I don't know how this line work but that's fine XD
 	## Edited: ohhhh my god that's genius! XD
 	# chosen_action = randi() % ActionEnum.actions.size()
-	chosen_action = ActionEnum.actions.FIREBALL
+	chosen_action = ActionEnum.actions.CHARGE
 
 
 func resolve_phase():
@@ -55,3 +56,4 @@ func _on_area_2d_body_entered(body):
 	if body.is_in_group("fireball"):
 		if chosen_action in [ActionEnum.actions.CHARGE, ActionEnum.actions.CHARGE]:
 			$"AnimationPlayer".play("hitted")
+			hp -= 1
