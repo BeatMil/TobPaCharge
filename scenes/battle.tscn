@@ -9,6 +9,7 @@
 script = ExtResource("1_o5j4i")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
 
 [node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_leiyv")]
 current_scene = "res://scenes/battle.tscn"
