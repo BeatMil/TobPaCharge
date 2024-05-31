@@ -3,7 +3,7 @@ extends Node2D
 
 # configs
 var time_control:int = 1 ## seconds
-var resolve_time:int = 3 ## seconds
+var resolve_time:int = 1 ## seconds
 
 
 # signals
