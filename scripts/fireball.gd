@@ -36,12 +36,6 @@ func set_target(target: String):
 		printerr("Please choose target!!")
 
 
-func explode():
-	## TODO create explosion effect
-	print("%s explode!"%[name])
-	pass
-
-
 func _on_body_entered(body):
 	print(body.name)
 	if body.is_in_group("fireball"):

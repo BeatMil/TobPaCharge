@@ -76,5 +76,3 @@ func _on_area_2d_body_entered(body):
 	if body.is_in_group("fireball"):
 		if chosen_action in [ActionEnum.actions.CHARGE, ActionEnum.actions.CHARGE]:
 			$"AnimationPlayer".play("hitted")
-		else:
-			body.explode()
