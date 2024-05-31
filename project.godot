@@ -23,6 +23,7 @@ ActionEnum="*res://scripts/action_enum.gd"
 
 2d_physics/layer_1="P1"
 2d_physics/layer_2="P2"
+2d_physics/layer_3="fireball"
 
 [physics]
 
