@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://c75mn6c4kcy72"]
+[gd_scene load_steps=5 format=3 uid="uid://c75mn6c4kcy72"]
 
 [ext_resource type="Script" path="res://scripts/battle.gd" id="1_o5j4i"]
 [ext_resource type="PackedScene" uid="uid://d1dreux08gbt" path="res://nodes/characters/Player.tscn" id="2_a6fra"]
+[ext_resource type="PackedScene" uid="uid://di45s8k4r18g4" path="res://nodes/restart_menu.tscn" id="2_leiyv"]
 [ext_resource type="PackedScene" uid="uid://bcaie6x0r2o7p" path="res://nodes/characters/bot.tscn" id="3_j1cia"]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_o5j4i")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_leiyv")]
+current_scene = "res://scenes/battle.tscn"
 
 [node name="Player" parent="." instance=ExtResource("2_a6fra")]
 position = Vector2(223, 364)
