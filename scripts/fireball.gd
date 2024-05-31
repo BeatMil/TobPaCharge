@@ -53,4 +53,4 @@ If fireball hit character(player or bot) while BLOCKING, fireball explode
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("character"):
 		if area.get_parent().chosen_action == ActionEnum.actions.BLOCK:
-			$"AnimationPlayer".play("explode")
+			$"AnimationPlayer".play("explode_smol")
