@@ -1,5 +1,19 @@
 extends Node2D
 
+"""
+Beat's Note
+- Check if steam is running
+- Check if user owns the game
+- Then you can get userID, userSteamLevel, userAvatar
+
+To get userAvatar: you gotta connect avatar_loaded first
+avatar_loaded returns 3 args which is id, avatar_size and buffer
+use avatar_size and buffer to create texture then assign it to TextureRect
+
+
+This is what I learned so far...
+"""
+
 
 var is_on_steam: bool = false
 var is_on_steam_deck: bool = false
@@ -12,9 +26,7 @@ var steam_username: String = "[not set]"
 
 func _ready() -> void:
 	Steam.connect("avatar_loaded", _on_avatar_loaded)
-	#connect(Steam.avatar_loaded, _on_avatar_loaded, 2)
-	#connect_signal(Steam.avatar_loaded, _on_avatar_loaded, 2)
-	_initialize_steam()
+	_initialize_steam() # check if steam is running
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
