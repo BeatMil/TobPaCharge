@@ -1,0 +1,109 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0psnmtfnq5v3"]
+
+[ext_resource type="Script" path="res://scripts/steam_lobby.gd" id="1_m6o36"]
+
+[node name="SteamLobby" type="Node2D"]
+script = ExtResource("1_m6o36")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 832.0
+offset_right = 1152.0
+offset_bottom = 192.0
+
+[node name="AvatarPanel" type="Panel" parent="."]
+offset_left = 832.0
+offset_top = 216.0
+offset_right = 1152.0
+offset_bottom = 408.0
+
+[node name="LobbyPanel" type="Panel" parent="."]
+offset_left = 368.0
+offset_top = 64.0
+offset_right = 688.0
+offset_bottom = 400.0
+
+[node name="AvatarTexture" type="TextureRect" parent="."]
+offset_left = 832.0
+offset_top = 216.0
+offset_right = 872.0
+offset_bottom = 256.0
+
+[node name="UsernameLabel" type="Label" parent="."]
+offset_left = 896.0
+offset_top = 64.0
+offset_right = 1008.0
+offset_bottom = 87.0
+text = "My User name
+"
+
+[node name="UserLevelLabel" type="Label" parent="."]
+offset_left = 896.0
+offset_top = 104.0
+offset_right = 1008.0
+offset_bottom = 127.0
+text = "My level
+"
+
+[node name="LobbyIdLabel" type="Label" parent="."]
+offset_left = 368.0
+offset_top = 24.0
+offset_right = 480.0
+offset_bottom = 47.0
+text = "Lobby ID: "
+
+[node name="Button" type="Button" parent="."]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 184.0
+offset_bottom = 95.0
+text = "Get Username"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 64.0
+offset_top = 160.0
+offset_right = 184.0
+offset_bottom = 191.0
+text = "Get Avatar L"
+
+[node name="Button3" type="Button" parent="."]
+offset_left = 64.0
+offset_top = 216.0
+offset_right = 184.0
+offset_bottom = 247.0
+text = "Get Avatar M"
+
+[node name="Button4" type="Button" parent="."]
+offset_left = 64.0
+offset_top = 272.0
+offset_right = 184.0
+offset_bottom = 303.0
+text = "Get Avatar S"
+
+[node name="CreateLobbyButton" type="Button" parent="."]
+offset_left = 368.0
+offset_top = 416.0
+offset_right = 488.0
+offset_bottom = 447.0
+text = "Create Lobby
+"
+
+[node name="LeaveLobbyButton" type="Button" parent="."]
+offset_left = 568.0
+offset_top = 416.0
+offset_right = 688.0
+offset_bottom = 447.0
+disabled = true
+text = "Leave Lobby"
+
+[node name="VBoxMember" type="VBoxContainer" parent="."]
+offset_left = 368.0
+offset_top = 64.0
+offset_right = 688.0
+offset_bottom = 400.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="CreateLobbyButton" to="." method="_on_create_lobby_button_pressed"]
+[connection signal="pressed" from="LeaveLobbyButton" to="." method="_on_leave_lobby_button_pressed"]

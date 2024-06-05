@@ -31,7 +31,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	Steam.run_callbacks()
 
 
 func _initialize_steam() -> void:
@@ -40,6 +40,7 @@ func _initialize_steam() -> void:
 		OS.set_environment("SteamGameId", str(480))
 
 		var init_response: Dictionary = Steam.steamInit(false)
+		print("init_response: " +str(init_response))
 		# If the status isn't one, print out the possible error and quit the program
 		if init_response['status'] != 1:
 			printerr("[STEAM] Failed to initialize: %s Shutting down..." %
