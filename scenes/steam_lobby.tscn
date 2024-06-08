@@ -12,9 +12,9 @@ offset_bottom = 192.0
 
 [node name="AvatarPanel" type="Panel" parent="."]
 offset_left = 832.0
-offset_top = 216.0
+offset_top = 440.0
 offset_right = 1152.0
-offset_bottom = 408.0
+offset_bottom = 632.0
 
 [node name="LobbyPanel" type="Panel" parent="."]
 offset_left = 368.0
@@ -44,12 +44,14 @@ offset_bottom = 127.0
 text = "My level
 "
 
-[node name="LobbyIdLabel" type="Label" parent="."]
+[node name="LobbyIdLabel" type="RichTextLabel" parent="."]
 offset_left = 368.0
 offset_top = 24.0
-offset_right = 480.0
-offset_bottom = 47.0
+offset_right = 696.0
+offset_bottom = 64.0
+focus_mode = 2
 text = "Lobby ID: "
+selection_enabled = true
 
 [node name="Button" type="Button" parent="."]
 offset_left = 64.0
@@ -101,9 +103,25 @@ offset_top = 64.0
 offset_right = 688.0
 offset_bottom = 400.0
 
+[node name="LobbyIdTextEdit" type="TextEdit" parent="."]
+offset_left = 736.0
+offset_top = 248.0
+offset_right = 1032.0
+offset_bottom = 280.0
+placeholder_text = "Insert lobby id to join"
+
+[node name="JoinLobbyButton" type="Button" parent="."]
+offset_left = 1040.0
+offset_top = 248.0
+offset_right = 1112.0
+offset_bottom = 280.0
+text = "Join
+"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
 [connection signal="pressed" from="CreateLobbyButton" to="." method="_on_create_lobby_button_pressed"]
 [connection signal="pressed" from="LeaveLobbyButton" to="." method="_on_leave_lobby_button_pressed"]
+[connection signal="pressed" from="JoinLobbyButton" to="." method="_on_join_lobby_button_pressed"]

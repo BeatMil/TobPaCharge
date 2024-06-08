@@ -38,16 +38,18 @@ Preloads
 """
 Nodes
 """
-@onready var lobby_id_label: Label = $"LobbyIdLabel"
+@onready var lobby_id_label: RichTextLabel = $"LobbyIdLabel"
 @onready var vbox_member: VBoxContainer = $"VBoxMember"
 @onready var create_lobby_button: Button = $"CreateLobbyButton"
 @onready var leave_lobby_button: Button = $"LeaveLobbyButton"
+@onready var lobby_text_edit: TextEdit = $"LobbyIdTextEdit"
 
 
 
 func _ready() -> void:
 	# Steam.connect("avatar_loaded", _on_avatar_loaded)
 	Steam.connect("lobby_created", _on_lobby_created)
+	Steam.connect("lobby_joined", _on_lobby_joined)
 	_initialize_steam() # check if steam is running
 
 
@@ -145,21 +147,19 @@ func create_lobby() -> void:
 	if lobby_id == 0:
 		# Set the lobby to public with ten members max
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_max_members)
+	else:
+		printerr("Lobby already created??")
 
 
 # A lobby has been successfully created
 func _on_lobby_created(connect_result: int, _lobby_id: int) -> void:
 	if connect_result == 1:
-		lobby_id = _lobby_id
-
-		# output.append_text("[STEAM] Created a lobby: "+str(lobby_id)+"\n")
+		print("[STEAM] Created a lobby: "+str(lobby_id)+"\n")
 
 		# Set lobby joinable as a test
 		var SET_JOINABLE: bool = Steam.setLobbyJoinable(lobby_id, true)
 		print("[STEAM] The lobby has been set joinable: "+str(SET_JOINABLE))
 
-		# Print the lobby ID to a label
-		lobby_id_label.text = "Lobby ID: " + str(lobby_id)
 
 		# Set some lobby data
 		var SET_LOBBY_DATA = Steam.setLobbyData(lobby_id, "name",
@@ -176,14 +176,16 @@ func _on_lobby_created(connect_result: int, _lobby_id: int) -> void:
 	else:
 		print("[STEAM] Failed to create lobby\n")
 
-	get_lobby_members()
-
 
 
 # Get the lobby members from Steam
 func get_lobby_members() -> void:
 	# Clear your previous lobby list
 	lobby_members.clear()
+
+	# clear Vboxmember
+	for node in vbox_member.get_children():
+		node.queue_free()
 
 	# Get the number of members from this lobby from Steam
 	var MEMBERS: int = Steam.getNumLobbyMembers(lobby_id)
@@ -215,14 +217,14 @@ func leave_lobby() -> void:
 		# Reset lobby_id
 		print("Left the lobby")
 		lobby_id = 0
-
+		Steam.leaveLobby(lobby_id)
 		# clear Vboxmember
 		for node in vbox_member.get_children():
 			node.queue_free()
 
 		# Set label
 		lobby_id_label.text = ""
-		
+
 		# Set buttons
 		create_lobby_button.disabled = false
 		leave_lobby_button.disabled = true
@@ -230,3 +232,23 @@ func leave_lobby() -> void:
 
 func _on_leave_lobby_button_pressed():
 	leave_lobby()
+
+"""
+This trigger both when create or join lobby.
+"""
+func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _response: int) -> void:
+	print("=====_on_lobby_joined=====")
+	print("response: ", _response)
+	if _response == 1:
+		lobby_id = _lobby_id
+		# Print the lobby ID to a label
+		lobby_id_label.text = "Lobby ID: " + str(lobby_id)
+
+		get_lobby_members()
+	else:
+		print("Create or Join lobby failed")
+
+
+func _on_join_lobby_button_pressed():
+	var lobby_id = int(lobby_text_edit.text)
+	Steam.joinLobby(lobby_id)
