@@ -216,10 +216,11 @@ func get_lobby_members() -> void:
 
 func leave_lobby() -> void:
 	if lobby_id != 0:
-		# Reset lobby_id
-		print("Left the lobby")
-		lobby_id = 0
 		Steam.leaveLobby(lobby_id)
+		print("Left the lobby")
+		
+		# Reset lobby_id
+		lobby_id = 0
 		# clear Vboxmember
 		for node in vbox_member.get_children():
 			node.queue_free()
