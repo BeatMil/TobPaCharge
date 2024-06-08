@@ -50,6 +50,8 @@ func _ready() -> void:
 	# Steam.connect("avatar_loaded", _on_avatar_loaded)
 	Steam.connect("lobby_created", _on_lobby_created)
 	Steam.connect("lobby_joined", _on_lobby_joined)
+	Steam.connect("lobby_chat_update", _on_lobby_chat_update)
+
 	_initialize_steam() # check if steam is running
 
 
@@ -203,7 +205,7 @@ func get_lobby_members() -> void:
 		print("MEMBER_STEAM_NAME: "+str(MEMBER_STEAM_NAME))
 
 		var lobby_member = LOBBY_MEMBER_NODE.instantiate()
-		lobby_member.name = str(MEMBER_STEAM_ID)
+		lobby_member.name = str(MEMBER_STEAM_NAME)
 		lobby_member.set_member(MEMBER_STEAM_ID, MEMBER_STEAM_NAME)
 		vbox_member.add_child(lobby_member)
 
@@ -245,8 +247,19 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 		lobby_id_label.text = "Lobby ID: " + str(lobby_id)
 
 		get_lobby_members()
+		# Disable create lobby button
+		create_lobby_button.disabled = true
+		leave_lobby_button.disabled = false
 	else:
-		print("Create or Join lobby failed")
+		printerr("Create or Join lobby failed")
+
+
+# When a lobby chat is updated
+func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_change_id: int, chat_state: int) -> void:
+	# Note that chat state changes is: 1 - entered, 2 - left, 4 - user disconnected before leaving, 8 - user was kicked, 16 - user was banned
+	print("[STEAM] Lobby ID: "+str(lobby_id)+", Changed ID: "+str(changed_id)+", Making Change: "+str(making_change_id)+", Chat State: "+str(chat_state))
+	# Update the lobby now that a change has occurred
+	get_lobby_members()
 
 
 func _on_join_lobby_button_pressed():
