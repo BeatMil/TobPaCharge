@@ -73,8 +73,8 @@ func _on_charge_button_pressed():
 	$ActionLabel.text = ActionEnum.actions.keys()[chosen_action]
 
 
-func _on_area_2d_body_entered(body):
-	if body.is_in_group("fireball"):
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("fireball"):
 		if chosen_action in [ActionEnum.actions.CHARGE, ActionEnum.actions.CHARGE]:
 			$"AnimationPlayer".play("hitted")
 			hp -= 1

@@ -28,23 +28,17 @@ func _ready():
 func set_target(target: String):
 	if target == "p1":
 		collision_layer = 0b00000000000000000101
-		$"Area2D".collision_layer = 0b00000000000000000001
+		$"Area2D".collision_layer = 0b00000000000000000101
+		$"Area2D".collision_mask  = 0b00000000000000000101
 	elif target == "p2":
 		collision_layer = 0b00000000000000000110
-		$"Area2D".collision_layer = 0b00000000000000000010
+		$"Area2D".collision_layer = 0b00000000000000000110
+		$"Area2D".collision_mask  = 0b00000000000000000110
 	else:
 		printerr("Please choose target!!")
 
-
-func _on_body_entered(body):
-	print(body.name)
-	if body.is_in_group("fireball"):
-		$"AnimationPlayer".play("explode")
-
 """
-If fireball hit character(player or bot) while BLOCKING, fireball explode
+Fireball always explode when hitted by something
 """
-func _on_area_2d_area_entered(area):
-	if area.is_in_group("character"):
-		if area.get_parent().chosen_action == ActionEnum.actions.BLOCK:
-			$"AnimationPlayer".play("explode_smol")
+func _on_area_2d_area_entered(_area):
+	$"AnimationPlayer".play("explode_smol")
