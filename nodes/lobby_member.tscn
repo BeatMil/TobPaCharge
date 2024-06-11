@@ -4,21 +4,19 @@
 
 [node name="LobbyMember" type="Control" node_paths=PackedStringArray("username_label")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
+anchor_right = 0.097
+anchor_bottom = 0.099
+offset_right = -111.744
+offset_bottom = -64.152
 size_flags_vertical = 3
 script = ExtResource("1_yyo3l")
 username_label = NodePath("SteamNameLabel")
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 0
+layout_mode = 1
 offset_top = 24.0
-offset_right = 40.0
-offset_bottom = 64.0
+offset_right = 64.0
+offset_bottom = 88.0
 
 [node name="AvatarTexture" type="TextureRect" parent="."]
 layout_mode = 0

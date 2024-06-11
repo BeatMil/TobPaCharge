@@ -11,16 +11,10 @@ offset_right = 1152.0
 offset_bottom = 192.0
 
 [node name="AvatarPanel" type="Panel" parent="."]
-offset_left = 832.0
-offset_top = 440.0
-offset_right = 1152.0
-offset_bottom = 632.0
-
-[node name="LobbyPanel" type="Panel" parent="."]
-offset_left = 368.0
-offset_top = 64.0
-offset_right = 688.0
-offset_bottom = 400.0
+offset_left = 464.0
+offset_top = 144.0
+offset_right = 784.0
+offset_bottom = 480.0
 
 [node name="AvatarTexture" type="TextureRect" parent="."]
 offset_left = 832.0
@@ -44,77 +38,103 @@ offset_bottom = 127.0
 text = "My level
 "
 
+[node name="ChatTitleLabel" type="Label" parent="."]
+offset_left = 472.0
+offset_top = 120.0
+offset_right = 584.0
+offset_bottom = 143.0
+text = "Chat"
+
+[node name="ChatLabel" type="Label" parent="."]
+offset_left = 464.0
+offset_top = 144.0
+offset_right = 784.0
+offset_bottom = 480.0
+
 [node name="LobbyIdLabel" type="RichTextLabel" parent="."]
-offset_left = 368.0
-offset_top = 24.0
-offset_right = 696.0
-offset_bottom = 64.0
+offset_left = 40.0
+offset_top = 16.0
+offset_right = 368.0
+offset_bottom = 56.0
 focus_mode = 2
 text = "Lobby ID: "
 selection_enabled = true
 
 [node name="Button" type="Button" parent="."]
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 184.0
-offset_bottom = 95.0
+offset_left = 952.0
+offset_top = 192.0
+offset_right = 1072.0
+offset_bottom = 223.0
 text = "Get Username"
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 64.0
-offset_top = 160.0
-offset_right = 184.0
-offset_bottom = 191.0
+offset_left = 832.0
+offset_top = 192.0
+offset_right = 952.0
+offset_bottom = 223.0
 text = "Get Avatar L"
 
 [node name="Button3" type="Button" parent="."]
-offset_left = 64.0
-offset_top = 216.0
-offset_right = 184.0
-offset_bottom = 247.0
+offset_left = 832.0
+offset_top = 224.0
+offset_right = 952.0
+offset_bottom = 255.0
 text = "Get Avatar M"
 
 [node name="Button4" type="Button" parent="."]
-offset_left = 64.0
-offset_top = 272.0
-offset_right = 184.0
-offset_bottom = 303.0
+offset_left = 832.0
+offset_top = 256.0
+offset_right = 952.0
+offset_bottom = 287.0
 text = "Get Avatar S"
 
 [node name="CreateLobbyButton" type="Button" parent="."]
-offset_left = 368.0
-offset_top = 416.0
-offset_right = 488.0
-offset_bottom = 447.0
+offset_left = 40.0
+offset_top = 408.0
+offset_right = 160.0
+offset_bottom = 439.0
 text = "Create Lobby
 "
 
 [node name="LeaveLobbyButton" type="Button" parent="."]
-offset_left = 568.0
-offset_top = 416.0
-offset_right = 688.0
-offset_bottom = 447.0
+offset_left = 240.0
+offset_top = 408.0
+offset_right = 360.0
+offset_bottom = 439.0
 disabled = true
 text = "Leave Lobby"
 
-[node name="VBoxMember" type="VBoxContainer" parent="."]
-offset_left = 368.0
-offset_top = 64.0
-offset_right = 688.0
-offset_bottom = 400.0
+[node name="LobbyPanel" type="Panel" parent="."]
+offset_left = 40.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 392.0
 
-[node name="LobbyIdTextEdit" type="TextEdit" parent="."]
-offset_left = 736.0
-offset_top = 248.0
-offset_right = 1032.0
-offset_bottom = 280.0
-placeholder_text = "Insert lobby id to join"
+[node name="VBoxMember" type="VBoxContainer" parent="."]
+offset_left = 40.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 392.0
+
+[node name="ChatLineEdit" type="LineEdit" parent="."]
+offset_left = 464.0
+offset_top = 496.0
+offset_right = 784.0
+offset_bottom = 527.0
+placeholder_text = "Chat: here"
+
+[node name="LobbyIdLineEdit" type="LineEdit" parent="."]
+offset_left = 376.0
+offset_top = 56.0
+offset_right = 672.0
+offset_bottom = 87.0
+placeholder_text = "Insert lobby id it join"
 
 [node name="JoinLobbyButton" type="Button" parent="."]
-offset_left = 1040.0
-offset_top = 248.0
-offset_right = 1112.0
-offset_bottom = 280.0
+offset_left = 680.0
+offset_top = 56.0
+offset_right = 752.0
+offset_bottom = 88.0
 text = "Join
 "
 
@@ -124,4 +144,6 @@ text = "Join
 [connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
 [connection signal="pressed" from="CreateLobbyButton" to="." method="_on_create_lobby_button_pressed"]
 [connection signal="pressed" from="LeaveLobbyButton" to="." method="_on_leave_lobby_button_pressed"]
+[connection signal="text_submitted" from="ChatLineEdit" to="." method="_on_chat_line_edit_text_submitted"]
+[connection signal="text_submitted" from="LobbyIdLineEdit" to="." method="_on_lobby_id_line_edit_text_submitted"]
 [connection signal="pressed" from="JoinLobbyButton" to="." method="_on_join_lobby_button_pressed"]
