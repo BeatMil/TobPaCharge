@@ -44,7 +44,7 @@ Nodes
 @onready var leave_lobby_button: Button = $"LeaveLobbyButton"
 @onready var lobby_line_edit: LineEdit = $"LobbyIdLineEdit"
 @onready var chat_label: Label = $"ChatLabel"
-
+@onready var chat_line_edit: LineEdit = $"ChatLineEdit"
 
 
 func _ready() -> void:
@@ -218,12 +218,12 @@ func _on_lobby_id_line_edit_text_submitted(new_text):
 
 
 func _on_chat_line_edit_text_submitted(new_text):
-	# var MESSAGE: String = $Frame/Main/Messaging/Chat.get_text()
 	var IS_SENT: bool = Steam.sendLobbyChatMsg(lobby_id, new_text)
 	if not IS_SENT:
 		printerr("Sent message failed")
 	else:
 		print("message sent!: ", new_text)
+		chat_line_edit.text = ""
 
 
 #################################################
@@ -231,9 +231,10 @@ func _on_chat_line_edit_text_submitted(new_text):
 #################################################
 
 # When a lobby message is received
-func _on_lobby_message(_result: int, user: int, message: String, type: int) -> void:
+func _on_lobby_message(_lobby_id: int, user: int, message: String, type: int) -> void:
+	chat_label.text += "%s: %s\n"%[Steam.getFriendPersonaName(user), message]
 	print("▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦") 
-	print("%s: %s"%[Steam.getFriendPersonaName(user), message])
+	print("%s %s: %s, %s"%[_lobby_id, Steam.getFriendPersonaName(user), message, type])
 	print("▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦") 
 	pass
 	# process_lobby_message(_result, user, message, type)
