@@ -48,7 +48,7 @@ offset_bottom = 480.0
 [node name="ChatLabel" type="RichTextLabel" parent="AvatarPanel"]
 offset_right = 320.0
 offset_bottom = 336.0
-text = "why you grey?"
+scroll_following = true
 
 [node name="LobbyIdLabel" type="RichTextLabel" parent="."]
 offset_left = 40.0
