@@ -51,8 +51,10 @@ func _ready() -> void:
 	# Steam.connect("avatar_loaded", _on_avatar_loaded)
 	Steam.connect("lobby_created", _on_lobby_created)
 	Steam.connect("lobby_joined", _on_lobby_joined)
+	Steam.connect("join_requested", _on_join_requested)
 	Steam.connect("lobby_chat_update", _on_lobby_chat_update) # when other player join
 	Steam.connect("lobby_message", _on_lobby_message)
+	Steam.connect("lobby_invite", _on_lobby_invite)
 
 	_initialize_steam() # check if steam is running
 
@@ -299,3 +301,11 @@ func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_change_id: int
 	get_lobby_members()
 
 
+# Trigger when got a friend invite from steam
+func _on_lobby_invite(inviter: int, lobby: int, game: int):
+	print("%s, %s, %s"%[inviter, lobby, game])
+
+
+# Trigger when accepct friend invite from steam
+func _on_join_requested(_lobby_id: int, _steam_id: int):
+	Steam.joinLobby(_lobby_id)
