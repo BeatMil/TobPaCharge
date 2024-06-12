@@ -43,7 +43,7 @@ Nodes
 @onready var create_lobby_button: Button = $"CreateLobbyButton"
 @onready var leave_lobby_button: Button = $"LeaveLobbyButton"
 @onready var lobby_line_edit: LineEdit = $"LobbyIdLineEdit"
-@onready var chat_label: Label = $"ChatLabel"
+@onready var chat_label: RichTextLabel = $"AvatarPanel/ChatLabel"
 @onready var chat_line_edit: LineEdit = $"ChatLineEdit"
 
 

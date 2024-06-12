@@ -10,12 +10,6 @@ offset_left = 832.0
 offset_right = 1152.0
 offset_bottom = 192.0
 
-[node name="AvatarPanel" type="Panel" parent="."]
-offset_left = 464.0
-offset_top = 144.0
-offset_right = 784.0
-offset_bottom = 480.0
-
 [node name="AvatarTexture" type="TextureRect" parent="."]
 offset_left = 832.0
 offset_top = 216.0
@@ -45,11 +39,16 @@ offset_right = 584.0
 offset_bottom = 143.0
 text = "Chat"
 
-[node name="ChatLabel" type="Label" parent="."]
+[node name="AvatarPanel" type="Panel" parent="."]
 offset_left = 464.0
 offset_top = 144.0
 offset_right = 784.0
 offset_bottom = 480.0
+
+[node name="ChatLabel" type="RichTextLabel" parent="AvatarPanel"]
+offset_right = 320.0
+offset_bottom = 336.0
+text = "why you grey?"
 
 [node name="LobbyIdLabel" type="RichTextLabel" parent="."]
 offset_left = 40.0
