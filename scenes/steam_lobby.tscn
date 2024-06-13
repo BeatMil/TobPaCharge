@@ -46,6 +46,7 @@ offset_right = 784.0
 offset_bottom = 480.0
 
 [node name="ChatLabel" type="RichTextLabel" parent="AvatarPanel"]
+layout_mode = 0
 offset_right = 320.0
 offset_bottom = 336.0
 scroll_following = true

@@ -3,12 +3,11 @@
 [ext_resource type="Script" path="res://scripts/lobby_member.gd" id="1_yyo3l"]
 
 [node name="LobbyMember" type="Control" node_paths=PackedStringArray("username_label")]
+custom_minimum_size = Vector2(160, 88)
 layout_mode = 3
-anchor_right = 0.097
-anchor_bottom = 0.099
-offset_right = -111.744
-offset_bottom = -64.152
-size_flags_vertical = 3
+anchors_preset = 0
+offset_right = 7.936
+offset_bottom = -7.904
 script = ExtResource("1_yyo3l")
 username_label = NodePath("SteamNameLabel")
 

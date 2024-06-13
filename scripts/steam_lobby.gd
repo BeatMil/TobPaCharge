@@ -31,6 +31,12 @@ var lobby_members: Array = []
 var lobby_max_members: int = 4
 
 """
+Steam Multiplayer thingy
+"""
+
+var steam_multiplayer: SteamMultiplayerPeer = SteamMultiplayerPeer.new()
+
+"""
 Preloads
 """
 @onready var LOBBY_MEMBER_NODE = preload("res://nodes/lobby_member.tscn")
@@ -55,6 +61,8 @@ func _ready() -> void:
 	Steam.connect("lobby_chat_update", _on_lobby_chat_update) # when other player join
 	Steam.connect("lobby_message", _on_lobby_message)
 	Steam.connect("lobby_invite", _on_lobby_invite)
+	
+	steam_multiplayer.connect("peer_connected", _peer_connected)
 
 	_initialize_steam() # check if steam is running
 
@@ -149,7 +157,8 @@ func create_lobby() -> void:
 	# Make sure a lobby is not already set
 	if lobby_id == 0:
 		# Set the lobby to public with ten members max
-		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_max_members)
+		#Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_max_members)
+		steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_FRIENDS_ONLY, 4)
 	else:
 		printerr("Lobby create failed.")
 
@@ -308,4 +317,9 @@ func _on_lobby_invite(inviter: int, lobby: int, game: int):
 
 # Trigger when accepct friend invite from steam
 func _on_join_requested(_lobby_id: int, _steam_id: int):
-	Steam.joinLobby(_lobby_id)
+	steam_multiplayer.connect_lobby(_lobby_id)
+	#Steam.joinLobby(_lobby_id)
+
+
+func _peer_connected(_id :int):
+	print("=====peer id: %s"%_id)
