@@ -116,6 +116,7 @@ func spawn_color_controller(_id: int) -> void:
 	# Spawn multiplayer test thingy
 	var mul_test = MUL_TEST.instantiate()
 	mul_test.player_id = _id
+	mul_test.name = str(_id)
 	if _id == 1:
 		mul_test.position = $"SpawnPoints".get_children()[0].position
 	else:
@@ -225,7 +226,7 @@ func _on_join_requested(_lobby_id: int, _steam_id: int):
 	else:
 		lobby_id = _lobby_id
 	multiplayer.multiplayer_peer = steam_multiplayer
-	# spawn_color_controller(multiplayer.get_unique_id())
+	spawn_color_controller(multiplayer.get_unique_id())
 	#Steam.joinLobby(_lobby_id)
 
 

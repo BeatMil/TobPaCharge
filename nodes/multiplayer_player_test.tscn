@@ -97,6 +97,7 @@ bg_color = Color(0.264776, 0.674727, 0.420367, 1)
 script = ExtResource("1_g4ea0")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_xeq8h")
 
 [node name="ColorRect" type="ColorRect" parent="."]
