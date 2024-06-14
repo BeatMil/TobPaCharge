@@ -173,6 +173,12 @@ func get_lobby_members() -> void:
 	for node in vbox_member.get_children():
 		node.queue_free()
 
+
+	# clear ColorPanels
+	for node in $"ColorPanels".get_children():
+		node.queue_free()
+
+
 	# Get the number of members from this lobby from Steam
 	var MEMBERS: int = Steam.getNumLobbyMembers(lobby_id)
 	# Update the player list title
@@ -195,9 +201,9 @@ func get_lobby_members() -> void:
 
 		# Spawn multiplayer test thingy
 		var mul_test = MUL_TEST.instantiate()
-		mul_test.player_id = Steam.getSteamID()
+		mul_test.player_id = MEMBER_STEAM_ID
 		mul_test.position = $"SpawnPoints".get_children()[MEMBER].position
-		add_child(mul_test)
+		$"ColorPanels".add_child(mul_test)
 
 		# Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, MEMBER_STEAM_ID) nice?
 		# # Add them to the player list
