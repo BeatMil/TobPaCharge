@@ -225,6 +225,7 @@ func _on_join_requested(_lobby_id: int, _steam_id: int):
 	else:
 		lobby_id = _lobby_id
 	multiplayer.multiplayer_peer = steam_multiplayer
+	# spawn_color_controller(multiplayer.get_unique_id())
 	#Steam.joinLobby(_lobby_id)
 
 
