@@ -22,6 +22,7 @@ SceneTransition="*res://nodes/scene_transition.tscn"
 
 [display]
 
+window/size/always_on_top=true
 window/stretch/mode="canvas_items"
 
 [layer_names]
