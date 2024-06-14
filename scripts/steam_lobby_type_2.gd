@@ -112,6 +112,17 @@ func _initialize_steam() -> void:
 		For more information, visit https://godotsteam.com/")
 
 
+func spawn_color_controller(_id: int) -> void:
+	# Spawn multiplayer test thingy
+	var mul_test = MUL_TEST.instantiate()
+	mul_test.player_id = _id
+	if _id == 1:
+		mul_test.position = $"SpawnPoints".get_children()[0].position
+	else:
+		mul_test.position = $"SpawnPoints".get_children()[1].position
+	$"ColorPanels".add_child(mul_test)
+
+
 # Get the lobby members from Steam
 func get_lobby_members() -> void:
 	# Clear your previous lobby list
@@ -119,11 +130,6 @@ func get_lobby_members() -> void:
 
 	# clear Vboxmember
 	for node in vbox_member.get_children():
-		node.queue_free()
-
-
-	# clear ColorPanels
-	for node in $"ColorPanels".get_children():
 		node.queue_free()
 
 
@@ -147,12 +153,6 @@ func get_lobby_members() -> void:
 		lobby_member.set_member(MEMBER_STEAM_ID, MEMBER_STEAM_NAME)
 		vbox_member.add_child(lobby_member)
 
-		# Spawn multiplayer test thingy
-		var mul_test = MUL_TEST.instantiate()
-		mul_test.player_id = MEMBER_STEAM_ID
-		mul_test.position = $"SpawnPoints".get_children()[MEMBER].position
-		$"ColorPanels".add_child(mul_test)
-
 
 func get_lobby_members_at_home() -> void:
 	# Get the number of members from this lobby from Steam
@@ -167,6 +167,8 @@ func create_lobby() -> void:
 	if error:
 		printerr("Create lobby failed")
 	multiplayer.multiplayer_peer = steam_multiplayer
+
+	spawn_color_controller(multiplayer.get_unique_id())
 	#Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, lobby_max_members)
 
 
@@ -189,6 +191,7 @@ func _on_lobby_created(connect_result: int, _lobby_id: int) -> void:
 		var IS_RELAY: bool = Steam.allowP2PPacketRelay(true)
 		print("[STEAM] Allowing Steam to be relay backup: "+str(IS_RELAY)+"\n")
 
+		get_lobby_members()
 		# Disable create lobby button
 		# create_lobby_button.disabled = true
 	else:
@@ -196,7 +199,7 @@ func _on_lobby_created(connect_result: int, _lobby_id: int) -> void:
 
 
 """
-This trigger both when create or join lobby.
+This doesn't seem to trigger anytime...
 """
 func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _response: int) -> void:
 	print("=====_on_lobby_joined=====")
@@ -216,13 +219,19 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 
 # Trigger when accepct friend invite from steam
 func _on_join_requested(_lobby_id: int, _steam_id: int):
-	steam_multiplayer.connect_lobby(_lobby_id)
+	var error = steam_multiplayer.connect_lobby(_lobby_id)
+	if error:
+		printerr("Join lobby error!")
+	else:
+		lobby_id = _lobby_id
 	multiplayer.multiplayer_peer = steam_multiplayer
 	#Steam.joinLobby(_lobby_id)
 
 
 func _peer_connected(_id :int):
 	print("=============connected peer id: %s"%_id)
+	get_lobby_members()
+	spawn_color_controller(_id)
 
 
 func _peer_disconnected(_id :int):

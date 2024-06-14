@@ -35,5 +35,15 @@ offset_right = 360.0
 offset_bottom = 520.0
 text = "get_lobby_member_at_home"
 
+[node name="ColorPanels" type="Node2D" parent="."]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnMarker1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(66, 466)
+
+[node name="SpawnMarker2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(194, 466)
+
 [connection signal="pressed" from="CreateLobbyButton" to="." method="create_lobby"]
 [connection signal="pressed" from="Button" to="." method="get_lobby_members_at_home"]
