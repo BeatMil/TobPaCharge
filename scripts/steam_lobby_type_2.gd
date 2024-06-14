@@ -62,10 +62,13 @@ func _ready() -> void:
 	steam_multiplayer.connect("lobby_created", _on_lobby_created)
 	steam_multiplayer.connect("lobby_joined", _on_lobby_joined)
 
+
+	multiplayer.connect("peer_connected", _peer_connected)
+	multiplayer.connect("peer_disconnected", _peer_disconnected)
+
 	_initialize_steam() # check if steam is running
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
 
@@ -156,12 +159,14 @@ func get_lobby_members_at_home() -> void:
 	var MEMBERS: int = Steam.getNumLobbyMembers(lobby_id)
 	# Update the player list title
 	print("Player List ("+str(MEMBERS)+")")
+	print("peer: %s"% multiplayer.get_peers())
 
 
 func create_lobby() -> void:
 	var error = steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_FRIENDS_ONLY, 4)
 	if error:
 		printerr("Create lobby failed")
+	multiplayer.multiplayer_peer = steam_multiplayer
 	#Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, lobby_max_members)
 
 
@@ -212,4 +217,13 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 # Trigger when accepct friend invite from steam
 func _on_join_requested(_lobby_id: int, _steam_id: int):
 	steam_multiplayer.connect_lobby(_lobby_id)
+	multiplayer.multiplayer_peer = steam_multiplayer
 	#Steam.joinLobby(_lobby_id)
+
+
+func _peer_connected(_id :int):
+	print("=============connected peer id: %s"%_id)
+
+
+func _peer_disconnected(_id :int):
+	print("=============disconnected peer id: %s"%_id)
