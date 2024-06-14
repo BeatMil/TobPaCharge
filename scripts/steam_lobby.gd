@@ -40,6 +40,7 @@ var steam_multiplayer: SteamMultiplayerPeer = SteamMultiplayerPeer.new()
 Preloads
 """
 @onready var LOBBY_MEMBER_NODE = preload("res://nodes/lobby_member.tscn")
+@onready var MUL_TEST = preload("res://nodes/multiplayer_player_test.tscn")
 
 """
 Nodes
@@ -61,8 +62,8 @@ func _ready() -> void:
 	Steam.connect("lobby_chat_update", _on_lobby_chat_update) # when other player join
 	Steam.connect("lobby_message", _on_lobby_message)
 	Steam.connect("lobby_invite", _on_lobby_invite)
-	
-	steam_multiplayer.connect("peer_connected", _peer_connected)
+
+	# multiplayer.connect("peer_connected", _peer_connected) # not sure if I need to use this...
 
 	_initialize_steam() # check if steam is running
 
@@ -192,6 +193,12 @@ func get_lobby_members() -> void:
 		lobby_member.set_member(MEMBER_STEAM_ID, MEMBER_STEAM_NAME)
 		vbox_member.add_child(lobby_member)
 
+		# Spawn multiplayer test thingy
+		var mul_test = MUL_TEST.instantiate()
+		mul_test.player_id = Steam.getSteamID()
+		mul_test.position = $"SpawnPoints".get_children()[MEMBER].position
+		add_child(mul_test)
+
 		# Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, MEMBER_STEAM_ID) nice?
 		# # Add them to the player list
 		# add_player_to_connect_list(MEMBER_STEAM_ID, MEMBER_STEAM_NAME)
@@ -292,6 +299,7 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 		# Disable create lobby button
 		create_lobby_button.disabled = true
 		leave_lobby_button.disabled = false
+
 	else:
 		printerr("Create or Join lobby failed")
 
@@ -321,5 +329,5 @@ func _on_join_requested(_lobby_id: int, _steam_id: int):
 	#Steam.joinLobby(_lobby_id)
 
 
-func _peer_connected(_id :int):
-	print("=====peer id: %s"%_id)
+# func _peer_connected(_id :int):
+# 	print("=============peer id: %s"%_id)

@@ -1,0 +1,135 @@
+[gd_scene load_steps=13 format=3 uid="uid://7gcd55r6v87"]
+
+[ext_resource type="Script" path="res://scripts/multiplayer_player_test.gd" id="1_g4ea0"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xeq8h"]
+properties/0/path = NodePath("ColorRect:color")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="Animation" id="Animation_0yk4d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wjusb"]
+resource_name = "blue"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.219957, 0.670225, 0.793794, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4esaq"]
+resource_name = "green"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.264776, 0.674727, 0.420367, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_70j8p"]
+resource_name = "white"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a3i6l"]
+_data = {
+"RESET": SubResource("Animation_0yk4d"),
+"blue": SubResource("Animation_wjusb"),
+"green": SubResource("Animation_4esaq"),
+"white": SubResource("Animation_70j8p")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m5cq"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hk1dw"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2p7eq"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jd6fu"]
+bg_color = Color(0.219957, 0.670225, 0.793794, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u878b"]
+bg_color = Color(0.264776, 0.674727, 0.420367, 1)
+
+[node name="MultiplayerPlayerTest" type="Node2D"]
+script = ExtResource("1_g4ea0")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_xeq8h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a3i6l")
+}
+
+[node name="WhiteButton" type="Button" parent="."]
+offset_top = 128.0
+offset_right = 40.0
+offset_bottom = 152.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_1m5cq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hk1dw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2p7eq")
+
+[node name="BlueButton" type="Button" parent="."]
+offset_left = 40.0
+offset_top = 128.0
+offset_right = 88.0
+offset_bottom = 152.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jd6fu")
+
+[node name="GreenButton" type="Button" parent="."]
+offset_left = 88.0
+offset_top = 128.0
+offset_right = 128.0
+offset_bottom = 152.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_u878b")
+
+[connection signal="pressed" from="WhiteButton" to="." method="turn_white"]
+[connection signal="pressed" from="BlueButton" to="." method="turn_blue"]
+[connection signal="pressed" from="GreenButton" to="." method="turn_green"]

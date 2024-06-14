@@ -138,6 +138,14 @@ offset_bottom = 88.0
 text = "Join
 "
 
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnMarker1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(66, 466)
+
+[node name="SpawnMarker2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(194, 466)
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
