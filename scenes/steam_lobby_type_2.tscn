@@ -28,6 +28,14 @@ offset_bottom = 439.0
 text = "Create Lobby
 "
 
+[node name="LeaveLobbyButton" type="Button" parent="."]
+offset_left = 200.0
+offset_top = 408.0
+offset_right = 320.0
+offset_bottom = 439.0
+text = "Leave
+"
+
 [node name="Button" type="Button" parent="."]
 offset_left = 256.0
 offset_top = 472.0
@@ -46,4 +54,5 @@ position = Vector2(66, 466)
 position = Vector2(194, 466)
 
 [connection signal="pressed" from="CreateLobbyButton" to="." method="create_lobby"]
+[connection signal="pressed" from="LeaveLobbyButton" to="." method="leave_lobby"]
 [connection signal="pressed" from="Button" to="." method="get_lobby_members_at_home"]

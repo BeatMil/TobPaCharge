@@ -56,8 +56,8 @@ Nodes
 
 func _ready() -> void:
 	# Steam.connect("avatar_loaded", _on_avatar_loaded)
-	# Steam.connect("lobby_created", _on_lobby_created)
-	# Steam.connect("lobby_joined", _on_lobby_joined)
+	Steam.connect("lobby_created", _on_lobby_created)
+	Steam.connect("lobby_joined", _on_lobby_joined)
 	# Steam.connect("join_requested", _on_join_requested)
 	# Steam.connect("lobby_chat_update", _on_lobby_chat_update) # when other player join
 	# Steam.connect("lobby_message", _on_lobby_message)
@@ -65,8 +65,8 @@ func _ready() -> void:
 
 	multiplayer.connect("peer_connected", _peer_connected)
 	multiplayer.connect("peer_disconnected", _peer_disconnected)
-	steam_multiplayer.connect("lobby_created", _on_lobby_created)
-	steam_multiplayer.connect("lobby_joined", _on_lobby_joined)
+	# steam_multiplayer.connect("lobby_created", _on_lobby_created)
+	# steam_multiplayer.connect("lobby_joined", _on_lobby_joined)
 
 	_initialize_steam() # check if steam is running
 
@@ -148,8 +148,9 @@ func create_lobby() -> void:
 	# Make sure a lobby is not already set
 	if lobby_id == 0:
 		# Set the lobby to public with ten members max
-		#Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_max_members)
-		steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_FRIENDS_ONLY, 4)
+		Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, lobby_max_members)
+		# steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_FRIENDS_ONLY, 4)
+		multiplayer.multiplayer_peer = steam_multiplayer
 	else:
 		printerr("Lobby create failed.")
 
@@ -200,13 +201,21 @@ func get_lobby_members() -> void:
 		# add_player_to_connect_list(MEMBER_STEAM_ID, MEMBER_STEAM_NAME)
 
 
+func get_lobby_members_at_home() -> void:
+	# Get the number of members from this lobby from Steam
+	var MEMBERS: int = Steam.getNumLobbyMembers(lobby_id)
+	# Update the player list title
+	print("Player List ("+str(MEMBERS)+")")
+	print("peer: %s"% multiplayer.get_peers())
+
+
 func leave_lobby() -> void:
 	if lobby_id != 0:
 		Steam.leaveLobby(lobby_id)
 		print("Left the lobby")
 		
 		# Reset lobby_id
-		lobby_id = 0
+		# lobby_id = 0
 		# clear Vboxmember
 		for node in vbox_member.get_children():
 			node.queue_free()
@@ -284,7 +293,7 @@ func _on_lobby_created(connect_result: int, _lobby_id: int) -> void:
 This trigger both when create or join lobby.
 """
 func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _response: int) -> void:
-	print("=====_on_lobby_joined=====")
+	print_rich("[color=purple][b]==_on_lobby_joined!![/b][/color]")
 	print("response: ", _response)
 	if _response == 1:
 		lobby_id = _lobby_id

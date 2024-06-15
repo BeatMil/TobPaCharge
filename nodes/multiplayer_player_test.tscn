@@ -109,7 +109,9 @@ libraries = {
 "": SubResource("AnimationLibrary_a3i6l")
 }
 
-[node name="WhiteButton" type="Button" parent="."]
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="WhiteButton" type="Button" parent="Buttons"]
 offset_top = 128.0
 offset_right = 40.0
 offset_bottom = 152.0
@@ -117,20 +119,20 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1m5cq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_hk1dw")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2p7eq")
 
-[node name="BlueButton" type="Button" parent="."]
+[node name="BlueButton" type="Button" parent="Buttons"]
 offset_left = 40.0
 offset_top = 128.0
 offset_right = 88.0
 offset_bottom = 152.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_jd6fu")
 
-[node name="GreenButton" type="Button" parent="."]
+[node name="GreenButton" type="Button" parent="Buttons"]
 offset_left = 88.0
 offset_top = 128.0
 offset_right = 128.0
 offset_bottom = 152.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_u878b")
 
-[connection signal="pressed" from="WhiteButton" to="." method="turn_white"]
-[connection signal="pressed" from="BlueButton" to="." method="turn_blue"]
-[connection signal="pressed" from="GreenButton" to="." method="turn_green"]
+[connection signal="pressed" from="Buttons/WhiteButton" to="." method="turn_white"]
+[connection signal="pressed" from="Buttons/BlueButton" to="." method="turn_blue"]
+[connection signal="pressed" from="Buttons/GreenButton" to="." method="turn_green"]

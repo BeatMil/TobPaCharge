@@ -51,16 +51,16 @@ Nodes
 
 func _ready() -> void:
 	# Steam.connect("avatar_loaded", _on_avatar_loaded)
-	#Steam.connect("lobby_created", _on_lobby_created)
-	# Steam.connect("lobby_joined", _on_lobby_joined)
+	Steam.connect("lobby_created", _on_lobby_created)
+	Steam.connect("lobby_joined", _on_lobby_joined)
 	Steam.connect("join_requested", _on_join_requested)
 	# Steam.connect("lobby_chat_update", _on_lobby_chat_update) # when other player join
 	# Steam.connect("lobby_message", _on_lobby_message)
 	# Steam.connect("lobby_invite", _on_lobby_invite)
 
 
-	steam_multiplayer.connect("lobby_created", _on_lobby_created)
-	steam_multiplayer.connect("lobby_joined", _on_lobby_joined)
+	# steam_multiplayer.connect("lobby_created", _on_lobby_created)
+	# steam_multiplayer.connect("lobby_joined", _on_lobby_joined)
 
 
 	multiplayer.connect("peer_connected", _peer_connected)
@@ -173,9 +173,28 @@ func create_lobby() -> void:
 	#Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, lobby_max_members)
 
 
+func leave_lobby() -> void:
+	if lobby_id != 0:
+		Steam.leaveLobby(lobby_id)
+		print("Left the lobby")
+		
+		# Reset lobby_id
+		lobby_id = 0
+		# clear Vboxmember
+		for node in vbox_member.get_children():
+			node.queue_free()
+
+		# Set label
+		lobby_id_label.text = ""
+
+		# Set buttons
+		create_lobby_button.disabled = false
+
+
 # A lobby has been successfully created
 func _on_lobby_created(connect_result: int, _lobby_id: int) -> void:
 	if connect_result == 1:
+		Steam.joinLobby(_lobby_id)
 		lobby_id = _lobby_id
 		print("[STEAM] Created a lobby: "+str(lobby_id)+"\n")
 
@@ -200,10 +219,10 @@ func _on_lobby_created(connect_result: int, _lobby_id: int) -> void:
 
 
 """
-This doesn't seem to trigger anytime...
+This triggers with Steam."lobby_joined"
 """
 func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _response: int) -> void:
-	print("=====_on_lobby_joined=====")
+	print_rich("[color=purple][b]==_on_lobby_joined!![/b][/color]")
 	print("response: ", _response)
 	if _response == 1:
 		lobby_id = _lobby_id
