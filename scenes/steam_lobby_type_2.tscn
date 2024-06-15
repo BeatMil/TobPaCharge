@@ -53,6 +53,20 @@ position = Vector2(66, 466)
 [node name="SpawnMarker2" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(194, 466)
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 640.0
+offset_right = 1152.0
+offset_bottom = 504.0
+scroll_following = true
+
+[node name="ShowStuffButton" type="Button" parent="."]
+offset_left = 880.0
+offset_top = 480.0
+offset_right = 1109.0
+offset_bottom = 528.0
+text = "get_lobby_member_at_home"
+
 [connection signal="pressed" from="CreateLobbyButton" to="." method="create_lobby"]
 [connection signal="pressed" from="LeaveLobbyButton" to="." method="leave_lobby"]
 [connection signal="pressed" from="Button" to="." method="get_lobby_members_at_home"]
+[connection signal="pressed" from="ShowStuffButton" to="." method="show_stuff"]

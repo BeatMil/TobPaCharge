@@ -179,7 +179,7 @@ func leave_lobby() -> void:
 		print("Left the lobby")
 		
 		# Reset lobby_id
-		lobby_id = 0
+		# lobby_id = 0
 		# clear Vboxmember
 		for node in vbox_member.get_children():
 			node.queue_free()
@@ -189,6 +189,19 @@ func leave_lobby() -> void:
 
 		# Set buttons
 		create_lobby_button.disabled = false
+
+
+func show_stuff() -> void:
+	$RichTextLabel.text += "getAllLobbyData%s: %s\n"%[lobby_id, Steam.getAllLobbyData(lobby_id)]
+
+	# Get the number of members from this lobby from Steam
+	var MEMBERS: int = Steam.getNumLobbyMembers(lobby_id)
+	for MEMBER in range(0, MEMBERS):
+		# Get the member's Steam ID
+		var MEMBER_STEAM_ID: int = Steam.getLobbyMemberByIndex(lobby_id, MEMBER)
+		# Get the member's Steam name
+		var MEMBER_STEAM_NAME: String = Steam.getFriendPersonaName(MEMBER_STEAM_ID)
+		$RichTextLabel.text += "STEAM_ID: %s, STEAM_NAME: %s\n"%[MEMBER_STEAM_ID, MEMBER_STEAM_NAME]
 
 
 # A lobby has been successfully created
