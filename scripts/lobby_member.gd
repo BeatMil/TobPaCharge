@@ -9,6 +9,8 @@ var steam_name: String = "[empty]"
 func _ready():
 	Steam.connect("avatar_loaded", _on_avatar_loaded)
 	$ReadyButton.focus_mode = FOCUS_NONE
+	if steam_id != Steam.getSteamID():
+		$ReadyButton.set_deferred("visible", false)
 
 
 # Set this player up
@@ -42,6 +44,8 @@ func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> vo
 func _on_ready_button_toggled(toggled_on):
 	if toggled_on:
 		$ReadyButton/AnimationPlayer.play("ready")
+		$ReadyLabel/AnimationPlayer.play("ready")
 		SteamNetwork.rpc("test_show_pic")
 	else:
 		$ReadyButton/AnimationPlayer.play("stand_by")
+		$ReadyLabel/AnimationPlayer.play("stand_by")
