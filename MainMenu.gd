@@ -44,14 +44,16 @@ func update_lobby_members() -> void:
 		var lobby_member = LOBBY_MEMBER_NODE.instantiate()
 		lobby_member.name = str(MEMBER_STEAM_NAME)
 		lobby_member.set_member(MEMBER_STEAM_ID, MEMBER_STEAM_NAME)
+		lobby_member.connect("ready_state_change", check_ready)
 		vbox_member.add_child(lobby_member)
 
 
-func check_ready() -> int:
+func check_ready() -> void:
 	for node in vbox_member.get_children():
 		if node.is_ready == false:
-			return 0
-	return 1
+			$StartGameButton.set_deferred("visible", false)
+			return
+	$StartGameButton.set_deferred("visible", true)
 
 
 #################################################

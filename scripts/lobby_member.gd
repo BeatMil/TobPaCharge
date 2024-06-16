@@ -6,6 +6,9 @@ var steam_name: String = "[empty]"
 var is_ready: bool = false
 
 
+# signal
+signal ready_state_change
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Steam.connect("avatar_loaded", _on_avatar_loaded)
@@ -38,6 +41,7 @@ func toggle_ready(toggled_on) -> void:
 		$ReadyButton/AnimationPlayer.play("stand_by")
 		$ReadyLabel/AnimationPlayer.play("stand_by")
 		is_ready = false
+	emit_signal("ready_state_change")
 
 #################################################
 # CALLBACKS
