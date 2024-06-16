@@ -27,16 +27,8 @@ func set_member(_steam_id: int, _steam_name: String) -> void:
 
 
 @rpc("any_peer")
-func toggle_ready(toggled_on) -> void:
-	if toggled_on:
-		$ReadyButton/AnimationPlayer.play("ready")
-		$ReadyLabel/AnimationPlayer.play("ready")
-		is_ready = true
-		# SteamNetwork.rpc("test_show_pic")
-	else:
-		$ReadyButton/AnimationPlayer.play("stand_by")
-		$ReadyLabel/AnimationPlayer.play("stand_by")
-		is_ready = false
+func toggle_ready() -> void:
+	print_rich("[img]res://media/FirstChar/FirstChar_block.png[/img]")
 
 
 #################################################
@@ -56,4 +48,16 @@ func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> vo
 
 
 func _on_ready_button_toggled(toggled_on):
-	rpc("toggle_ready", toggled_on)
+	if rpc("toggle_ready"): 
+		# if error
+		printerr("rpc toggle_ready error!")
+
+	if toggled_on:
+		$ReadyButton/AnimationPlayer.play("ready")
+		$ReadyLabel/AnimationPlayer.play("ready")
+		is_ready = true
+		# SteamNetwork.rpc("test_show_pic")
+	else:
+		$ReadyButton/AnimationPlayer.play("stand_by")
+		$ReadyLabel/AnimationPlayer.play("stand_by")
+		is_ready = false
