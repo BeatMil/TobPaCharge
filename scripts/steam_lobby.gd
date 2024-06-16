@@ -310,9 +310,9 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 
 
 # When a lobby chat is updated
-func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_change_id: int, chat_state: int) -> void:
+func _on_lobby_chat_update(_lobby_id: int, changed_id: int, making_change_id: int, chat_state: int) -> void:
 	# Note that chat state changes is: 1 - entered, 2 - left, 4 - user disconnected before leaving, 8 - user was kicked, 16 - user was banned
-	print("[STEAM] Lobby ID: "+str(lobby_id)+", Changed ID: "+str(changed_id)+", Making Change: "+str(making_change_id)+", Chat State: "+str(chat_state))
+	print("[STEAM] Lobby ID: "+str(_lobby_id)+", Changed ID: "+str(changed_id)+", Making Change: "+str(making_change_id)+", Chat State: "+str(chat_state))
 
 	if chat_state == 1:
 		chat_label.text += ("[STEAM]  has joined the lobby.\n")
@@ -330,7 +330,9 @@ func _on_lobby_invite(inviter: int, lobby: int, game: int):
 
 # Trigger when accepct friend invite from steam
 func _on_join_requested(_lobby_id: int, _steam_id: int):
-	steam_multiplayer.connect_lobby(_lobby_id)
+	var error = steam_multiplayer.connect_lobby(_lobby_id)
+	if error:
+		printerr("Join lobby failed")
 	#Steam.joinLobby(_lobby_id)
 
 

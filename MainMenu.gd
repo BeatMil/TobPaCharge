@@ -96,5 +96,3 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 		get_lobby_members()
 	else:
 		printerr("Create or Join lobby failed")
-
-
