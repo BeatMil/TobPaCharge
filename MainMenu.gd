@@ -29,6 +29,7 @@ func update_lobby_members() -> void:
 	for node in vbox_member.get_children():
 		node.queue_free()
 
+	await get_tree().create_timer(0.2).timeout
 
 	# Get the number of members from this lobby from Steam
 	var MEMBERS: int = Steam.getNumLobbyMembers(lobby_id)
