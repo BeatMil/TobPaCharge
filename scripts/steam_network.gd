@@ -20,7 +20,7 @@ func _ready():
 	Steam.connect("lobby_joined", _on_lobby_joined)
 	Steam.connect("join_requested", _on_join_requested)
 	multiplayer.connect("peer_connected", _peer_connected)
-	# multiplayer.connect("peer_disconnected", _peer_disconnected)
+	multiplayer.connect("peer_disconnected", _peer_disconnected)
 
 	_initialize_steam()
 
@@ -49,6 +49,18 @@ func _initialize_steam() -> void:
 		steam_id = Steam.getSteamID()
 		steam_username = Steam.getPersonaName()
 
+
+func _update_lobby_for_mainmenu() -> void:
+	var now_scene = get_tree().current_scene
+	if now_scene.name == "MainMenu":
+		now_scene.update_lobby_members()
+
+
+func _update_button_for_mainmenu() -> void:
+	var now_scene = get_tree().current_scene
+	if now_scene.name == "MainMenu":
+		now_scene._in_lobby_buttons()
+
 #################################################
 # Call backs
 #################################################
@@ -61,9 +73,9 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 		lobby_id = _lobby_id
 		print_rich("[color=purple][b]_on_lobby_joined!! lobby_id: %s[/b][/color]"%_lobby_id)
 		multiplayer.multiplayer_peer = steam_multiplayer
-		var now_scene = get_tree().current_scene
-		if now_scene.name == "MainMenu":
-			now_scene.update_lobby_members()
+		_update_lobby_for_mainmenu()
+		_update_button_for_mainmenu()
+
 	else:
 		printerr("Create or Join lobby failed")
 
@@ -75,16 +87,12 @@ func _on_join_requested(_lobby_id: int, _steam_id: int):
 
 func _peer_connected(_id :int):
 	print_rich("[color=Bisque ][b]%s has join![/b][/color]"%_id)
-	var now_scene = get_tree().current_scene
-	if now_scene.name == "MainMenu":
-		now_scene.update_lobby_members()
+	_update_lobby_for_mainmenu()
 
 
 func _peer_disconnected(_id :int):
 	print_rich("[color=Bisque ][b]%s left[/b][/color]"%_id)
-	var now_scene = get_tree().current_scene
-	if now_scene.name == "MainMenu":
-		now_scene.update_lobby_members()
+	_update_lobby_for_mainmenu()
 
 
 #################################################

@@ -16,6 +16,17 @@ func _ready():
 	pass
 
 
+func _in_lobby_buttons() -> void:
+	create_lobby_button.set_deferred("disabled", true)
+	leave_lobby_button.set_deferred("disabled", false)
+	invite_friend_button.set_deferred("disabled", false)
+
+
+func _outside_lobby_buttons() -> void:
+	create_lobby_button.set_deferred("disabled", false)
+	leave_lobby_button.set_deferred("disabled", true)
+	invite_friend_button.set_deferred("disabled", true)
+
 #################################################
 # Normal functions
 #################################################
@@ -67,16 +78,12 @@ func _on_button_pressed():
 func _on_create_lobby_button_pressed():
 	var error = SteamNetwork.create_lobby()
 	if not error:
-		create_lobby_button.set_deferred("disabled", true)
-		leave_lobby_button.set_deferred("disabled", false)
-		invite_friend_button.set_deferred("disabled", false)
+		_in_lobby_buttons()
 
 
 func _on_leave_lobby_button_pressed():
 	SteamNetwork.leave_lobby()
-	create_lobby_button.set_deferred("disabled", false)
-	leave_lobby_button.set_deferred("disabled", true)
-	invite_friend_button.set_deferred("disabled", true)
+	_outside_lobby_buttons()
 	update_lobby_members()
 
 
