@@ -5,6 +5,7 @@ extends Control
 @onready var invite_friend_button: Button = $InviteFriendButton
 @onready var leave_lobby_button: Button = $LeaveLobbyButton
 @onready var create_lobby_button: Button = $CreateLobbyButton
+@onready var start_game_button: Button = $StartGameButton
 """
 Preloads
 """
@@ -13,7 +14,7 @@ Preloads
 
 
 func _ready():
-	pass
+	_outside_lobby_buttons()
 
 
 func _in_lobby_buttons() -> void:
@@ -26,6 +27,7 @@ func _outside_lobby_buttons() -> void:
 	create_lobby_button.set_deferred("disabled", false)
 	leave_lobby_button.set_deferred("disabled", true)
 	invite_friend_button.set_deferred("disabled", true)
+	start_game_button.set_deferred("visible", false)
 
 #################################################
 # Normal functions
