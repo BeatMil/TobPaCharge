@@ -8,6 +8,7 @@ var steam_name: String = "[empty]"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Steam.connect("avatar_loaded", _on_avatar_loaded)
+	$ReadyButton.focus_mode = FOCUS_NONE
 
 
 # Set this player up
@@ -36,3 +37,11 @@ func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> vo
 		var avatar_texture : ImageTexture = ImageTexture.create_from_image(avatar_image)
 		# Display it
 		$"AvatarTexture".set_texture(avatar_texture)
+
+
+func _on_ready_button_toggled(toggled_on):
+	if toggled_on:
+		$ReadyButton/AnimationPlayer.play("ready")
+		SteamNetwork.rpc("test_show_pic")
+	else:
+		$ReadyButton/AnimationPlayer.play("stand_by")

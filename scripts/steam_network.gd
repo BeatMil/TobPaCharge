@@ -103,6 +103,10 @@ func leave_lobby() -> void:
 	else:
 		print("Not in a lobby")
 
+@rpc("call_local")
+func test_show_pic() -> void:
+	print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
+
 
 func debug() -> void:
 	print_rich("""[color=red][b]============================================================
