@@ -26,6 +26,19 @@ func set_member(_steam_id: int, _steam_name: String) -> void:
 	Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, steam_id)
 
 
+@rpc("any_peer")
+func toggle_ready(toggled_on) -> void:
+	if toggled_on:
+		$ReadyButton/AnimationPlayer.play("ready")
+		$ReadyLabel/AnimationPlayer.play("ready")
+		is_ready = true
+		# SteamNetwork.rpc("test_show_pic")
+	else:
+		$ReadyButton/AnimationPlayer.play("stand_by")
+		$ReadyLabel/AnimationPlayer.play("stand_by")
+		is_ready = false
+
+
 #################################################
 # CALLBACKS
 #################################################
@@ -42,14 +55,5 @@ func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> vo
 		$"AvatarTexture".set_texture(avatar_texture)
 
 
-@rpc("any_peer")
 func _on_ready_button_toggled(toggled_on):
-	if toggled_on:
-		$ReadyButton/AnimationPlayer.play("ready")
-		$ReadyLabel/AnimationPlayer.play("ready")
-		is_ready = true
-		# SteamNetwork.rpc("test_show_pic")
-	else:
-		$ReadyButton/AnimationPlayer.play("stand_by")
-		$ReadyLabel/AnimationPlayer.play("stand_by")
-		is_ready = false
+	rpc("toggle_ready", toggled_on)
