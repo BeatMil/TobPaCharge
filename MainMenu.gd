@@ -77,22 +77,3 @@ func _on_invite_friend_button_pressed():
 
 func _on_debug_button_pressed():
 	SteamNetwork.debug()
-
-
-#################################################
-# Call backs
-#################################################
-
-"""
-This triggers with Steam."lobby_joined"
-"""
-func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _response: int) -> void:
-	if _response == 1:
-		update_lobby_members()
-	else:
-		printerr("Create or Join lobby failed")
-
-
-# Trigger when accepct friend invite from steam
-func _on_join_requested(_lobby_id: int, _steam_id: int):
-	SteamNetwork.join_lobby(_lobby_id)

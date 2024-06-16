@@ -18,7 +18,7 @@ func _ready():
 	# Connect signals
 	# Steam.connect("lobby_created", _on_lobby_created)
 	Steam.connect("lobby_joined", _on_lobby_joined)
-	# Steam.connect("join_requested", _on_join_requested)
+	Steam.connect("join_requested", _on_join_requested)
 	multiplayer.connect("peer_connected", _peer_connected)
 	# multiplayer.connect("peer_disconnected", _peer_disconnected)
 
@@ -66,6 +66,11 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 			now_scene.update_lobby_members()
 	else:
 		printerr("Create or Join lobby failed")
+
+
+# Trigger when accepct friend invite from steam
+func _on_join_requested(_lobby_id: int, _steam_id: int):
+	join_lobby(_lobby_id)
 
 
 func _peer_connected(_id :int):
