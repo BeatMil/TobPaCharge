@@ -19,10 +19,12 @@ func _ready():
 	# Steam.connect("lobby_created", _on_lobby_created)
 	Steam.connect("lobby_joined", _on_lobby_joined)
 	# Steam.connect("join_requested", _on_join_requested)
-	# multiplayer.connect("peer_connected", _peer_connected)
+	multiplayer.connect("peer_connected", _peer_connected)
 	# multiplayer.connect("peer_disconnected", _peer_disconnected)
 
 	_initialize_steam()
+
+	print(get_tree().current_scene.name)
 
 
 func _process(_delta):
@@ -58,16 +60,26 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 	if _response == 1:
 		lobby_id = _lobby_id
 		print_rich("[color=purple][b]_on_lobby_joined!! lobby_id: %s[/b][/color]"%_lobby_id)
+		multiplayer.multiplayer_peer = steam_multiplayer
+		var now_scene = get_tree().current_scene
+		if now_scene.name == "MainMenu":
+			now_scene.update_lobby_members()
 	else:
 		printerr("Create or Join lobby failed")
 
 
 func _peer_connected(_id :int):
-	print("=============connected peer id: %s"%_id)
+	print_rich("[color=Bisque ][b]%s has join![/b][/color]"%_id)
+	var now_scene = get_tree().current_scene
+	if now_scene.name == "MainMenu":
+		now_scene.update_lobby_members()
 
 
 func _peer_disconnected(_id :int):
-	print("=============disconnected peer id: %s"%_id)
+	print_rich("[color=Bisque ][b]%s left[/b][/color]"%_id)
+	var now_scene = get_tree().current_scene
+	if now_scene.name == "MainMenu":
+		now_scene.update_lobby_members()
 
 
 #################################################
@@ -79,7 +91,7 @@ func create_lobby() -> int:
 	if error:
 		printerr("Create lobby failed")
 	else:
-		multiplayer.multiplayer_peer = steam_multiplayer
+		# multiplayer.multiplayer_peer = steam_multiplayer
 		print_rich("[color=orange][b]SteamNetwork.create_lobby() ✓[/b][/color]")
 	return error
 
@@ -89,14 +101,14 @@ func join_lobby(_lobby_id: int) -> int:
 	if error:
 		printerr("Join lobby failed")
 	else:
-		multiplayer.multiplayer_peer = steam_multiplayer
+		# multiplayer.multiplayer_peer = steam_multiplayer
 		print_rich("[color=orange][b]SteamNetwork.join_lobby() ✓[/b][/color]")
 	return error
 
 
 func leave_lobby() -> void:
 	if lobby_id != 0:
-		print_rich("[color=red][b]lobby_id: %s[/b][/color]"%lobby_id)
+		print_rich("[color=red][b]Left lobby_id: %s[/b][/color]"%lobby_id)
 		Steam.leaveLobby(lobby_id)
 		steam_multiplayer.close()
 		lobby_id = 0

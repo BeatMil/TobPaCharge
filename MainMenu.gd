@@ -13,12 +13,7 @@ Preloads
 
 
 func _ready():
-	# Connect signals
-	# Steam.connect("lobby_created", _on_lobby_created)
-	Steam.connect("lobby_joined", _on_lobby_joined)
-	Steam.connect("join_requested", _on_join_requested)
-	# multiplayer.connect("peer_connected", _peer_connected)
-	# multiplayer.connect("peer_disconnected", _peer_disconnected)
+	pass
 
 
 #################################################
@@ -26,8 +21,8 @@ func _ready():
 #################################################
 
 # Get the lobby members from Steam
-func get_lobby_members() -> void:
-	print_rich("[color=orange][b]get_lobby_members()✓[/b][/color]")
+func update_lobby_members() -> void:
+	print_rich("[color=orange][b]update_lobby_members()✓[/b][/color]")
 	var lobby_id = SteamNetwork.lobby_id
 
 	# clear Vboxmember
@@ -73,7 +68,7 @@ func _on_leave_lobby_button_pressed():
 	create_lobby_button.set_deferred("disabled", false)
 	leave_lobby_button.set_deferred("disabled", true)
 	invite_friend_button.set_deferred("disabled", true)
-	get_lobby_members()
+	update_lobby_members()
 
 
 func _on_invite_friend_button_pressed():
@@ -93,7 +88,7 @@ This triggers with Steam."lobby_joined"
 """
 func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _response: int) -> void:
 	if _response == 1:
-		get_lobby_members()
+		update_lobby_members()
 	else:
 		printerr("Create or Join lobby failed")
 
