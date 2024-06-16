@@ -3,6 +3,7 @@ extends Control
 @export var username_label: Label
 var steam_id: int = 0
 var steam_name: String = "[empty]"
+var is_ready: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -41,11 +42,14 @@ func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> vo
 		$"AvatarTexture".set_texture(avatar_texture)
 
 
+@rpc("any_peer")
 func _on_ready_button_toggled(toggled_on):
 	if toggled_on:
 		$ReadyButton/AnimationPlayer.play("ready")
 		$ReadyLabel/AnimationPlayer.play("ready")
-		SteamNetwork.rpc("test_show_pic")
+		is_ready = true
+		# SteamNetwork.rpc("test_show_pic")
 	else:
 		$ReadyButton/AnimationPlayer.play("stand_by")
 		$ReadyLabel/AnimationPlayer.play("stand_by")
+		is_ready = false

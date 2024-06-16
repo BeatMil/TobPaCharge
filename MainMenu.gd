@@ -46,6 +46,12 @@ func update_lobby_members() -> void:
 		vbox_member.add_child(lobby_member)
 
 
+func check_ready() -> int:
+	for node in vbox_member.get_children():
+		if node.is_ready == false:
+			return 0
+	return 1
+
 
 #################################################
 # Buttons
