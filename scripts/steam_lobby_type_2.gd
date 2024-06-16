@@ -164,13 +164,13 @@ func get_lobby_members_at_home() -> void:
 
 
 func create_lobby() -> void:
-	var error = steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_FRIENDS_ONLY, 4)
-	if error:
-		printerr("Create lobby failed")
+	Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, lobby_max_members)
+	# var error = steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_FRIENDS_ONLY, 4)
+	# if error:
+	# 	printerr("Create lobby failed")
 	multiplayer.multiplayer_peer = steam_multiplayer
 
 	spawn_color_controller(multiplayer.get_unique_id())
-	#Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, lobby_max_members)
 
 
 func leave_lobby() -> void:

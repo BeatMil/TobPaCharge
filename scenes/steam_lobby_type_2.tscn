@@ -61,9 +61,9 @@ scroll_following = true
 
 [node name="ShowStuffButton" type="Button" parent="."]
 offset_left = 880.0
-offset_top = 480.0
+offset_top = 512.0
 offset_right = 1109.0
-offset_bottom = 528.0
+offset_bottom = 560.0
 text = "get_lobby_member_at_home"
 
 [connection signal="pressed" from="CreateLobbyButton" to="." method="create_lobby"]

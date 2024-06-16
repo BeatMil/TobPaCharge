@@ -20,8 +20,6 @@ func set_member(_steam_id: int, _steam_name: String) -> void:
 
 	# Get the avatar and show it
 	Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, steam_id)
-	print("==steam_id: ", steam_id)
-	print("==steam_name: ", steam_name)
 
 
 #################################################
@@ -31,8 +29,6 @@ func set_member(_steam_id: int, _steam_name: String) -> void:
 # Avatar is ready for display
 func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> void:
 	if id == steam_id:
-		print("Avatar for user: "+str(id)+", size: "+str(avatar_size))
-
 		# Create the image and texture for loading
 		var avatar_image: Image = Image.create_from_data(avatar_size, avatar_size,
 				false, Image.FORMAT_RGBA8, buffer)
@@ -40,4 +36,3 @@ func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> vo
 		var avatar_texture : ImageTexture = ImageTexture.create_from_image(avatar_image)
 		# Display it
 		$"AvatarTexture".set_texture(avatar_texture)
-		print("Avatar loaded ✓✓✓ ", name)

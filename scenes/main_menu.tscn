@@ -32,13 +32,28 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -510.0
-offset_top = -257.0
-offset_right = -464.0
-offset_bottom = -226.0
+offset_left = -432.0
+offset_top = -202.0
+offset_right = -322.0
+offset_bottom = -171.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Start"
+text = "Play with Bot"
+
+[node name="DebugButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -552.0
+offset_top = -278.0
+offset_right = -442.0
+offset_bottom = -247.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "debug"
 
 [node name="CreateLobbyButton" type="Button" parent="."]
 layout_mode = 1
@@ -47,13 +62,53 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -505.0
-offset_top = -174.0
-offset_right = -459.0
-offset_bottom = -143.0
+offset_left = -433.0
+offset_top = -130.0
+offset_right = -322.0
+offset_bottom = -99.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Create Lobby"
 
+[node name="InviteFriendButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -432.0
+offset_top = -90.0
+offset_right = -321.0
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Invite Friend"
+
+[node name="LeaveLobbyButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -432.0
+offset_top = -54.0
+offset_right = -321.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Leave Lobby"
+
+[node name="VBoxMember" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 94.0
+offset_right = 1148.0
+offset_bottom = 645.0
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="DebugButton" to="." method="_on_debug_button_pressed"]
 [connection signal="pressed" from="CreateLobbyButton" to="." method="_on_create_lobby_button_pressed"]
+[connection signal="pressed" from="InviteFriendButton" to="." method="_on_invite_friend_button_pressed"]
+[connection signal="pressed" from="LeaveLobbyButton" to="." method="_on_leave_lobby_button_pressed"]
