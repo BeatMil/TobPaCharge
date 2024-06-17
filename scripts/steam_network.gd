@@ -6,6 +6,7 @@ var is_online: bool = false
 var steam_id: int = 0
 var steam_username: String = ""
 var lobby_id: int = 0
+var lobby_members: Array = []
 
 # Configs
 var appId: int = 480
@@ -61,6 +62,7 @@ func _update_button_for_mainmenu() -> void:
 	if now_scene.name == "MainMenu":
 		now_scene._in_lobby_buttons()
 
+
 #################################################
 # Call backs
 #################################################
@@ -73,6 +75,7 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 		lobby_id = _lobby_id
 		print_rich("[color=purple][b]_on_lobby_joined!! lobby_id: %s[/b][/color]"%_lobby_id)
 		multiplayer.multiplayer_peer = steam_multiplayer
+		update_lobby_members()
 		_update_lobby_for_mainmenu()
 		_update_button_for_mainmenu()
 
@@ -125,8 +128,24 @@ func leave_lobby() -> void:
 		Steam.leaveLobby(lobby_id)
 		steam_multiplayer.close()
 		lobby_id = 0
+		update_lobby_members()
 	else:
 		print("Not in a lobby")
+
+
+func update_lobby_members() -> void:
+	print_rich("[color=orange][b]SteamNetwork.update_lobby_members✓[/b][/color]")
+
+	lobby_members.clear()
+
+	var MEMBERS: int = Steam.getNumLobbyMembers(lobby_id)
+	for MEMBER in range(0, MEMBERS):
+		var MEMBER_STEAM_ID: int = Steam.getLobbyMemberByIndex(lobby_id, MEMBER)
+		var MEMBER_STEAM_NAME: String = Steam.getFriendPersonaName(MEMBER_STEAM_ID)
+
+		print("steam_id: %s, steam_name: %s"%[MEMBER_STEAM_ID, MEMBER_STEAM_NAME])
+
+		lobby_members.append(MEMBER_STEAM_ID)
 
 
 @rpc("call_local")
@@ -137,8 +156,8 @@ func test_show_pic() -> void:
 func debug() -> void:
 	print_rich("""[color=red][b]============================================================
 = lobby_state: %s
-=  debug_data: %s
+=  get_unique_id: %s
 ============================================================[/b][/color]"""
 	%[steam_multiplayer.get_state(),
-	steam_multiplayer.collect_debug_data()
+	steam_multiplayer.get_unique_id()
 ])

@@ -36,8 +36,6 @@ func _outside_lobby_buttons() -> void:
 # Get the lobby members from Steam
 func update_lobby_members() -> void:
 	print_rich("[color=orange][b]update_lobby_members()✓[/b][/color]")
-	var lobby_id = SteamNetwork.lobby_id
-
 	# clear Vboxmember
 	for node in vbox_member.get_children():
 		node.queue_free()
@@ -45,18 +43,14 @@ func update_lobby_members() -> void:
 	await get_tree().create_timer(0.2).timeout
 
 	# Get the number of members from this lobby from Steam
-	var MEMBERS: int = Steam.getNumLobbyMembers(lobby_id)
-	for MEMBER in range(0, MEMBERS):
-		# Get the member's Steam ID
-		var MEMBER_STEAM_ID: int = Steam.getLobbyMemberByIndex(lobby_id, MEMBER)
-		# Get the member's Steam name
-		var MEMBER_STEAM_NAME: String = Steam.getFriendPersonaName(MEMBER_STEAM_ID)
+	for member_steam_id in SteamNetwork.lobby_members:
+		var member_steam_name: String = Steam.getFriendPersonaName(member_steam_id)
 
-		print("steam_id: %s, steam_name: %s"%[MEMBER_STEAM_ID, MEMBER_STEAM_NAME])
+		print("steam_id: %s, steam_name: %s"%[member_steam_id, member_steam_name])
 
 		var lobby_member = LOBBY_MEMBER_NODE.instantiate()
-		lobby_member.name = str(MEMBER_STEAM_NAME)
-		lobby_member.set_member(MEMBER_STEAM_ID, MEMBER_STEAM_NAME)
+		lobby_member.name = str(member_steam_name)
+		lobby_member.set_member(member_steam_id, member_steam_name)
 		lobby_member.connect("ready_state_change", check_ready)
 		vbox_member.add_child(lobby_member)
 
