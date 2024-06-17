@@ -27,13 +27,13 @@ func _ready():
 
 func set_target(target: String):
 	if target == "p1":
-		collision_layer = 0b00000000000000000101
-		$"Area2D".collision_layer = 0b00000000000000000101
-		$"Area2D".collision_mask  = 0b00000000000000000101
+		collision_layer = 0b00000000000000001001
+		$"Area2D".collision_layer = 0b00000000000000001101
+		$"Area2D".collision_mask  = 0b00000000000000001101
 	elif target == "p2":
 		collision_layer = 0b00000000000000000110
-		$"Area2D".collision_layer = 0b00000000000000000110
-		$"Area2D".collision_mask  = 0b00000000000000000110
+		$"Area2D".collision_layer = 0b00000000000000001110
+		$"Area2D".collision_mask  = 0b00000000000000001110
 	else:
 		printerr("Please choose target!!")
 
@@ -46,5 +46,6 @@ func set_no_target() -> void:
 Fireball always explode when hitted by something
 """
 func _on_area_2d_area_entered(_area):
-	$"AnimationPlayer".play("explode_smol")
-	set_no_target()
+	if not _area.is_in_group("fireball"):
+		$"AnimationPlayer".play("explode_smol")
+		set_no_target()
