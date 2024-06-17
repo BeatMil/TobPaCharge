@@ -78,9 +78,13 @@ func test_show_pic() -> void:
 func debug() -> void:
 	print_rich("""[color=red][b]============================================================
 = lobby_state: %s
+=  lobby index 0: %s
+=  lobby index 1: %s
 =  get_unique_id: %s
 ============================================================[/b][/color]"""
 	%[steam_multiplayer.get_state(),
+	Steam.getLobbyMemberByIndex(lobby_id, 0),
+	Steam.getLobbyMemberByIndex(lobby_id, 1),
 	steam_multiplayer.get_unique_id()
 ])
 
