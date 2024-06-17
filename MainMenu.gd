@@ -56,6 +56,12 @@ func update_lobby_members() -> void:
 		lobby_member.connect("ready_state_change", check_ready)
 		vbox_member.add_child(lobby_member)
 
+	# Update buttons disabled mode
+	if SteamNetwork.lobby_members:
+		_in_lobby_buttons()
+	else:
+		_outside_lobby_buttons()
+
 
 func check_ready() -> void:
 	for node in vbox_member.get_children():
