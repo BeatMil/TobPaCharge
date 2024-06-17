@@ -14,6 +14,7 @@ Preloads
 
 
 func _ready():
+	SteamNetwork.connect("lobby_member_update", update_lobby_members)
 	_outside_lobby_buttons()
 
 
@@ -39,8 +40,6 @@ func update_lobby_members() -> void:
 	# clear Vboxmember
 	for node in vbox_member.get_children():
 		node.queue_free()
-
-	await get_tree().create_timer(0.2).timeout
 
 	# Get the number of members from this lobby from Steam
 	for member_steam_id in SteamNetwork.lobby_members:

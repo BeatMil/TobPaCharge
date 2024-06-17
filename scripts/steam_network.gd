@@ -1,6 +1,10 @@
 extends Node
 
 
+# Signals
+signal lobby_member_update
+
+
 # Properties
 var is_online: bool = false
 var steam_id: int = 0
@@ -51,12 +55,6 @@ func _initialize_steam() -> void:
 		steam_username = Steam.getPersonaName()
 
 
-func _update_lobby_for_mainmenu() -> void:
-	var now_scene = get_tree().current_scene
-	if now_scene.name == "MainMenu":
-		now_scene.update_lobby_members()
-
-
 func _update_button_for_mainmenu() -> void:
 	var now_scene = get_tree().current_scene
 	if now_scene.name == "MainMenu":
@@ -76,9 +74,7 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, _respons
 		print_rich("[color=purple][b]_on_lobby_joined!! lobby_id: %s[/b][/color]"%_lobby_id)
 		multiplayer.multiplayer_peer = steam_multiplayer
 		update_lobby_members()
-		_update_lobby_for_mainmenu()
 		_update_button_for_mainmenu()
-
 	else:
 		printerr("Create or Join lobby failed")
 
@@ -90,12 +86,12 @@ func _on_join_requested(_lobby_id: int, _steam_id: int):
 
 func _peer_connected(_id :int):
 	print_rich("[color=Bisque ][b]%s has join![/b][/color]"%_id)
-	_update_lobby_for_mainmenu()
+	update_lobby_members()
 
 
 func _peer_disconnected(_id :int):
 	print_rich("[color=Bisque ][b]%s left[/b][/color]"%_id)
-	_update_lobby_for_mainmenu()
+	update_lobby_members()
 
 
 #################################################
@@ -117,7 +113,6 @@ func join_lobby(_lobby_id: int) -> int:
 	if error:
 		printerr("Join lobby failed")
 	else:
-		# multiplayer.multiplayer_peer = steam_multiplayer
 		print_rich("[color=orange][b]SteamNetwork.join_lobby() ✓[/b][/color]")
 	return error
 
@@ -146,6 +141,8 @@ func update_lobby_members() -> void:
 		print("steam_id: %s, steam_name: %s"%[MEMBER_STEAM_ID, MEMBER_STEAM_NAME])
 
 		lobby_members.append(MEMBER_STEAM_ID)
+
+	emit_signal("lobby_member_update")
 
 
 @rpc("call_local")
