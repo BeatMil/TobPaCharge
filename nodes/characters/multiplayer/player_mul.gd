@@ -96,8 +96,8 @@ func new_turn():
 #################################################
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("fireball"):
-		if chosen_action in [ActionEnum.actions.CHARGE, ActionEnum.actions.CHARGE]
-			or (chosen_action == ActionEnum.actions.FIREBALL and charge <= 0):
+		if chosen_action in [ActionEnum.actions.CHARGE, ActionEnum.actions.CHARGE] \
+			or (chosen_action == ActionEnum.actions.FIREBALL and charge_count <= 0):
 			animation_player.play("hitted")
 			hp -= 1
 
