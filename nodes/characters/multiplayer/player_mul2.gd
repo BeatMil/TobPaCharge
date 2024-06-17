@@ -4,9 +4,13 @@ extends Node2D
 var FIREBALL = preload("res://nodes/fireball.tscn")
 
 
+# properties
+var charge_count: int = 0
+var steam_id: int = 0
+
+
 # Configs
 var chosen_action = ActionEnum.actions.CHARGE
-var charge_count = 0
 var hp = 1
 
 
