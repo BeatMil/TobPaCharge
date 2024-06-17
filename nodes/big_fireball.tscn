@@ -1,0 +1,154 @@
+[gd_scene load_steps=10 format=3 uid="uid://dh1i5m1n25gmw"]
+
+[ext_resource type="Script" path="res://scripts/fireball.gd" id="1_f57mg"]
+[ext_resource type="Texture2D" uid="uid://dpniaq1mhsioq" path="res://media/attacks_texture/magic_circle.png" id="2_bsqbj"]
+[ext_resource type="AudioStream" uid="uid://bpuvwwj5xfy1j" path="res://media/sfx/explosion16.wav" id="3_o752y"]
+[ext_resource type="AudioStream" uid="uid://ddsba0qrdedsr" path="res://media/sfx/getBlocked.wav" id="4_n70au"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_33pg2"]
+radius = 128.016
+
+[sub_resource type="Animation" id="Animation_q4m1o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.93082, 0.542683, 0.440105, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4bf7k"]
+resource_name = "explode"
+length = 0.6
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_o752y")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.406126, 0.032352),
+"update": 0,
+"values": [Color(0.877007, 0.578418, 0.282711, 1), Color(0.878431, 0.576471, 0.282353, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_iusx1"]
+resource_name = "explode_smol"
+length = 0.6
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_n70au")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.406126, 0.032352),
+"update": 0,
+"values": [Color(0.877007, 0.578418, 0.282711, 1), Color(0.878431, 0.576471, 0.282353, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aequ7"]
+_data = {
+"RESET": SubResource("Animation_q4m1o"),
+"explode": SubResource("Animation_4bf7k"),
+"explode_smol": SubResource("Animation_iusx1")
+}
+
+[node name="FireBall" type="RigidBody2D"]
+modulate = Color(0.93082, 0.542683, 0.440105, 1)
+collision_layer = 4
+collision_mask = 0
+mass = 0.1
+gravity_scale = 0.0
+max_contacts_reported = 2
+contact_monitor = true
+script = ExtResource("1_f57mg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_33pg2")
+
+[node name="Sprite" type="Sprite2D" parent="CollisionShape2D"]
+scale = Vector2(1.08594, 0.632812)
+texture = ExtResource("2_bsqbj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aequ7")
+}
+
+[node name="Area2D" type="Area2D" parent="." groups=["big_fireball"]]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_33pg2")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

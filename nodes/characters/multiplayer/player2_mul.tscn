@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3adto1be3xa2"]
+[gd_scene load_steps=20 format=3 uid="uid://c3adto1be3xa2"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_upm2h"]
 [ext_resource type="Texture2D" uid="uid://ddsc1u18jewb" path="res://media/SecondChar/SecondChar_holder.png" id="2_0ggyf"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://bpmc3anpihb54" path="res://media/SecondChar/SecondChar_fireball.png" id="7_se4ed"]
 [ext_resource type="Texture2D" uid="uid://d0c2nk4fx2ftc" path="res://media/SecondChar/SecondChar_hitted.png" id="8_s1fb2"]
 [ext_resource type="AudioStream" uid="uid://b4oglay37sa58" path="res://media/sfx/gura_a.wav" id="9_sqhs7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5m07p"]
+bg_color = Color(0.78262, 0.506265, 0.403243, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7wuc"]
 size = Vector2(152, 454)
@@ -286,9 +289,26 @@ tracks/0/keys = {
 "values": [ExtResource("2_0ggyf")]
 }
 
+[sub_resource type="Animation" id="Animation_k5ivg"]
+resource_name = "big_fireball"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_se4ed")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jb0rc"]
 _data = {
 "RESET": SubResource("Animation_3sjde"),
+"big_fireball": SubResource("Animation_k5ivg"),
 "block": SubResource("Animation_vyhkl"),
 "charge": SubResource("Animation_m3swk"),
 "fireball": SubResource("Animation_pf7un"),
@@ -336,6 +356,18 @@ offset_bottom = 472.0
 focus_mode = 0
 text = "Charge"
 
+[node name="BigFireBallButton" type="Button" parent="CanvasLayer/Buttons"]
+visible = false
+layout_mode = 0
+offset_left = 423.0
+offset_top = 302.0
+offset_right = 615.0
+offset_bottom = 404.0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.36016, 0.188694, 0.114951, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_5m07p")
+text = "BIG FIREBALL"
+
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 546.0
 offset_top = 506.0
@@ -382,4 +414,5 @@ position = Vector2(-151, -55)
 [connection signal="pressed" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/BigFireBallButton" to="." method="_on_big_fire_ball_button_pressed"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
