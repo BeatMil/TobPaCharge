@@ -80,8 +80,12 @@ func spawn_fireball():
 		charge_count -= 1
 		var fireball = FIREBALL.instantiate()
 		fireball.position = $"FireBallSpawnPos".position
-		fireball.is_going_right_side = true
-		fireball.set_target("p2")
+		if name == "Player1":
+			fireball.is_going_right_side = true
+			fireball.set_target("p2")
+		elif name == "Player2":
+			fireball.is_going_right_side = false
+			fireball.set_target("p1")
 		add_child(fireball)
 
 
@@ -96,8 +100,7 @@ func new_turn():
 #################################################
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("fireball"):
-		if chosen_action in [ActionEnum.actions.CHARGE, ActionEnum.actions.CHARGE] \
-			or (chosen_action == ActionEnum.actions.FIREBALL and charge_count <= 0):
+		if chosen_action in [ActionEnum.actions.CHARGE, ActionEnum.actions.FIREBALL]:
 			animation_player.play("hitted")
 			hp -= 1
 
