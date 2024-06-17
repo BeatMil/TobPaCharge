@@ -17,6 +17,7 @@ func _ready():
 	SteamNetwork.connect("lobby_member_update", update_lobby_members)
 	_outside_lobby_buttons()
 
+	SteamNetwork.update_lobby_members()
 
 func _in_lobby_buttons() -> void:
 	create_lobby_button.set_deferred("disabled", true)

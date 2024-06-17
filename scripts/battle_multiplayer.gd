@@ -58,6 +58,7 @@ func resolve_action(P1_action, P2_action) -> String:
 # Notifications
 ########################################
 func _ready():
+	multiplayer.connect("peer_connected", _peer_connected)
 	_setup_player()
 
 	time_control_timer.wait_time = time_control
@@ -93,3 +94,5 @@ func _on_resolve_timer_timeout():
 		time_control_timer.start()
 
 
+func _peer_connected(_id: int):
+	SceneTransition.change_scene("res://scenes/mainmenu.tscn")
