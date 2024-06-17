@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://c3adto1be3xa2"]
 
-[ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul2.gd" id="1_mj0c3"]
+[ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_upm2h"]
 [ext_resource type="Texture2D" uid="uid://ddsc1u18jewb" path="res://media/SecondChar/SecondChar_holder.png" id="2_0ggyf"]
 [ext_resource type="Texture2D" uid="uid://dowkcuaaf4qgd" path="res://media/SecondChar/SecondChar_block.png" id="3_4krpn"]
 [ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_tyuok"]
@@ -297,7 +297,7 @@ _data = {
 }
 
 [node name="Player2" type="Node2D"]
-script = ExtResource("1_mj0c3")
+script = ExtResource("1_upm2h")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
