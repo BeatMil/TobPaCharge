@@ -15,7 +15,10 @@ var hp = 1
 
 
 func _ready():
-	pass
+	if steam_id != SteamNetwork.steam_id:
+		$CanvasLayer.visible = false
+	print_rich("[color=Deeppink][b]steam_id: %s, actual_steam_id: %s[/b][/color]"%
+	[steam_id, SteamNetwork.steam_id])
 	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	# print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
 

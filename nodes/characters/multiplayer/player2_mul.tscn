@@ -335,4 +335,41 @@ libraries = {
 [node name="FireBallSpawnPos" type="Marker2D" parent="."]
 position = Vector2(-151, -55)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Buttons" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 46.0
+offset_top = 16.0
+offset_right = 46.0
+offset_bottom = 16.0
+
+[node name="FireBallButton" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 413.0
+offset_right = 463.0
+offset_bottom = 472.0
+focus_mode = 0
+text = "Fireball"
+
+[node name="BlockButton" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 413.0
+offset_right = 577.0
+offset_bottom = 472.0
+focus_mode = 0
+text = "Block"
+
+[node name="ChargeButton" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 585.0
+offset_top = 413.0
+offset_right = 692.0
+offset_bottom = 472.0
+focus_mode = 0
+text = "Charge"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
