@@ -48,7 +48,7 @@ func update_lobby_members() -> void:
 		print("steam_id: %s, steam_name: %s"%[member_steam_id, member_steam_name])
 
 		var lobby_member = LOBBY_MEMBER_NODE.instantiate()
-		lobby_member.name = str(member_steam_name)
+		lobby_member.name = str(member_steam_id)
 		lobby_member.set_member(member_steam_id, member_steam_name)
 		lobby_member.connect("ready_state_change", check_ready)
 		vbox_member.add_child(lobby_member)
