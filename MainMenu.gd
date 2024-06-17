@@ -90,3 +90,7 @@ func _on_invite_friend_button_pressed():
 
 func _on_debug_button_pressed():
 	SteamNetwork.debug()
+
+
+func _on_start_game_button_pressed():
+	SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")

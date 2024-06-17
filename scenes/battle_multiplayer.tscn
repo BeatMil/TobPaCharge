@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://fdmlajasqvjd"]
+
+[ext_resource type="PackedScene" uid="uid://d30b2qwpstgt4" path="res://nodes/characters/multiplayer/Player_mul.tscn" id="1_58itq"]
+[ext_resource type="Script" path="res://scripts/battle_multiplayer.gd" id="1_clmqd"]
+[ext_resource type="PackedScene" uid="uid://c3adto1be3xa2" path="res://nodes/characters/multiplayer/player2_mul.tscn" id="2_6t46w"]
+[ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul2.gd" id="3_qbka1"]
+
+[node name="BattleMultiplayer" type="Node2D"]
+script = ExtResource("1_clmqd")
+
+[node name="Player1" parent="." instance=ExtResource("1_58itq")]
+position = Vector2(207, 320)
+
+[node name="Player2" parent="." instance=ExtResource("2_6t46w")]
+position = Vector2(931, 320)
+script = ExtResource("3_qbka1")
