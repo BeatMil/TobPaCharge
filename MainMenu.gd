@@ -64,6 +64,10 @@ func check_ready() -> void:
 	$StartGameButton.set_deferred("visible", true)
 
 
+@rpc("any_peer", "call_local")
+func start_game() -> void:
+	SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")
+
 #################################################
 # Buttons
 #################################################
@@ -93,4 +97,4 @@ func _on_debug_button_pressed():
 
 
 func _on_start_game_button_pressed():
-	SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")
+	rpc("start_game")
