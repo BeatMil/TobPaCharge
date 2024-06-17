@@ -1,59 +1,78 @@
 extends Node2D
 
-# Preloads
+
+#################################################
+## Nodes
+#################################################
+@onready var action_label: Label = $ActionLabel
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var canvaslayer: CanvasLayer = $CanvasLayer
+
+
+#################################################
+## Preloads
+#################################################
 var FIREBALL = preload("res://nodes/fireball.tscn")
 
 
+#################################################
 # properties
+#################################################
 var charge_count: int = 0
 var steam_id: int = 0:
 	set(_id):
 		steam_id = _id
 		if _id != SteamNetwork.steam_id:
-			$CanvasLayer.visible = false
+			canvaslayer.visible = false
 
+
+#################################################
 # Configs
+#################################################
 var chosen_action = ActionEnum.actions.CHARGE
 var hp = 1
 
 
+#################################################
+## Notifications
+#################################################
 func _ready():
-	$"ActionLabel".text = ActionEnum.actions.keys()[chosen_action]
+	print_rich("[color=Deeppink][b]steam_id: %s, actual_steam_id: %s[/b][/color]"%
+	[steam_id, SteamNetwork.steam_id])
+	get_parent().connect("new_turn", new_turn)
+	get_parent().connect("resolve_phase", resolve_phase)
+	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
+	# print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
+
+#################################################
+## public functions
+#################################################
+@rpc("any_peer", "call_local")
+func do_the_action(the_action: ActionEnum.actions) -> void:
+	chosen_action = the_action
+	action_label.text = ActionEnum.actions.keys()[chosen_action]
 
 
 func random_action():
-	chosen_action = ActionEnum.actions.keys()[randi() % ActionEnum.actions.size()]
-	$"ActionLabel".text = ActionEnum.actions.keys()[chosen_action]
-
-
-func new_turn():
-	pass
-	# random_action()
-	# print("PLAYER: %s"%[ActionEnum.actions.find_key(chosen_action)])
-	$"AnimationPlayer".play("idle")
-	$ActionLabel.text = "Ready"
+	# I don't know how this line work but that's fine XD
+	## Edited: ohhhh my god that's genius! XD
+	# chosen_action = randi() % ActionEnum.actions.size()
 	chosen_action = ActionEnum.actions.CHARGE
-	if charge_count <= 0:
-		# turn off fireball buttons
-		$"CanvasLayer/Buttons/FireBallButton".disabled = true
-	else:
-		$"CanvasLayer/Buttons/FireBallButton".disabled = false
 
 
 func resolve_phase():
-	if chosen_action == ActionEnum.actions.FIREBALL and charge_count:
-		$"AnimationPlayer".play("fireball")
+	# Update action Label
+	action_label.text = ActionEnum.actions.keys()[chosen_action]
+
+	# Update animation
+	if chosen_action == ActionEnum.actions.FIREBALL:
+		animation_player.play("fireball")
 		spawn_fireball()
 	elif chosen_action == ActionEnum.actions.BLOCK:
-		$"AnimationPlayer".play("block")
+		animation_player.play("block")
 	elif chosen_action == ActionEnum.actions.CHARGE:
-		$"AnimationPlayer".play("charge")
+		animation_player.play("charge")
 		charge_count += 1
-	else:
-		## It shouldn't reach this else...
-		$"AnimationPlayer".play("charge")
-		charge_count += 1
-		printerr("Idle: not enough charges?")
 
 
 func spawn_fireball():
@@ -61,35 +80,36 @@ func spawn_fireball():
 		charge_count -= 1
 		var fireball = FIREBALL.instantiate()
 		fireball.position = $"FireBallSpawnPos".position
+		fireball.is_going_right_side = true
 		fireball.set_target("p2")
 		add_child(fireball)
 
 
-#################################################
-## buttons
-#################################################
-
-func _on_fire_ball_button_pressed():
-	chosen_action = ActionEnum.actions.FIREBALL
-	$ActionLabel.text = ActionEnum.actions.keys()[chosen_action]
-
-
-func _on_block_button_pressed():
-	chosen_action = ActionEnum.actions.BLOCK
-	$ActionLabel.text = ActionEnum.actions.keys()[chosen_action]
-
-
-func _on_charge_button_pressed():
-	chosen_action = ActionEnum.actions.CHARGE
-	$ActionLabel.text = ActionEnum.actions.keys()[chosen_action]
+func new_turn():
+	random_action()
+	animation_player.play("idle")
+	action_label.text = "CHARGE"
 
 
 #################################################
-## areas
+## Signals
 #################################################
-
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("fireball"):
 		if chosen_action in [ActionEnum.actions.CHARGE, ActionEnum.actions.CHARGE]:
-			$"AnimationPlayer".play("hitted")
+			animation_player.play("hitted")
 			hp -= 1
+
+
+func _on_fire_ball_button_pressed():
+	rpc("do_the_action", ActionEnum.actions.FIREBALL)
+
+
+func _on_block_button_pressed():
+	rpc("do_the_action", ActionEnum.actions.BLOCK)
+
+
+func _on_charge_button_pressed():
+	rpc("do_the_action", ActionEnum.actions.CHARGE)
+
+
