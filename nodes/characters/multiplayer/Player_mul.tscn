@@ -334,6 +334,13 @@ offset_bottom = 472.0
 focus_mode = 0
 text = "Charge"
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 546.0
+offset_top = 506.0
+offset_right = 604.0
+offset_bottom = 529.0
+text = "Player1"
+
 [node name="Sprite" type="Sprite2D" parent="."]
 clip_children = 2
 texture = ExtResource("2_0cqqi")

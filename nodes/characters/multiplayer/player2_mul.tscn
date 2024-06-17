@@ -372,4 +372,11 @@ offset_bottom = 472.0
 focus_mode = 0
 text = "Charge"
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 546.0
+offset_top = 506.0
+offset_right = 604.0
+offset_bottom = 529.0
+text = "Player2"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

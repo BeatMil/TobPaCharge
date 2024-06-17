@@ -6,7 +6,11 @@ var FIREBALL = preload("res://nodes/fireball.tscn")
 
 # properties
 var charge_count: int = 0
-var steam_id: int = 0
+var steam_id: int = 0:
+	set(_id):
+		steam_id = _id
+		if _id != SteamNetwork.steam_id:
+			$CanvasLayer.visible = false
 
 
 # Configs
@@ -15,8 +19,6 @@ var hp = 1
 
 
 func _ready():
-	if steam_id != SteamNetwork.steam_id:
-		$CanvasLayer.visible = false
 	print_rich("[color=Deeppink][b]steam_id: %s, actual_steam_id: %s[/b][/color]"%
 	[steam_id, SteamNetwork.steam_id])
 	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
