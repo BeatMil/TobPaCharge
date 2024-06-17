@@ -95,4 +95,4 @@ func _on_resolve_timer_timeout():
 
 
 func _peer_disconnected(_id: int):
-	SceneTransition.change_scene("res://scenes/mainmenu.tscn")
+	SceneTransition.change_scene("res://scenes/main_menu.tscn")
