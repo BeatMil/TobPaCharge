@@ -150,9 +150,10 @@ func _on_area_2d_area_entered(area):
 
 
 func _on_time_control_timeout() -> void:
-	if not is_action_choosed:
-		_on_charge_button_pressed()
-		print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
+	if SteamNetwork.steam_id == steam_id:
+		if not is_action_choosed:
+			_on_charge_button_pressed()
+			print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
 
 
 func _on_fire_ball_button_pressed():
