@@ -63,6 +63,7 @@ func _ready():
 func do_the_action(the_action: ActionEnum.actions) -> void:
 	chosen_action = the_action
 	action_label.text = ActionEnum.actions.keys()[chosen_action]
+	emit_signal("action_choosed")
 
 
 func set_disable_all_buttons(_value: bool) -> void:
@@ -115,7 +116,7 @@ func resolve_phase():
 
 
 func new_turn():
-	chosen_action = ActionEnum.actions.CHARGE
+	_on_charge_button_pressed()
 	action_label.text = "CHARGE"
 	animation_player.play("idle")
 	set_disable_all_buttons(false)
