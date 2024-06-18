@@ -152,23 +152,23 @@ func _on_area_2d_area_entered(area):
 func _on_time_control_timeout() -> void:
 	if SteamNetwork.steam_id == steam_id:
 		if not is_action_choosed:
-			_on_charge_button_pressed()
+			_on_charge_button_button_down()
 			print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
 
 
-func _on_fire_ball_button_pressed():
+func _on_fire_ball_button_button_down():
 	rpc("do_the_action", ActionEnum.actions.FIREBALL)
 
 
-func _on_block_button_pressed():
+func _on_block_button_button_down():
 	rpc("do_the_action", ActionEnum.actions.BLOCK)
 
 
-func _on_charge_button_pressed():
+func _on_charge_button_button_down():
 	rpc("do_the_action", ActionEnum.actions.CHARGE)
 
 
-func _on_big_fire_ball_button_pressed():
+func _on_big_fire_ball_button_button_down():
 	rpc("do_the_action", ActionEnum.actions.BIGFIREBALL)
 
 
