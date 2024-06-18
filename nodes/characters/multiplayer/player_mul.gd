@@ -26,6 +26,7 @@ var steam_id: int = 0:
 		steam_id = _id
 		if _id != SteamNetwork.steam_id:
 			canvaslayer.visible = false
+			action_label.visible = false
 
 
 #################################################
