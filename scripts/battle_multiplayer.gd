@@ -91,6 +91,12 @@ func _on_time_control_timeout():
 	if not (player1_ready and player2_ready):
 		await get_tree().create_timer(0.1).timeout
 		_on_time_control_timeout()
+		return
+	else:
+		# reset ready
+		pass
+		# player1_ready = false
+		# player2_ready = false
 
 	emit_signal("resolve_phase")
 	resolve_timer.start()

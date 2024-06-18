@@ -29,6 +29,7 @@ var steam_id: int = 0:
 		if _id != SteamNetwork.steam_id:
 			canvaslayer.visible = false
 			action_label.visible = false
+var is_action_choosed:bool = false
 
 
 #################################################
@@ -53,6 +54,7 @@ func _ready():
 	Steam.connect("avatar_loaded", _on_avatar_loaded)
 	get_parent().connect("new_turn", new_turn)
 	get_parent().connect("resolve_phase", resolve_phase)
+	get_parent().get_node("TimeControl").connect("timeout", _time_control_timeout)
 	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	# print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
 
@@ -64,6 +66,7 @@ func do_the_action(the_action: ActionEnum.actions) -> void:
 	chosen_action = the_action
 	action_label.text = ActionEnum.actions.keys()[chosen_action]
 	set_disable_all_buttons(true)
+	is_action_choosed = true
 	emit_signal("action_choosed")
 
 
@@ -98,6 +101,7 @@ func spawn_fireball(type: String):
 
 
 func resolve_phase():
+	print_rich("[color=Rosybrown ][b]resolve_phase %s[/b][/color]"%name)
 	# Update action Label
 	action_label.text = ActionEnum.actions.keys()[chosen_action]
 	set_disable_all_buttons(true)
@@ -117,7 +121,7 @@ func resolve_phase():
 
 
 func new_turn():
-	_on_charge_button_pressed()
+	chosen_action = ActionEnum.actions.CHARGE
 	action_label.text = "CHARGE"
 	animation_player.play("idle")
 	set_disable_all_buttons(false)
@@ -132,7 +136,9 @@ func new_turn():
 #################################################
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("fireball"):
-		if chosen_action in [ActionEnum.actions.CHARGE, ActionEnum.actions.FIREBALL]:
+		if chosen_action not in [ActionEnum.actions.BLOCK]:
+			print_rich("[color=Silver ][b]Hit by fireball action: %s[/b][/color]"%
+			chosen_action)
 			animation_player.play("hitted")
 			hp -= 1
 	elif area.is_in_group("big_fireball"):
@@ -140,6 +146,12 @@ func _on_area_2d_area_entered(area):
 		if chosen_action not in [ActionEnum.actions.BIGFIREBALL]:
 			animation_player.play("hitted")
 			hp -= 1
+
+
+func _time_control_timeout() -> void:
+	if not is_action_choosed:
+		_on_charge_button_pressed()
+
 
 func _on_fire_ball_button_pressed():
 	rpc("do_the_action", ActionEnum.actions.FIREBALL)
