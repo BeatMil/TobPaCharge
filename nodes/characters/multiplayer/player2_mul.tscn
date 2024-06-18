@@ -1,16 +1,22 @@
-[gd_scene load_steps=18 format=3 uid="uid://d1dreux08gbt"]
+[gd_scene load_steps=20 format=3 uid="uid://c3adto1be3xa2"]
 
-[ext_resource type="Texture2D" uid="uid://bhilkjo6hnj61" path="res://media/FirstChar/FirstChar_holder.png" id="1_mjyin"]
-[ext_resource type="Script" path="res://scripts/Player.gd" id="1_nivk1"]
-[ext_resource type="Texture2D" uid="uid://cnelufqm0nn36" path="res://media/FirstChar/FirstChar_fireball.png" id="3_20fhk"]
-[ext_resource type="Texture2D" uid="uid://pskxmpxq37qc" path="res://media/FirstChar/FirstChar_block.png" id="4_73o7j"]
-[ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_aw2aw"]
-[ext_resource type="AudioStream" uid="uid://bocx334wnhp3u" path="res://media/sfx/charge01.wav" id="5_2v0km"]
-[ext_resource type="Texture2D" uid="uid://blsgqkxoawu8e" path="res://media/FirstChar/FirstChar_charge.png" id="5_ye5wi"]
-[ext_resource type="Texture2D" uid="uid://rsk05rcpo5ta" path="res://media/FirstChar/FirstChar_hitted.png" id="7_qagg6"]
-[ext_resource type="AudioStream" uid="uid://ntpovytul8qr" path="res://media/sfx/boss_damaged.wav" id="7_wbjsp"]
+[ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_upm2h"]
+[ext_resource type="Texture2D" uid="uid://ddsc1u18jewb" path="res://media/SecondChar/SecondChar_holder.png" id="2_0ggyf"]
+[ext_resource type="Texture2D" uid="uid://dowkcuaaf4qgd" path="res://media/SecondChar/SecondChar_block.png" id="3_4krpn"]
+[ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_tyuok"]
+[ext_resource type="Texture2D" uid="uid://dyb1swa610nhf" path="res://media/SecondChar/SecondChar_charge.png" id="5_j4mct"]
+[ext_resource type="AudioStream" uid="uid://cabk1jmro237s" path="res://media/sfx/charge02.wav" id="6_lkn2m"]
+[ext_resource type="Texture2D" uid="uid://bpmc3anpihb54" path="res://media/SecondChar/SecondChar_fireball.png" id="7_se4ed"]
+[ext_resource type="Texture2D" uid="uid://d0c2nk4fx2ftc" path="res://media/SecondChar/SecondChar_hitted.png" id="8_s1fb2"]
+[ext_resource type="AudioStream" uid="uid://b4oglay37sa58" path="res://media/sfx/gura_a.wav" id="9_sqhs7"]
 
-[sub_resource type="Animation" id="Animation_0vekx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5m07p"]
+bg_color = Color(0.78262, 0.506265, 0.403243, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7wuc"]
+size = Vector2(152, 454)
+
+[sub_resource type="Animation" id="Animation_3sjde"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -22,43 +28,43 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_mjyin")]
+"values": [ExtResource("2_0ggyf")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/ColorRect:position")
+tracks/1/path = NodePath("Sprite:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-203, 276)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/path = NodePath("Sprite:offset")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite:offset")
+tracks/3/path = NodePath("Sprite/ColorRect:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(-203, 231)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -73,9 +79,9 @@ tracks/4/keys = {
 "values": [Color(0.235294, 0.74902, 0.423529, 0.454902)]
 }
 
-[sub_resource type="Animation" id="Animation_l5ppu"]
-resource_name = "block"
-length = 0.3
+[sub_resource type="Animation" id="Animation_k5ivg"]
+resource_name = "big_fireball"
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -86,7 +92,22 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_73o7j")]
+"values": [ExtResource("7_se4ed")]
+}
+
+[sub_resource type="Animation" id="Animation_vyhkl"]
+resource_name = "block"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_4krpn")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -98,7 +119,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("4_aw2aw")
+"stream": ExtResource("4_tyuok")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -125,7 +146,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-203, 276), Vector2(-203, -322)]
+"values": [Vector2(-203, 231), Vector2(-203, -322)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -134,15 +155,16 @@ tracks/4/path = NodePath("Sprite:offset")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, -20), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_pfoks"]
+[sub_resource type="Animation" id="Animation_m3swk"]
 resource_name = "charge"
 length = 0.2
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -153,35 +175,35 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_ye5wi")]
+"values": [ExtResource("5_j4mct")]
 }
-tracks/1/type = "audio"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/path = NodePath("Sprite/ColorRect:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("5_2v0km")
-}],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0, 0.18, 0.2),
+"transitions": PackedFloat32Array(1, 0, 1),
+"update": 0,
+"values": [Vector2(-203, 231), Vector2(-203, -311), Vector2(-203, 231)]
 }
-tracks/1/use_blend = true
-tracks/2/type = "value"
+tracks/2/type = "audio"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/ColorRect:position")
+tracks/2/path = NodePath("AudioStreamPlayer")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-203, 276), Vector2(-203, -343)]
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_lkn2m")
+}],
+"times": PackedFloat32Array(0)
 }
+tracks/2/use_blend = true
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
@@ -195,7 +217,7 @@ tracks/3/keys = {
 "values": [Color(0.235294, 0.74902, 0.423529, 0.454902)]
 }
 
-[sub_resource type="Animation" id="Animation_n7kqx"]
+[sub_resource type="Animation" id="Animation_pf7un"]
 resource_name = "fireball"
 length = 0.001
 tracks/0/type = "value"
@@ -208,11 +230,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_20fhk")]
+"values": [ExtResource("7_se4ed")]
 }
 
-[sub_resource type="Animation" id="Animation_m2n50"]
+[sub_resource type="Animation" id="Animation_e0mlr"]
 resource_name = "hitted"
+length = 0.4
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -223,7 +247,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_qagg6")]
+"values": [ExtResource("8_s1fb2")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -233,9 +257,9 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "clips": [{
-"end_offset": 0.456388,
-"start_offset": 0.0,
-"stream": ExtResource("7_wbjsp")
+"end_offset": 0.0,
+"start_offset": 0.253432,
+"stream": ExtResource("9_sqhs7")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -247,10 +271,10 @@ tracks/2/path = NodePath("Sprite:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.831373, 0.239216, 0.282353, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.941176, 0.356863, 0.309804, 1), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -259,13 +283,13 @@ tracks/3/path = NodePath("Sprite:offset")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.33),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-100, 0), Vector2(0, 0)]
+"values": [Vector2(100, 0), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_tv0p2"]
+[sub_resource type="Animation" id="Animation_08ybx"]
 resource_name = "idle"
 length = 0.001
 tracks/0/type = "value"
@@ -278,24 +302,22 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_mjyin")]
+"values": [ExtResource("2_0ggyf")]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wq4l7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jb0rc"]
 _data = {
-"RESET": SubResource("Animation_0vekx"),
-"block": SubResource("Animation_l5ppu"),
-"charge": SubResource("Animation_pfoks"),
-"fireball": SubResource("Animation_n7kqx"),
-"hitted": SubResource("Animation_m2n50"),
-"idle": SubResource("Animation_tv0p2")
+"RESET": SubResource("Animation_3sjde"),
+"big_fireball": SubResource("Animation_k5ivg"),
+"block": SubResource("Animation_vyhkl"),
+"charge": SubResource("Animation_m3swk"),
+"fireball": SubResource("Animation_pf7un"),
+"hitted": SubResource("Animation_e0mlr"),
+"idle": SubResource("Animation_08ybx")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yon4"]
-size = Vector2(152, 454)
-
-[node name="Player" type="Node2D"]
-script = ExtResource("1_nivk1")
+[node name="Player2" type="Node2D"]
+script = ExtResource("1_upm2h")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -303,9 +325,9 @@ script = ExtResource("1_nivk1")
 layout_mode = 3
 anchors_preset = 0
 offset_left = 46.0
-offset_top = 16.0
+offset_top = 43.0
 offset_right = 46.0
-offset_bottom = 16.0
+offset_bottom = 43.0
 
 [node name="FireBallButton" type="Button" parent="CanvasLayer/Buttons"]
 layout_mode = 0
@@ -334,40 +356,74 @@ offset_bottom = 472.0
 focus_mode = 0
 text = "Charge"
 
+[node name="BigFireBallButton" type="Button" parent="CanvasLayer/Buttons"]
+visible = false
+layout_mode = 0
+offset_left = 423.0
+offset_top = 302.0
+offset_right = 615.0
+offset_bottom = 404.0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.36016, 0.188694, 0.114951, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_5m07p")
+text = "BIG FIREBALL"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 546.0
+offset_top = 506.0
+offset_right = 604.0
+offset_bottom = 529.0
+text = "Player2"
+
 [node name="Sprite" type="Sprite2D" parent="."]
 clip_children = 2
-texture = ExtResource("1_mjyin")
+texture = ExtResource("2_0ggyf")
+flip_h = true
 
 [node name="ColorRect" type="ColorRect" parent="Sprite"]
 offset_left = -203.0
-offset_top = 276.0
+offset_top = 231.0
 offset_right = 162.0
-offset_bottom = 373.0
+offset_bottom = 328.0
 color = Color(0.235294, 0.74902, 0.423529, 0.454902)
 
 [node name="ActionLabel" type="Label" parent="."]
-offset_left = -32.0
-offset_top = -284.0
-offset_right = 16.0
-offset_bottom = -258.0
-text = "action"
+offset_left = -8.0
+offset_top = -271.0
+offset_right = 42.0
+offset_bottom = -245.0
+text = "Action"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_wq4l7")
-}
+[node name="Area2D" type="Area2D" parent="." groups=["character"]]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_s7wuc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jb0rc")
+}
+
 [node name="FireBallSpawnPos" type="Marker2D" parent="."]
-position = Vector2(189, -46)
+position = Vector2(-151, -55)
 
-[node name="Area2D" type="Area2D" parent="." groups=["character"]]
+[node name="AvatarPanel" type="Panel" parent="."]
+offset_left = -149.0
+offset_top = -290.0
+offset_right = -87.0
+offset_bottom = -228.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_1yon4")
+[node name="AvatarTexture" type="TextureRect" parent="AvatarPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="pressed" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/BigFireBallButton" to="." method="_on_big_fire_ball_button_pressed"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

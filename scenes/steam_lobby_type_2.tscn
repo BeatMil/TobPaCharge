@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxxquvci0jkv4"]
+
+[ext_resource type="Script" path="res://scripts/steam_lobby_type_2.gd" id="1_ysc4k"]
+
+[node name="steam_lobby_type2" type="Node2D"]
+script = ExtResource("1_ysc4k")
+
+[node name="LobbyIdLabel" type="RichTextLabel" parent="."]
+offset_left = 40.0
+offset_top = 16.0
+offset_right = 368.0
+offset_bottom = 56.0
+focus_mode = 2
+text = "Lobby ID: "
+selection_enabled = true
+
+[node name="VBoxMember" type="VBoxContainer" parent="."]
+offset_left = 40.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 392.0
+
+[node name="CreateLobbyButton" type="Button" parent="."]
+offset_left = 40.0
+offset_top = 408.0
+offset_right = 160.0
+offset_bottom = 439.0
+text = "Create Lobby
+"
+
+[node name="LeaveLobbyButton" type="Button" parent="."]
+offset_left = 200.0
+offset_top = 408.0
+offset_right = 320.0
+offset_bottom = 439.0
+text = "Leave
+"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 256.0
+offset_top = 472.0
+offset_right = 360.0
+offset_bottom = 520.0
+text = "get_lobby_member_at_home"
+
+[node name="ColorPanels" type="Node2D" parent="."]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnMarker1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(66, 466)
+
+[node name="SpawnMarker2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(194, 466)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 640.0
+offset_right = 1152.0
+offset_bottom = 504.0
+scroll_following = true
+
+[node name="ShowStuffButton" type="Button" parent="."]
+offset_left = 880.0
+offset_top = 512.0
+offset_right = 1109.0
+offset_bottom = 560.0
+text = "get_lobby_member_at_home"
+
+[connection signal="pressed" from="CreateLobbyButton" to="." method="create_lobby"]
+[connection signal="pressed" from="LeaveLobbyButton" to="." method="leave_lobby"]
+[connection signal="pressed" from="Button" to="." method="get_lobby_members_at_home"]
+[connection signal="pressed" from="ShowStuffButton" to="." method="show_stuff"]

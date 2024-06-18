@@ -13,6 +13,7 @@ layer = 10
 
 [node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_leiyv")]
 current_scene = "res://scenes/battle.tscn"
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_a6fra")]
 position = Vector2(223, 364)

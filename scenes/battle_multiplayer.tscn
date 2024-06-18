@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://fdmlajasqvjd"]
+
+[ext_resource type="PackedScene" uid="uid://d30b2qwpstgt4" path="res://nodes/characters/multiplayer/Player_mul.tscn" id="1_58itq"]
+[ext_resource type="Script" path="res://scripts/battle_multiplayer.gd" id="1_clmqd"]
+[ext_resource type="PackedScene" uid="uid://c3adto1be3xa2" path="res://nodes/characters/multiplayer/player2_mul.tscn" id="2_6t46w"]
+[ext_resource type="PackedScene" uid="uid://di45s8k4r18g4" path="res://nodes/restart_menu.tscn" id="2_7lbw4"]
+
+[node name="BattleMultiplayer" type="Node2D"]
+script = ExtResource("1_clmqd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_7lbw4")]
+current_scene = "res://scenes/battle_multiplayer.tscn"
+
+[node name="Player1" parent="." instance=ExtResource("1_58itq")]
+position = Vector2(207, 320)
+
+[node name="Player2" parent="." instance=ExtResource("2_6t46w")]
+position = Vector2(931, 320)
+
+[node name="TimeLeftLabel" type="Label" parent="."]
+offset_left = 482.0
+offset_top = 239.0
+offset_right = 538.0
+offset_bottom = 265.0
+scale = Vector2(3.19559, 3.19559)
+text = "TimeLeft"
+
+[node name="TimeControl" type="Timer" parent="."]
+one_shot = true
+
+[node name="ResolveTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
+[connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]
