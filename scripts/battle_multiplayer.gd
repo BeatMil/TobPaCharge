@@ -82,12 +82,6 @@ func _process(_delta):
 # received signals
 ########################################
 func _on_time_control_timeout():
-	### Resolve actions
-	var result = resolve_action(player1.chosen_action, player2.chosen_action)
-	print("P1: %s, P2: %s, %s"%[ActionEnum.actions.keys()[player1.chosen_action],
-		ActionEnum.actions.keys()[player2.chosen_action], result])
-	### Wait for opponent response here
-	## I can await for signals from both player
 	if not (player1_ready and player2_ready):
 		await get_tree().create_timer(0.1).timeout
 		_on_time_control_timeout()
@@ -97,6 +91,13 @@ func _on_time_control_timeout():
 		pass
 		player1_ready = false
 		player2_ready = false
+
+	### Resolve actions
+	var result = resolve_action(player1.chosen_action, player2.chosen_action)
+	print("P1: %s, P2: %s, %s"%[ActionEnum.actions.keys()[player1.chosen_action],
+		ActionEnum.actions.keys()[player2.chosen_action], result])
+	### Wait for opponent response here
+	## I can await for signals from both player
 
 	emit_signal("resolve_phase")
 	resolve_timer.start()

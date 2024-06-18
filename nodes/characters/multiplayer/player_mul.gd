@@ -54,7 +54,7 @@ func _ready():
 	Steam.connect("avatar_loaded", _on_avatar_loaded)
 	get_parent().connect("new_turn", new_turn)
 	get_parent().connect("resolve_phase", resolve_phase)
-	get_parent().get_node("TimeControl").connect("timeout", _time_control_timeout)
+	get_parent().get_node("TimeControl").connect("timeout", _on_time_control_timeout)
 	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	# print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
 
@@ -149,10 +149,10 @@ func _on_area_2d_area_entered(area):
 			hp -= 1
 
 
-func _time_control_timeout() -> void:
-	return
+func _on_time_control_timeout() -> void:
 	if not is_action_choosed:
 		_on_charge_button_pressed()
+		print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
 
 
 func _on_fire_ball_button_pressed():
