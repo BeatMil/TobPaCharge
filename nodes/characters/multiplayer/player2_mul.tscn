@@ -411,16 +411,15 @@ libraries = {
 [node name="FireBallSpawnPos" type="Marker2D" parent="."]
 position = Vector2(-151, -55)
 
-[node name="AvatarTexture" type="TextureRect" parent="."]
+[node name="AvatarPanel" type="Panel" parent="."]
 offset_left = -149.0
 offset_top = -290.0
-offset_right = -109.0
-offset_bottom = -250.0
+offset_right = -87.0
+offset_bottom = -228.0
 
-[node name="AvatarPanel" type="Panel" parent="AvatarTexture"]
-layout_mode = 0
-offset_right = 62.0
-offset_bottom = 62.0
+[node name="AvatarTexture" type="TextureRect" parent="AvatarPanel"]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="pressed" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_pressed"]

@@ -4,7 +4,7 @@ extends Node2D
 #################################################
 ## Nodes
 #################################################
-@onready var avatar_texture_rect:TextureRect = $AvatarTexture
+@onready var avatar_texture_rect:TextureRect = $AvatarPanel/AvatarTexture
 @onready var action_label: Label = $ActionLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
@@ -44,6 +44,7 @@ var hp = 1
 func _ready():
 	print_rich("[color=Deeppink][b]steam_id: %s, actual_steam_id: %s[/b][/color]"%
 	[steam_id, SteamNetwork.steam_id])
+	Steam.connect("avatar_loaded", _on_avatar_loaded)
 	get_parent().connect("new_turn", new_turn)
 	get_parent().connect("resolve_phase", resolve_phase)
 	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
