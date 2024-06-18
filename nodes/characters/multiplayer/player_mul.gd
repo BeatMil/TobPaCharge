@@ -125,6 +125,7 @@ func new_turn():
 	action_label.text = "CHARGE"
 	animation_player.play("idle")
 	set_disable_all_buttons(false)
+	is_action_choosed = false
 	if charge_count >= 3:
 		big_fireball_button.set_deferred("visible", true)
 	else:

@@ -95,8 +95,8 @@ func _on_time_control_timeout():
 	else:
 		# reset ready
 		pass
-		# player1_ready = false
-		# player2_ready = false
+		player1_ready = false
+		player2_ready = false
 
 	emit_signal("resolve_phase")
 	resolve_timer.start()
