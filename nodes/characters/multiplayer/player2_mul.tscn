@@ -418,6 +418,7 @@ offset_right = -87.0
 offset_bottom = -228.0
 
 [node name="AvatarTexture" type="TextureRect" parent="AvatarPanel"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
