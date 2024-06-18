@@ -63,6 +63,7 @@ func _ready():
 func do_the_action(the_action: ActionEnum.actions) -> void:
 	chosen_action = the_action
 	action_label.text = ActionEnum.actions.keys()[chosen_action]
+	set_disable_all_buttons(true)
 	emit_signal("action_choosed")
 
 

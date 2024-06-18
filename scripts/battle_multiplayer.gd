@@ -15,6 +15,8 @@ extends Node2D
 ########################################
 var time_control:int = 1 ## seconds
 var resolve_time:int = 1 ## seconds
+var player1_ready: bool = false
+var player2_ready: bool = false
 
 
 ########################################
@@ -61,6 +63,8 @@ func resolve_action(P1_action, P2_action) -> String:
 ########################################
 func _ready():
 	multiplayer.connect("peer_disconnected", _peer_disconnected)
+	player1.connect("action_choosed", _player1_action_choosed)
+	player2.connect("action_choosed", _player2_action_choosed)
 	_setup_player()
 
 	time_control_timer.wait_time = time_control
@@ -84,8 +88,9 @@ func _on_time_control_timeout():
 		ActionEnum.actions.keys()[player2.chosen_action], result])
 	### Wait for opponent response here
 	## I can await for signals from both player
-	await player1.action_choosed
-	await player2.action_choosed
+	if not (player1_ready and player2_ready):
+		await get_tree().create_timer(0.1).timeout
+		_on_time_control_timeout()
 
 	emit_signal("resolve_phase")
 	resolve_timer.start()
@@ -103,3 +108,11 @@ func _on_resolve_timer_timeout():
 
 func _peer_disconnected(_id: int):
 	SceneTransition.change_scene("res://scenes/main_menu.tscn")
+
+
+func _player1_action_choosed() -> void:
+	player1_ready = true
+
+
+func _player2_action_choosed() -> void:
+	player2_ready = true
