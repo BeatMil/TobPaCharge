@@ -35,6 +35,8 @@ func _setup_player() -> void:
 	elif lobby_size == 2:
 		player1.steam_id = SteamNetwork.lobby_members[0]
 		player2.steam_id = SteamNetwork.lobby_members[1]
+		Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, player1.steam_id)
+		Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, player2.steam_id)
 		print_rich("[color=orange][b]Game Start!!∑d(°∀°d)[/b][/color]")
 	else:
 		printerr("not enough players!")

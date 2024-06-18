@@ -4,6 +4,7 @@ extends Node2D
 #################################################
 ## Nodes
 #################################################
+@onready var avatar_texture_rect:TextureRect = $AvatarTexture
 @onready var action_label: Label = $ActionLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
@@ -145,3 +146,17 @@ func _on_charge_button_pressed():
 
 func _on_big_fire_ball_button_pressed():
 	rpc("do_the_action", ActionEnum.actions.BIGFIREBALL)
+
+
+#################################################
+## Callbacks
+#################################################
+func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> void:
+	if id == steam_id:
+		# Create the image and texture for loading
+		var avatar_image: Image = Image.create_from_data(avatar_size, avatar_size,
+				false, Image.FORMAT_RGBA8, buffer)
+
+		var avatar_texture : ImageTexture = ImageTexture.create_from_image(avatar_image)
+		# Display it
+		avatar_texture_rect.set_texture(avatar_texture)
