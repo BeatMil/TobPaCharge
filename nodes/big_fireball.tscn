@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dh1i5m1n25gmw"]
 
-[ext_resource type="Script" path="res://scripts/fireball.gd" id="1_f57mg"]
+[ext_resource type="Script" path="res://scripts/big_fireball.gd" id="1_f2k7m"]
 [ext_resource type="Texture2D" uid="uid://dpniaq1mhsioq" path="res://media/attacks_texture/magic_circle.png" id="2_bsqbj"]
 [ext_resource type="AudioStream" uid="uid://bpuvwwj5xfy1j" path="res://media/sfx/explosion16.wav" id="3_o752y"]
 [ext_resource type="AudioStream" uid="uid://ddsba0qrdedsr" path="res://media/sfx/getBlocked.wav" id="4_n70au"]
@@ -128,7 +128,7 @@ mass = 0.1
 gravity_scale = 0.0
 max_contacts_reported = 2
 contact_monitor = true
-script = ExtResource("1_f57mg")
+script = ExtResource("1_f2k7m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_33pg2")

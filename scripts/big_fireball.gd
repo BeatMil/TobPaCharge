@@ -46,5 +46,6 @@ func set_no_target() -> void:
 Fireball always explode when hitted by something
 """
 func _on_area_2d_area_entered(_area):
-	$"AnimationPlayer".play("explode_smol")
-	set_no_target()
+	if not _area.is_in_group("fireball"):
+		$"AnimationPlayer".play("explode_smol")
+		set_no_target()
