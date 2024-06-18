@@ -150,6 +150,7 @@ func _on_area_2d_area_entered(area):
 
 
 func _time_control_timeout() -> void:
+	return
 	if not is_action_choosed:
 		_on_charge_button_pressed()
 
