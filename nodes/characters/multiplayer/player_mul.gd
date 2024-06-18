@@ -7,6 +7,7 @@ extends Node2D
 @onready var action_label: Label = $ActionLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
+@onready var buttons: Control = $CanvasLayer/Buttons
 @onready var big_fireball_button: Button = $CanvasLayer/Buttons/BigFireBallButton
 
 
@@ -56,22 +57,9 @@ func do_the_action(the_action: ActionEnum.actions) -> void:
 	action_label.text = ActionEnum.actions.keys()[chosen_action]
 
 
-func resolve_phase():
-	# Update action Label
-	action_label.text = ActionEnum.actions.keys()[chosen_action]
-
-	# Update animation
-	if chosen_action == ActionEnum.actions.FIREBALL:
-		animation_player.play("fireball")
-		spawn_fireball("normal")
-	elif chosen_action == ActionEnum.actions.BLOCK:
-		animation_player.play("block")
-	elif chosen_action == ActionEnum.actions.CHARGE:
-		animation_player.play("charge")
-		charge_count += 1
-	elif chosen_action == ActionEnum.actions.BIGFIREBALL:
-		animation_player.play("big_fireball")
-		spawn_fireball("BIG")
+func set_disable_all_buttons(_value: bool) -> void:
+	for node in buttons.get_children():
+		node.set_deferred("disabled", _value)
 
 
 func spawn_fireball(type: String):
@@ -99,10 +87,30 @@ func spawn_fireball(type: String):
 		add_child(fireball)
 
 
+func resolve_phase():
+	# Update action Label
+	action_label.text = ActionEnum.actions.keys()[chosen_action]
+	set_disable_all_buttons(true)
+
+	# Update animation
+	if chosen_action == ActionEnum.actions.FIREBALL:
+		animation_player.play("fireball")
+		spawn_fireball("normal")
+	elif chosen_action == ActionEnum.actions.BLOCK:
+		animation_player.play("block")
+	elif chosen_action == ActionEnum.actions.CHARGE:
+		animation_player.play("charge")
+		charge_count += 1
+	elif chosen_action == ActionEnum.actions.BIGFIREBALL:
+		animation_player.play("big_fireball")
+		spawn_fireball("BIG")
+
+
 func new_turn():
 	chosen_action = ActionEnum.actions.CHARGE
 	action_label.text = "CHARGE"
 	animation_player.play("idle")
+	set_disable_all_buttons(false)
 	if charge_count >= 3:
 		big_fireball_button.set_deferred("visible", true)
 	else:
