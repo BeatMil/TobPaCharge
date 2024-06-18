@@ -82,6 +82,11 @@ func _on_time_control_timeout():
 	var result = resolve_action(player1.chosen_action, player2.chosen_action)
 	print("P1: %s, P2: %s, %s"%[ActionEnum.actions.keys()[player1.chosen_action],
 		ActionEnum.actions.keys()[player2.chosen_action], result])
+	### Wait for opponent response here
+	## I can await for signals from both player
+	await player1.action_choosed
+	await player2.action_choosed
+
 	emit_signal("resolve_phase")
 	resolve_timer.start()
 
