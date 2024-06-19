@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cplpougrn07we"]
+
+[ext_resource type="Script" path="res://scripts/particle.gd" id="1_vd7rf"]
+[ext_resource type="Texture2D" uid="uid://fifvaalavhph" path="res://media/sprites/particle_effects/floaty_128.png" id="2_e7xx1"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fmtxd"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 7
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_s4atv"]
+offsets = PackedFloat32Array(0, 0.510989)
+colors = PackedColorArray(0.992188, 0.981771, 0.325562, 1, 0.683594, 0.0534058, 0.0534058, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mw88u"]
+gradient = SubResource("Gradient_s4atv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3326g"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 64.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_mw88u")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="hit_spark" type="Node2D"]
+script = ExtResource("1_vd7rf")
+time_before_queue_free = 1.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_fmtxd")
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_3326g")
+texture = ExtResource("2_e7xx1")
+one_shot = true
+speed_scale = 3.0
+explosiveness = 0.51
+fixed_fps = 0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

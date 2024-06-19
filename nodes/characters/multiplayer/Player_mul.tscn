@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d30b2qwpstgt4"]
+[gd_scene load_steps=21 format=3 uid="uid://d30b2qwpstgt4"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_ep8rt"]
 [ext_resource type="Texture2D" uid="uid://bhilkjo6hnj61" path="res://media/FirstChar/FirstChar_holder.png" id="2_0cqqi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cnelufqm0nn36" path="res://media/FirstChar/FirstChar_fireball.png" id="7_bs2mu"]
 [ext_resource type="Texture2D" uid="uid://rsk05rcpo5ta" path="res://media/FirstChar/FirstChar_hitted.png" id="8_ngct6"]
 [ext_resource type="AudioStream" uid="uid://ntpovytul8qr" path="res://media/sfx/boss_damaged.wav" id="9_ag5du"]
+[ext_resource type="PackedScene" uid="uid://b732gs6p4vb3i" path="res://nodes/charge_meter.tscn" id="10_dnqw3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnc5c"]
 bg_color = Color(0.78262, 0.506265, 0.403243, 1)
@@ -416,6 +417,9 @@ offset_bottom = -228.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="ChargeMeter" parent="." instance=ExtResource("10_dnqw3")]
+position = Vector2(-92, -318)
 
 [connection signal="button_down" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_button_down"]

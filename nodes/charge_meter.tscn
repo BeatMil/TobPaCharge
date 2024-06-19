@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://b732gs6p4vb3i"]
+
+[ext_resource type="Script" path="res://scripts/charge_meter.gd" id="1_qvhnv"]
+[ext_resource type="PackedScene" uid="uid://cohckmyhe6vjp" path="res://nodes/helpers/charge_polygon.tscn" id="2_5t1cf"]
+
+[node name="ChargeMeter" type="Node2D"]
+script = ExtResource("1_qvhnv")
+
+[node name="charge1" parent="." instance=ExtResource("2_5t1cf")]
+select_color = Color(0.800622, 0.754764, 0.3546, 1)
+
+[node name="charge2" parent="." instance=ExtResource("2_5t1cf")]
+select_color = Color(0.796155, 0.47091, 0.276079, 1)
+
+[node name="charge3" parent="." instance=ExtResource("2_5t1cf")]
+select_color = Color(0.762113, 0.214319, 0.262523, 1)
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 192, 0, 192, 32, 0, 32, 0, 0)
+width = 3.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Line2D2" type="Line2D" parent="."]
+points = PackedVector2Array(64, 0, 64, 32)
+width = 3.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Line2D3" type="Line2D" parent="."]
+position = Vector2(64, 0)
+points = PackedVector2Array(64, 0, 64, 32)
+width = 3.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="ParticleEffectMarker2D" type="Marker2D" parent="."]
+position = Vector2(96, 16)
