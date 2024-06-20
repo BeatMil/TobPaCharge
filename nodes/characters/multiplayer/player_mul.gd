@@ -10,6 +10,7 @@ extends Node2D
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
 @onready var buttons: Control = $CanvasLayer/Buttons
 @onready var big_fireball_button: Button = $CanvasLayer/Buttons/BigFireBallButton
+@onready var charge_meter = $ChargeMeter
 
 
 #################################################
@@ -77,7 +78,6 @@ func set_disable_all_buttons(_value: bool) -> void:
 
 func spawn_fireball(type: String):
 	if charge_count and type == "normal":
-		charge_count -= 1
 		var fireball = FIREBALL.instantiate()
 		fireball.position = $"FireBallSpawnPos".position
 		if name == "Player1":
@@ -88,7 +88,6 @@ func spawn_fireball(type: String):
 			fireball.set_target("p1")
 		add_child(fireball)
 	elif charge_count >= 3 and type == "BIG":
-		charge_count -= 3
 		var fireball = BIGFIREBALL.instantiate()
 		fireball.position = $"FireBallSpawnPos".position
 		if name == "Player1":
@@ -110,14 +109,19 @@ func resolve_phase():
 	if chosen_action == ActionEnum.actions.FIREBALL:
 		animation_player.play("fireball")
 		spawn_fireball("normal")
+		charge_count -= 1
+		charge_meter.discharge()
 	elif chosen_action == ActionEnum.actions.BLOCK:
 		animation_player.play("block")
 	elif chosen_action == ActionEnum.actions.CHARGE:
 		animation_player.play("charge")
 		charge_count += 1
+		charge_meter.charge()
 	elif chosen_action == ActionEnum.actions.BIGFIREBALL:
 		animation_player.play("big_fireball")
 		spawn_fireball("BIG")
+		charge_count -= 3
+		charge_meter.discharge_big_fireball()
 
 
 func new_turn():

@@ -408,10 +408,10 @@ position = Vector2(189, -46)
 shape = SubResource("RectangleShape2D_1yon4")
 
 [node name="AvatarPanel" type="Panel" parent="."]
-offset_left = 84.0
-offset_top = -290.0
-offset_right = 146.0
-offset_bottom = -228.0
+offset_left = 120.0
+offset_top = -288.0
+offset_right = 182.0
+offset_bottom = -226.0
 
 [node name="AvatarTexture" type="TextureRect" parent="AvatarPanel"]
 layout_mode = 0
@@ -419,7 +419,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ChargeMeter" parent="." instance=ExtResource("10_dnqw3")]
-position = Vector2(-92, -318)
+position = Vector2(-96, -288)
 
 [connection signal="button_down" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_button_down"]

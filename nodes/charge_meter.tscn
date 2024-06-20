@@ -10,9 +10,11 @@ script = ExtResource("1_qvhnv")
 select_color = Color(0.800622, 0.754764, 0.3546, 1)
 
 [node name="charge2" parent="." instance=ExtResource("2_5t1cf")]
+position = Vector2(64, 32)
 select_color = Color(0.796155, 0.47091, 0.276079, 1)
 
 [node name="charge3" parent="." instance=ExtResource("2_5t1cf")]
+position = Vector2(128, 32)
 select_color = Color(0.762113, 0.214319, 0.262523, 1)
 
 [node name="Line2D" type="Line2D" parent="."]
