@@ -1,7 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://d30b2qwpstgt4"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_ep8rt"]
-[ext_resource type="Texture2D" uid="uid://bhilkjo6hnj61" path="res://media/FirstChar/FirstChar_holder.png" id="2_0cqqi"]
 [ext_resource type="Texture2D" uid="uid://pskxmpxq37qc" path="res://media/FirstChar/FirstChar_block.png" id="3_b66tr"]
 [ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_ifsn1"]
 [ext_resource type="Texture2D" uid="uid://blsgqkxoawu8e" path="res://media/FirstChar/FirstChar_charge.png" id="5_5ea2s"]
@@ -9,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cnelufqm0nn36" path="res://media/FirstChar/FirstChar_fireball.png" id="7_bs2mu"]
 [ext_resource type="Texture2D" uid="uid://rsk05rcpo5ta" path="res://media/FirstChar/FirstChar_hitted.png" id="8_ngct6"]
 [ext_resource type="AudioStream" uid="uid://ntpovytul8qr" path="res://media/sfx/boss_damaged.wav" id="9_ag5du"]
+[ext_resource type="Texture2D" uid="uid://cn45jrmt425rr" path="res://media/FirstChar/FirstChar_idle.png" id="10_bm8lq"]
 [ext_resource type="PackedScene" uid="uid://b732gs6p4vb3i" path="res://nodes/charge_meter.tscn" id="10_dnqw3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnc5c"]
@@ -26,7 +26,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_0cqqi")]
+"values": [ExtResource("10_bm8lq")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -298,7 +298,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_0cqqi")]
+"values": [ExtResource("10_bm8lq")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wq4l7"]
@@ -376,7 +376,7 @@ text = "Player1"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 clip_children = 2
-texture = ExtResource("2_0cqqi")
+texture = ExtResource("10_bm8lq")
 
 [node name="ColorRect" type="ColorRect" parent="Sprite"]
 offset_left = -203.0

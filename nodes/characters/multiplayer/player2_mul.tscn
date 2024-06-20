@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://c3adto1be3xa2"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_upm2h"]
-[ext_resource type="Texture2D" uid="uid://ddsc1u18jewb" path="res://media/SecondChar/SecondChar_holder.png" id="2_0ggyf"]
+[ext_resource type="Texture2D" uid="uid://c3prva38mw2hh" path="res://media/SecondChar/SecondChar_idle.png" id="2_noe77"]
 [ext_resource type="Texture2D" uid="uid://dowkcuaaf4qgd" path="res://media/SecondChar/SecondChar_block.png" id="3_4krpn"]
 [ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_tyuok"]
 [ext_resource type="Texture2D" uid="uid://dyb1swa610nhf" path="res://media/SecondChar/SecondChar_charge.png" id="5_j4mct"]
@@ -29,7 +29,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_0ggyf")]
+"values": [ExtResource("2_noe77")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -303,7 +303,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_0ggyf")]
+"values": [ExtResource("2_noe77")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jb0rc"]
@@ -378,7 +378,7 @@ text = "Player2"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 clip_children = 2
-texture = ExtResource("2_0ggyf")
+texture = ExtResource("2_noe77")
 flip_h = true
 
 [node name="ColorRect" type="ColorRect" parent="Sprite"]
