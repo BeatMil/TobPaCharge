@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c3adto1be3xa2"]
+[gd_scene load_steps=21 format=3 uid="uid://c3adto1be3xa2"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_upm2h"]
 [ext_resource type="Texture2D" uid="uid://ddsc1u18jewb" path="res://media/SecondChar/SecondChar_holder.png" id="2_0ggyf"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bpmc3anpihb54" path="res://media/SecondChar/SecondChar_fireball.png" id="7_se4ed"]
 [ext_resource type="Texture2D" uid="uid://d0c2nk4fx2ftc" path="res://media/SecondChar/SecondChar_hitted.png" id="8_s1fb2"]
 [ext_resource type="AudioStream" uid="uid://b4oglay37sa58" path="res://media/sfx/gura_a.wav" id="9_sqhs7"]
+[ext_resource type="PackedScene" uid="uid://b732gs6p4vb3i" path="res://nodes/charge_meter.tscn" id="10_yss4r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5m07p"]
 bg_color = Color(0.78262, 0.506265, 0.403243, 1)
@@ -412,18 +413,22 @@ libraries = {
 position = Vector2(-151, -55)
 
 [node name="AvatarPanel" type="Panel" parent="."]
-offset_left = -149.0
-offset_top = -290.0
-offset_right = -87.0
-offset_bottom = -228.0
+offset_left = -184.0
+offset_top = -280.0
+offset_right = -122.0
+offset_bottom = -218.0
 
 [node name="AvatarTexture" type="TextureRect" parent="AvatarPanel"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[connection signal="pressed" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Buttons/BigFireBallButton" to="." method="_on_big_fire_ball_button_pressed"]
+[node name="ChargeMeter" parent="." instance=ExtResource("10_yss4r")]
+position = Vector2(96, -280)
+scale = Vector2(-1, 1)
+
+[connection signal="button_down" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Buttons/BigFireBallButton" to="." method="_on_big_fire_ball_button_button_down"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

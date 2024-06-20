@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbcn0ubro3dob"]
+
+[ext_resource type="Script" path="res://scripts/dialog_box.gd" id="1_rtqxf"]
+
+[node name="DialogBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rtqxf")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 448.0
+offset_right = 1024.0
+offset_bottom = 640.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 456.0
+offset_right = 1016.0
+offset_bottom = 632.0
+bbcode_enabled = true
+text = "[color=palegreen][b]
+I won't let anything stand in my way and my cat and my kingdom of cats and everything else that I have not 
+mention hehehehehe XD XD XD I just need this text to be long oh my god pls pls how is this not long enough
+???? man pls okay let's talk about something else maybe about a hourse... how do you spell hourse is it horus? no? ummm hoorse huuros? frick hourse... hourse it's this one! no? horse.... ohh.....
+[/b][/color]"

@@ -1,0 +1,119 @@
+[gd_scene load_steps=7 format=3 uid="uid://cohckmyhe6vjp"]
+
+[ext_resource type="Script" path="res://scripts/charge_polygon.gd" id="1_guty3"]
+
+[sub_resource type="Animation" id="Animation_4pkl1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qia7l"]
+resource_name = "pop_down"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [Vector2(1, -0.5), Vector2(1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_particle_effect"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_l2cd5"]
+resource_name = "pop_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, -0.5)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_particle_effect"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_56766"]
+resource_name = "upped"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vgg6k"]
+_data = {
+"RESET": SubResource("Animation_4pkl1"),
+"pop_down": SubResource("Animation_qia7l"),
+"pop_up": SubResource("Animation_l2cd5"),
+"upped": SubResource("Animation_56766")
+}
+
+[node name="charge1" type="Polygon2D"]
+position = Vector2(0, 32)
+scale = Vector2(1, 1e-05)
+color = Color(0.929474, 0.712664, 0.886175, 1)
+polygon = PackedVector2Array(0, 0, 32, 0, 64, 0, 64, 64, 0, 64)
+script = ExtResource("1_guty3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vgg6k")
+}
+
+[node name="ParticlePositionMarke2D" type="Marker2D" parent="."]
+position = Vector2(32, 32)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

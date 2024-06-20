@@ -24,7 +24,7 @@ var steam_multiplayer: SteamMultiplayerPeer = SteamMultiplayerPeer.new()
 # public funcitons
 #################################################
 func create_lobby() -> int:
-	var error = steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_FRIENDS_ONLY, 4)
+	var error = steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_FRIENDS_ONLY, 2)
 	if error:
 		printerr("Create lobby failed")
 	else:

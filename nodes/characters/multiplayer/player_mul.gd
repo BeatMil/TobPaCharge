@@ -10,6 +10,7 @@ extends Node2D
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
 @onready var buttons: Control = $CanvasLayer/Buttons
 @onready var big_fireball_button: Button = $CanvasLayer/Buttons/BigFireBallButton
+@onready var charge_meter = $ChargeMeter
 
 
 #################################################
@@ -54,7 +55,7 @@ func _ready():
 	Steam.connect("avatar_loaded", _on_avatar_loaded)
 	get_parent().connect("new_turn", new_turn)
 	get_parent().connect("resolve_phase", resolve_phase)
-	get_parent().get_node("TimeControl").connect("timeout", _time_control_timeout)
+	get_parent().get_node("TimeControl").connect("timeout", _on_time_control_timeout)
 	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	# print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
 
@@ -77,7 +78,6 @@ func set_disable_all_buttons(_value: bool) -> void:
 
 func spawn_fireball(type: String):
 	if charge_count and type == "normal":
-		charge_count -= 1
 		var fireball = FIREBALL.instantiate()
 		fireball.position = $"FireBallSpawnPos".position
 		if name == "Player1":
@@ -88,7 +88,6 @@ func spawn_fireball(type: String):
 			fireball.set_target("p1")
 		add_child(fireball)
 	elif charge_count >= 3 and type == "BIG":
-		charge_count -= 3
 		var fireball = BIGFIREBALL.instantiate()
 		fireball.position = $"FireBallSpawnPos".position
 		if name == "Player1":
@@ -110,14 +109,19 @@ func resolve_phase():
 	if chosen_action == ActionEnum.actions.FIREBALL:
 		animation_player.play("fireball")
 		spawn_fireball("normal")
+		charge_count -= 1
+		charge_meter.discharge()
 	elif chosen_action == ActionEnum.actions.BLOCK:
 		animation_player.play("block")
 	elif chosen_action == ActionEnum.actions.CHARGE:
 		animation_player.play("charge")
 		charge_count += 1
+		charge_meter.charge()
 	elif chosen_action == ActionEnum.actions.BIGFIREBALL:
 		animation_player.play("big_fireball")
 		spawn_fireball("BIG")
+		charge_count -= 3
+		charge_meter.discharge_big_fireball()
 
 
 func new_turn():
@@ -149,24 +153,26 @@ func _on_area_2d_area_entered(area):
 			hp -= 1
 
 
-func _time_control_timeout() -> void:
-	if not is_action_choosed:
-		_on_charge_button_pressed()
+func _on_time_control_timeout() -> void:
+	if SteamNetwork.steam_id == steam_id:
+		if not is_action_choosed:
+			_on_charge_button_button_down()
+			print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
 
 
-func _on_fire_ball_button_pressed():
+func _on_fire_ball_button_button_down():
 	rpc("do_the_action", ActionEnum.actions.FIREBALL)
 
 
-func _on_block_button_pressed():
+func _on_block_button_button_down():
 	rpc("do_the_action", ActionEnum.actions.BLOCK)
 
 
-func _on_charge_button_pressed():
+func _on_charge_button_button_down():
 	rpc("do_the_action", ActionEnum.actions.CHARGE)
 
 
-func _on_big_fire_ball_button_pressed():
+func _on_big_fire_ball_button_button_down():
 	rpc("do_the_action", ActionEnum.actions.BIGFIREBALL)
 
 
