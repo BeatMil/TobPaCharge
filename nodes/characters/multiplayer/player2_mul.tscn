@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_upm2h"]
 [ext_resource type="Texture2D" uid="uid://c3prva38mw2hh" path="res://media/SecondChar/SecondChar_idle.png" id="2_noe77"]
-[ext_resource type="Texture2D" uid="uid://dowkcuaaf4qgd" path="res://media/SecondChar/SecondChar_block.png" id="3_4krpn"]
+[ext_resource type="Texture2D" uid="uid://brv7edpwvp45f" path="res://media/SecondChar/SecondChar_block_color.png" id="4_f2nuj"]
 [ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_tyuok"]
 [ext_resource type="Texture2D" uid="uid://dih8ygxgxsgf2" path="res://media/SecondChar/SecondChar_charge_color.png" id="6_705t5"]
 [ext_resource type="AudioStream" uid="uid://cabk1jmro237s" path="res://media/sfx/charge02.wav" id="6_lkn2m"]
+[ext_resource type="Texture2D" uid="uid://b8p0o1hwd7d2n" path="res://media/SecondChar/SecondChar_hitted_color.png" id="8_h8asg"]
 [ext_resource type="Texture2D" uid="uid://c2vbpwe4nyp2j" path="res://media/SecondChar/SecondChar_fireball_color.png" id="8_keivj"]
-[ext_resource type="Texture2D" uid="uid://d0c2nk4fx2ftc" path="res://media/SecondChar/SecondChar_hitted.png" id="8_s1fb2"]
 [ext_resource type="AudioStream" uid="uid://b4oglay37sa58" path="res://media/sfx/gura_a.wav" id="9_sqhs7"]
 [ext_resource type="PackedScene" uid="uid://b732gs6p4vb3i" path="res://nodes/charge_meter.tscn" id="10_yss4r"]
 
@@ -98,6 +98,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_vyhkl"]
 resource_name = "block"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -108,7 +109,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_4krpn")]
+"values": [ExtResource("4_f2nuj")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -248,7 +249,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_s1fb2")]
+"values": [ExtResource("8_h8asg")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false

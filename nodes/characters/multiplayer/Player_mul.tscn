@@ -1,11 +1,11 @@
 [gd_scene load_steps=21 format=3 uid="uid://d30b2qwpstgt4"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_ep8rt"]
-[ext_resource type="Texture2D" uid="uid://pskxmpxq37qc" path="res://media/FirstChar/FirstChar_block.png" id="3_b66tr"]
 [ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_ifsn1"]
+[ext_resource type="Texture2D" uid="uid://c8ci17o62bjjg" path="res://media/FirstChar/FirstChar_block_color.png" id="4_qfw1n"]
 [ext_resource type="Texture2D" uid="uid://dc3shpkjxt0c2" path="res://media/FirstChar/FirstChar_charge_color.png" id="6_4c8i3"]
 [ext_resource type="AudioStream" uid="uid://bocx334wnhp3u" path="res://media/sfx/charge01.wav" id="6_iugao"]
-[ext_resource type="Texture2D" uid="uid://rsk05rcpo5ta" path="res://media/FirstChar/FirstChar_hitted.png" id="8_ngct6"]
+[ext_resource type="Texture2D" uid="uid://dwwkvmtef7cqy" path="res://media/FirstChar/FirstChar_hitted_color.png" id="8_c3p1c"]
 [ext_resource type="Texture2D" uid="uid://dctbsxjcvn1hm" path="res://media/FirstChar/FirstChar_fireball_color.png" id="8_rtwa8"]
 [ext_resource type="AudioStream" uid="uid://ntpovytul8qr" path="res://media/sfx/boss_damaged.wav" id="9_ag5du"]
 [ext_resource type="Texture2D" uid="uid://cn45jrmt425rr" path="res://media/FirstChar/FirstChar_idle.png" id="10_bm8lq"]
@@ -106,7 +106,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_b66tr")]
+"values": [ExtResource("4_qfw1n")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -233,6 +233,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_m2n50"]
 resource_name = "hitted"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -243,7 +244,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_ngct6")]
+"values": [ExtResource("8_c3p1c")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
