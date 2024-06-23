@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://c3adto1be3xa2"]
+[gd_scene load_steps=22 format=3 uid="uid://c3adto1be3xa2"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_upm2h"]
 [ext_resource type="Texture2D" uid="uid://c3prva38mw2hh" path="res://media/SecondChar/SecondChar_idle.png" id="2_noe77"]
+[ext_resource type="AudioStream" uid="uid://ceqtyf8i6pfjq" path="res://media/sfx/big_fireball.wav" id="4_bcwt1"]
 [ext_resource type="Texture2D" uid="uid://brv7edpwvp45f" path="res://media/SecondChar/SecondChar_block_color.png" id="4_f2nuj"]
 [ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_tyuok"]
 [ext_resource type="Texture2D" uid="uid://dih8ygxgxsgf2" path="res://media/SecondChar/SecondChar_charge_color.png" id="6_705t5"]
@@ -82,7 +83,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_k5ivg"]
 resource_name = "big_fireball"
-length = 0.001
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -95,6 +96,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("8_keivj")]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_bcwt1")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_vyhkl"]
 resource_name = "block"
@@ -221,7 +237,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_pf7un"]
 resource_name = "fireball"
-length = 0.001
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

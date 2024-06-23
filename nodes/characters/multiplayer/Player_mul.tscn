@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://d30b2qwpstgt4"]
+[gd_scene load_steps=22 format=3 uid="uid://d30b2qwpstgt4"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_ep8rt"]
+[ext_resource type="AudioStream" uid="uid://ceqtyf8i6pfjq" path="res://media/sfx/big_fireball.wav" id="4_82uu1"]
 [ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_ifsn1"]
 [ext_resource type="Texture2D" uid="uid://c8ci17o62bjjg" path="res://media/FirstChar/FirstChar_block_color.png" id="4_qfw1n"]
 [ext_resource type="Texture2D" uid="uid://dc3shpkjxt0c2" path="res://media/FirstChar/FirstChar_charge_color.png" id="6_4c8i3"]
@@ -79,7 +80,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_lptgh"]
 resource_name = "big_fireball"
-length = 0.001
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -92,6 +93,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("8_rtwa8")]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_82uu1")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_l5ppu"]
 resource_name = "block"
@@ -217,7 +233,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_n7kqx"]
 resource_name = "fireball"
-length = 0.001
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
