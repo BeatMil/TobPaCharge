@@ -77,7 +77,7 @@ func set_disable_all_buttons(_value: bool) -> void:
 
 
 func spawn_fireball(type: String):
-	if charge_count and type == "normal":
+	if charge_count > 0 and type == "normal":
 		var fireball = FIREBALL.instantiate()
 		fireball.position = $"FireBallSpawnPos".position
 		if name == "Player1":
@@ -108,9 +108,10 @@ func resolve_phase():
 	# Update animation
 	if chosen_action == ActionEnum.actions.FIREBALL:
 		animation_player.play("fireball")
-		spawn_fireball("normal")
-		charge_count -= 1
-		charge_meter.discharge()
+		if charge_count > 0:
+			spawn_fireball("normal")
+			charge_count -= 1
+			charge_meter.discharge()
 	elif chosen_action == ActionEnum.actions.BLOCK:
 		animation_player.play("block")
 	elif chosen_action == ActionEnum.actions.CHARGE:
@@ -119,9 +120,10 @@ func resolve_phase():
 		charge_meter.charge()
 	elif chosen_action == ActionEnum.actions.BIGFIREBALL:
 		animation_player.play("big_fireball")
-		spawn_fireball("BIG")
-		charge_count -= 3
-		charge_meter.discharge_big_fireball()
+		if charge_count >= 3:
+			spawn_fireball("BIG")
+			charge_count -= 3
+			charge_meter.discharge_big_fireball()
 
 
 func new_turn():
