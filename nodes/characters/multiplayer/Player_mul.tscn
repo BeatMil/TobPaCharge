@@ -340,10 +340,10 @@ script = ExtResource("1_ep8rt")
 [node name="Buttons" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 46.0
-offset_top = 16.0
-offset_right = 46.0
-offset_bottom = 16.0
+offset_left = 464.0
+offset_top = 424.0
+offset_right = 464.0
+offset_bottom = 424.0
 
 [node name="FireBallButton" type="Button" parent="CanvasLayer/Buttons"]
 layout_mode = 0

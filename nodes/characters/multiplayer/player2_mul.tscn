@@ -342,10 +342,10 @@ script = ExtResource("1_upm2h")
 [node name="Buttons" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 46.0
-offset_top = 43.0
-offset_right = 46.0
-offset_bottom = 43.0
+offset_left = 464.0
+offset_top = 368.0
+offset_right = 464.0
+offset_bottom = 368.0
 
 [node name="FireBallButton" type="Button" parent="CanvasLayer/Buttons"]
 layout_mode = 0
