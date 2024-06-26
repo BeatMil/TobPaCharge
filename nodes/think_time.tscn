@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://ilua2f08ss2o"]
+
+[ext_resource type="Texture2D" uid="uid://cnqfrwxwhlgw0" path="res://media/FirstChar/vanilla_timer.png" id="1_avvoy"]
+[ext_resource type="Script" path="res://scripts/think_time.gd" id="1_g3xtb"]
+[ext_resource type="Texture2D" uid="uid://bwu6omrl6xevd" path="res://media/SecondChar/kaisouko_timer.png" id="2_73el5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekyuq"]
+bg_color = Color(0, 0, 0, 0.152941)
+
+[node name="ThinkTime" type="Node2D"]
+script = ExtResource("1_g3xtb")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 576.0
+offset_top = 192.0
+offset_right = 1344.0
+offset_bottom = 320.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ekyuq")
+
+[node name="Vanilla" type="Sprite2D" parent="."]
+position = Vector2(640, 256)
+texture = ExtResource("1_avvoy")
+
+[node name="VanillaMarker2D" type="Marker2D" parent="."]
+position = Vector2(640, 256)
+
+[node name="Kaisouko" type="Sprite2D" parent="."]
+position = Vector2(1280, 256)
+texture = ExtResource("2_73el5")
+flip_h = true
+
+[node name="KaisoukoMarker2D" type="Marker2D" parent="."]
+position = Vector2(1280, 256)
+
+[node name="LeftMarker2D" type="Marker2D" parent="."]
+position = Vector2(920, 256)
+
+[node name="MidMarker2D" type="Marker2D" parent="."]
+position = Vector2(960, 256)
+
+[node name="RightMarker2D" type="Marker2D" parent="."]
+position = Vector2(1000, 256)

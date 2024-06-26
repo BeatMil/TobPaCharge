@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://fdmlajasqvjd"]
+[gd_scene load_steps=11 format=3 uid="uid://fdmlajasqvjd"]
 
 [ext_resource type="PackedScene" uid="uid://d30b2qwpstgt4" path="res://nodes/characters/multiplayer/Player_mul.tscn" id="1_58itq"]
 [ext_resource type="Script" path="res://scripts/battle_multiplayer.gd" id="1_clmqd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b5nopnieawkn8" path="res://media/stages/clouds2.png" id="5_yvd4y"]
 [ext_resource type="Texture2D" uid="uid://c88k531esm7ad" path="res://media/stages/clouds3.png" id="6_7ttp5"]
 [ext_resource type="Texture2D" uid="uid://c20t0egyiwwja" path="res://media/stages/clouds.png" id="6_gqq8x"]
+[ext_resource type="PackedScene" uid="uid://ilua2f08ss2o" path="res://nodes/think_time.tscn" id="10_t0dry"]
 
 [node name="BattleMultiplayer" type="Node2D"]
 script = ExtResource("1_clmqd")
@@ -63,10 +64,10 @@ position = Vector2(448, 712)
 position = Vector2(1480, 712)
 
 [node name="TimeLeftLabel" type="Label" parent="."]
-offset_left = 482.0
-offset_top = 239.0
-offset_right = 538.0
-offset_bottom = 265.0
+offset_left = 864.0
+offset_top = 240.0
+offset_right = 933.0
+offset_bottom = 266.0
 scale = Vector2(3.19559, 3.19559)
 text = "TimeLeft"
 
@@ -75,6 +76,8 @@ one_shot = true
 
 [node name="ResolveTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ThinkTimeDisplay" parent="." instance=ExtResource("10_t0dry")]
 
 [connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
 [connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]
