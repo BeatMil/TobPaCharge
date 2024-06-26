@@ -10,7 +10,7 @@ extends Node2D
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
 @onready var buttons: Control = $CanvasLayer/Buttons
 @onready var big_fireball_button: Button = $CanvasLayer/Buttons/BigFireBallButton
-@onready var charge_meter = $ChargeMeter
+@onready var charge_meter = %ChargeMeter
 
 
 #################################################

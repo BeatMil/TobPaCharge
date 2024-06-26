@@ -391,6 +391,10 @@ offset_right = 604.0
 offset_bottom = 529.0
 text = "Player1"
 
+[node name="ChargeMeter" parent="CanvasLayer" instance=ExtResource("10_dnqw3")]
+unique_name_in_owner = true
+position = Vector2(16, 16)
+
 [node name="Sprite" type="Sprite2D" parent="."]
 clip_children = 2
 texture = ExtResource("10_bm8lq")
@@ -434,9 +438,6 @@ offset_bottom = -226.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="ChargeMeter" parent="." instance=ExtResource("10_dnqw3")]
-position = Vector2(-96, -288)
 
 [connection signal="button_down" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_button_down"]
