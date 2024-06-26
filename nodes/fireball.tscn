@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dy4mt8sfbgevl"]
+[gd_scene load_steps=11 format=3 uid="uid://dy4mt8sfbgevl"]
 
 [ext_resource type="Texture2D" uid="uid://dpniaq1mhsioq" path="res://media/attacks_texture/magic_circle.png" id="1_12tf1"]
 [ext_resource type="Script" path="res://scripts/fireball.gd" id="1_g132v"]
 [ext_resource type="AudioStream" uid="uid://bpuvwwj5xfy1j" path="res://media/sfx/explosion16.wav" id="3_jib7a"]
 [ext_resource type="AudioStream" uid="uid://ddsba0qrdedsr" path="res://media/sfx/getBlocked.wav" id="4_uosn2"]
+[ext_resource type="PackedScene" uid="uid://bs8vtp2yca0ty" path="res://nodes/particles_effects/hit_spark_fireball.tscn" id="5_c07dv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_33pg2"]
 radius = 128.016
@@ -121,6 +122,7 @@ _data = {
 }
 
 [node name="FireBall" type="RigidBody2D" groups=["fireball"]]
+position = Vector2(0, 1)
 collision_layer = 4
 collision_mask = 0
 mass = 0.1
@@ -149,5 +151,8 @@ collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_33pg2")
+
+[node name="hit_spark_fireball" parent="." instance=ExtResource("5_c07dv")]
+position = Vector2(0, -2)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

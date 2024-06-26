@@ -33,6 +33,7 @@ time_before_queue_free = 1.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_fmtxd")
+emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_3326g")
 texture = ExtResource("2_aljnp")
