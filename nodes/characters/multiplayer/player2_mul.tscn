@@ -446,6 +446,9 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="backwindMarker2D" type="Marker2D" parent="."]
+position = Vector2(168, 152)
+
 [connection signal="button_down" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_button_down"]

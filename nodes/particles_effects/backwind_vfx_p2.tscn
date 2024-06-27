@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwmi1v4x0ioa6"]
+
+[ext_resource type="Script" path="res://scripts/particle_vfx.gd" id="1_vi4gi"]
+[ext_resource type="Material" uid="uid://tagq431uf2km" path="res://nodes/particles_effects/process_material/backwind_vfx_p2.tres" id="2_ptdql"]
+[ext_resource type="Texture2D" uid="uid://cg2klgceea4tb" path="res://media/sprites/particle_effects/backwind.png" id="3_m2v3k"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrnsk"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[node name="backwind" type="Node2D"]
+script = ExtResource("1_vi4gi")
+time_before_queue_free = 1.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_yrnsk")
+amount = 3
+process_material = ExtResource("2_ptdql")
+texture = ExtResource("3_m2v3k")
+speed_scale = 3.0
+fixed_fps = 0

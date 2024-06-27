@@ -11,13 +11,16 @@ extends Node2D
 @onready var buttons: Control = $CanvasLayer/Buttons
 @onready var big_fireball_button: Button = $CanvasLayer/Buttons/BigFireBallButton
 @onready var charge_meter = %ChargeMeter
+@onready var backwind_marker_2d = $backwindMarker2D
 
 
 #################################################
 ## Preloads
 #################################################
-var FIREBALL = preload("res://nodes/fireball.tscn")
-var BIGFIREBALL = preload("res://nodes/big_fireball.tscn")
+const FIREBALL = preload("res://nodes/fireball.tscn")
+const BIGFIREBALL = preload("res://nodes/big_fireball.tscn")
+const BACKWIND_VFX_P_1 = preload("res://nodes/particles_effects/backwind_vfx_p1.tscn")
+const BACKWIND_VFX_P_2 = preload("res://nodes/particles_effects/backwind_vfx_p2.tscn")
 
 
 #################################################
@@ -96,6 +99,7 @@ func spawn_fireball(type: String):
 		elif name == "Player2":
 			fireball.is_going_right_side = false
 			fireball.set_target("p1")
+		_spawn_backwind_vfx()
 		add_child(fireball)
 
 
@@ -136,6 +140,20 @@ func new_turn():
 		big_fireball_button.set_deferred("visible", true)
 	else:
 		big_fireball_button.set_deferred("visible", false)
+
+
+#################################################
+## private functions
+#################################################
+func _spawn_backwind_vfx() -> void:
+	if name == "Player1":
+		var vfx = BACKWIND_VFX_P_1.instantiate()
+		vfx.position = backwind_marker_2d.position
+		add_child(vfx)
+	elif name == "Player2":
+		var vfx = BACKWIND_VFX_P_2.instantiate()
+		vfx.position = backwind_marker_2d.position
+		add_child(vfx)
 
 
 #################################################

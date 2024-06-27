@@ -150,7 +150,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Vector2(0.1, 0.08), Vector2(0.5, 0.4)]
+"values": [Vector2(0.1, 0.08), Vector2(1, 0.8)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aequ7"]
