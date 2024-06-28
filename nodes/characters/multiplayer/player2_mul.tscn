@@ -337,6 +337,14 @@ _data = {
 [node name="Player2" type="Node2D"]
 script = ExtResource("1_upm2h")
 
+[node name="CanvasLayerPublic" type="CanvasLayer" parent="."]
+
+[node name="ChargeMeter" parent="CanvasLayerPublic" instance=ExtResource("10_yss4r")]
+unique_name_in_owner = true
+position = Vector2(1904, 16)
+rotation = -3.14159
+scale = Vector2(3, -3)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Buttons" type="Control" parent="CanvasLayer"]
@@ -386,12 +394,6 @@ offset_top = 506.0
 offset_right = 604.0
 offset_bottom = 529.0
 text = "Player2"
-
-[node name="ChargeMeter" parent="CanvasLayer" instance=ExtResource("10_yss4r")]
-unique_name_in_owner = true
-position = Vector2(1904, 16)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="AvatarPanel" type="Panel" parent="CanvasLayer"]
 offset_left = 1840.0
