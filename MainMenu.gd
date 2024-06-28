@@ -2,10 +2,13 @@ extends Control
 
 # Properties
 @onready var vbox_member: VBoxContainer = $"VBoxMember"
-@onready var invite_friend_button: Button = $InviteFriendButton
-@onready var leave_lobby_button: Button = $LeaveLobbyButton
-@onready var create_lobby_button: Button = $CreateLobbyButton
-@onready var start_game_button: Button = $StartGameButton
+@onready var versus_bot_button: Node2D = $MenuButtons/VersusBotButton
+@onready var create_lobby_button: Node2D = $MenuButtons/CreateLobbyButton
+@onready var invite_friend_button: Node2D = $MenuButtons/InviteFriendButton
+@onready var start_game_button: Node2D = $MenuButtons/StartGameButton
+@onready var leave_lobby_button: Node2D = $MenuButtons/LeaveLobbyButton
+
+
 """
 Preloads
 """
@@ -13,28 +16,37 @@ Preloads
 @onready var MUL_TEST = preload("res://nodes/multiplayer_player_test.tscn")
 
 
+#################################################
+# Built-in
+#################################################
 func _ready():
 	SteamNetwork.connect("lobby_member_update", update_lobby_members)
 	_outside_lobby_buttons()
 
 	SteamNetwork.update_lobby_members()
 
+#################################################
+# Private functions
+#################################################
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		print("WHAT??? NO QUIT!!")
+
 func _in_lobby_buttons() -> void:
-	create_lobby_button.set_deferred("disabled", true)
-	leave_lobby_button.set_deferred("disabled", false)
-	invite_friend_button.set_deferred("disabled", false)
+	create_lobby_button.disable()
+	leave_lobby_button.enable()
+	invite_friend_button.enable()
 
 
 func _outside_lobby_buttons() -> void:
-	create_lobby_button.set_deferred("disabled", false)
-	leave_lobby_button.set_deferred("disabled", true)
-	invite_friend_button.set_deferred("disabled", true)
-	start_game_button.set_deferred("visible", false)
+	create_lobby_button.enable()
+	leave_lobby_button.disable()
+	invite_friend_button.disable()
+	start_game_button.disable()
 
 #################################################
-# Normal functions
+# Public functions
 #################################################
-
 # Get the lobby members from Steam
 func update_lobby_members() -> void:
 	print_rich("[color=orange][b]update_lobby_members()✓[/b][/color]")
@@ -66,9 +78,9 @@ func update_lobby_members() -> void:
 func check_ready() -> void:
 	for node in vbox_member.get_children():
 		if node.is_ready == false:
-			$StartGameButton.set_deferred("visible", false)
+			start_game_button.disable()
 			return
-	$StartGameButton.set_deferred("visible", true)
+	start_game_button.enable()
 
 
 @rpc("any_peer", "call_local")
@@ -105,3 +117,32 @@ func _on_debug_button_pressed():
 
 func _on_start_game_button_pressed():
 	rpc("start_game")
+
+
+func _on_versus_bot_on_press() -> void:
+	SceneTransition.change_scene("res://scenes/battle.tscn")
+
+
+func _on_create_lobby_on_press() -> void:
+	var error = SteamNetwork.create_lobby()
+	if not error:
+		_in_lobby_buttons()
+
+
+func _on_invite_friend_on_press() -> void:
+	Steam.activateGameOverlayInviteDialog(SteamNetwork.lobby_id)
+
+
+func _on_start_game_button_on_press() -> void:
+	rpc("start_game")
+
+
+func _on_leave_lobby_on_press() -> void:
+	SteamNetwork.leave_lobby()
+	# _outside_lobby_buttons()
+	# update_lobby_members()
+
+
+func _on_exit_button_on_press() -> void:
+	#get_tree().quit()
+	OS.kill(OS.get_process_id()) # quit game fast!! but there maybe side effects...
