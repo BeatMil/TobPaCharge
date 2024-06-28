@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cohckmyhe6vjp" path="res://nodes/helpers/charge_polygon.tscn" id="2_5t1cf"]
 
 [node name="ChargeMeter" type="Node2D"]
+scale = Vector2(3, 3)
 script = ExtResource("1_qvhnv")
 
 [node name="charge1" parent="." instance=ExtResource("2_5t1cf")]

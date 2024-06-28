@@ -1,12 +1,55 @@
-[gd_scene load_steps=5 format=3 uid="uid://fdmlajasqvjd"]
+[gd_scene load_steps=11 format=3 uid="uid://fdmlajasqvjd"]
 
 [ext_resource type="PackedScene" uid="uid://d30b2qwpstgt4" path="res://nodes/characters/multiplayer/Player_mul.tscn" id="1_58itq"]
 [ext_resource type="Script" path="res://scripts/battle_multiplayer.gd" id="1_clmqd"]
+[ext_resource type="Script" path="res://scripts/CloudsParallaxLayer.gd" id="2_3jako"]
 [ext_resource type="PackedScene" uid="uid://c3adto1be3xa2" path="res://nodes/characters/multiplayer/player2_mul.tscn" id="2_6t46w"]
 [ext_resource type="PackedScene" uid="uid://di45s8k4r18g4" path="res://nodes/restart_menu.tscn" id="2_7lbw4"]
+[ext_resource type="Texture2D" uid="uid://bpiir3byivakw" path="res://media/stages/rooftop_no_clouds.png" id="3_ej8yi"]
+[ext_resource type="Texture2D" uid="uid://b5nopnieawkn8" path="res://media/stages/clouds2.png" id="5_yvd4y"]
+[ext_resource type="Texture2D" uid="uid://c88k531esm7ad" path="res://media/stages/clouds3.png" id="6_7ttp5"]
+[ext_resource type="Texture2D" uid="uid://c20t0egyiwwja" path="res://media/stages/clouds.png" id="6_gqq8x"]
+[ext_resource type="PackedScene" uid="uid://ilua2f08ss2o" path="res://nodes/think_time.tscn" id="10_t0dry"]
 
 [node name="BattleMultiplayer" type="Node2D"]
 script = ExtResource("1_clmqd")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Rooftop" type="Sprite2D" parent="ParallaxBackground"]
+self_modulate = Color(0.925353, 0.925353, 0.925353, 1)
+texture = ExtResource("3_ej8yi")
+centered = false
+
+[node name="CloudsParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(2000, 0)
+script = ExtResource("2_3jako")
+SPEED = -50
+
+[node name="Clouds" type="Sprite2D" parent="ParallaxBackground/CloudsParallaxLayer"]
+position = Vector2(752, 136)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_gqq8x")
+
+[node name="CloudsParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(2000, 0)
+script = ExtResource("2_3jako")
+SPEED = -20
+
+[node name="Clouds" type="Sprite2D" parent="ParallaxBackground/CloudsParallaxLayer2"]
+position = Vector2(1344, 80)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_yvd4y")
+
+[node name="CloudsParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(2000, 0)
+script = ExtResource("2_3jako")
+SPEED = -80
+
+[node name="Clouds" type="Sprite2D" parent="ParallaxBackground/CloudsParallaxLayer3"]
+position = Vector2(392, 104)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_7ttp5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 10
@@ -15,16 +58,17 @@ layer = 10
 current_scene = "res://scenes/battle_multiplayer.tscn"
 
 [node name="Player1" parent="." instance=ExtResource("1_58itq")]
-position = Vector2(207, 320)
+position = Vector2(448, 712)
 
 [node name="Player2" parent="." instance=ExtResource("2_6t46w")]
-position = Vector2(931, 320)
+position = Vector2(1480, 712)
 
 [node name="TimeLeftLabel" type="Label" parent="."]
-offset_left = 482.0
-offset_top = 239.0
-offset_right = 538.0
-offset_bottom = 265.0
+visible = false
+offset_left = 864.0
+offset_top = 240.0
+offset_right = 933.0
+offset_bottom = 266.0
 scale = Vector2(3.19559, 3.19559)
 text = "TimeLeft"
 
@@ -33,6 +77,8 @@ one_shot = true
 
 [node name="ResolveTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ThinkTimeDisplay" parent="." instance=ExtResource("10_t0dry")]
 
 [connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
 [connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]

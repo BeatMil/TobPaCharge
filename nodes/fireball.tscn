@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dy4mt8sfbgevl"]
+[gd_scene load_steps=12 format=3 uid="uid://dy4mt8sfbgevl"]
 
 [ext_resource type="Texture2D" uid="uid://dpniaq1mhsioq" path="res://media/attacks_texture/magic_circle.png" id="1_12tf1"]
 [ext_resource type="Script" path="res://scripts/fireball.gd" id="1_g132v"]
 [ext_resource type="AudioStream" uid="uid://bpuvwwj5xfy1j" path="res://media/sfx/explosion16.wav" id="3_jib7a"]
 [ext_resource type="AudioStream" uid="uid://ddsba0qrdedsr" path="res://media/sfx/getBlocked.wav" id="4_uosn2"]
+[ext_resource type="PackedScene" uid="uid://bs8vtp2yca0ty" path="res://nodes/particles_effects/hit_spark_fireball.tscn" id="5_c07dv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_33pg2"]
 radius = 128.016
@@ -21,6 +22,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D/Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.1, 0.08)]
 }
 
 [sub_resource type="Animation" id="Animation_4bf7k"]
@@ -113,14 +126,43 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_268vh"]
+resource_name = "normal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.9375, 0.522856, 0.64362, 1), Color(0.845662, 0.597019, 0.133619, 1), Color(0.639738, 0.247438, 0.545038, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D/Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.08), Vector2(1, 0.8)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aequ7"]
 _data = {
 "RESET": SubResource("Animation_q4m1o"),
 "explode": SubResource("Animation_4bf7k"),
-"explode_smol": SubResource("Animation_iusx1")
+"explode_smol": SubResource("Animation_iusx1"),
+"normal": SubResource("Animation_268vh")
 }
 
 [node name="FireBall" type="RigidBody2D" groups=["fireball"]]
+position = Vector2(0, 1)
 collision_layer = 4
 collision_mask = 0
 mass = 0.1
@@ -142,6 +184,7 @@ texture = ExtResource("1_12tf1")
 libraries = {
 "": SubResource("AnimationLibrary_aequ7")
 }
+autoplay = "normal"
 
 [node name="Area2D" type="Area2D" parent="." groups=["fireball"]]
 collision_layer = 4
@@ -149,5 +192,8 @@ collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_33pg2")
+
+[node name="hit_spark_fireball" parent="." instance=ExtResource("5_c07dv")]
+position = Vector2(0, -2)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

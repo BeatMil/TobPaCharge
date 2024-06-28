@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cc85xyg2whm6b"]
+[gd_scene load_steps=6 format=3 uid="uid://cc85xyg2whm6b"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_bdtlp"]
 [ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="2_7agid"]
+[ext_resource type="Texture2D" uid="uid://jf1ws6bprf8u" path="res://media/sprites/menu_waifu/menu_waifu_idle.png" id="3_oif5j"]
+[ext_resource type="PackedScene" uid="uid://dl5pewv5dfsfe" path="res://nodes/cool_menu_button.tscn" id="4_ofm7h"]
+[ext_resource type="PackedScene" uid="uid://h5otivo8816m" path="res://nodes/cool_menu_button_start_game.tscn" id="5_2b7m8"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -26,21 +29,6 @@ theme_override_fonts/font = ExtResource("2_7agid")
 theme_override_font_sizes/font_size = 69
 text = "TobPaCharge"
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -327.0
-offset_top = -236.0
-offset_right = -217.0
-offset_bottom = -205.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Play with Bot"
-
 [node name="DebugButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -56,78 +44,48 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "debug"
 
-[node name="CreateLobbyButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -328.0
-offset_top = -164.0
-offset_right = -217.0
-offset_bottom = -133.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Create Lobby"
-
-[node name="InviteFriendButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -327.0
-offset_top = -124.0
-offset_right = -216.0
-offset_bottom = -93.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Invite Friend"
-
-[node name="LeaveLobbyButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -328.0
-offset_top = -44.0
-offset_right = -217.0
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Leave Lobby"
-
-[node name="StartGameButton" type="Button" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -328.0
-offset_top = -84.0
-offset_right = -217.0
-offset_bottom = -53.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.456364, 0.790949, 0.415139, 1)
-text = "Start Game!"
-
 [node name="VBoxMember" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 376.0
-offset_top = 94.0
-offset_right = 1148.0
-offset_bottom = 645.0
+offset_left = 832.0
+offset_top = 256.0
+offset_right = 1604.0
+offset_bottom = 807.0
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="MenuWaifuIdle" type="Sprite2D" parent="."]
+position = Vector2(920, 824)
+texture = ExtResource("3_oif5j")
+
+[node name="MenuButtons" type="Node" parent="."]
+
+[node name="VersusBotButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(56, 64)
+text_on_button = "VS Bot"
+
+[node name="CreateLobbyButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(56, 192)
+text_on_button = "Create Lobby"
+
+[node name="InviteFriendButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(56, 312)
+text_on_button = "Invite Friend"
+
+[node name="StartGameButton" parent="MenuButtons" instance=ExtResource("5_2b7m8")]
+position = Vector2(56, 432)
+text_on_button = "START GAME!"
+
+[node name="LeaveLobbyButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(56, 560)
+text_on_button = "Leave"
+
+[node name="ExitButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(64, 688)
+scale = Vector2(0.2, 0.2)
+text_on_button = "Exit o(TヘTo)"
+
 [connection signal="pressed" from="DebugButton" to="." method="_on_debug_button_pressed"]
-[connection signal="pressed" from="CreateLobbyButton" to="." method="_on_create_lobby_button_pressed"]
-[connection signal="pressed" from="InviteFriendButton" to="." method="_on_invite_friend_button_pressed"]
-[connection signal="pressed" from="LeaveLobbyButton" to="." method="_on_leave_lobby_button_pressed"]
-[connection signal="pressed" from="StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="on_press" from="MenuButtons/VersusBotButton" to="." method="_on_versus_bot_on_press"]
+[connection signal="on_press" from="MenuButtons/CreateLobbyButton" to="." method="_on_create_lobby_on_press"]
+[connection signal="on_press" from="MenuButtons/InviteFriendButton" to="." method="_on_invite_friend_on_press"]
+[connection signal="on_press" from="MenuButtons/StartGameButton" to="." method="_on_start_game_button_on_press"]
+[connection signal="on_press" from="MenuButtons/LeaveLobbyButton" to="." method="_on_leave_lobby_on_press"]
+[connection signal="on_press" from="MenuButtons/ExitButton" to="." method="_on_exit_button_on_press"]

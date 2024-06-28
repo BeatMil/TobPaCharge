@@ -20,9 +20,6 @@ func random_action():
 
 
 func new_turn():
-	pass
-	# random_action()
-	# print("PLAYER: %s"%[ActionEnum.actions.find_key(chosen_action)])
 	$"AnimationPlayer".play("idle")
 	$ActionLabel.text = "Ready"
 	chosen_action = ActionEnum.actions.CHARGE

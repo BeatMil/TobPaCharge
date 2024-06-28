@@ -148,8 +148,8 @@ _data = {
 custom_minimum_size = Vector2(160, 88)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 192.0
-offset_bottom = 88.0
+offset_right = 256.0
+offset_bottom = 128.0
 script = ExtResource("1_yyo3l")
 username_label = NodePath("SteamNameLabel")
 

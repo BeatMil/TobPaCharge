@@ -1,18 +1,19 @@
-[gd_scene load_steps=21 format=3 uid="uid://d30b2qwpstgt4"]
+[gd_scene load_steps=24 format=3 uid="uid://d30b2qwpstgt4"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_ep8rt"]
-[ext_resource type="Texture2D" uid="uid://bhilkjo6hnj61" path="res://media/FirstChar/FirstChar_holder.png" id="2_0cqqi"]
-[ext_resource type="Texture2D" uid="uid://pskxmpxq37qc" path="res://media/FirstChar/FirstChar_block.png" id="3_b66tr"]
+[ext_resource type="PackedScene" uid="uid://cua0jhtddpgu3" path="res://nodes/very_cool_buttons/very_cool_block_button.tscn" id="3_mim8e"]
+[ext_resource type="AudioStream" uid="uid://ceqtyf8i6pfjq" path="res://media/sfx/big_fireball.wav" id="4_82uu1"]
 [ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_ifsn1"]
-[ext_resource type="Texture2D" uid="uid://blsgqkxoawu8e" path="res://media/FirstChar/FirstChar_charge.png" id="5_5ea2s"]
+[ext_resource type="Texture2D" uid="uid://c8ci17o62bjjg" path="res://media/FirstChar/FirstChar_block_color.png" id="4_qfw1n"]
+[ext_resource type="PackedScene" uid="uid://bbcwbus8mbbec" path="res://nodes/very_cool_buttons/very_cool_big_fireball_button.tscn" id="4_s4ucm"]
+[ext_resource type="Texture2D" uid="uid://dc3shpkjxt0c2" path="res://media/FirstChar/FirstChar_charge_color.png" id="6_4c8i3"]
 [ext_resource type="AudioStream" uid="uid://bocx334wnhp3u" path="res://media/sfx/charge01.wav" id="6_iugao"]
-[ext_resource type="Texture2D" uid="uid://cnelufqm0nn36" path="res://media/FirstChar/FirstChar_fireball.png" id="7_bs2mu"]
-[ext_resource type="Texture2D" uid="uid://rsk05rcpo5ta" path="res://media/FirstChar/FirstChar_hitted.png" id="8_ngct6"]
+[ext_resource type="Texture2D" uid="uid://dwwkvmtef7cqy" path="res://media/FirstChar/FirstChar_hitted_color.png" id="8_c3p1c"]
+[ext_resource type="Texture2D" uid="uid://dctbsxjcvn1hm" path="res://media/FirstChar/FirstChar_fireball_color.png" id="8_rtwa8"]
 [ext_resource type="AudioStream" uid="uid://ntpovytul8qr" path="res://media/sfx/boss_damaged.wav" id="9_ag5du"]
+[ext_resource type="Texture2D" uid="uid://cn45jrmt425rr" path="res://media/FirstChar/FirstChar_idle.png" id="10_bm8lq"]
 [ext_resource type="PackedScene" uid="uid://b732gs6p4vb3i" path="res://nodes/charge_meter.tscn" id="10_dnqw3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnc5c"]
-bg_color = Color(0.78262, 0.506265, 0.403243, 1)
+[ext_resource type="PackedScene" uid="uid://km0bq0gsqwmw" path="res://nodes/very_cool_buttons/very_cool_fireball_button.tscn" id="12_7db1n"]
 
 [sub_resource type="Animation" id="Animation_0vekx"]
 length = 0.001
@@ -26,7 +27,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_0cqqi")]
+"values": [ExtResource("10_bm8lq")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -79,7 +80,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_lptgh"]
 resource_name = "big_fireball"
-length = 0.001
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -90,8 +91,23 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_bs2mu")]
+"values": [ExtResource("8_rtwa8")]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_82uu1")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_l5ppu"]
 resource_name = "block"
@@ -106,7 +122,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_b66tr")]
+"values": [ExtResource("4_qfw1n")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -173,7 +189,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_5ea2s")]
+"values": [ExtResource("6_4c8i3")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -212,12 +228,12 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.235294, 0.74902, 0.423529, 0.454902)]
+"values": [Color(0.942774, 0.847968, 0.328243, 0.454902)]
 }
 
 [sub_resource type="Animation" id="Animation_n7kqx"]
 resource_name = "fireball"
-length = 0.001
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -228,11 +244,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_bs2mu")]
+"values": [ExtResource("8_rtwa8")]
 }
 
 [sub_resource type="Animation" id="Animation_m2n50"]
 resource_name = "hitted"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -243,7 +260,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_ngct6")]
+"values": [ExtResource("8_c3p1c")]
 }
 tracks/1/type = "audio"
 tracks/1/imported = false
@@ -298,7 +315,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_0cqqi")]
+"values": [ExtResource("10_bm8lq")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wq4l7"]
@@ -318,56 +335,70 @@ size = Vector2(152, 454)
 [node name="Player" type="Node2D"]
 script = ExtResource("1_ep8rt")
 
+[node name="CanvasLayerPublic" type="CanvasLayer" parent="."]
+
+[node name="ChargeMeter" parent="CanvasLayerPublic" instance=ExtResource("10_dnqw3")]
+unique_name_in_owner = true
+position = Vector2(16, 16)
+
+[node name="AvatarPanel" type="Panel" parent="CanvasLayerPublic"]
+offset_left = 16.0
+offset_top = 128.0
+offset_right = 78.0
+offset_bottom = 190.0
+metadata/_edit_group_ = true
+
+[node name="AvatarTexture" type="TextureRect" parent="CanvasLayerPublic/AvatarPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Buttons" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 46.0
-offset_top = 16.0
-offset_right = 46.0
-offset_bottom = 16.0
+offset_left = 464.0
+offset_top = 424.0
+offset_right = 464.0
+offset_bottom = 424.0
 
-[node name="FireBallButton" type="Button" parent="CanvasLayer/Buttons"]
+[node name="FireballButton" parent="CanvasLayer/Buttons" instance=ExtResource("12_7db1n")]
 layout_mode = 0
-offset_left = 356.0
-offset_top = 413.0
-offset_right = 463.0
-offset_bottom = 472.0
-focus_mode = 0
-text = "Fireball"
+offset_left = 96.0
+offset_top = 376.0
+offset_right = 608.0
+offset_bottom = 888.0
+scale = Vector2(0.5, 0.5)
 
-[node name="BlockButton" type="Button" parent="CanvasLayer/Buttons"]
+[node name="BlockButton" parent="CanvasLayer/Buttons" instance=ExtResource("3_mim8e")]
 layout_mode = 0
-offset_left = 470.0
-offset_top = 413.0
-offset_right = 577.0
-offset_bottom = 472.0
-focus_mode = 0
-text = "Block"
+offset_left = 480.0
+offset_top = 376.0
+offset_right = 992.0
+offset_bottom = 888.0
+scale = Vector2(0.5, 0.5)
+
+[node name="BigFireBallButton" parent="CanvasLayer/Buttons" instance=ExtResource("4_s4ucm")]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 200.0
+offset_right = 800.0
+offset_bottom = 712.0
+scale = Vector2(0.5, 0.5)
 
 [node name="ChargeButton" type="Button" parent="CanvasLayer/Buttons"]
 layout_mode = 0
-offset_left = 585.0
-offset_top = 413.0
-offset_right = 692.0
-offset_bottom = 472.0
+offset_left = -136.0
+offset_top = 408.0
+offset_right = -29.0
+offset_bottom = 467.0
 focus_mode = 0
 text = "Charge"
 
-[node name="BigFireBallButton" type="Button" parent="CanvasLayer/Buttons"]
+[node name="Label" type="Label" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 423.0
-offset_top = 302.0
-offset_right = 615.0
-offset_bottom = 404.0
-focus_mode = 0
-theme_override_colors/font_color = Color(0.36016, 0.188694, 0.114951, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_nnc5c")
-text = "BIG FIREBALL"
-
-[node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 546.0
 offset_top = 506.0
 offset_right = 604.0
@@ -376,7 +407,7 @@ text = "Player1"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 clip_children = 2
-texture = ExtResource("2_0cqqi")
+texture = ExtResource("10_bm8lq")
 
 [node name="ColorRect" type="ColorRect" parent="Sprite"]
 offset_left = -203.0
@@ -386,6 +417,7 @@ offset_bottom = 373.0
 color = Color(0.235294, 0.74902, 0.423529, 0.454902)
 
 [node name="ActionLabel" type="Label" parent="."]
+visible = false
 offset_left = -32.0
 offset_top = -284.0
 offset_right = 16.0
@@ -407,22 +439,11 @@ position = Vector2(189, -46)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_1yon4")
 
-[node name="AvatarPanel" type="Panel" parent="."]
-offset_left = 120.0
-offset_top = -288.0
-offset_right = 182.0
-offset_bottom = -226.0
+[node name="backwindMarker2D" type="Marker2D" parent="."]
+position = Vector2(-184, 152)
 
-[node name="AvatarTexture" type="TextureRect" parent="AvatarPanel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ChargeMeter" parent="." instance=ExtResource("10_dnqw3")]
-position = Vector2(-96, -288)
-
-[connection signal="button_down" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_button_down"]
+[connection signal="toggled" from="CanvasLayer/Buttons/FireballButton" to="." method="_on_fireball_button_toggled"]
+[connection signal="toggled" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_toggled"]
+[connection signal="toggled" from="CanvasLayer/Buttons/BigFireBallButton" to="." method="_on_big_fire_ball_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Buttons/BigFireBallButton" to="." method="_on_big_fire_ball_button_button_down"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

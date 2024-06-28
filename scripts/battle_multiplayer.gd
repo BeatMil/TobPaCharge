@@ -8,6 +8,7 @@ extends Node2D
 @onready var time_control_timer:Timer = $"TimeControl"
 @onready var resolve_timer:Timer = $"ResolveTimer"
 @onready var restart_menu:Control = $"CanvasLayer/RestartMenu"
+@onready var think_time_display = $ThinkTimeDisplay
 
 
 ########################################
@@ -45,6 +46,11 @@ func _setup_player() -> void:
 		# SceneTransition.change_scene("res://scenes/main_menu.tscn")
 
 
+func _start_think_time() -> void:
+	time_control_timer.start()
+	think_time_display.start_think_time()
+
+
 ########################################
 # public functions
 ########################################
@@ -70,7 +76,7 @@ func _ready():
 	time_control_timer.wait_time = time_control
 	resolve_timer.wait_time = resolve_time
 	
-	time_control_timer.start()
+	_start_think_time()
 	emit_signal("new_turn")
 
 
@@ -110,7 +116,7 @@ func _on_resolve_timer_timeout():
 		restart_menu.open()
 	else:
 		emit_signal("new_turn")
-		time_control_timer.start()
+		_start_think_time()
 
 
 func _peer_disconnected(_id: int):

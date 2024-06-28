@@ -4,20 +4,27 @@ extends Node2D
 #################################################
 ## Nodes
 #################################################
-@onready var avatar_texture_rect:TextureRect = $AvatarPanel/AvatarTexture
+@onready var avatar_texture_rect:TextureRect = %AvatarTexture
 @onready var action_label: Label = $ActionLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
 @onready var buttons: Control = $CanvasLayer/Buttons
-@onready var big_fireball_button: Button = $CanvasLayer/Buttons/BigFireBallButton
-@onready var charge_meter = $ChargeMeter
+@onready var big_fireball_button: TextureButton = $CanvasLayer/Buttons/BigFireBallButton
+@onready var charge_button: Button = $CanvasLayer/Buttons/ChargeButton
+
+@onready var charge_meter = %ChargeMeter
+@onready var backwind_marker_2d = $backwindMarker2D
+@onready var fireball_button: TextureButton = $CanvasLayer/Buttons/FireballButton
+@onready var block_button: TextureButton = $CanvasLayer/Buttons/BlockButton
 
 
 #################################################
 ## Preloads
 #################################################
-var FIREBALL = preload("res://nodes/fireball.tscn")
-var BIGFIREBALL = preload("res://nodes/big_fireball.tscn")
+const FIREBALL = preload("res://nodes/fireball.tscn")
+const BIGFIREBALL = preload("res://nodes/big_fireball.tscn")
+const BACKWIND_VFX_P_1 = preload("res://nodes/particles_effects/backwind_vfx_p1.tscn")
+const BACKWIND_VFX_P_2 = preload("res://nodes/particles_effects/backwind_vfx_p2.tscn")
 
 
 #################################################
@@ -30,6 +37,7 @@ var steam_id: int = 0:
 		if _id != SteamNetwork.steam_id:
 			canvaslayer.visible = false
 			action_label.visible = false
+		charge_button.visible = false # show only in testing
 var is_action_choosed:bool = false
 
 
@@ -66,7 +74,6 @@ func _ready():
 func do_the_action(the_action: ActionEnum.actions) -> void:
 	chosen_action = the_action
 	action_label.text = ActionEnum.actions.keys()[chosen_action]
-	set_disable_all_buttons(true)
 	is_action_choosed = true
 	emit_signal("action_choosed")
 
@@ -76,8 +83,19 @@ func set_disable_all_buttons(_value: bool) -> void:
 		node.set_deferred("disabled", _value)
 
 
+func set_block_touch_all_buttons(_value: bool) -> void:
+	for node in buttons.get_children():
+		if node.has_method("set_block_touch"):
+			node.set_block_touch(false)
+
+
+func set_pressed_all_buttons(_value: bool) -> void:
+	for node in buttons.get_children():
+		node.button_pressed = _value
+
+
 func spawn_fireball(type: String):
-	if charge_count and type == "normal":
+	if charge_count > 0 and type == "normal":
 		var fireball = FIREBALL.instantiate()
 		fireball.position = $"FireBallSpawnPos".position
 		if name == "Player1":
@@ -96,6 +114,7 @@ func spawn_fireball(type: String):
 		elif name == "Player2":
 			fireball.is_going_right_side = false
 			fireball.set_target("p1")
+		_spawn_backwind_vfx()
 		add_child(fireball)
 
 
@@ -108,9 +127,10 @@ func resolve_phase():
 	# Update animation
 	if chosen_action == ActionEnum.actions.FIREBALL:
 		animation_player.play("fireball")
-		spawn_fireball("normal")
-		charge_count -= 1
-		charge_meter.discharge()
+		if charge_count > 0:
+			spawn_fireball("normal")
+			charge_count -= 1
+			charge_meter.discharge()
 	elif chosen_action == ActionEnum.actions.BLOCK:
 		animation_player.play("block")
 	elif chosen_action == ActionEnum.actions.CHARGE:
@@ -119,21 +139,41 @@ func resolve_phase():
 		charge_meter.charge()
 	elif chosen_action == ActionEnum.actions.BIGFIREBALL:
 		animation_player.play("big_fireball")
-		spawn_fireball("BIG")
-		charge_count -= 3
-		charge_meter.discharge_big_fireball()
+		if charge_count >= 3:
+			spawn_fireball("BIG")
+			charge_count -= 3
+			charge_meter.discharge_big_fireball()
 
 
 func new_turn():
+	# prevent charges above 3
+	if charge_count > 3:
+		charge_count = 3
 	chosen_action = ActionEnum.actions.CHARGE
 	action_label.text = "CHARGE"
 	animation_player.play("idle")
 	set_disable_all_buttons(false)
+	set_block_touch_all_buttons(false)
+	set_pressed_all_buttons(false)
 	is_action_choosed = false
 	if charge_count >= 3:
 		big_fireball_button.set_deferred("visible", true)
 	else:
 		big_fireball_button.set_deferred("visible", false)
+
+
+#################################################
+## private functions
+#################################################
+func _spawn_backwind_vfx() -> void:
+	if name == "Player1":
+		var vfx = BACKWIND_VFX_P_1.instantiate()
+		vfx.position = backwind_marker_2d.position
+		add_child(vfx)
+	elif name == "Player2":
+		var vfx = BACKWIND_VFX_P_2.instantiate()
+		vfx.position = backwind_marker_2d.position
+		add_child(vfx)
 
 
 #################################################
@@ -160,20 +200,33 @@ func _on_time_control_timeout() -> void:
 			print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
 
 
-func _on_fire_ball_button_button_down():
-	rpc("do_the_action", ActionEnum.actions.FIREBALL)
+func _on_fireball_button_toggled(toggled_on):
+	if toggled_on:
+		rpc("do_the_action", ActionEnum.actions.FIREBALL)
+		set_disable_all_buttons(true)
+		fireball_button.set_deferred("disabled", false)
+		fireball_button.set_block_touch(true)
 
 
-func _on_block_button_button_down():
-	rpc("do_the_action", ActionEnum.actions.BLOCK)
+func _on_block_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		rpc("do_the_action", ActionEnum.actions.BLOCK)
+		set_disable_all_buttons(true)
+		block_button.set_deferred("disabled", false)
+		block_button.set_block_touch(true)
 
 
 func _on_charge_button_button_down():
 	rpc("do_the_action", ActionEnum.actions.CHARGE)
+	set_disable_all_buttons(true)
 
 
-func _on_big_fire_ball_button_button_down():
-	rpc("do_the_action", ActionEnum.actions.BIGFIREBALL)
+func _on_big_fire_ball_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		rpc("do_the_action", ActionEnum.actions.BIGFIREBALL)
+		set_disable_all_buttons(true)
+		big_fireball_button.set_deferred("disabled", false)
+		big_fireball_button.set_block_touch(true)
 
 
 #################################################

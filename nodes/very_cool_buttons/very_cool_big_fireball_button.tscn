@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbcwbus8mbbec"]
+
+[ext_resource type="Script" path="res://scripts/very_cool_button.gd" id="1_cc3u0"]
+[ext_resource type="Texture2D" uid="uid://bb8ud77sg5y43" path="res://media/sprites/very_cool_big_fireball_button/very_cool_big_fireball_button_normal.png" id="2_1p154"]
+[ext_resource type="Texture2D" uid="uid://b7ibyhq4twcmr" path="res://media/sprites/very_cool_big_fireball_button/very_cool_big_fireball_button_hover.png" id="3_5oucy"]
+[ext_resource type="Texture2D" uid="uid://ck5eypcoomrah" path="res://media/sprites/very_cool_big_fireball_button/very_cool_big_fireball_button_disabled.png" id="4_7h0w0"]
+[ext_resource type="Texture2D" uid="uid://cg8b70n4ipbf3" path="res://media/sprites/very_cool_big_fireball_button/very_cool_big_fireball_button_pressed.png" id="4_20xdo"]
+[ext_resource type="AudioStream" uid="uid://kkjrq7u5ln8k" path="res://media/sfx/button_hit.wav" id="5_77lef"]
+
+[sub_resource type="Animation" id="Animation_yfa6r"]
+resource_name = "button_down"
+length = 0.2
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_77lef")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lrhco"]
+_data = {
+"button_down": SubResource("Animation_yfa6r")
+}
+
+[node name="TextureButton" type="TextureButton"]
+offset_right = 64.0
+offset_bottom = 64.0
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource("2_1p154")
+texture_pressed = ExtResource("4_20xdo")
+texture_hover = ExtResource("3_5oucy")
+texture_disabled = ExtResource("4_7h0w0")
+script = ExtResource("1_cc3u0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lrhco")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+
+[node name="BlockPanel" type="Panel" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 520.0
+offset_bottom = 512.0
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

@@ -346,6 +346,7 @@ offset_bottom = 373.0
 color = Color(0.235294, 0.74902, 0.423529, 0.454902)
 
 [node name="ActionLabel" type="Label" parent="."]
+visible = false
 offset_left = -32.0
 offset_top = -284.0
 offset_right = 16.0
@@ -366,6 +367,9 @@ position = Vector2(189, -46)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_1yon4")
+
+[node name="backwindMarker2D" type="Marker2D" parent="."]
+position = Vector2(-184, 152)
 
 [connection signal="pressed" from="CanvasLayer/Buttons/FireBallButton" to="." method="_on_fire_ball_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_pressed"]

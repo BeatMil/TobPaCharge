@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bs8vtp2yca0ty"]
+
+[ext_resource type="Texture2D" uid="uid://fifvaalavhph" path="res://media/sprites/particle_effects/floaty_128.png" id="2_6ck3x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2qujg"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 7
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_go605"]
+colors = PackedColorArray(0.38958, 0.804688, 0.792679, 1, 0.728822, 0.349759, 0.711542, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c0854"]
+gradient = SubResource("Gradient_go605")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bia1m"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(80, 80, 1)
+angle_min = -180.0
+direction = Vector3(100, 0, 0)
+gravity = Vector3(1, 0, 0)
+color_initial_ramp = SubResource("GradientTexture1D_c0854")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_2qujg")
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_bia1m")
+texture = ExtResource("2_6ck3x")
+speed_scale = 2.0
+fixed_fps = 0
