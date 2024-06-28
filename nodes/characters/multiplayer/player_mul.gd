@@ -37,7 +37,7 @@ var steam_id: int = 0:
 		if _id != SteamNetwork.steam_id:
 			canvaslayer.visible = false
 			action_label.visible = false
-			charge_button.visible = false
+		charge_button.visible = false # show only in testing
 var is_action_choosed:bool = false
 
 
