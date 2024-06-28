@@ -7,13 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://vsp31wtq1p5c" path="res://media/sprites/very_cool_button/very_cool_button_pressed.png" id="4_kfi6u"]
 [ext_resource type="AudioStream" uid="uid://kkjrq7u5ln8k" path="res://media/sfx/button_hit.wav" id="5_77lef"]
 
-[sub_resource type="Animation" id="Animation_ym5mn"]
+[sub_resource type="Animation" id="Animation_yfa6r"]
 resource_name = "button_down"
 length = 0.2
 tracks/0/type = "audio"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../AnimationPlayer/AudioStreamPlayer")
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,9 +26,9 @@ tracks/0/keys = {
 }
 tracks/0/use_blend = true
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h0pim"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lrhco"]
 _data = {
-"button_down": SubResource("Animation_ym5mn")
+"button_down": SubResource("Animation_yfa6r")
 }
 
 [node name="TextureButton" type="TextureButton"]
@@ -43,9 +43,8 @@ texture_disabled = ExtResource("4_jrkw5")
 script = ExtResource("1_cc3u0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("")
 libraries = {
-"": SubResource("AnimationLibrary_h0pim")
+"": SubResource("AnimationLibrary_lrhco")
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
