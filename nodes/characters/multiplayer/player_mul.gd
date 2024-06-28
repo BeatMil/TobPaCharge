@@ -4,7 +4,7 @@ extends Node2D
 #################################################
 ## Nodes
 #################################################
-@onready var avatar_texture_rect:TextureRect = $CanvasLayer/AvatarPanel/AvatarTexture
+@onready var avatar_texture_rect:TextureRect = %AvatarTexture
 @onready var action_label: Label = $ActionLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var canvaslayer: CanvasLayer = $CanvasLayer

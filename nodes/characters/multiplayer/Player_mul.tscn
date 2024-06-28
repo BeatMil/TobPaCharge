@@ -349,6 +349,7 @@ offset_bottom = 190.0
 metadata/_edit_group_ = true
 
 [node name="AvatarTexture" type="TextureRect" parent="CanvasLayerPublic/AvatarPanel"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
