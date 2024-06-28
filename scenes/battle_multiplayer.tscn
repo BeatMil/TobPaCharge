@@ -64,6 +64,7 @@ position = Vector2(448, 712)
 position = Vector2(1480, 712)
 
 [node name="TimeLeftLabel" type="Label" parent="."]
+visible = false
 offset_left = 864.0
 offset_top = 240.0
 offset_right = 933.0
