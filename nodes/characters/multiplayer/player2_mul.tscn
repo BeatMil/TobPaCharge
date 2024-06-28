@@ -345,6 +345,18 @@ position = Vector2(1904, 16)
 rotation = -3.14159
 scale = Vector2(3, -3)
 
+[node name="AvatarPanel" type="Panel" parent="CanvasLayerPublic"]
+offset_left = 1840.0
+offset_top = 128.0
+offset_right = 1902.0
+offset_bottom = 190.0
+metadata/_edit_group_ = true
+
+[node name="AvatarTexture" type="TextureRect" parent="CanvasLayerPublic/AvatarPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Buttons" type="Control" parent="CanvasLayer"]
@@ -394,18 +406,6 @@ offset_top = 506.0
 offset_right = 604.0
 offset_bottom = 529.0
 text = "Player2"
-
-[node name="AvatarPanel" type="Panel" parent="CanvasLayer"]
-offset_left = 1840.0
-offset_top = 128.0
-offset_right = 1902.0
-offset_bottom = 190.0
-metadata/_edit_group_ = true
-
-[node name="AvatarTexture" type="TextureRect" parent="CanvasLayer/AvatarPanel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
 clip_children = 2
