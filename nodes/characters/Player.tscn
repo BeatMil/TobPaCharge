@@ -346,6 +346,7 @@ offset_bottom = 373.0
 color = Color(0.235294, 0.74902, 0.423529, 0.454902)
 
 [node name="ActionLabel" type="Label" parent="."]
+visible = false
 offset_left = -32.0
 offset_top = -284.0
 offset_right = 16.0

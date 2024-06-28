@@ -4,14 +4,17 @@ extends Node2D
 #################################################
 ## Nodes
 #################################################
-@onready var avatar_texture_rect:TextureRect = $AvatarPanel/AvatarTexture
+@onready var avatar_texture_rect:TextureRect = $CanvasLayer/AvatarPanel/AvatarTexture
 @onready var action_label: Label = $ActionLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
 @onready var buttons: Control = $CanvasLayer/Buttons
-@onready var big_fireball_button: Button = $CanvasLayer/Buttons/BigFireBallButton
+@onready var big_fireball_button: TextureButton = $CanvasLayer/Buttons/BigFireBallButton
+
 @onready var charge_meter = %ChargeMeter
 @onready var backwind_marker_2d = $backwindMarker2D
+@onready var fireball_button: TextureButton = $CanvasLayer/Buttons/FireballButton
+@onready var block_button: TextureButton = $CanvasLayer/Buttons/BlockButton
 
 
 #################################################
@@ -69,7 +72,6 @@ func _ready():
 func do_the_action(the_action: ActionEnum.actions) -> void:
 	chosen_action = the_action
 	action_label.text = ActionEnum.actions.keys()[chosen_action]
-	set_disable_all_buttons(true)
 	is_action_choosed = true
 	emit_signal("action_choosed")
 
@@ -77,6 +79,17 @@ func do_the_action(the_action: ActionEnum.actions) -> void:
 func set_disable_all_buttons(_value: bool) -> void:
 	for node in buttons.get_children():
 		node.set_deferred("disabled", _value)
+
+
+func set_block_touch_all_buttons(_value: bool) -> void:
+	for node in buttons.get_children():
+		if node.has_method("set_block_touch"):
+			node.set_block_touch(false)
+
+
+func set_pressed_all_buttons(_value: bool) -> void:
+	for node in buttons.get_children():
+		node.button_pressed = _value
 
 
 func spawn_fireball(type: String):
@@ -135,6 +148,8 @@ func new_turn():
 	action_label.text = "CHARGE"
 	animation_player.play("idle")
 	set_disable_all_buttons(false)
+	set_block_touch_all_buttons(false)
+	set_pressed_all_buttons(false)
 	is_action_choosed = false
 	if charge_count >= 3:
 		big_fireball_button.set_deferred("visible", true)
@@ -180,20 +195,33 @@ func _on_time_control_timeout() -> void:
 			print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
 
 
-func _on_fire_ball_button_button_down():
-	rpc("do_the_action", ActionEnum.actions.FIREBALL)
+func _on_fireball_button_toggled(toggled_on):
+	if toggled_on:
+		rpc("do_the_action", ActionEnum.actions.FIREBALL)
+		set_disable_all_buttons(true)
+		fireball_button.set_deferred("disabled", false)
+		fireball_button.set_block_touch(true)
 
 
-func _on_block_button_button_down():
-	rpc("do_the_action", ActionEnum.actions.BLOCK)
+func _on_block_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		rpc("do_the_action", ActionEnum.actions.BLOCK)
+		set_disable_all_buttons(true)
+		block_button.set_deferred("disabled", false)
+		block_button.set_block_touch(true)
 
 
 func _on_charge_button_button_down():
 	rpc("do_the_action", ActionEnum.actions.CHARGE)
+	set_disable_all_buttons(true)
 
 
-func _on_big_fire_ball_button_button_down():
-	rpc("do_the_action", ActionEnum.actions.BIGFIREBALL)
+func _on_big_fire_ball_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		rpc("do_the_action", ActionEnum.actions.BIGFIREBALL)
+		set_disable_all_buttons(true)
+		big_fireball_button.set_deferred("disabled", false)
+		big_fireball_button.set_block_touch(true)
 
 
 #################################################

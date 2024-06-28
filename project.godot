@@ -21,6 +21,10 @@ ActionEnum="*res://scripts/action_enum.gd"
 SceneTransition="*res://nodes/scene_transition.tscn"
 SteamNetwork="*res://scripts/steam_network.gd"
 
+[debug]
+
+gdscript/warnings/unused_parameter=0
+
 [display]
 
 window/size/viewport_width=1920

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cua0jhtddpgu3"]
+
+[ext_resource type="Script" path="res://scripts/very_cool_button.gd" id="1_4o8qm"]
+[ext_resource type="Texture2D" uid="uid://67xlxwi7q8vu" path="res://media/sprites/very_cool_block_button/very_cool_button__block_normal.png" id="2_nyhg4"]
+[ext_resource type="Texture2D" uid="uid://co3nly8tuuw02" path="res://media/sprites/very_cool_block_button/very_cool_button__block_hover.png" id="3_g8h2h"]
+[ext_resource type="Texture2D" uid="uid://btbih11dooojr" path="res://media/sprites/very_cool_block_button/very_cool_button__block_pressed.png" id="4_bbhhc"]
+[ext_resource type="Texture2D" uid="uid://56dbrfgt71th" path="res://media/sprites/very_cool_block_button/very_cool_button__block_disabled.png" id="4_bpa1a"]
+
+[node name="TextureButton" type="TextureButton"]
+offset_right = 64.0
+offset_bottom = 64.0
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource("2_nyhg4")
+texture_pressed = ExtResource("4_bbhhc")
+texture_hover = ExtResource("3_g8h2h")
+texture_disabled = ExtResource("4_bpa1a")
+script = ExtResource("1_4o8qm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+
+[node name="BlockPanel" type="Panel" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 520.0
+offset_bottom = 512.0
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]
