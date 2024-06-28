@@ -10,6 +10,7 @@ extends Node2D
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
 @onready var buttons: Control = $CanvasLayer/Buttons
 @onready var big_fireball_button: TextureButton = $CanvasLayer/Buttons/BigFireBallButton
+@onready var charge_button: Button = $CanvasLayer/Buttons/ChargeButton
 
 @onready var charge_meter = %ChargeMeter
 @onready var backwind_marker_2d = $backwindMarker2D
@@ -36,6 +37,7 @@ var steam_id: int = 0:
 		if _id != SteamNetwork.steam_id:
 			canvaslayer.visible = false
 			action_label.visible = false
+			charge_button.visible = false
 var is_action_choosed:bool = false
 
 
