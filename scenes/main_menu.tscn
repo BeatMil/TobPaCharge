@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cc85xyg2whm6b"]
+[gd_scene load_steps=5 format=3 uid="uid://cc85xyg2whm6b"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_bdtlp"]
 [ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="2_7agid"]
+[ext_resource type="Texture2D" uid="uid://jf1ws6bprf8u" path="res://media/sprites/menu_waifu/menu_waifu_idle.png" id="3_oif5j"]
+[ext_resource type="PackedScene" uid="uid://dl5pewv5dfsfe" path="res://nodes/cool_menu_button.tscn" id="4_ofm7h"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -128,6 +130,32 @@ offset_left = 832.0
 offset_top = 256.0
 offset_right = 1604.0
 offset_bottom = 807.0
+
+[node name="MenuWaifuIdle" type="Sprite2D" parent="."]
+position = Vector2(920, 824)
+texture = ExtResource("3_oif5j")
+
+[node name="MenuButtons" type="Node" parent="."]
+
+[node name="VersusBot" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(56, 64)
+text_on_button = "VS Bot"
+
+[node name="CreateLobby" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(56, 192)
+text_on_button = "Create Lobby"
+
+[node name="InviteFriend" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(56, 312)
+text_on_button = "Invite Friend"
+
+[node name="StartGame" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(56, 440)
+text_on_button = "Start Game!"
+
+[node name="LeaveLobby" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(56, 552)
+text_on_button = "Leave"
 
 [connection signal="pressed" from="DebugButton" to="." method="_on_debug_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
