@@ -20,10 +20,6 @@ func random_action():
 
 
 func new_turn():
-	# prevent charges above 3
-	if charge_count < 3:
-		charge_count = 3
-
 	$"AnimationPlayer".play("idle")
 	$ActionLabel.text = "Ready"
 	chosen_action = ActionEnum.actions.CHARGE

@@ -144,6 +144,9 @@ func resolve_phase():
 
 
 func new_turn():
+	# prevent charges above 3
+	if charge_count > 3:
+		charge_count = 3
 	chosen_action = ActionEnum.actions.CHARGE
 	action_label.text = "CHARGE"
 	animation_player.play("idle")
