@@ -1,5 +1,6 @@
 extends Control
 
+
 # Properties
 @onready var vbox_member: VBoxContainer = $"VBoxMember"
 @onready var versus_bot_button: Node2D = $MenuButtons/VersusBotButton
@@ -9,9 +10,9 @@ extends Control
 @onready var leave_lobby_button: Node2D = $MenuButtons/LeaveLobbyButton
 
 
-"""
-Preloads
-"""
+#################################################
+# Preloads
+#################################################
 @onready var LOBBY_MEMBER_NODE = preload("res://nodes/lobby_member.tscn")
 @onready var MUL_TEST = preload("res://nodes/multiplayer_player_test.tscn")
 
@@ -24,6 +25,7 @@ func _ready():
 	_outside_lobby_buttons()
 
 	SteamNetwork.update_lobby_members()
+
 
 #################################################
 # Private functions
@@ -43,6 +45,7 @@ func _outside_lobby_buttons() -> void:
 	leave_lobby_button.disable()
 	invite_friend_button.disable()
 	start_game_button.disable()
+
 
 #################################################
 # Public functions
@@ -87,10 +90,10 @@ func check_ready() -> void:
 func start_game() -> void:
 	SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")
 
+
 #################################################
 # Buttons
 #################################################
-
 func _on_button_pressed():
 	SceneTransition.change_scene("res://scenes/battle.tscn")
 
