@@ -287,7 +287,7 @@ _data = {
 "mouse_in": SubResource("Animation_wrgqq")
 }
 
-[node name="CoolMenuButton" type="Node2D"]
+[node name="CoolMenuStartGameButton" type="Node2D"]
 script = ExtResource("1_uyrbj")
 text_on_button = "TEXT HOLDER"
 
@@ -323,3 +323,4 @@ libraries = {
 
 [connection signal="mouse_entered" from="RichTextLabel" to="." method="_on_rich_text_label_mouse_entered"]
 [connection signal="mouse_exited" from="RichTextLabel" to="." method="_on_rich_text_label_mouse_exited"]
+[connection signal="current_animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_current_animation_changed"]
