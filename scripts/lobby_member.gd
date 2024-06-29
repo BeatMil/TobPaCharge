@@ -13,6 +13,7 @@ signal ready_state_change
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	custom_minimum_size = size
 	Steam.connect("avatar_loaded", _on_avatar_loaded)
 	if steam_id != Steam.getSteamID():
 		cool_menu_ready_button.set_deferred("visible", false)
