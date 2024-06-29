@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_bdtlp"]
 [ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="2_7agid"]
-[ext_resource type="Texture2D" uid="uid://jf1ws6bprf8u" path="res://media/sprites/menu_waifu/menu_waifu_idle.png" id="3_oif5j"]
+[ext_resource type="PackedScene" uid="uid://dvbchwfxrs3w6" path="res://nodes/menu_waifu.tscn" id="3_52upu"]
 [ext_resource type="PackedScene" uid="uid://dl5pewv5dfsfe" path="res://nodes/cool_menu_button.tscn" id="4_ofm7h"]
 [ext_resource type="PackedScene" uid="uid://h5otivo8816m" path="res://nodes/cool_menu_button_start_game.tscn" id="5_2b7m8"]
 
@@ -51,9 +51,8 @@ offset_top = 192.0
 offset_right = 1896.0
 offset_bottom = 1024.0
 
-[node name="MenuWaifuIdle" type="Sprite2D" parent="."]
-position = Vector2(920, 824)
-texture = ExtResource("3_oif5j")
+[node name="MenuWaifuIdle" parent="." instance=ExtResource("3_52upu")]
+position = Vector2(992, 824)
 
 [node name="MenuButtons" type="Node" parent="."]
 

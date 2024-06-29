@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvbchwfxrs3w6"]
+
+[ext_resource type="Texture2D" uid="uid://jf1ws6bprf8u" path="res://media/sprites/menu_waifu/menu_waifu_idle.png" id="1_0tfvj"]
+[ext_resource type="Script" path="res://scripts/menu_waifu.gd" id="2_ydwai"]
+
+[node name="MenuWaifuIdle" type="Sprite2D"]
+position = Vector2(256, 256)
+texture = ExtResource("1_0tfvj")
+script = ExtResource("2_ydwai")
