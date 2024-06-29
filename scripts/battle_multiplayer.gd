@@ -121,6 +121,7 @@ func _on_resolve_timer_timeout():
 
 func _peer_disconnected(_id: int):
 	SceneTransition.change_scene("res://scenes/main_menu.tscn")
+	SteamNetwork.leave_lobby()
 
 
 func _player1_action_choosed() -> void:
