@@ -1,0 +1,419 @@
+[gd_scene load_steps=21 format=3 uid="uid://dwudxqx2i5jsm"]
+
+[ext_resource type="Script" path="res://scripts/cool_menu_ready_button.gd" id="1_enfjw"]
+[ext_resource type="Texture2D" uid="uid://bqjul63c7atc7" path="res://media/sprites/menu_cursor/menu_cursor_white.png" id="2_evva2"]
+[ext_resource type="Texture2D" uid="uid://b4e4pb8it1qjx" path="res://media/sprites/menu_ready_icon/ready_normal_background.png" id="3_1peyp"]
+[ext_resource type="FontFile" uid="uid://cl02il1o54qfl" path="res://fonts/DroidSansMono.ttf" id="3_kdjgb"]
+[ext_resource type="Texture2D" uid="uid://bkjydbofq8he3" path="res://media/sprites/menu_ready_icon/ready_normal_tick.png" id="4_fkefp"]
+[ext_resource type="AudioStream" uid="uid://gsdkjmi240ja" path="res://media/sfx/menu_cursor_move.wav" id="4_ohray"]
+[ext_resource type="Texture2D" uid="uid://dt5gwa1lpbmwe" path="res://media/sprites/menu_ready_icon/ready_normal_cross.png" id="5_fqg01"]
+
+[sub_resource type="Animation" id="Animation_jphkb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.989733, 0.99558, 0.487148, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_fkefp")]
+}
+
+[sub_resource type="Animation" id="Animation_f1eby"]
+resource_name = "hover"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.949219, 0.584338, 0.305796, 1), Color(0.99558, 0.501897, 0.374657, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_fkefp")]
+}
+
+[sub_resource type="Animation" id="Animation_fcoac"]
+resource_name = "pressed"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.773525, 0.99558, 0.536614, 1), Color(0.336217, 0.949219, 0.595196, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_fkefp")]
+}
+
+[sub_resource type="Animation" id="Animation_p2rpk"]
+resource_name = "unpressed"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.989733, 0.99558, 0.487148, 1), Color(0.925094, 0.872782, 0.323533, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_fqg01")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nj1ku"]
+_data = {
+"RESET": SubResource("Animation_jphkb"),
+"hover": SubResource("Animation_f1eby"),
+"pressed": SubResource("Animation_fcoac"),
+"unpressed": SubResource("Animation_p2rpk")
+}
+
+[sub_resource type="Animation" id="Animation_36fkv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuCursor:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MenuCursor:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.999999, 0.234335, 0.339139, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0hcb6"]
+resource_name = "disable"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuCursor:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(-2),
+"update": 0,
+"values": [Vector2(1e-05, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.254902)]
+}
+
+[sub_resource type="Animation" id="Animation_aet56"]
+resource_name = "focus"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuCursor:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MenuCursor:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.999999, 0.234335, 0.339139, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q4f7u"]
+resource_name = "pressed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuCursor:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.666667, 1), Vector2(1, 1)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SfxPlayer/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_ohray")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RichTextLabel:theme_override_colors/default_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MenuCursor:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.999999, 0.234335, 0.339139, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_g1rdr"]
+resource_name = "unfocus"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuCursor:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SfxPlayer/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MenuCursor:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.999999, 0.234335, 0.339139, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lqv37"]
+_data = {
+"RESET": SubResource("Animation_36fkv"),
+"disable": SubResource("Animation_0hcb6"),
+"focus": SubResource("Animation_aet56"),
+"pressed": SubResource("Animation_q4f7u"),
+"unfocus": SubResource("Animation_g1rdr")
+}
+
+[sub_resource type="Animation" id="Animation_wrgqq"]
+resource_name = "mouse_in"
+length = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SfxPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_ohray")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ylvig"]
+_data = {
+"mouse_in": SubResource("Animation_wrgqq")
+}
+
+[node name="CoolMenuReadyButton" type="Node2D"]
+script = ExtResource("1_enfjw")
+
+[node name="MenuCursor" type="Sprite2D" parent="."]
+self_modulate = Color(0.999999, 0.234335, 0.339139, 1)
+scale = Vector2(1e-05, 1)
+texture = ExtResource("2_evva2")
+centered = false
+
+[node name="Icon" type="Node2D" parent="."]
+scale = Vector2(0.666667, 0.666667)
+
+[node name="ReadyNormalBackground" type="Sprite2D" parent="Icon"]
+self_modulate = Color(0.219501, 0.219501, 0.219501, 1)
+position = Vector2(96, 96)
+texture = ExtResource("3_1peyp")
+
+[node name="ReadyNormal" type="Sprite2D" parent="Icon"]
+self_modulate = Color(0.989733, 0.99558, 0.487148, 1)
+position = Vector2(96, 96)
+texture = ExtResource("4_fkefp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Icon"]
+root_node = NodePath("../ReadyNormal")
+libraries = {
+"": SubResource("AnimationLibrary_nj1ku")
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_top = 8.0
+offset_right = 768.0
+offset_bottom = 136.0
+size_flags_horizontal = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_kdjgb")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center][/center]"
+scroll_active = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lqv37")
+}
+
+[node name="SfxPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ylvig")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SfxPlayer"]
+
+[connection signal="mouse_entered" from="RichTextLabel" to="." method="_on_rich_text_label_mouse_entered"]
+[connection signal="mouse_exited" from="RichTextLabel" to="." method="_on_rich_text_label_mouse_exited"]

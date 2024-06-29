@@ -36,20 +36,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -552.0
-offset_top = -278.0
-offset_right = -442.0
-offset_bottom = -247.0
+offset_left = -896.0
+offset_top = -476.0
+offset_right = -786.0
+offset_bottom = -445.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "debug"
 
 [node name="VBoxMember" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 832.0
-offset_top = 256.0
-offset_right = 1604.0
-offset_bottom = 807.0
+offset_left = 1088.0
+offset_top = 192.0
+offset_right = 1896.0
+offset_bottom = 1024.0
 
 [node name="MenuWaifuIdle" type="Sprite2D" parent="."]
 position = Vector2(920, 824)
@@ -58,27 +58,27 @@ texture = ExtResource("3_oif5j")
 [node name="MenuButtons" type="Node" parent="."]
 
 [node name="VersusBotButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
-position = Vector2(56, 64)
+position = Vector2(56, 232)
 text_on_button = "VS Bot"
 
 [node name="CreateLobbyButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
-position = Vector2(56, 192)
+position = Vector2(56, 360)
 text_on_button = "Create Lobby"
 
 [node name="InviteFriendButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
-position = Vector2(56, 312)
+position = Vector2(56, 480)
 text_on_button = "Invite Friend"
 
 [node name="StartGameButton" parent="MenuButtons" instance=ExtResource("5_2b7m8")]
-position = Vector2(56, 432)
+position = Vector2(56, 600)
 text_on_button = "START GAME!"
 
 [node name="LeaveLobbyButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
-position = Vector2(56, 560)
+position = Vector2(56, 728)
 text_on_button = "Leave"
 
 [node name="ExitButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
-position = Vector2(64, 688)
+position = Vector2(64, 856)
 scale = Vector2(0.2, 0.2)
 text_on_button = "Exit o(TヘTo)"
 
