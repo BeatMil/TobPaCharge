@@ -10,6 +10,7 @@ extends Control
 @onready var leave_lobby_button: Node2D = $MenuButtons/LeaveLobbyButton
 @onready var menu_buttons: Node2D = $MenuButtons
 @onready var menu_buttons_player: AnimationPlayer = $MenuButtons/MenuButtonsPlayer
+@onready var sound_slider: VSlider = %SoundSlider
 
 
 #################################################
@@ -27,6 +28,10 @@ func _ready():
 	_outside_lobby_buttons()
 
 	SteamNetwork.update_lobby_members()
+
+
+func _process(delta):
+	AudioServer.set_bus_volume_db(0, sound_slider.value)
 
 
 #################################################
