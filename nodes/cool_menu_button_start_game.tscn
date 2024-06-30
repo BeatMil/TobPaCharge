@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://h5otivo8816m"]
 
 [ext_resource type="Script" path="res://scripts/cool_menu_button_start_game.gd" id="1_uyrbj"]
-[ext_resource type="Texture2D" uid="uid://bqjul63c7atc7" path="res://media/sprites/menu_cursor/menu_cursor_white.png" id="2_76v63"]
+[ext_resource type="Texture2D" uid="uid://bqjul63c7atc7" path="res://media/sprites/menu/menu_cursor/menu_cursor_white.png" id="2_76v63"]
 [ext_resource type="FontFile" uid="uid://cl02il1o54qfl" path="res://fonts/DroidSansMono.ttf" id="3_jxa7i"]
 [ext_resource type="AudioStream" uid="uid://gsdkjmi240ja" path="res://media/sfx/menu_cursor_move.wav" id="4_fc7ti"]
 

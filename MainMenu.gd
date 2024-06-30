@@ -8,6 +8,8 @@ extends Control
 @onready var invite_friend_button: Node2D = $MenuButtons/InviteFriendButton
 @onready var start_game_button: Node2D = $MenuButtons/StartGameButton
 @onready var leave_lobby_button: Node2D = $MenuButtons/LeaveLobbyButton
+@onready var menu_buttons: Node2D = $MenuButtons
+@onready var menu_buttons_player: AnimationPlayer = $MenuButtons/MenuButtonsPlayer
 
 
 #################################################
@@ -149,3 +151,11 @@ func _on_leave_lobby_on_press() -> void:
 func _on_exit_button_on_press() -> void:
 	#get_tree().quit()
 	OS.kill(OS.get_process_id()) # quit game fast!! but there maybe side effects...
+
+
+#################################################
+# Receive signals
+#################################################
+func _on_menu_background_animation_finished() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(menu_buttons, "position", Vector2.ZERO, 1).set_trans(Tween.TRANS_BACK)

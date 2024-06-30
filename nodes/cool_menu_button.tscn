@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://cl02il1o54qfl" path="res://fonts/DroidSansMono.ttf" id="1_swmxl"]
 [ext_resource type="Script" path="res://scripts/cool_menu_button.gd" id="1_yo6w1"]
-[ext_resource type="Texture2D" uid="uid://bqjul63c7atc7" path="res://media/sprites/menu_cursor/menu_cursor_white.png" id="2_sy1v4"]
+[ext_resource type="Texture2D" uid="uid://bqjul63c7atc7" path="res://media/sprites/menu/menu_cursor/menu_cursor_white.png" id="2_7rnrb"]
 [ext_resource type="AudioStream" uid="uid://gsdkjmi240ja" path="res://media/sfx/menu_cursor_move.wav" id="4_563nw"]
 
 [sub_resource type="Animation" id="Animation_36fkv"]
@@ -85,7 +85,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(-2, 1),
 "update": 0,
-"values": [Vector2(1e-05, 1), Vector2(1, 1)]
+"values": [Vector2(0, 0.438), Vector2(1, 0.4375)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -246,17 +246,16 @@ text_on_button = "VS BOB"
 [node name="MenuCursor" type="Sprite2D" parent="."]
 self_modulate = Color(0.999999, 0.234335, 0.339139, 1)
 scale = Vector2(1e-05, 1)
-texture = ExtResource("2_sy1v4")
+texture = ExtResource("2_7rnrb")
 centered = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_top = 8.0
 offset_right = 768.0
-offset_bottom = 136.0
+offset_bottom = 128.0
 size_flags_horizontal = 0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("1_swmxl")
-theme_override_font_sizes/normal_font_size = 96
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "[center]TEXT HOLDERRR[/center]"
 scroll_active = false

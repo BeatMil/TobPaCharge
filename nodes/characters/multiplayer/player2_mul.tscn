@@ -363,9 +363,9 @@ offset_bottom = 40.0
 [node name="Buttons" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 464.0
+offset_left = 384.0
 offset_top = 368.0
-offset_right = 464.0
+offset_right = 384.0
 offset_bottom = 368.0
 
 [node name="ChargeButton" type="Button" parent="CanvasLayer/Buttons"]

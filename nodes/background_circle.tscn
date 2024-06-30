@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://cia1yvlyrydlu"]
+
+[ext_resource type="Texture2D" uid="uid://dpniaq1mhsioq" path="res://media/attacks_texture/magic_circle.png" id="1_6675r"]
+[ext_resource type="Texture2D" uid="uid://bl5wlnmqehw6g" path="res://media/sprites/menu/menu_background/color_palette_pollen8-32x.png" id="2_cgje5"]
+[ext_resource type="Script" path="res://scripts/background_circle.gd" id="2_dh8jx"]
+
+[sub_resource type="Animation" id="Animation_x2gma"]
+resource_name = "normal"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.905882, 0.839216, 1), Color(1, 0.654902, 0.647059, 1), Color(0.670588, 0.337255, 0.458824, 1), Color(1, 0.654902, 0.647059, 1), Color(1, 0.905882, 0.839216, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8y24u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_akd6o"]
+_data = {
+"RESET": SubResource("Animation_8y24u"),
+"normal": SubResource("Animation_x2gma")
+}
+
+[node name="BackgroundCircle" type="Sprite2D"]
+position = Vector2(1080, 616)
+texture = ExtResource("1_6675r")
+script = ExtResource("2_dh8jx")
+radius = 250.0
+speed = 1.0
+circle_size = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_akd6o")
+}
+
+[node name="ColorPalettePollen8-32x" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(472, -208)
+texture = ExtResource("2_cgje5")
