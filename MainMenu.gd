@@ -26,6 +26,7 @@ extends Control
 #################################################
 func _ready():
 	SteamNetwork.connect("lobby_member_update", update_lobby_members)
+	update_lobby_members()
 
 
 func _process(delta):

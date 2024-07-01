@@ -299,7 +299,8 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_3ftms"]
 resource_name = "menu_song"
-length = 70.0
+length = 60.3
+loop_mode = 1
 tracks/0/type = "audio"
 tracks/0/imported = false
 tracks/0/enabled = true
