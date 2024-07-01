@@ -11,6 +11,7 @@ extends Control
 @onready var menu_buttons: Node2D = $MenuButtons
 @onready var menu_buttons_player: AnimationPlayer = $MenuButtons/MenuButtonsPlayer
 @onready var sound_slider: VSlider = %SoundSlider
+@onready var lobby_panel_player: AnimationPlayer = $LobbyPanel/LobbyPanelPlayer
 
 
 #################################################
@@ -25,9 +26,6 @@ extends Control
 #################################################
 func _ready():
 	SteamNetwork.connect("lobby_member_update", update_lobby_members)
-	_outside_lobby_buttons()
-
-	SteamNetwork.update_lobby_members()
 
 
 func _process(delta):
@@ -45,6 +43,7 @@ func _in_lobby_buttons() -> void:
 	create_lobby_button.disable()
 	leave_lobby_button.enable()
 	invite_friend_button.enable()
+	lobby_panel_player.play("on")
 
 
 func _outside_lobby_buttons() -> void:
@@ -52,6 +51,8 @@ func _outside_lobby_buttons() -> void:
 	leave_lobby_button.disable()
 	invite_friend_button.disable()
 	start_game_button.disable()
+	lobby_panel_player.play("off")
+	print_rich("[color=orange][b]==bob✓[/b][/color]")
 
 
 #################################################
@@ -149,8 +150,6 @@ func _on_start_game_button_on_press() -> void:
 
 func _on_leave_lobby_on_press() -> void:
 	SteamNetwork.leave_lobby()
-	# _outside_lobby_buttons()
-	# update_lobby_members()
 
 
 func _on_exit_button_on_press() -> void:

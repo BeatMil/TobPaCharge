@@ -129,8 +129,6 @@ func _ready():
 
 	_initialize_steam()
 
-	print(get_tree().current_scene.name)
-
 
 #################################################
 # Call backs
