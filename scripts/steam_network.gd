@@ -12,6 +12,10 @@ var steam_username: String = ""
 var lobby_id: int = 0
 var lobby_members: Array = []
 
+# helpers
+var p1_score: int = 0
+var p2_score: int = 0
+
 # Configs
 var appId: int = 480
 
@@ -48,6 +52,8 @@ func leave_lobby() -> void:
 		Steam.leaveLobby(lobby_id)
 		steam_multiplayer.close()
 		lobby_id = 0
+		p1_score = 0
+		p2_score = 0
 		update_lobby_members()
 	else:
 		print("Not in a lobby")
