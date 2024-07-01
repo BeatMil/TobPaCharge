@@ -10,37 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://bhiryivk5mwi8" path="res://nodes/helpers/menu_background.tscn" id="6_31cw2"]
 [ext_resource type="Texture2D" uid="uid://cvr10ukromojy" path="res://media/sprites/menu/menu_background/volume_icon_smol.png" id="7_6j0oy"]
 
-[sub_resource type="Animation" id="Animation_gt8j6"]
-resource_name = "on"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(712, 0), Vector2(712, 816)]
-}
-tracks/1/type = "audio"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("4_pa8rk")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/1/use_blend = true
-
 [sub_resource type="Animation" id="Animation_ag0of"]
 length = 0.001
 tracks/0/type = "value"
@@ -82,6 +51,37 @@ tracks/1/keys = {
 "end_offset": 0.0,
 "start_offset": 0.0,
 "stream": ExtResource("5_1yvow")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_gt8j6"]
+resource_name = "on"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(712, 0), Vector2(712, 816)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_pa8rk")
 }],
 "times": PackedFloat32Array(0)
 }
