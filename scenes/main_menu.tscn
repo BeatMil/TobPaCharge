@@ -203,7 +203,7 @@ position = Vector2(0, 568)
 
 [node name="HunterNotesButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
 position = Vector2(64, 512)
-text_on_button = "Hunter Note"
+text_on_button = "How To Play"
 
 [node name="VersusBotButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
 position = Vector2(64, 568)
