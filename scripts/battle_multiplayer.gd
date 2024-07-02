@@ -16,8 +16,8 @@ extends Node2D
 ########################################
 # configs
 ########################################
-var time_control:int = 1 ## seconds
-var resolve_time:int = 1 ## seconds
+var time_control:float = 1.5 ## seconds
+var resolve_time:float = 1 ## seconds
 var player1_ready: bool = false
 var player2_ready: bool = false
 
@@ -46,6 +46,7 @@ func _setup_player() -> void:
 	else:
 		printerr("not enough players!")
 		# SceneTransition.change_scene("res://scenes/main_menu.tscn")
+	think_time_display.time_to_think = time_control
 
 
 func _start_think_time() -> void:
