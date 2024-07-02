@@ -416,4 +416,3 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicPlayer"]
-bus = &"smol_bus"
