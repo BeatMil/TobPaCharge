@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkhj34nihcxx5"]
+
+[ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="1_jo2wi"]
+[ext_resource type="PackedScene" uid="uid://dl5pewv5dfsfe" path="res://nodes/cool_menu_button.tscn" id="1_wdo8n"]
+[ext_resource type="Script" path="res://scripts/hunter_note.gd" id="1_yy6le"]
+[ext_resource type="Texture2D" uid="uid://dt5gwa1lpbmwe" path="res://media/sprites/menu/menu_ready_icon/ready_normal_cross.png" id="4_savqf"]
+[ext_resource type="Texture2D" uid="uid://b73t1b4tu4n5m" path="res://media/sprites/menu/menu_ready_icon/ready_normal_cross_orange.png" id="5_25y1u"]
+
+[node name="HunterNote" type="Node2D"]
+script = ExtResource("1_yy6le")
+
+[node name="BackPanel" type="Panel" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+metadata/_edit_lock_ = true
+
+[node name="DescriptionPanel" type="Panel" parent="."]
+offset_left = 960.0
+offset_top = 32.0
+offset_right = 1896.0
+offset_bottom = 1048.0
+metadata/_edit_lock_ = true
+
+[node name="DescriptionText" type="RichTextLabel" parent="."]
+offset_left = 992.0
+offset_top = 64.0
+offset_right = 1872.0
+offset_bottom = 1032.0
+theme_override_fonts/normal_font = ExtResource("1_jo2wi")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "How to Play!
+This is so smol god dang XD"
+
+[node name="HowToPlayButton" parent="." instance=ExtResource("1_wdo8n")]
+position = Vector2(56, 128)
+text_on_button = "How To Play"
+
+[node name="SkillsButton" parent="." instance=ExtResource("1_wdo8n")]
+position = Vector2(56, 208)
+text_on_button = "Skills"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_right = 192.0
+offset_bottom = 192.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("4_savqf")
+texture_hover = ExtResource("5_25y1u")
+
+[connection signal="on_press" from="HowToPlayButton" to="." method="_on_how_to_play_button_on_press"]
+[connection signal="on_press" from="SkillsButton" to="." method="_on_skills_button_on_press"]
+[connection signal="button_down" from="TextureButton" to="." method="_on_texture_button_button_down"]

@@ -12,6 +12,7 @@ extends Control
 @onready var menu_buttons_player: AnimationPlayer = $MenuButtons/MenuButtonsPlayer
 @onready var sound_slider: VSlider = %SoundSlider
 @onready var lobby_panel_player: AnimationPlayer = $LobbyPanel/LobbyPanelPlayer
+@onready var hunter_note: Node2D = $HunterNote
 
 
 #################################################
@@ -164,3 +165,7 @@ func _on_exit_button_on_press() -> void:
 func _on_menu_background_animation_finished() -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(menu_buttons, "position", Vector2.ZERO, 1).set_trans(Tween.TRANS_BACK)
+
+
+func _on_hunter_notes_button_on_press() -> void:
+	hunter_note.set_deferred("visible", true)

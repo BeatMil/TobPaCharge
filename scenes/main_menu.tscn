@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cc85xyg2whm6b"]
+[gd_scene load_steps=18 format=3 uid="uid://cc85xyg2whm6b"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_bdtlp"]
 [ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="2_7agid"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://h5otivo8816m" path="res://nodes/cool_menu_button_start_game.tscn" id="5_2b7m8"]
 [ext_resource type="PackedScene" uid="uid://bhiryivk5mwi8" path="res://nodes/helpers/menu_background.tscn" id="6_31cw2"]
 [ext_resource type="Texture2D" uid="uid://cvr10ukromojy" path="res://media/sprites/menu/menu_background/volume_icon_smol.png" id="7_6j0oy"]
+[ext_resource type="PackedScene" uid="uid://bkhj34nihcxx5" path="res://scenes/hunter_note.tscn" id="10_qsi8i"]
 
 [sub_resource type="Animation" id="Animation_ag0of"]
 length = 0.001
@@ -122,7 +123,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(-2, 1),
 "update": 0,
-"values": [Vector2(0, 568), Vector2(0, 0)]
+"values": [Vector2(0, 600), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1t6r3"]
@@ -200,6 +201,10 @@ offset_bottom = 1008.0
 [node name="MenuButtons" type="Node2D" parent="."]
 position = Vector2(0, 568)
 
+[node name="HunterNotesButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(64, 512)
+text_on_button = "Hunter Note"
+
 [node name="VersusBotButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
 position = Vector2(64, 568)
 text_on_button = "VS Bot"
@@ -218,7 +223,7 @@ text_on_button = "START GAME!"
 
 [node name="LeaveLobbyButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
 position = Vector2(64, 880)
-text_on_button = "Leave"
+text_on_button = "Leave Lobby"
 
 [node name="ExitButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
 position = Vector2(64, 952)
@@ -248,8 +253,11 @@ value = -20.0
 position = Vector2(16, 1024)
 texture = ExtResource("7_6j0oy")
 
+[node name="HunterNote" parent="." instance=ExtResource("10_qsi8i")]
+
 [connection signal="animation_finished" from="MenuBackground" to="." method="_on_menu_background_animation_finished"]
 [connection signal="pressed" from="DebugButton" to="." method="_on_debug_button_pressed"]
+[connection signal="on_press" from="MenuButtons/HunterNotesButton" to="." method="_on_hunter_notes_button_on_press"]
 [connection signal="on_press" from="MenuButtons/VersusBotButton" to="." method="_on_versus_bot_on_press"]
 [connection signal="on_press" from="MenuButtons/CreateLobbyButton" to="." method="_on_create_lobby_on_press"]
 [connection signal="on_press" from="MenuButtons/InviteFriendButton" to="." method="_on_invite_friend_on_press"]
