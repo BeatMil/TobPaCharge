@@ -9,7 +9,7 @@ const HIT_SPARK_BLUE = preload("res://nodes/particles_effects/hit_spark_blue.tsc
 #################################################
 ## Config
 #################################################
-var time_to_think: float = 1.00
+@export var time_to_think: float = 1.00
 
 
 #################################################
@@ -37,8 +37,8 @@ func _ready() -> void:
 #################################################
 func start_think_time() -> void:
 	var tween = get_tree().create_tween()
-	tween.tween_property(vanilla, "position", left_marker_2d.position, 1)
-	tween.parallel().tween_property(kaisouko, "position", right_marker_2d.position, 1)
+	tween.tween_property(vanilla, "position", left_marker_2d.position, time_to_think)
+	tween.parallel().tween_property(kaisouko, "position", right_marker_2d.position, time_to_think)
 	tween.tween_callback(_spawn_blue_hit_spark)
 	tween.tween_property(vanilla, "position", vanilla_marker_2d.position, 0.3).set_trans(Tween.TRANS_BACK)
 	tween.parallel().tween_property(kaisouko, "position", kaisouko_marker_2d.position, 0.3).set_trans(Tween.TRANS_BACK)

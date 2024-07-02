@@ -104,6 +104,7 @@ one_shot = true
 one_shot = true
 
 [node name="ThinkTimeDisplay" parent="." instance=ExtResource("10_t0dry")]
+time_to_think = 2.0
 
 [connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
 [connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]
