@@ -5,18 +5,18 @@ extends Node2D
 #############################################################
 var how_to_play_description: String = \
 """
-Explanation
+[color=Paleturquoise ]Explanation[/color]
 
-This is a 2 player turn-based game but both players perform their action at the same time!
+This is a 2 player [color=Burlywood]turn-based[/color] game but both players perform their action at the [color=Burlywood]same time[/color]!
 """
 var actions_description: String = \
 """
-Actions
+[color=Paleturquoise ]Actions[/color]
 
 [color=Chocolate]Fireball[/color]: This does damage. If this hit opponent, it kills.
 [color=Lightseagreen]Block[/color]: This negate any incoming damage except [color=red]big fireball[/color].
 [color=Papayawhip ]Charge[/color]: Player will automatically perform charge if nothing is choosed
-[color=Red ]Big Fireball[/color]: This requires 3 [color=Papayawhip ]charges[/color]. Once 3 charges the big fireball button will appear.
+[color=Red ]Big Fireball[/color]: This requires [color=Salmon]3 charges[/color]. Once 3 charges the big fireball button will appear.
 """
 
 
