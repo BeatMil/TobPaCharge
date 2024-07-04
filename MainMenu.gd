@@ -133,7 +133,7 @@ func _on_start_game_button_pressed():
 
 
 func _on_versus_bot_on_press() -> void:
-	SceneTransition.change_scene("res://scenes/battle.tscn")
+	SceneTransition.change_scene("res://scenes/battle_singleplayer.tscn")
 
 
 func _on_create_lobby_on_press() -> void:
