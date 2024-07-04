@@ -80,6 +80,9 @@ func _ready():
 		action_label.visible = false
 		charge_button.visible = false # show only in testing
 
+	if is_single_player:
+		charge_button.visible = false # show only in testing
+
 #################################################
 ## public functions
 #################################################
