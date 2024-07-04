@@ -60,6 +60,7 @@ current_scene = "res://scenes/battle_singleplayer.tscn"
 
 [node name="Player1" parent="." instance=ExtResource("8_yx8se")]
 position = Vector2(448, 712)
+is_single_player = true
 
 [node name="P1ScoreLabel" type="RichTextLabel" parent="Player1"]
 offset_left = -424.0

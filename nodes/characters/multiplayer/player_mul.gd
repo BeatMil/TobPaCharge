@@ -46,6 +46,7 @@ var steam_id: int = 0:
 		charge_button.visible = false # show only in testing
 var is_action_choosed:bool = false
 @export var is_bot: bool = false
+@export var is_single_player: bool = false
 
 
 #################################################
@@ -210,7 +211,10 @@ func _on_area_2d_area_entered(area):
 
 
 func _on_time_control_timeout() -> void:
-	if SteamNetwork.steam_id == steam_id:
+	if is_single_player and not is_action_choosed:
+		_on_charge_button_button_down()
+		print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
+	elif SteamNetwork.steam_id == steam_id:
 		if not is_action_choosed:
 			_on_charge_button_button_down()
 			print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
