@@ -6,3 +6,10 @@ enum actions {
 	FIREBALL,
 	BIGFIREBALL
 }
+
+
+enum bot_actions {
+	CHARGE,
+	BLOCK,
+	FIREBALL,
+}

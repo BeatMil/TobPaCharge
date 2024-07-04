@@ -18,8 +18,8 @@ func _ready():
 func random_action():
 	# I don't know how this line work but that's fine XD
 	## Edited: ohhhh my god that's genius! XD
-	chosen_action = randi() % ActionEnum.actions.size()
-	#chosen_action = ActionEnum.actions.CHARGE
+	# chosen_action = randi() % ActionEnum.actions.size()
+	chosen_action = ActionEnum.actions.CHARGE
 
 
 func resolve_phase():

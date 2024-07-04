@@ -1,0 +1,111 @@
+[gd_scene load_steps=12 format=3 uid="uid://1wf6r2ftolem"]
+
+[ext_resource type="Script" path="res://scripts/battle_singleplayer.gd" id="1_0ea4j"]
+[ext_resource type="Texture2D" uid="uid://bpiir3byivakw" path="res://media/stages/rooftop_no_clouds.png" id="2_23dxx"]
+[ext_resource type="Script" path="res://scripts/CloudsParallaxLayer.gd" id="3_g684u"]
+[ext_resource type="Texture2D" uid="uid://c20t0egyiwwja" path="res://media/stages/clouds.png" id="4_iwy37"]
+[ext_resource type="Texture2D" uid="uid://b5nopnieawkn8" path="res://media/stages/clouds2.png" id="5_2a6va"]
+[ext_resource type="Texture2D" uid="uid://c88k531esm7ad" path="res://media/stages/clouds3.png" id="6_rkluo"]
+[ext_resource type="PackedScene" uid="uid://di45s8k4r18g4" path="res://nodes/restart_menu.tscn" id="7_gi8m2"]
+[ext_resource type="PackedScene" uid="uid://d30b2qwpstgt4" path="res://nodes/characters/multiplayer/Player_mul.tscn" id="8_yx8se"]
+[ext_resource type="FontFile" uid="uid://cl02il1o54qfl" path="res://fonts/DroidSansMono.ttf" id="9_h7tod"]
+[ext_resource type="PackedScene" uid="uid://c3adto1be3xa2" path="res://nodes/characters/multiplayer/player2_mul.tscn" id="10_083od"]
+[ext_resource type="PackedScene" uid="uid://ilua2f08ss2o" path="res://nodes/think_time.tscn" id="11_v2rbx"]
+
+[node name="BattleSinglePlayer" type="Node2D"]
+script = ExtResource("1_0ea4j")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Rooftop" type="Sprite2D" parent="ParallaxBackground"]
+self_modulate = Color(0.925353, 0.925353, 0.925353, 1)
+texture = ExtResource("2_23dxx")
+centered = false
+
+[node name="CloudsParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(2000, 0)
+script = ExtResource("3_g684u")
+SPEED = -50
+
+[node name="Clouds" type="Sprite2D" parent="ParallaxBackground/CloudsParallaxLayer"]
+position = Vector2(752, 136)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_iwy37")
+
+[node name="CloudsParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(2000, 0)
+script = ExtResource("3_g684u")
+SPEED = -20
+
+[node name="Clouds" type="Sprite2D" parent="ParallaxBackground/CloudsParallaxLayer2"]
+position = Vector2(1344, 80)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_2a6va")
+
+[node name="CloudsParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(2000, 0)
+script = ExtResource("3_g684u")
+SPEED = -80
+
+[node name="Clouds" type="Sprite2D" parent="ParallaxBackground/CloudsParallaxLayer3"]
+position = Vector2(392, 104)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_rkluo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("7_gi8m2")]
+current_scene = "res://scenes/battle_singleplayer.tscn"
+
+[node name="Player1" parent="." instance=ExtResource("8_yx8se")]
+position = Vector2(448, 712)
+
+[node name="P1ScoreLabel" type="RichTextLabel" parent="Player1"]
+offset_left = -424.0
+offset_top = -488.0
+offset_right = -24.0
+offset_bottom = -368.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/normal_font = ExtResource("9_h7tod")
+theme_override_font_sizes/normal_font_size = 96
+text = "0 wins"
+
+[node name="Bot" parent="." instance=ExtResource("10_083od")]
+position = Vector2(1480, 712)
+is_bot = true
+
+[node name="P2ScoreLabel" type="RichTextLabel" parent="Bot"]
+offset_left = 57.0
+offset_top = -488.0
+offset_right = 457.0
+offset_bottom = -368.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/normal_font = ExtResource("9_h7tod")
+theme_override_font_sizes/normal_font_size = 96
+text = "0 wins"
+
+[node name="TimeLeftLabel" type="Label" parent="."]
+visible = false
+offset_left = 864.0
+offset_top = 240.0
+offset_right = 933.0
+offset_bottom = 266.0
+scale = Vector2(3.19559, 3.19559)
+text = "TimeLeft"
+
+[node name="TimeControl" type="Timer" parent="."]
+one_shot = true
+
+[node name="ResolveTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ThinkTimeDisplay" parent="." instance=ExtResource("11_v2rbx")]
+time_to_think = 2.0
+
+[connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
+[connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]

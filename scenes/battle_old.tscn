@@ -1,24 +1,24 @@
 [gd_scene load_steps=5 format=3 uid="uid://c75mn6c4kcy72"]
 
-[ext_resource type="Script" path="res://scripts/battle.gd" id="1_o5j4i"]
-[ext_resource type="PackedScene" uid="uid://d1dreux08gbt" path="res://nodes/characters/Player.tscn" id="2_a6fra"]
-[ext_resource type="PackedScene" uid="uid://di45s8k4r18g4" path="res://nodes/restart_menu.tscn" id="2_leiyv"]
-[ext_resource type="PackedScene" uid="uid://bcaie6x0r2o7p" path="res://nodes/characters/bot.tscn" id="3_j1cia"]
+[ext_resource type="Script" path="res://scripts/battle.gd" id="1_j5dq2"]
+[ext_resource type="PackedScene" uid="uid://di45s8k4r18g4" path="res://nodes/restart_menu.tscn" id="2_xbqv4"]
+[ext_resource type="PackedScene" uid="uid://d1dreux08gbt" path="res://nodes/characters/Player.tscn" id="3_xydjd"]
+[ext_resource type="PackedScene" uid="uid://bcaie6x0r2o7p" path="res://nodes/characters/bot.tscn" id="4_yd76v"]
 
 [node name="Battle" type="Node2D"]
-script = ExtResource("1_o5j4i")
+script = ExtResource("1_j5dq2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 10
 
-[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_leiyv")]
+[node name="RestartMenu" parent="CanvasLayer" instance=ExtResource("2_xbqv4")]
 current_scene = "res://scenes/battle.tscn"
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." instance=ExtResource("2_a6fra")]
+[node name="Player" parent="." instance=ExtResource("3_xydjd")]
 position = Vector2(223, 364)
 
-[node name="Bot" parent="." instance=ExtResource("3_j1cia")]
+[node name="Bot" parent="." instance=ExtResource("4_yd76v")]
 position = Vector2(943, 378)
 
 [node name="TimeLeftLabel" type="Label" parent="."]

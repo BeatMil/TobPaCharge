@@ -18,6 +18,12 @@ extends Node2D
 @onready var block_button: TextureButton = $CanvasLayer/Buttons/BlockButton
 
 
+var bot_actions = {
+	0: _on_charge_button_button_down,
+	1: _on_block_button_toggled,
+	2: _on_fireball_button_toggled,
+}
+
 #################################################
 ## Preloads
 #################################################
@@ -39,6 +45,7 @@ var steam_id: int = 0:
 			action_label.visible = false
 		charge_button.visible = false # show only in testing
 var is_action_choosed:bool = false
+@export var is_bot: bool = false
 
 
 #################################################
@@ -66,6 +73,11 @@ func _ready():
 	get_parent().get_node("TimeControl").connect("timeout", _on_time_control_timeout)
 	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	# print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
+
+	if is_bot:
+		canvaslayer.visible = false
+		action_label.visible = false
+		charge_button.visible = false # show only in testing
 
 #################################################
 ## public functions
@@ -101,7 +113,7 @@ func spawn_fireball(type: String):
 		if name == "Player1":
 			fireball.is_going_right_side = true
 			fireball.set_target("p2")
-		elif name == "Player2":
+		elif name == "Player2" or name == "Bot":
 			fireball.is_going_right_side = false
 			fireball.set_target("p1")
 		add_child(fireball)
@@ -111,7 +123,7 @@ func spawn_fireball(type: String):
 		if name == "Player1":
 			fireball.is_going_right_side = true
 			fireball.set_target("p2")
-		elif name == "Player2":
+		elif name == "Player2" or name == "Bot":
 			fireball.is_going_right_side = false
 			fireball.set_target("p1")
 		_spawn_backwind_vfx()
@@ -146,20 +158,24 @@ func resolve_phase():
 
 
 func new_turn():
-	# prevent charges above 3
-	if charge_count > 3:
-		charge_count = 3
-	chosen_action = ActionEnum.actions.CHARGE
-	action_label.text = "CHARGE"
-	animation_player.play("idle")
-	set_disable_all_buttons(false)
-	set_block_touch_all_buttons(false)
-	set_pressed_all_buttons(false)
-	is_action_choosed = false
-	if charge_count >= 3:
-		big_fireball_button.set_deferred("visible", true)
+	if is_bot:
+		is_action_choosed = false
+		animation_player.play("idle")
 	else:
-		big_fireball_button.set_deferred("visible", false)
+		# prevent charges above 3
+		if charge_count > 3:
+			charge_count = 3
+		chosen_action = ActionEnum.actions.CHARGE
+		action_label.text = "CHARGE"
+		animation_player.play("idle")
+		set_disable_all_buttons(false)
+		set_block_touch_all_buttons(false)
+		set_pressed_all_buttons(false)
+		is_action_choosed = false
+		if charge_count >= 3:
+			big_fireball_button.set_deferred("visible", true)
+		else:
+			big_fireball_button.set_deferred("visible", false)
 
 
 #################################################
@@ -198,6 +214,10 @@ func _on_time_control_timeout() -> void:
 		if not is_action_choosed:
 			_on_charge_button_button_down()
 			print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
+	
+	if is_bot:
+		# _on_fireball_button_toggled(true)
+		bot_actions[randi() % bot_actions.size()].call(true)
 
 
 func _on_fireball_button_toggled(toggled_on):
@@ -216,7 +236,7 @@ func _on_block_button_toggled(toggled_on: bool) -> void:
 		block_button.set_block_touch(true)
 
 
-func _on_charge_button_button_down():
+func _on_charge_button_button_down(_booo: bool = true):
 	rpc("do_the_action", ActionEnum.actions.CHARGE)
 	set_disable_all_buttons(true)
 
