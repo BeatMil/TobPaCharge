@@ -246,7 +246,7 @@ offset_right = 1864.0
 offset_bottom = 1016.0
 min_value = -50.0
 max_value = 20.0
-value = -20.0
+value = -15.0
 
 [node name="VolumeIcon" type="Sprite2D" parent="SoundSlider"]
 position = Vector2(16, 1024)
