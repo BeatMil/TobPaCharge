@@ -24,6 +24,11 @@ var bot_actions = {
 	2: _on_fireball_button_toggled,
 }
 
+var bot_actions_defense = {
+	0: _on_charge_button_button_down,
+	1: _on_block_button_toggled,
+}
+
 #################################################
 ## Preloads
 #################################################
@@ -223,8 +228,15 @@ func _on_time_control_timeout() -> void:
 			print_rich("[color=Lightcoral ][b]DEFAULT CHARGE[/b][/color]")
 	
 	if is_bot:
-		# _on_fireball_button_toggled(true)
-		bot_actions[randi() % bot_actions.size()].call(true)
+		if charge_count >= 3:
+			_on_big_fire_ball_button_toggled(true)
+		elif $"../Player1".charge_count <= 0:
+			_on_charge_button_button_down()
+		elif charge_count <= 0:
+			bot_actions[randi() % bot_actions_defense.size()].call(true)
+		else:
+			bot_actions[randi() % bot_actions.size()].call(true)
+			print_rich("[color=red][b]RANDOM Action for bot[/b][/color]")
 
 
 func _on_fireball_button_toggled(toggled_on):
