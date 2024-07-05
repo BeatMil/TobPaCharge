@@ -126,7 +126,7 @@ _data = {
 }
 
 [node name="CanvasLayer" type="CanvasLayer"]
-layer = 5
+layer = 100
 script = ExtResource("1_vmmq5")
 
 [node name="BlurryTransition" type="Sprite2D" parent="."]
