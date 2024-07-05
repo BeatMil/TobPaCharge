@@ -26,6 +26,7 @@ extends Control
 # Built-in
 #################################################
 func _ready():
+	SteamNetwork.clear_score()
 	SteamNetwork.connect("lobby_member_update", update_lobby_members)
 	update_lobby_members()
 

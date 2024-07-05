@@ -76,6 +76,11 @@ func update_lobby_members() -> void:
 	emit_signal("lobby_member_update")
 
 
+func clear_score() -> void:
+	p1_score = 0
+	p2_score = 0
+
+
 @rpc("call_local")
 func test_show_pic() -> void:
 	print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
