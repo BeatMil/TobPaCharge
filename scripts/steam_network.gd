@@ -111,6 +111,14 @@ func debug() -> void:
 
 
 #################################################
+# Achievements
+#################################################
+func activate_first_achivement() -> void:
+	Steam.requestCurrentStats() # gotta call this first then below
+	Steam.setAchievement("OPEN_GAME")
+
+
+#################################################
 # private functions
 #################################################
 func _initialize_steam() -> void:
