@@ -1,6 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://bfxbiu6m3gb38"]
 
 [ext_resource type="Script" path="res://scripts/lobby_member.gd" id="1_yyo3l"]
+[ext_resource type="Texture2D" uid="uid://dc2yhjrh18w2f" path="res://media/TobPaCharge_icon.png" id="2_ln01r"]
+[ext_resource type="FontFile" uid="uid://cl02il1o54qfl" path="res://fonts/DroidSansMono.ttf" id="3_j8qj2"]
+[ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="4_lot53"]
+[ext_resource type="PackedScene" uid="uid://dwudxqx2i5jsm" path="res://nodes/cool_menu_ready_button.tscn" id="5_qwk3n"]
 
 [sub_resource type="Animation" id="Animation_1l3l7"]
 length = 0.001
@@ -28,10 +32,23 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Stand by"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:theme_override_colors/default_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_rn53q"]
 resource_name = "ready"
-length = 0.01
+length = 0.5
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -56,10 +73,23 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Ready"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:theme_override_colors/default_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.414062, 1, 0.639942, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_2wrth"]
 resource_name = "stand_by"
-length = 0.01
+length = 2.0
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -84,6 +114,18 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Stand by"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:theme_override_colors/default_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.767337, 0.365502, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u3r6t"]
 _data = {
@@ -92,92 +134,49 @@ _data = {
 "stand_by": SubResource("Animation_2wrth")
 }
 
-[sub_resource type="Animation" id="Animation_o0nad"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Stand by"]
-}
-
-[sub_resource type="Animation" id="Animation_25ggq"]
-resource_name = "ready"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Ready"]
-}
-
-[sub_resource type="Animation" id="Animation_mqwec"]
-resource_name = "stand_by"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Stand by"]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iqi7y"]
-_data = {
-"RESET": SubResource("Animation_o0nad"),
-"ready": SubResource("Animation_25ggq"),
-"stand_by": SubResource("Animation_mqwec")
-}
-
 [node name="LobbyMember" type="Control" node_paths=PackedStringArray("username_label")]
-custom_minimum_size = Vector2(160, 88)
+custom_minimum_size = Vector2(528, 192)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 256.0
-offset_bottom = 128.0
+offset_right = 528.0
+offset_bottom = 192.0
 script = ExtResource("1_yyo3l")
 username_label = NodePath("SteamNameLabel")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
-offset_top = 24.0
-offset_right = 64.0
-offset_bottom = 88.0
+offset_right = 328.0
+offset_bottom = 184.0
 
 [node name="AvatarTexture" type="TextureRect" parent="."]
 layout_mode = 0
-offset_top = 24.0
-offset_right = 40.0
-offset_bottom = 64.0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 136.0
+offset_bottom = 176.0
+texture = ExtResource("2_ln01r")
+expand_mode = 1
 
-[node name="SteamNameLabel" type="Label" parent="."]
+[node name="SteamNameLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_right = 106.0
-offset_bottom = 23.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 264.0
+offset_bottom = 48.0
+theme_override_fonts/normal_font = ExtResource("3_j8qj2")
+theme_override_font_sizes/normal_font_size = 32
 text = "Steam name: "
+scroll_active = false
 
-[node name="ReadyLabel" type="Label" parent="."]
+[node name="ReadyLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 80.0
-offset_top = 24.0
-offset_right = 186.0
-offset_bottom = 47.0
-theme_override_colors/font_color = Color(0.538659, 0.771257, 0.881819, 1)
+offset_left = 152.0
+offset_top = 88.0
+offset_right = 312.0
+offset_bottom = 136.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("4_lot53")
+theme_override_font_sizes/normal_font_size = 36
 text = "Stand by"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ReadyLabel"]
@@ -185,21 +184,9 @@ libraries = {
 "": SubResource("AnimationLibrary_u3r6t")
 }
 
-[node name="ReadyButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 56.0
-offset_right = 160.0
-offset_bottom = 87.0
-theme_override_colors/font_color = Color(0.531117, 0.77257, 0.952538, 1)
-theme_override_colors/font_pressed_color = Color(0.544093, 0.83138, 0.432751, 1)
-theme_override_colors/font_hover_color = Color(0.531117, 0.77257, 0.952538, 1)
-toggle_mode = true
-text = "Stand by"
+[node name="CoolMenuReadyButton" parent="." instance=ExtResource("5_qwk3n")]
+position = Vector2(336, -3.8147e-06)
+scale = Vector2(1.45, 1.45)
+text_on_button = "Press me"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ReadyButton"]
-libraries = {
-"": SubResource("AnimationLibrary_iqi7y")
-}
-
-[connection signal="toggled" from="ReadyButton" to="." method="_on_ready_button_toggled"]
+[connection signal="toggle_pressed" from="CoolMenuReadyButton" to="." method="_on_cool_menu_ready_button_toggle_pressed"]

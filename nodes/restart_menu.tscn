@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://di45s8k4r18g4"]
+[gd_scene load_steps=6 format=3 uid="uid://di45s8k4r18g4"]
 
 [ext_resource type="Script" path="res://scripts/restart_menu.gd" id="1_cutqm"]
+[ext_resource type="PackedScene" uid="uid://dl5pewv5dfsfe" path="res://nodes/cool_menu_button.tscn" id="2_3p3ku"]
 
 [sub_resource type="Animation" id="Animation_tlfi1"]
 length = 0.001
@@ -19,22 +20,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Button:visible")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -58,22 +47,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Button:visible")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -106,25 +83,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
-[node name="Button" type="Button" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -43.5
-offset_top = -15.5
-offset_right = 43.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Play again"
+[node name="RematchButton" parent="." instance=ExtResource("2_3p3ku")]
+position = Vector2(768, 465)
+text_on_button = "Rematch!"
+
+[node name="MainMenuButton" parent="." instance=ExtResource("2_3p3ku")]
+position = Vector2(768, 521)
+text_on_button = "Return to Menu"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_7jfsm")
 }
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="on_press" from="RematchButton" to="." method="_on_rematch_button_on_press"]
+[connection signal="on_press" from="MainMenuButton" to="." method="_on_main_menu_button_on_press"]

@@ -363,9 +363,9 @@ offset_bottom = 40.0
 [node name="Buttons" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 464.0
+offset_left = 384.0
 offset_top = 368.0
-offset_right = 464.0
+offset_right = 384.0
 offset_bottom = 368.0
 
 [node name="ChargeButton" type="Button" parent="CanvasLayer/Buttons"]
@@ -400,13 +400,6 @@ offset_top = 264.0
 offset_right = 1128.0
 offset_bottom = 776.0
 scale = Vector2(0.5, 0.5)
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 546.0
-offset_top = 506.0
-offset_right = 604.0
-offset_bottom = 529.0
-text = "Player2"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 clip_children = 2

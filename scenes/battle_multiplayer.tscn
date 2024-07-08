@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://fdmlajasqvjd"]
+[gd_scene load_steps=12 format=3 uid="uid://fdmlajasqvjd"]
 
 [ext_resource type="PackedScene" uid="uid://d30b2qwpstgt4" path="res://nodes/characters/multiplayer/Player_mul.tscn" id="1_58itq"]
 [ext_resource type="Script" path="res://scripts/battle_multiplayer.gd" id="1_clmqd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b5nopnieawkn8" path="res://media/stages/clouds2.png" id="5_yvd4y"]
 [ext_resource type="Texture2D" uid="uid://c88k531esm7ad" path="res://media/stages/clouds3.png" id="6_7ttp5"]
 [ext_resource type="Texture2D" uid="uid://c20t0egyiwwja" path="res://media/stages/clouds.png" id="6_gqq8x"]
+[ext_resource type="FontFile" uid="uid://cl02il1o54qfl" path="res://fonts/DroidSansMono.ttf" id="9_g8roa"]
 [ext_resource type="PackedScene" uid="uid://ilua2f08ss2o" path="res://nodes/think_time.tscn" id="10_t0dry"]
 
 [node name="BattleMultiplayer" type="Node2D"]
@@ -60,8 +61,32 @@ current_scene = "res://scenes/battle_multiplayer.tscn"
 [node name="Player1" parent="." instance=ExtResource("1_58itq")]
 position = Vector2(448, 712)
 
+[node name="P1ScoreLabel" type="RichTextLabel" parent="Player1"]
+offset_left = -424.0
+offset_top = -488.0
+offset_right = -24.0
+offset_bottom = -368.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/normal_font = ExtResource("9_g8roa")
+theme_override_font_sizes/normal_font_size = 96
+text = "0 wins"
+
 [node name="Player2" parent="." instance=ExtResource("2_6t46w")]
 position = Vector2(1480, 712)
+
+[node name="P2ScoreLabel" type="RichTextLabel" parent="Player2"]
+offset_left = 64.0
+offset_top = -480.0
+offset_right = 464.0
+offset_bottom = -360.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/normal_font = ExtResource("9_g8roa")
+theme_override_font_sizes/normal_font_size = 96
+text = "0 wins"
 
 [node name="TimeLeftLabel" type="Label" parent="."]
 visible = false
@@ -79,6 +104,7 @@ one_shot = true
 one_shot = true
 
 [node name="ThinkTimeDisplay" parent="." instance=ExtResource("10_t0dry")]
+time_to_think = 2.0
 
 [connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
 [connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]

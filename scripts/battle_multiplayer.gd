@@ -9,13 +9,15 @@ extends Node2D
 @onready var resolve_timer:Timer = $"ResolveTimer"
 @onready var restart_menu:Control = $"CanvasLayer/RestartMenu"
 @onready var think_time_display = $ThinkTimeDisplay
+@onready var p1_score_label: RichTextLabel = $Player1/P1ScoreLabel
+@onready var p2_score_label: RichTextLabel = $Player2/P2ScoreLabel
 
 
 ########################################
 # configs
 ########################################
-var time_control:int = 1 ## seconds
-var resolve_time:int = 1 ## seconds
+var time_control:float = 1.5 ## seconds
+var resolve_time:float = 1 ## seconds
 var player1_ready: bool = false
 var player2_ready: bool = false
 
@@ -44,6 +46,7 @@ func _setup_player() -> void:
 	else:
 		printerr("not enough players!")
 		# SceneTransition.change_scene("res://scenes/main_menu.tscn")
+	think_time_display.time_to_think = time_control
 
 
 func _start_think_time() -> void:
@@ -72,6 +75,9 @@ func _ready():
 	player1.connect("action_choosed", _player1_action_choosed)
 	player2.connect("action_choosed", _player2_action_choosed)
 	_setup_player()
+
+	p1_score_label.text = "%s Wins"%SteamNetwork.p1_score
+	p2_score_label.text = "%s Wins"%SteamNetwork.p2_score
 
 	time_control_timer.wait_time = time_control
 	resolve_timer.wait_time = resolve_time
@@ -112,7 +118,13 @@ func _on_time_control_timeout():
 func _on_resolve_timer_timeout():
 	### After action resolved
 	# go to next turn or restart match
-	if player1.hp <= 0 or player2.hp <= 0:
+	if player1.hp <= 0:
+		SteamNetwork.p2_score += 1
+		p2_score_label.text = "%s Wins"%SteamNetwork.p2_score
+		restart_menu.open()
+	elif player2.hp <= 0:
+		SteamNetwork.p1_score += 1
+		p1_score_label.text = "%s Wins"%SteamNetwork.p1_score
 		restart_menu.open()
 	else:
 		emit_signal("new_turn")
@@ -121,6 +133,7 @@ func _on_resolve_timer_timeout():
 
 func _peer_disconnected(_id: int):
 	SceneTransition.change_scene("res://scenes/main_menu.tscn")
+	SteamNetwork.leave_lobby()
 
 
 func _player1_action_choosed() -> void:

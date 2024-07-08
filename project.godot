@@ -13,6 +13,8 @@ config_version=5
 config/name="TobPaCharge"
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/show_image=false
 config/icon="res://media/TobPaCharge_icon.png"
 
 [autoload]
@@ -20,6 +22,7 @@ config/icon="res://media/TobPaCharge_icon.png"
 ActionEnum="*res://scripts/action_enum.gd"
 SceneTransition="*res://nodes/scene_transition.tscn"
 SteamNetwork="*res://scripts/steam_network.gd"
+EscMenu="*res://nodes/esc_menu.tscn"
 
 [debug]
 
@@ -29,7 +32,7 @@ gdscript/warnings/unused_parameter=0
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/always_on_top=true
+window/size/mode=4
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"

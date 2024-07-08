@@ -1,5 +1,6 @@
 extends Control
 
+
 # Properties
 @onready var vbox_member: VBoxContainer = $"VBoxMember"
 @onready var versus_bot_button: Node2D = $MenuButtons/VersusBotButton
@@ -7,11 +8,16 @@ extends Control
 @onready var invite_friend_button: Node2D = $MenuButtons/InviteFriendButton
 @onready var start_game_button: Node2D = $MenuButtons/StartGameButton
 @onready var leave_lobby_button: Node2D = $MenuButtons/LeaveLobbyButton
+@onready var menu_buttons: Node2D = $MenuButtons
+@onready var menu_buttons_player: AnimationPlayer = $MenuButtons/MenuButtonsPlayer
+@onready var sound_slider: VSlider = %SoundSlider
+@onready var lobby_panel_player: AnimationPlayer = $LobbyPanel/LobbyPanelPlayer
+@onready var hunter_note: Node2D = $HunterNote
 
 
-"""
-Preloads
-"""
+#################################################
+# Preloads
+#################################################
 @onready var LOBBY_MEMBER_NODE = preload("res://nodes/lobby_member.tscn")
 @onready var MUL_TEST = preload("res://nodes/multiplayer_player_test.tscn")
 
@@ -20,10 +26,15 @@ Preloads
 # Built-in
 #################################################
 func _ready():
+	SteamNetwork.activate_first_achivement()
+	SteamNetwork.clear_score()
 	SteamNetwork.connect("lobby_member_update", update_lobby_members)
-	_outside_lobby_buttons()
+	update_lobby_members()
 
-	SteamNetwork.update_lobby_members()
+
+func _process(delta):
+	AudioServer.set_bus_volume_db(0, sound_slider.value)
+
 
 #################################################
 # Private functions
@@ -32,10 +43,12 @@ func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("WHAT??? NO QUIT!!")
 
+
 func _in_lobby_buttons() -> void:
 	create_lobby_button.disable()
 	leave_lobby_button.enable()
 	invite_friend_button.enable()
+	lobby_panel_player.play("on")
 
 
 func _outside_lobby_buttons() -> void:
@@ -43,6 +56,8 @@ func _outside_lobby_buttons() -> void:
 	leave_lobby_button.disable()
 	invite_friend_button.disable()
 	start_game_button.disable()
+	lobby_panel_player.play("off")
+
 
 #################################################
 # Public functions
@@ -87,10 +102,10 @@ func check_ready() -> void:
 func start_game() -> void:
 	SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")
 
+
 #################################################
 # Buttons
 #################################################
-
 func _on_button_pressed():
 	SceneTransition.change_scene("res://scenes/battle.tscn")
 
@@ -120,7 +135,7 @@ func _on_start_game_button_pressed():
 
 
 func _on_versus_bot_on_press() -> void:
-	SceneTransition.change_scene("res://scenes/battle.tscn")
+	SceneTransition.change_scene("res://scenes/battle_singleplayer.tscn")
 
 
 func _on_create_lobby_on_press() -> void:
@@ -139,10 +154,20 @@ func _on_start_game_button_on_press() -> void:
 
 func _on_leave_lobby_on_press() -> void:
 	SteamNetwork.leave_lobby()
-	# _outside_lobby_buttons()
-	# update_lobby_members()
 
 
 func _on_exit_button_on_press() -> void:
 	#get_tree().quit()
 	OS.kill(OS.get_process_id()) # quit game fast!! but there maybe side effects...
+
+
+#################################################
+# Receive signals
+#################################################
+func _on_menu_background_animation_finished() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(menu_buttons, "position", Vector2.ZERO, 1).set_trans(Tween.TRANS_BACK)
+
+
+func _on_hunter_notes_button_on_press() -> void:
+	hunter_note.set_deferred("visible", true)

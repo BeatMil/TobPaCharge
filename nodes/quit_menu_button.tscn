@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgvjucp4k0tmk"]
+
+[ext_resource type="Texture2D" uid="uid://b4e4pb8it1qjx" path="res://media/sprites/menu/menu_ready_icon/ready_normal_background.png" id="1_dyw36"]
+[ext_resource type="Texture2D" uid="uid://dt5gwa1lpbmwe" path="res://media/sprites/menu/menu_ready_icon/ready_normal_cross.png" id="2_rb5qo"]
+
+[node name="QuitMenuButton" type="Node2D"]
+
+[node name="ReadyNormalBackground" type="Sprite2D" parent="."]
+texture = ExtResource("1_dyw36")
+centered = false
+
+[node name="ReadyNormalCross" type="Sprite2D" parent="."]
+texture = ExtResource("2_rb5qo")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

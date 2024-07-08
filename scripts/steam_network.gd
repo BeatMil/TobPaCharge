@@ -12,6 +12,10 @@ var steam_username: String = ""
 var lobby_id: int = 0
 var lobby_members: Array = []
 
+# helpers
+var p1_score: int = 0
+var p2_score: int = 0
+
 # Configs
 var appId: int = 480
 
@@ -25,6 +29,16 @@ var steam_multiplayer: SteamMultiplayerPeer = SteamMultiplayerPeer.new()
 #################################################
 func create_lobby() -> int:
 	var error = steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_FRIENDS_ONLY, 2)
+	if error:
+		printerr("Create lobby failed")
+	else:
+		# multiplayer.multiplayer_peer = steam_multiplayer
+		print_rich("[color=orange][b]SteamNetwork.create_lobby() ✓[/b][/color]")
+	return error
+
+
+func create_single_player_lobby() -> int:
+	var error = steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_INVISIBLE, 1)
 	if error:
 		printerr("Create lobby failed")
 	else:
@@ -48,6 +62,8 @@ func leave_lobby() -> void:
 		Steam.leaveLobby(lobby_id)
 		steam_multiplayer.close()
 		lobby_id = 0
+		p1_score = 0
+		p2_score = 0
 		update_lobby_members()
 	else:
 		print("Not in a lobby")
@@ -70,6 +86,11 @@ func update_lobby_members() -> void:
 	emit_signal("lobby_member_update")
 
 
+func clear_score() -> void:
+	p1_score = 0
+	p2_score = 0
+
+
 @rpc("call_local")
 func test_show_pic() -> void:
 	print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
@@ -87,6 +108,15 @@ func debug() -> void:
 	Steam.getLobbyMemberByIndex(lobby_id, 1),
 	steam_multiplayer.get_unique_id()
 ])
+
+
+#################################################
+# Achievements
+#################################################
+func activate_first_achivement() -> void:
+	Steam.requestCurrentStats() # gotta call this first then below
+	Steam.setAchievement("OPEN_GAME") # set achivement duh!
+	Steam.storeStats() # notify player in game!
 
 
 #################################################
@@ -128,8 +158,6 @@ func _ready():
 	multiplayer.connect("peer_disconnected", _peer_disconnected)
 
 	_initialize_steam()
-
-	print(get_tree().current_scene.name)
 
 
 #################################################

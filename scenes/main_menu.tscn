@@ -1,10 +1,136 @@
-[gd_scene load_steps=6 format=3 uid="uid://cc85xyg2whm6b"]
+[gd_scene load_steps=18 format=3 uid="uid://cc85xyg2whm6b"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_bdtlp"]
 [ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="2_7agid"]
-[ext_resource type="Texture2D" uid="uid://jf1ws6bprf8u" path="res://media/sprites/menu_waifu/menu_waifu_idle.png" id="3_oif5j"]
+[ext_resource type="PackedScene" uid="uid://dvbchwfxrs3w6" path="res://nodes/menu_waifu.tscn" id="3_52upu"]
 [ext_resource type="PackedScene" uid="uid://dl5pewv5dfsfe" path="res://nodes/cool_menu_button.tscn" id="4_ofm7h"]
+[ext_resource type="AudioStream" uid="uid://c8x5k601a30h3" path="res://media/sfx/menu_background/open_dropdown.wav" id="4_pa8rk"]
+[ext_resource type="AudioStream" uid="uid://cklb7k4v0jixi" path="res://media/sfx/menu_background/close_dropdown.wav" id="5_1yvow"]
 [ext_resource type="PackedScene" uid="uid://h5otivo8816m" path="res://nodes/cool_menu_button_start_game.tscn" id="5_2b7m8"]
+[ext_resource type="PackedScene" uid="uid://bhiryivk5mwi8" path="res://nodes/helpers/menu_background.tscn" id="6_31cw2"]
+[ext_resource type="Texture2D" uid="uid://cvr10ukromojy" path="res://media/sprites/menu/menu_background/volume_icon_smol.png" id="7_6j0oy"]
+[ext_resource type="PackedScene" uid="uid://bkhj34nihcxx5" path="res://scenes/hunter_note.tscn" id="10_qsi8i"]
+
+[sub_resource type="Animation" id="Animation_ag0of"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(712, 816), Vector2(712, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4s7br"]
+resource_name = "off"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(712, 816), Vector2(712, 0)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_1yvow")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_gt8j6"]
+resource_name = "on"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(712, 0), Vector2(712, 816)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_pa8rk")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_plrjk"]
+_data = {
+"RESET": SubResource("Animation_ag0of"),
+"off": SubResource("Animation_4s7br"),
+"on": SubResource("Animation_gt8j6")
+}
+
+[sub_resource type="Animation" id="Animation_4t2hl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 568)]
+}
+
+[sub_resource type="Animation" id="Animation_2684p"]
+resource_name = "normal"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(0, 600), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1t6r3"]
+_data = {
+"RESET": SubResource("Animation_4t2hl"),
+"normal": SubResource("Animation_2684p")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -16,73 +142,121 @@ grow_vertical = 2
 script = ExtResource("1_bdtlp")
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="."]
+[node name="MenuBackground" parent="." instance=ExtResource("6_31cw2")]
+
+[node name="GameNameLabel" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -51.5
-offset_right = 51.5
-offset_bottom = 23.0
+offset_left = -888.0
+offset_top = 216.0
+offset_right = -471.0
+offset_bottom = 298.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_7agid")
 theme_override_font_sizes/font_size = 69
 text = "TobPaCharge"
 
 [node name="DebugButton" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -552.0
-offset_top = -278.0
-offset_right = -442.0
-offset_bottom = -247.0
+offset_left = -896.0
+offset_top = -476.0
+offset_right = -786.0
+offset_bottom = -445.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 0
 text = "debug"
+
+[node name="LobbyPanel" type="Panel" parent="."]
+layout_mode = 2
+offset_left = 1088.0
+offset_top = 192.0
+offset_right = 1800.0
+offset_bottom = 1008.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LobbyPanel"]
+
+[node name="LobbyPanelPlayer" type="AnimationPlayer" parent="LobbyPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_plrjk")
+}
+autoplay = "RESET"
 
 [node name="VBoxMember" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 832.0
-offset_top = 256.0
-offset_right = 1604.0
-offset_bottom = 807.0
+offset_left = 1088.0
+offset_top = 192.0
+offset_right = 1792.0
+offset_bottom = 1008.0
 
-[node name="MenuWaifuIdle" type="Sprite2D" parent="."]
-position = Vector2(920, 824)
-texture = ExtResource("3_oif5j")
+[node name="MenuButtons" type="Node2D" parent="."]
+position = Vector2(0, 568)
 
-[node name="MenuButtons" type="Node" parent="."]
+[node name="HunterNotesButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(64, 512)
+text_on_button = "How To Play"
 
 [node name="VersusBotButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
-position = Vector2(56, 64)
+position = Vector2(64, 568)
 text_on_button = "VS Bot"
 
 [node name="CreateLobbyButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
-position = Vector2(56, 192)
+position = Vector2(64, 624)
 text_on_button = "Create Lobby"
 
 [node name="InviteFriendButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
-position = Vector2(56, 312)
+position = Vector2(64, 696)
 text_on_button = "Invite Friend"
 
 [node name="StartGameButton" parent="MenuButtons" instance=ExtResource("5_2b7m8")]
-position = Vector2(56, 432)
+position = Vector2(64, 744)
 text_on_button = "START GAME!"
 
 [node name="LeaveLobbyButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
-position = Vector2(56, 560)
-text_on_button = "Leave"
+position = Vector2(64, 880)
+text_on_button = "Leave Lobby"
 
 [node name="ExitButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
-position = Vector2(64, 688)
-scale = Vector2(0.2, 0.2)
-text_on_button = "Exit o(TヘTo)"
+position = Vector2(64, 952)
+text_on_button = "Exit"
 
+[node name="MenuWaifuIdle" parent="MenuButtons" instance=ExtResource("3_52upu")]
+position = Vector2(992, 824)
+
+[node name="MenuButtonsPlayer" type="AnimationPlayer" parent="MenuButtons"]
+libraries = {
+"": SubResource("AnimationLibrary_1t6r3")
+}
+
+[node name="SoundSlider" type="VSlider" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1832.0
+offset_top = 24.0
+offset_right = 1864.0
+offset_bottom = 1016.0
+min_value = -50.0
+max_value = 20.0
+value = -15.0
+
+[node name="VolumeIcon" type="Sprite2D" parent="SoundSlider"]
+position = Vector2(16, 1024)
+texture = ExtResource("7_6j0oy")
+
+[node name="HunterNote" parent="." instance=ExtResource("10_qsi8i")]
+
+[connection signal="animation_finished" from="MenuBackground" to="." method="_on_menu_background_animation_finished"]
 [connection signal="pressed" from="DebugButton" to="." method="_on_debug_button_pressed"]
+[connection signal="on_press" from="MenuButtons/HunterNotesButton" to="." method="_on_hunter_notes_button_on_press"]
 [connection signal="on_press" from="MenuButtons/VersusBotButton" to="." method="_on_versus_bot_on_press"]
 [connection signal="on_press" from="MenuButtons/CreateLobbyButton" to="." method="_on_create_lobby_on_press"]
 [connection signal="on_press" from="MenuButtons/InviteFriendButton" to="." method="_on_invite_friend_on_press"]

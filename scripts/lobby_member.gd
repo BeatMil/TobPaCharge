@@ -1,9 +1,11 @@
 extends Control
 
-@export var username_label: Label
+@export var username_label: RichTextLabel
 var steam_id: int = 0
 var steam_name: String = "[empty]"
 var is_ready: bool = false
+@onready var ready_label: RichTextLabel = $ReadyLabel
+@onready var cool_menu_ready_button: Node2D = $CoolMenuReadyButton
 
 
 # signal
@@ -11,10 +13,13 @@ signal ready_state_change
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	custom_minimum_size = size
 	Steam.connect("avatar_loaded", _on_avatar_loaded)
-	$ReadyButton.focus_mode = FOCUS_NONE
 	if steam_id != Steam.getSteamID():
-		$ReadyButton.set_deferred("visible", false)
+		cool_menu_ready_button.set_deferred("visible", false)
+
+	ready_label.get_node("AnimationPlayer").play("stand_by")
+	cool_menu_ready_button.enable()
 
 
 # Set this player up
@@ -26,27 +31,25 @@ func set_member(_steam_id: int, _steam_name: String) -> void:
 	username_label.set_text(steam_name)
 
 	# Get the avatar and show it
-	Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, steam_id)
+	Steam.getPlayerAvatar(Steam.AVATAR_LARGE, steam_id)
 
 
 @rpc("any_peer", "call_local")
 func toggle_ready(toggled_on) -> void:
 	print_rich("[color=orange][b]toggle_ready()✓[/b][/color]")
 	if toggled_on:
-		$ReadyButton/AnimationPlayer.play("ready")
 		$ReadyLabel/AnimationPlayer.play("ready")
 		is_ready = true
 		# SteamNetwork.rpc("test_show_pic")
 	else:
-		$ReadyButton/AnimationPlayer.play("stand_by")
 		$ReadyLabel/AnimationPlayer.play("stand_by")
 		is_ready = false
 	emit_signal("ready_state_change")
 
+
 #################################################
 # CALLBACKS
 #################################################
-
 # Avatar is ready for display
 func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> void:
 	if id == steam_id:
@@ -59,7 +62,7 @@ func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> vo
 		$"AvatarTexture".set_texture(avatar_texture)
 
 
-func _on_ready_button_toggled(toggled_on):
+func _on_cool_menu_ready_button_toggle_pressed(toggled_on: bool) -> void:
 	if rpc("toggle_ready", toggled_on): 
 		# if error
 		printerr("rpc toggle_ready error!")

@@ -1,0 +1,418 @@
+[gd_scene load_steps=30 format=3 uid="uid://bhiryivk5mwi8"]
+
+[ext_resource type="Script" path="res://scripts/menu_background.gd" id="1_bm030"]
+[ext_resource type="PackedScene" uid="uid://cia1yvlyrydlu" path="res://nodes/background_circle.tscn" id="2_iskae"]
+[ext_resource type="Texture2D" uid="uid://bt73natkdsu21" path="res://media/sprites/menu/menu_background/vanilla_background_crop.png" id="2_ytmuw"]
+[ext_resource type="Texture2D" uid="uid://x6vexlinh0y1" path="res://media/sprites/menu/menu_background/kaisouko_background_crop.png" id="3_j6w36"]
+[ext_resource type="AudioStream" uid="uid://debtx5crt467g" path="res://media/sfx/menu_background/wippy_noise.wav" id="4_ea4fa"]
+[ext_resource type="Texture2D" uid="uid://coqevtt7subc1" path="res://media/sprites/menu/menu_background/white_cover.png" id="4_uvk81"]
+[ext_resource type="AudioStream" uid="uid://bbygpax7ve8jd" path="res://media/sfx/menu_background/potion_brewing.wav" id="6_3ytge"]
+[ext_resource type="AudioStream" uid="uid://dj03pg0ulkboj" path="res://media/sfx/menu_background/saaaaaa.wav" id="7_fsy21"]
+[ext_resource type="AudioStream" uid="uid://b1lp4gjrkdk30" path="res://media/music/bigboss_guitar.wav" id="9_gjcdt"]
+
+[sub_resource type="Animation" id="Animation_figmw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_duapv"]
+resource_name = "normal"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.572988, 0.572988, 0.572988, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8qfix"]
+_data = {
+"RESET": SubResource("Animation_figmw"),
+"normal": SubResource("Animation_duapv")
+}
+
+[sub_resource type="Animation" id="Animation_d5tgg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_536r4"]
+resource_name = "normal"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-25, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vd04w"]
+_data = {
+"RESET": SubResource("Animation_d5tgg"),
+"normal": SubResource("Animation_536r4")
+}
+
+[sub_resource type="Animation" id="Animation_usv3l"]
+resource_name = "normal"
+length = 0.6
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VanillaSfxPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_ea4fa")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2sy5"]
+_data = {
+"normal": SubResource("Animation_usv3l")
+}
+
+[sub_resource type="Animation" id="Animation_an0g2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r3x5b"]
+resource_name = "normal"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(30, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vum1e"]
+resource_name = "pop_in"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1100, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g7lpj"]
+_data = {
+"RESET": SubResource("Animation_an0g2"),
+"normal": SubResource("Animation_r3x5b"),
+"pop_in": SubResource("Animation_vum1e")
+}
+
+[sub_resource type="Animation" id="Animation_w5u7g"]
+resource_name = "normal"
+length = 0.6
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../KaisoukoBackground/KaisoukoSfxPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_ea4fa")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1w2qe"]
+_data = {
+"normal": SubResource("Animation_w5u7g")
+}
+
+[sub_resource type="Animation" id="Animation_mpc2r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_55c5r"]
+resource_name = "cover"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(1.05, 1.05), Vector2(0, 0)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_3ytge")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_vrf7r"]
+resource_name = "faint"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(2),
+"update": 0,
+"values": [Vector2(1.05, 1.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.603922), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_fsy21")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lteg4"]
+_data = {
+"RESET": SubResource("Animation_mpc2r"),
+"cover": SubResource("Animation_55c5r"),
+"faint": SubResource("Animation_vrf7r")
+}
+
+[sub_resource type="Animation" id="Animation_3ftms"]
+resource_name = "menu_song"
+length = 60.3
+loop_mode = 1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 5.86803,
+"stream": ExtResource("9_gjcdt")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vgnqy"]
+_data = {
+"menu_song": SubResource("Animation_3ftms")
+}
+
+[node name="MenuBackground" type="Node2D"]
+script = ExtResource("1_bm030")
+
+[node name="Backgrounds" type="Node2D" parent="."]
+
+[node name="RealBackground" type="ColorRect" parent="Backgrounds"]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 1984.0
+offset_bottom = 1136.0
+color = Color(0.388452, 0.387984, 0.638107, 1)
+
+[node name="BackgroundCircle" parent="Backgrounds" instance=ExtResource("2_iskae")]
+position = Vector2(392, 248)
+_position = Vector2(392, 248)
+
+[node name="BackgroundCircle2" parent="Backgrounds" instance=ExtResource("2_iskae")]
+position = Vector2(1640, 440)
+radius = 600.0
+speed = 0.2
+circle_size = 2.0
+_position = Vector2(1640, 440)
+
+[node name="BackgroundCircle3" parent="Backgrounds" instance=ExtResource("2_iskae")]
+position = Vector2(768, 984)
+radius = 100.0
+circle_size = 1.0
+_position = Vector2(768, 984)
+
+[node name="BackgroundsPlayer" type="AnimationPlayer" parent="Backgrounds"]
+libraries = {
+"": SubResource("AnimationLibrary_8qfix")
+}
+
+[node name="BlackCover" type="ColorRect" parent="."]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 1984.0
+offset_bottom = 1136.0
+color = Color(0, 0, 0, 1)
+
+[node name="VanillaBackground" type="Sprite2D" parent="."]
+position = Vector2(440, -24)
+texture = ExtResource("2_ytmuw")
+centered = false
+
+[node name="VanillaPlayer" type="AnimationPlayer" parent="VanillaBackground"]
+libraries = {
+"": SubResource("AnimationLibrary_vd04w")
+}
+
+[node name="VanillaSfxPlayer" type="AnimationPlayer" parent="VanillaBackground"]
+libraries = {
+"": SubResource("AnimationLibrary_y2sy5")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VanillaBackground/VanillaSfxPlayer"]
+
+[node name="KaisoukoBackground" type="Sprite2D" parent="."]
+position = Vector2(864, -48)
+texture = ExtResource("3_j6w36")
+centered = false
+
+[node name="KaisoukoPlayer" type="AnimationPlayer" parent="KaisoukoBackground"]
+libraries = {
+"": SubResource("AnimationLibrary_g7lpj")
+}
+
+[node name="KaisoukoSfxPlayer" type="AnimationPlayer" parent="KaisoukoBackground"]
+root_node = NodePath("../../VanillaBackground")
+libraries = {
+"": SubResource("AnimationLibrary_1w2qe")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="KaisoukoBackground/KaisoukoSfxPlayer"]
+
+[node name="WhiteCover" type="Sprite2D" parent="."]
+position = Vector2(960, 536)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_uvk81")
+
+[node name="WhiteCoverPlayer" type="AnimationPlayer" parent="WhiteCover"]
+libraries = {
+"": SubResource("AnimationLibrary_lteg4")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WhiteCover"]
+
+[node name="MusicPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vgnqy")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicPlayer"]
