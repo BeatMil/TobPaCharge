@@ -37,6 +37,16 @@ func create_lobby() -> int:
 	return error
 
 
+func create_single_player_lobby() -> int:
+	var error = steam_multiplayer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_INVISIBLE, 1)
+	if error:
+		printerr("Create lobby failed")
+	else:
+		# multiplayer.multiplayer_peer = steam_multiplayer
+		print_rich("[color=orange][b]SteamNetwork.create_lobby() ✓[/b][/color]")
+	return error
+
+
 func join_lobby(_lobby_id: int) -> int:
 	var error = steam_multiplayer.connect_lobby(_lobby_id)
 	if error:

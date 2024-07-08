@@ -71,7 +71,8 @@ func resolve_action(P1_action, P2_action) -> String:
 # Notifications
 ########################################
 func _ready():
-	multiplayer.connect("peer_disconnected", _peer_disconnected)
+	# multiplayer.connect("peer_disconnected", _peer_disconnected)
+	SteamNetwork.create_single_player_lobby()
 	player1.connect("action_choosed", _player1_action_choosed)
 	player2.connect("action_choosed", _player2_action_choosed)
 	_setup_player()

@@ -42,6 +42,7 @@ func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("WHAT??? NO QUIT!!")
 
+
 func _in_lobby_buttons() -> void:
 	create_lobby_button.disable()
 	leave_lobby_button.enable()
@@ -55,7 +56,6 @@ func _outside_lobby_buttons() -> void:
 	invite_friend_button.disable()
 	start_game_button.disable()
 	lobby_panel_player.play("off")
-	print_rich("[color=orange][b]==bob✓[/b][/color]")
 
 
 #################################################
