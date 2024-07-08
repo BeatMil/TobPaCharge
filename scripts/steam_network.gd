@@ -115,7 +115,8 @@ func debug() -> void:
 #################################################
 func activate_first_achivement() -> void:
 	Steam.requestCurrentStats() # gotta call this first then below
-	Steam.setAchievement("OPEN_GAME")
+	Steam.setAchievement("OPEN_GAME") # set achivement duh!
+	Steam.storeStats() # notify player in game!
 
 
 #################################################
