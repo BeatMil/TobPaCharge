@@ -130,6 +130,17 @@ func _on_resolve_timer_timeout():
 		emit_signal("new_turn")
 		_start_think_time()
 
+	# achivements
+	if SteamNetwork.p1_score >= 10 and SteamNetwork.steam_id == player1.steam_id:
+		SteamNetwork.activate_first_achivement("FRIEND_10_WINS")
+	elif SteamNetwork.p1_score >= 5 and SteamNetwork.steam_id == player1.steam_id:
+		SteamNetwork.activate_first_achivement("FRIEND_5_WINS")
+
+	if SteamNetwork.p2_score >= 10 and SteamNetwork.steam_id == player2.steam_id:
+		SteamNetwork.activate_first_achivement("FRIEND_10_WINS")
+	elif SteamNetwork.p2_score >= 5 and SteamNetwork.steam_id == player2.steam_id:
+		SteamNetwork.activate_first_achivement("FRIEND_5_WINS")
+
 
 func _peer_disconnected(_id: int):
 	SceneTransition.change_scene("res://scenes/main_menu.tscn")

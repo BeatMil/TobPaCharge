@@ -113,9 +113,9 @@ func debug() -> void:
 #################################################
 # Achievements
 #################################################
-func activate_first_achivement() -> void:
+func activate_first_achivement(_achivement: String) -> void:
 	Steam.requestCurrentStats() # gotta call this first then below
-	Steam.setAchievement("OPEN_GAME") # set achivement duh!
+	Steam.setAchievement(_achivement) # set achivement duh!
 	Steam.storeStats() # notify player in game!
 
 
