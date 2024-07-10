@@ -111,6 +111,10 @@ func _on_time_control_timeout():
 	### Wait for opponent response here
 	## I can await for signals from both player
 
+	if player1.chosen_action == ActionEnum.actions.BIGFIREBALL:
+		%AnimationPlayer.play("vanilla_metsu_hadoken_splash")
+		await %AnimationPlayer.animation_finished
+
 	emit_signal("resolve_phase")
 	resolve_timer.start()
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cn13oo045xcy5"]
+[gd_scene load_steps=19 format=3 uid="uid://bfv00tw1aigos"]
 
-[ext_resource type="Texture2D" uid="uid://6ps1p0c1ogba" path="res://media/sprites/particle_effects/white_glowing_circle.png" id="1_6ny3a"]
-[ext_resource type="Texture2D" uid="uid://bix5f5egvw6bh" path="res://media/sprites/particle_effects/puff.png" id="1_r41my"]
-[ext_resource type="Texture2D" uid="uid://ca3q7pafm5c4v" path="res://media/sprites/particle_effects/sparkle.png" id="2_q65ca"]
-[ext_resource type="Texture2D" uid="uid://8nvkne878aia" path="res://media/sprites/particle_effects/puff_smooth.png" id="3_pegwx"]
+[ext_resource type="Texture2D" uid="uid://bpgg0yju1d7rp" path="res://media/FirstChar/metsu_hadoken.png" id="1_hfrxx"]
+[ext_resource type="Texture2D" uid="uid://bix5f5egvw6bh" path="res://media/sprites/particle_effects/puff.png" id="2_y4opt"]
+[ext_resource type="Texture2D" uid="uid://ca3q7pafm5c4v" path="res://media/sprites/particle_effects/sparkle.png" id="3_0dutx"]
+[ext_resource type="Texture2D" uid="uid://8nvkne878aia" path="res://media/sprites/particle_effects/puff_smooth.png" id="4_x3w57"]
+[ext_resource type="Texture2D" uid="uid://6ps1p0c1ogba" path="res://media/sprites/particle_effects/white_glowing_circle.png" id="5_q40h8"]
 
 [sub_resource type="Gradient" id="Gradient_hlxkh"]
 offsets = PackedFloat32Array(0, 0.554545)
@@ -80,26 +81,31 @@ color_ramp = SubResource("GradientTexture1D_c6gkc")
 
 [node name="MetsuHadoken" type="Node2D"]
 
+[node name="Vanilla" type="Sprite2D" parent="."]
+position = Vector2(96, 168)
+texture = ExtResource("1_hfrxx")
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_yrw7h")
-texture = ExtResource("1_r41my")
+texture = ExtResource("2_y4opt")
 fixed_fps = 0
 
 [node name="smolPartBehind" type="GPUParticles2D" parent="."]
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_8xfh0")
-texture = ExtResource("2_q65ca")
+texture = ExtResource("3_0dutx")
 speed_scale = 2.0
 fixed_fps = 0
 
 [node name="FireTrail" type="GPUParticles2D" parent="."]
 amount = 64
 process_material = SubResource("ParticleProcessMaterial_ghwqy")
-texture = ExtResource("3_pegwx")
+texture = ExtResource("4_x3w57")
 lifetime = 1.5
 speed_scale = 2.0
 fixed_fps = 0
+visibility_rect = Rect2(-100, -100, -2000, 200)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false
@@ -108,4 +114,4 @@ color = Color(0.799987, 0.507267, 0.535284, 1)
 [node name="WhiteGlowingCircle" type="Sprite2D" parent="."]
 self_modulate = Color(0.993255, 0.940502, 1, 1)
 scale = Vector2(10, 10)
-texture = ExtResource("1_6ny3a")
+texture = ExtResource("5_q40h8")
