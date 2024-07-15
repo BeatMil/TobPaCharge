@@ -1,0 +1,117 @@
+[gd_scene load_steps=19 format=3 uid="uid://bfv00tw1aigos"]
+
+[ext_resource type="Texture2D" uid="uid://bpgg0yju1d7rp" path="res://media/FirstChar/metsu_hadoken.png" id="1_hfrxx"]
+[ext_resource type="Texture2D" uid="uid://bix5f5egvw6bh" path="res://media/sprites/particle_effects/puff.png" id="2_y4opt"]
+[ext_resource type="Texture2D" uid="uid://ca3q7pafm5c4v" path="res://media/sprites/particle_effects/sparkle.png" id="3_0dutx"]
+[ext_resource type="Texture2D" uid="uid://8nvkne878aia" path="res://media/sprites/particle_effects/puff_smooth.png" id="4_x3w57"]
+[ext_resource type="Texture2D" uid="uid://6ps1p0c1ogba" path="res://media/sprites/particle_effects/white_glowing_circle.png" id="5_q40h8"]
+
+[sub_resource type="Gradient" id="Gradient_hlxkh"]
+offsets = PackedFloat32Array(0, 0.554545)
+colors = PackedColorArray(1, 1, 1, 1, 0.803102, 0.528064, 0.9375, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ank1d"]
+gradient = SubResource("Gradient_hlxkh")
+
+[sub_resource type="Curve" id="Curve_j3dqd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.770161, 0.989011), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_00yl1"]
+curve = SubResource("Curve_j3dqd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yrw7h"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 190.0
+emission_ring_inner_radius = 150.0
+angle_min = -90.0
+angle_max = 90.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 1000.0
+linear_accel_max = 1000.0
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_00yl1")
+color_ramp = SubResource("GradientTexture1D_ank1d")
+
+[sub_resource type="Gradient" id="Gradient_wf2yg"]
+offsets = PackedFloat32Array(0, 0.631818)
+colors = PackedColorArray(1, 1, 1, 1, 0.659587, 0.439157, 0.907091, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3ogm6"]
+gradient = SubResource("Gradient_wf2yg")
+
+[sub_resource type="Curve" id="Curve_le66j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.495968, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_n0p0d"]
+curve = SubResource("Curve_le66j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8xfh0"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 100.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_n0p0d")
+color_ramp = SubResource("GradientTexture1D_3ogm6")
+
+[sub_resource type="Gradient" id="Gradient_2oqdr"]
+offsets = PackedFloat32Array(0, 0.304545, 0.659091, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.862745, 0.568627, 0.980392, 1, 0.785835, 0.375482, 0.651507, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c6gkc"]
+gradient = SubResource("Gradient_2oqdr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ghwqy"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 0.0
+angular_velocity_min = 200.0
+angular_velocity_max = 230.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_c6gkc")
+
+[node name="MetsuHadoken" type="Node2D"]
+
+[node name="Vanilla" type="Sprite2D" parent="."]
+position = Vector2(96, 168)
+texture = ExtResource("1_hfrxx")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_yrw7h")
+texture = ExtResource("2_y4opt")
+fixed_fps = 0
+
+[node name="smolPartBehind" type="GPUParticles2D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_8xfh0")
+texture = ExtResource("3_0dutx")
+speed_scale = 2.0
+fixed_fps = 0
+
+[node name="FireTrail" type="GPUParticles2D" parent="."]
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_ghwqy")
+texture = ExtResource("4_x3w57")
+lifetime = 1.5
+speed_scale = 2.0
+fixed_fps = 0
+visibility_rect = Rect2(-100, -100, -2000, 200)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+color = Color(0.799987, 0.507267, 0.535284, 1)
+
+[node name="WhiteGlowingCircle" type="Sprite2D" parent="."]
+self_modulate = Color(0.993255, 0.940502, 1, 1)
+scale = Vector2(10, 10)
+texture = ExtResource("5_q40h8")

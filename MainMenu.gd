@@ -26,7 +26,7 @@ extends Control
 # Built-in
 #################################################
 func _ready():
-	SteamNetwork.activate_first_achivement()
+	SteamNetwork.activate_first_achivement("OPEN_GAME")
 	SteamNetwork.clear_score()
 	SteamNetwork.connect("lobby_member_update", update_lobby_members)
 	update_lobby_members()

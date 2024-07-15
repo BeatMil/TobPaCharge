@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://fdmlajasqvjd"]
+[gd_scene load_steps=21 format=3 uid="uid://fdmlajasqvjd"]
 
 [ext_resource type="PackedScene" uid="uid://d30b2qwpstgt4" path="res://nodes/characters/multiplayer/Player_mul.tscn" id="1_58itq"]
 [ext_resource type="Script" path="res://scripts/battle_multiplayer.gd" id="1_clmqd"]
@@ -10,7 +10,258 @@
 [ext_resource type="Texture2D" uid="uid://c88k531esm7ad" path="res://media/stages/clouds3.png" id="6_7ttp5"]
 [ext_resource type="Texture2D" uid="uid://c20t0egyiwwja" path="res://media/stages/clouds.png" id="6_gqq8x"]
 [ext_resource type="FontFile" uid="uid://cl02il1o54qfl" path="res://fonts/DroidSansMono.ttf" id="9_g8roa"]
+[ext_resource type="AudioStream" uid="uid://bdt0n8j3ohnx4" path="res://media/sfx/hadoken_start_louder.wav" id="9_hsgs8"]
 [ext_resource type="PackedScene" uid="uid://ilua2f08ss2o" path="res://nodes/think_time.tscn" id="10_t0dry"]
+[ext_resource type="PackedScene" uid="uid://bfv00tw1aigos" path="res://nodes/metsu_hadoken_splash.tscn" id="12_8umfi"]
+[ext_resource type="PackedScene" uid="uid://cojyv2arrd211" path="res://nodes/metsu_hadoken_splash2.tscn" id="14_pshrk"]
+
+[sub_resource type="Animation" id="Animation_wp3cd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SplashLayer/Darken:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SplashLayer/VanillaMetsuHadoken:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-856, 344)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SplashLayer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera2D:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_niq6j"]
+resource_name = "vanilla_metsu_hadoken_splash"
+length = 2.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SplashLayer/Darken:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.54902), Color(0, 0, 0, 0.54902), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SplashLayer/VanillaMetsuHadoken:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.9),
+"transitions": PackedFloat32Array(0.203064, 2, 1),
+"update": 0,
+"values": [Vector2(-856, 344), Vector2(456, 344), Vector2(2456, 344)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SplashLayer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SplashLayer/AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_hsgs8")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera2D:zoom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 1.0001, 2.4, 2.4001, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(2, 2), Vector2(2, 2), Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(11, 443), Vector2(11, 443), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ytad"]
+_data = {
+"RESET": SubResource("Animation_wp3cd"),
+"vanilla_metsu_hadoken_splash": SubResource("Animation_niq6j")
+}
+
+[sub_resource type="Animation" id="Animation_hn5h4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MetsuHadoken2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2303, 398)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Darken:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fapo7"]
+resource_name = "kaisouko_metsu_hadoken"
+length = 2.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MetsuHadoken2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.2, 2.7),
+"transitions": PackedFloat32Array(0.5, 1, 2, 0.5),
+"update": 0,
+"values": [Vector2(2303, 398), Vector2(820, 398), Vector2(820, 398), Vector2(-2000, 398)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_hsgs8")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Darken:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.52549)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m32ax"]
+_data = {
+"RESET": SubResource("Animation_hn5h4"),
+"kaisouko_metsu_hadoken": SubResource("Animation_fapo7")
+}
 
 [node name="BattleMultiplayer" type="Node2D"]
 script = ExtResource("1_clmqd")
@@ -105,6 +356,54 @@ one_shot = true
 
 [node name="ThinkTimeDisplay" parent="." instance=ExtResource("10_t0dry")]
 time_to_think = 2.0
+
+[node name="SplashLayer" type="CanvasLayer" parent="."]
+layer = 20
+visible = false
+
+[node name="Darken" type="ColorRect" parent="SplashLayer"]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 1928.0
+offset_bottom = 1088.0
+color = Color(0, 0, 0, 0)
+
+[node name="VanillaMetsuHadoken" parent="SplashLayer" instance=ExtResource("12_8umfi")]
+position = Vector2(-856, 344)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SplashLayer"]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_3ytad")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SplashLayer"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="SplashLayer2" type="CanvasLayer" parent="."]
+layer = 20
+visible = false
+
+[node name="Darken" type="ColorRect" parent="SplashLayer2"]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 1928.0
+offset_bottom = 1088.0
+color = Color(0, 0, 0, 0)
+
+[node name="MetsuHadoken2" parent="SplashLayer2" instance=ExtResource("14_pshrk")]
+position = Vector2(2303, 398)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SplashLayer2"]
+
+[node name="KaisoukoMetsuPlayer" type="AnimationPlayer" parent="SplashLayer2"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_m32ax")
+}
 
 [connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
 [connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]

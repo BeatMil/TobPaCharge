@@ -71,6 +71,7 @@ func resolve_action(P1_action, P2_action) -> String:
 # Notifications
 ########################################
 func _ready():
+	SteamNetwork.activate_first_achivement("PLAY_WITH_BOT")
 	# multiplayer.connect("peer_disconnected", _peer_disconnected)
 	SteamNetwork.create_single_player_lobby()
 	player1.connect("action_choosed", _player1_action_choosed)
@@ -112,6 +113,15 @@ func _on_time_control_timeout():
 	### Wait for opponent response here
 	## I can await for signals from both player
 
+	if player1.chosen_action == ActionEnum.actions.BIGFIREBALL:
+		%AnimationPlayer.play("vanilla_metsu_hadoken_splash")
+		await %AnimationPlayer.animation_finished
+
+	if player2.chosen_action == ActionEnum.actions.BIGFIREBALL:
+		%KaisoukoMetsuPlayer.play("kaisouko_metsu_hadoken")
+		await %KaisoukoMetsuPlayer.animation_finished
+
+
 	emit_signal("resolve_phase")
 	resolve_timer.start()
 
@@ -130,6 +140,11 @@ func _on_resolve_timer_timeout():
 	else:
 		emit_signal("new_turn")
 		_start_think_time()
+
+	if SteamNetwork.p1_score >= 10:
+		SteamNetwork.activate_first_achivement("BOT_10_WINS")
+	elif SteamNetwork.p1_score >= 5:
+		SteamNetwork.activate_first_achivement("BOT_5_WINS")
 
 
 func _peer_disconnected(_id: int):

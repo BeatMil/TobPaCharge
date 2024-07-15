@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dh1i5m1n25gmw"]
+[gd_scene load_steps=11 format=3 uid="uid://dh1i5m1n25gmw"]
 
 [ext_resource type="Script" path="res://scripts/big_fireball.gd" id="1_f2k7m"]
 [ext_resource type="Texture2D" uid="uid://dpniaq1mhsioq" path="res://media/attacks_texture/magic_circle.png" id="2_bsqbj"]
 [ext_resource type="AudioStream" uid="uid://bpuvwwj5xfy1j" path="res://media/sfx/explosion16.wav" id="3_o752y"]
 [ext_resource type="AudioStream" uid="uid://ddsba0qrdedsr" path="res://media/sfx/getBlocked.wav" id="4_n70au"]
+[ext_resource type="PackedScene" uid="uid://cn13oo045xcy5" path="res://nodes/metsu_hadoken.tscn" id="5_i47og"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_33pg2"]
 radius = 128.016
@@ -20,7 +21,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.93082, 0.542683, 0.440105, 1)]
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_4bf7k"]
@@ -51,7 +52,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(0.406126, 0.032352),
 "update": 0,
-"values": [Color(0.877007, 0.578418, 0.282711, 1), Color(0.878431, 0.576471, 0.282353, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -96,7 +97,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(0.406126, 0.032352),
 "update": 0,
-"values": [Color(0.877007, 0.578418, 0.282711, 1), Color(0.878431, 0.576471, 0.282353, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -121,7 +122,6 @@ _data = {
 }
 
 [node name="BigFireBall" type="RigidBody2D"]
-modulate = Color(0.93082, 0.542683, 0.440105, 1)
 collision_layer = 4
 collision_mask = 0
 mass = 0.1
@@ -131,6 +131,7 @@ contact_monitor = true
 script = ExtResource("1_f2k7m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_33pg2")
 
 [node name="Sprite" type="Sprite2D" parent="CollisionShape2D"]
@@ -150,5 +151,8 @@ collision_mask = 8
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_33pg2")
+
+[node name="MetsuHadoken" parent="." instance=ExtResource("5_i47og")]
+position = Vector2(-2, -1)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

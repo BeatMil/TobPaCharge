@@ -111,6 +111,14 @@ func _on_time_control_timeout():
 	### Wait for opponent response here
 	## I can await for signals from both player
 
+	if player1.chosen_action == ActionEnum.actions.BIGFIREBALL:
+		%AnimationPlayer.play("vanilla_metsu_hadoken_splash")
+		await %AnimationPlayer.animation_finished
+
+	if player2.chosen_action == ActionEnum.actions.BIGFIREBALL:
+		%KaisoukoMetsuPlayer.play("kaisouko_metsu_hadoken")
+		await %KaisoukoMetsuPlayer.animation_finished
+
 	emit_signal("resolve_phase")
 	resolve_timer.start()
 
@@ -129,6 +137,17 @@ func _on_resolve_timer_timeout():
 	else:
 		emit_signal("new_turn")
 		_start_think_time()
+
+	# achivements
+	if SteamNetwork.p1_score >= 10 and SteamNetwork.steam_id == player1.steam_id:
+		SteamNetwork.activate_first_achivement("FRIEND_10_WINS")
+	elif SteamNetwork.p1_score >= 5 and SteamNetwork.steam_id == player1.steam_id:
+		SteamNetwork.activate_first_achivement("FRIEND_5_WINS")
+
+	if SteamNetwork.p2_score >= 10 and SteamNetwork.steam_id == player2.steam_id:
+		SteamNetwork.activate_first_achivement("FRIEND_10_WINS")
+	elif SteamNetwork.p2_score >= 5 and SteamNetwork.steam_id == player2.steam_id:
+		SteamNetwork.activate_first_achivement("FRIEND_5_WINS")
 
 
 func _peer_disconnected(_id: int):
