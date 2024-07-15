@@ -115,6 +115,10 @@ func _on_time_control_timeout():
 		%AnimationPlayer.play("vanilla_metsu_hadoken_splash")
 		await %AnimationPlayer.animation_finished
 
+	if player2.chosen_action == ActionEnum.actions.BIGFIREBALL:
+		%KaisoukoMetsuPlayer.play("kaisouko_metsu_hadoken")
+		await %KaisoukoMetsuPlayer.animation_finished
+
 	emit_signal("resolve_phase")
 	resolve_timer.start()
 
