@@ -361,21 +361,21 @@ is_single_player = true
 [node name="P1ScoreLabel" type="RichTextLabel" parent="Player1"]
 offset_left = -424.0
 offset_top = -488.0
-offset_right = -24.0
+offset_right = 37.0
 offset_bottom = -368.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 11
 theme_override_fonts/normal_font = ExtResource("9_h7tod")
 theme_override_font_sizes/normal_font_size = 96
-text = "0 wins"
+text = "10 wins"
 
 [node name="Bot" parent="." instance=ExtResource("10_083od")]
 position = Vector2(1480, 712)
 is_bot = true
 
 [node name="P2ScoreLabel" type="RichTextLabel" parent="Bot"]
-offset_left = 57.0
+offset_left = 23.0
 offset_top = -488.0
 offset_right = 457.0
 offset_bottom = -368.0
@@ -384,7 +384,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 11
 theme_override_fonts/normal_font = ExtResource("9_h7tod")
 theme_override_font_sizes/normal_font_size = 96
-text = "0 wins"
+text = "10 wins"
 
 [node name="TimeLeftLabel" type="Label" parent="."]
 visible = false

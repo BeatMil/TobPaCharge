@@ -315,20 +315,20 @@ position = Vector2(448, 712)
 [node name="P1ScoreLabel" type="RichTextLabel" parent="Player1"]
 offset_left = -424.0
 offset_top = -488.0
-offset_right = -24.0
+offset_right = 16.0
 offset_bottom = -368.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 11
 theme_override_fonts/normal_font = ExtResource("9_g8roa")
 theme_override_font_sizes/normal_font_size = 96
-text = "0 wins"
+text = "10 wins"
 
 [node name="Player2" parent="." instance=ExtResource("2_6t46w")]
 position = Vector2(1480, 712)
 
 [node name="P2ScoreLabel" type="RichTextLabel" parent="Player2"]
-offset_left = 64.0
+offset_left = 16.0
 offset_top = -480.0
 offset_right = 464.0
 offset_bottom = -360.0
@@ -337,7 +337,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 11
 theme_override_fonts/normal_font = ExtResource("9_g8roa")
 theme_override_font_sizes/normal_font_size = 96
-text = "0 wins"
+text = "10 wins"
 
 [node name="TimeLeftLabel" type="Label" parent="."]
 visible = false
