@@ -31,6 +31,8 @@ func _ready():
 	SteamNetwork.connect("lobby_member_update", update_lobby_members)
 	update_lobby_members()
 
+	OstPlayer.stop_battle_ost()
+
 
 func _process(delta):
 	AudioServer.set_bus_volume_db(0, sound_slider.value)

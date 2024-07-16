@@ -71,6 +71,7 @@ func resolve_action(P1_action, P2_action) -> String:
 # Notifications
 ########################################
 func _ready():
+	OstPlayer.play_battle_ost()
 	SteamNetwork.activate_first_achivement("PLAY_WITH_BOT")
 	# multiplayer.connect("peer_disconnected", _peer_disconnected)
 	SteamNetwork.create_single_player_lobby()

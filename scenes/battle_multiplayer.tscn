@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://fdmlajasqvjd"]
+[gd_scene load_steps=21 format=3 uid="uid://fdmlajasqvjd"]
 
 [ext_resource type="PackedScene" uid="uid://d30b2qwpstgt4" path="res://nodes/characters/multiplayer/Player_mul.tscn" id="1_58itq"]
 [ext_resource type="Script" path="res://scripts/battle_multiplayer.gd" id="1_clmqd"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://ilua2f08ss2o" path="res://nodes/think_time.tscn" id="10_t0dry"]
 [ext_resource type="PackedScene" uid="uid://bfv00tw1aigos" path="res://nodes/metsu_hadoken_splash.tscn" id="12_8umfi"]
 [ext_resource type="PackedScene" uid="uid://cojyv2arrd211" path="res://nodes/metsu_hadoken_splash2.tscn" id="14_pshrk"]
-[ext_resource type="AudioStream" uid="uid://v50dvjdagkbe" path="res://media/music/forestSong.wav" id="15_jekix"]
 
 [sub_resource type="Animation" id="Animation_wp3cd"]
 length = 0.001
@@ -264,31 +263,6 @@ _data = {
 "kaisouko_metsu_hadoken": SubResource("Animation_fapo7")
 }
 
-[sub_resource type="Animation" id="Animation_1j4ry"]
-resource_name = "battle_ost"
-length = 44.7
-loop_mode = 1
-tracks/0/type = "audio"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OstPlayer/AudioStreamPlayer")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"clips": [{
-"end_offset": 6.52584,
-"start_offset": 0.0,
-"stream": ExtResource("15_jekix")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/0/use_blend = true
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kwjhh"]
-_data = {
-"battle_ost": SubResource("Animation_1j4ry")
-}
-
 [node name="BattleMultiplayer" type="Node2D"]
 script = ExtResource("1_clmqd")
 
@@ -430,14 +404,6 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_m32ax")
 }
-
-[node name="OstPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_kwjhh")
-}
-autoplay = "battle_ost"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="OstPlayer"]
 
 [connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
 [connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]

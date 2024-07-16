@@ -72,6 +72,8 @@ func resolve_action(P1_action, P2_action) -> String:
 # Notifications
 ########################################
 func _ready():
+	OstPlayer.play_battle_ost()
+
 	multiplayer.connect("peer_disconnected", _peer_disconnected)
 	player1.connect("action_choosed", _player1_action_choosed)
 	player2.connect("action_choosed", _player2_action_choosed)

@@ -23,6 +23,7 @@ ActionEnum="*res://scripts/action_enum.gd"
 SceneTransition="*res://nodes/scene_transition.tscn"
 SteamNetwork="*res://scripts/steam_network.gd"
 EscMenu="*res://nodes/esc_menu.tscn"
+OstPlayer="*res://nodes/ost_player.tscn"
 
 [debug]
 
