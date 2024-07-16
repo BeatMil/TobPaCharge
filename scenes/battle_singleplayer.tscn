@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://1wf6r2ftolem"]
+[gd_scene load_steps=24 format=3 uid="uid://1wf6r2ftolem"]
 
 [ext_resource type="Script" path="res://scripts/battle_singleplayer.gd" id="1_0ea4j"]
 [ext_resource type="Texture2D" uid="uid://bpiir3byivakw" path="res://media/stages/rooftop_no_clouds.png" id="2_23dxx"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c3adto1be3xa2" path="res://nodes/characters/multiplayer/player2_mul.tscn" id="10_083od"]
 [ext_resource type="PackedScene" uid="uid://cojyv2arrd211" path="res://nodes/metsu_hadoken_splash2.tscn" id="10_l45p4"]
 [ext_resource type="PackedScene" uid="uid://ilua2f08ss2o" path="res://nodes/think_time.tscn" id="11_v2rbx"]
+[ext_resource type="AudioStream" uid="uid://v50dvjdagkbe" path="res://media/music/forestSong.wav" id="15_bgaoi"]
 
 [sub_resource type="Animation" id="Animation_wp3cd"]
 length = 0.001
@@ -163,6 +164,45 @@ _data = {
 "vanilla_metsu_hadoken_splash": SubResource("Animation_niq6j")
 }
 
+[sub_resource type="Animation" id="Animation_hn5h4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MetsuHadoken2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2303, 398)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Darken:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_fapo7"]
 resource_name = "kaisouko_metsu_hadoken"
 length = 2.8
@@ -218,49 +258,35 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_hn5h4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MetsuHadoken2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2303, 398)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Darken:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m32ax"]
 _data = {
 "RESET": SubResource("Animation_hn5h4"),
 "kaisouko_metsu_hadoken": SubResource("Animation_fapo7")
+}
+
+[sub_resource type="Animation" id="Animation_1j4ry"]
+resource_name = "battle_ost"
+length = 44.7
+loop_mode = 1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OstPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 6.52584,
+"start_offset": 0.0,
+"stream": ExtResource("15_bgaoi")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kwjhh"]
+_data = {
+"battle_ost": SubResource("Animation_1j4ry")
 }
 
 [node name="BattleSinglePlayer" type="Node2D"]
@@ -406,6 +432,14 @@ time_to_think = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+
+[node name="OstPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kwjhh")
+}
+autoplay = "battle_ost"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="OstPlayer"]
 
 [connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
 [connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]
