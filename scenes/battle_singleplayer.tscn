@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://1wf6r2ftolem"]
+[gd_scene load_steps=21 format=3 uid="uid://1wf6r2ftolem"]
 
 [ext_resource type="Script" path="res://scripts/battle_singleplayer.gd" id="1_0ea4j"]
 [ext_resource type="Texture2D" uid="uid://bpiir3byivakw" path="res://media/stages/rooftop_no_clouds.png" id="2_23dxx"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://c3adto1be3xa2" path="res://nodes/characters/multiplayer/player2_mul.tscn" id="10_083od"]
 [ext_resource type="PackedScene" uid="uid://cojyv2arrd211" path="res://nodes/metsu_hadoken_splash2.tscn" id="10_l45p4"]
 [ext_resource type="PackedScene" uid="uid://ilua2f08ss2o" path="res://nodes/think_time.tscn" id="11_v2rbx"]
-[ext_resource type="AudioStream" uid="uid://v50dvjdagkbe" path="res://media/music/forestSong.wav" id="15_bgaoi"]
 
 [sub_resource type="Animation" id="Animation_wp3cd"]
 length = 0.001
@@ -264,31 +263,6 @@ _data = {
 "kaisouko_metsu_hadoken": SubResource("Animation_fapo7")
 }
 
-[sub_resource type="Animation" id="Animation_1j4ry"]
-resource_name = "battle_ost"
-length = 44.7
-loop_mode = 1
-tracks/0/type = "audio"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OstPlayer/AudioStreamPlayer")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"clips": [{
-"end_offset": 6.52584,
-"start_offset": 0.0,
-"stream": ExtResource("15_bgaoi")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/0/use_blend = true
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kwjhh"]
-_data = {
-"battle_ost": SubResource("Animation_1j4ry")
-}
-
 [node name="BattleSinglePlayer" type="Node2D"]
 script = ExtResource("1_0ea4j")
 
@@ -387,21 +361,21 @@ is_single_player = true
 [node name="P1ScoreLabel" type="RichTextLabel" parent="Player1"]
 offset_left = -424.0
 offset_top = -488.0
-offset_right = -24.0
+offset_right = 37.0
 offset_bottom = -368.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 11
 theme_override_fonts/normal_font = ExtResource("9_h7tod")
 theme_override_font_sizes/normal_font_size = 96
-text = "0 wins"
+text = "10 wins"
 
 [node name="Bot" parent="." instance=ExtResource("10_083od")]
 position = Vector2(1480, 712)
 is_bot = true
 
 [node name="P2ScoreLabel" type="RichTextLabel" parent="Bot"]
-offset_left = 57.0
+offset_left = 23.0
 offset_top = -488.0
 offset_right = 457.0
 offset_bottom = -368.0
@@ -410,7 +384,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 11
 theme_override_fonts/normal_font = ExtResource("9_h7tod")
 theme_override_font_sizes/normal_font_size = 96
-text = "0 wins"
+text = "10 wins"
 
 [node name="TimeLeftLabel" type="Label" parent="."]
 visible = false
@@ -432,14 +406,6 @@ time_to_think = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-
-[node name="OstPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_kwjhh")
-}
-autoplay = "battle_ost"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="OstPlayer"]
 
 [connection signal="timeout" from="TimeControl" to="." method="_on_time_control_timeout"]
 [connection signal="timeout" from="ResolveTimer" to="." method="_on_resolve_timer_timeout"]

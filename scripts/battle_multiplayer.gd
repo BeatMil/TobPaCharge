@@ -43,6 +43,7 @@ func _setup_player() -> void:
 		Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, player1.steam_id)
 		Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, player2.steam_id)
 		print_rich("[color=orange][b]Game Start!!∑d(°∀°d)[/b][/color]")
+		SteamNetwork.activate_first_achivement("PLAY_WITH_FRIEND")
 	else:
 		printerr("not enough players!")
 		# SceneTransition.change_scene("res://scenes/main_menu.tscn")
@@ -71,6 +72,8 @@ func resolve_action(P1_action, P2_action) -> String:
 # Notifications
 ########################################
 func _ready():
+	OstPlayer.play_battle_ost()
+
 	multiplayer.connect("peer_disconnected", _peer_disconnected)
 	player1.connect("action_choosed", _player1_action_choosed)
 	player2.connect("action_choosed", _player2_action_choosed)
