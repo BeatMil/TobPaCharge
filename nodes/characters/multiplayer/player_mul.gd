@@ -10,6 +10,7 @@ extends Node2D
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
 @onready var buttons: Control = $CanvasLayer/Buttons
 @onready var big_fireball_button: TextureButton = $CanvasLayer/Buttons/BigFireBallButton
+@onready var double_fireball_button: TextureButton = $CanvasLayer/Buttons/DoubleFireballButton
 @onready var charge_button: Button = $CanvasLayer/Buttons/ChargeButton
 
 @onready var charge_meter = %ChargeMeter
@@ -42,6 +43,7 @@ const BACKWIND_VFX_P_2 = preload("res://nodes/particles_effects/backwind_vfx_p2.
 # properties
 #################################################
 var charge_count: int = 0
+var double_fireball_can_use_left = 1
 var steam_id: int = 0:
 	set(_id):
 		steam_id = _id
@@ -152,6 +154,15 @@ func resolve_phase():
 			spawn_fireball("normal")
 			charge_count -= 1
 			charge_meter.discharge()
+	elif chosen_action == ActionEnum.actions.DOUBLEFIREBALL:
+		animation_player.play("double_fireball")
+		if charge_count > 0 and double_fireball_can_use_left > 0:
+			spawn_fireball("normal")
+			await get_tree().create_timer(0.2).timeout
+			spawn_fireball("normal")
+			charge_count -= 1
+			double_fireball_can_use_left -= 1
+			charge_meter.discharge()
 	elif chosen_action == ActionEnum.actions.BLOCK:
 		animation_player.play("block")
 	elif chosen_action == ActionEnum.actions.CHARGE:
@@ -186,6 +197,8 @@ func new_turn():
 		else:
 			big_fireball_button.set_deferred("visible", false)
 
+		if double_fireball_can_use_left <= 0:
+			double_fireball_button.set_deferred("disabled", true)
 
 #################################################
 ## private functions
@@ -245,6 +258,14 @@ func _on_fireball_button_toggled(toggled_on):
 		set_disable_all_buttons(true)
 		fireball_button.set_deferred("disabled", false)
 		fireball_button.set_block_touch(true)
+
+
+func _on_double_fireball_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		rpc("do_the_action", ActionEnum.actions.DOUBLEFIREBALL)
+		set_disable_all_buttons(true)
+		double_fireball_button.set_deferred("disabled", false)
+		double_fireball_button.set_block_touch(true)
 
 
 func _on_block_button_toggled(toggled_on: bool) -> void:

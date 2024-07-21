@@ -4,6 +4,7 @@ enum actions {
 	CHARGE,
 	BLOCK,
 	FIREBALL,
+	DOUBLEFIREBALL,
 	BIGFIREBALL
 }
 
