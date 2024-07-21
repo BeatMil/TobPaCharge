@@ -11,13 +11,14 @@ var steam_id: int = 0
 var steam_username: String = ""
 var lobby_id: int = 0
 var lobby_members: Array = []
+var volume_slider: float = -15
 
 # helpers
 var p1_score: int = 0
 var p2_score: int = 0
 
 # Configs
-var appId: int = 480
+var appId: int = 3094590
 
 
 #Steam Multiplayer thingy

@@ -32,6 +32,7 @@ func _ready():
 	update_lobby_members()
 
 	OstPlayer.stop_battle_ost()
+	sound_slider.value = SteamNetwork.volume_slider
 
 
 func _process(delta):
@@ -173,3 +174,7 @@ func _on_menu_background_animation_finished() -> void:
 
 func _on_hunter_notes_button_on_press() -> void:
 	hunter_note.set_deferred("visible", true)
+
+
+func _on_sound_slider_value_changed(value: float) -> void:
+	SteamNetwork.volume_slider = value

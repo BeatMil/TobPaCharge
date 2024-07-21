@@ -263,3 +263,4 @@ texture = ExtResource("7_6j0oy")
 [connection signal="on_press" from="MenuButtons/StartGameButton" to="." method="_on_start_game_button_on_press"]
 [connection signal="on_press" from="MenuButtons/LeaveLobbyButton" to="." method="_on_leave_lobby_on_press"]
 [connection signal="on_press" from="MenuButtons/ExitButton" to="." method="_on_exit_button_on_press"]
+[connection signal="value_changed" from="SoundSlider" to="." method="_on_sound_slider_value_changed"]
