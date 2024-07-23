@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvwwxb1ld5flf"]
+
+[ext_resource type="Script" path="res://scripts/particle.gd" id="1_2v72i"]
+[ext_resource type="Texture2D" uid="uid://b33tvgij8ekm8" path="res://media/sprites/particle_effects/heart_particle_sprite.png" id="1_sqi4b"]
+
+[sub_resource type="Gradient" id="Gradient_sjw8v"]
+offsets = PackedFloat32Array(0, 0.540909, 1)
+colors = PackedColorArray(1, 0.413854, 0.619907, 1, 0.910156, 0.305379, 0.325754, 1, 0.955487, 0.664964, 0.451299, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_836wv"]
+gradient = SubResource("Gradient_sjw8v")
+
+[sub_resource type="Curve" id="Curve_6ulhi"]
+_data = [Vector2(0, 0.527472), 0.0, 0.0, 0, 0, Vector2(0.491935, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qed0r"]
+curve = SubResource("Curve_6ulhi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_05qls"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 64.0
+angle_min = -45.0
+angle_max = 45.0
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_qed0r")
+color_ramp = SubResource("GradientTexture1D_836wv")
+
+[node name="Heart_charge" type="Node2D"]
+script = ExtResource("1_2v72i")
+time_before_queue_free = 1.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_05qls")
+texture = ExtResource("1_sqi4b")
+lifetime = 3.0
+speed_scale = 3.0
+explosiveness = 0.9
+fixed_fps = 0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

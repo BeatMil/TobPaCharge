@@ -12,11 +12,12 @@ extends Node2D
 @onready var big_fireball_button: TextureButton = $CanvasLayer/Buttons/BigFireBallButton
 @onready var double_fireball_button: TextureButton = $CanvasLayer/Buttons/DoubleFireballButton
 @onready var charge_button: Button = $CanvasLayer/Buttons/ChargeButton
-
+@onready var heart_charge_button: TextureButton = $CanvasLayer/Buttons/HeartChargeButton
 @onready var charge_meter = %ChargeMeter
 @onready var backwind_marker_2d = $backwindMarker2D
 @onready var fireball_button: TextureButton = $CanvasLayer/Buttons/FireballButton
 @onready var block_button: TextureButton = $CanvasLayer/Buttons/BlockButton
+@onready var heart_charge_icon: Node2D = $CanvasLayerPublic/HeartChargeIcon
 
 
 var bot_actions = {
@@ -37,6 +38,7 @@ const FIREBALL = preload("res://nodes/fireball.tscn")
 const BIGFIREBALL = preload("res://nodes/big_fireball.tscn")
 const BACKWIND_VFX_P_1 = preload("res://nodes/particles_effects/backwind_vfx_p1.tscn")
 const BACKWIND_VFX_P_2 = preload("res://nodes/particles_effects/backwind_vfx_p2.tscn")
+const HEART_CHARGE = preload("res://nodes/particles_effects/heart_charge.tscn")
 
 
 #################################################
@@ -44,6 +46,7 @@ const BACKWIND_VFX_P_2 = preload("res://nodes/particles_effects/backwind_vfx_p2.
 #################################################
 var charge_count: int = 0
 var double_fireball_can_use_left = 1
+var heart_charge_can_use_left = 1
 var steam_id: int = 0:
 	set(_id):
 		steam_id = _id
@@ -163,6 +166,15 @@ func resolve_phase():
 			charge_count -= 1
 			double_fireball_can_use_left -= 1
 			charge_meter.discharge()
+	elif chosen_action == ActionEnum.actions.HEARTCHARGE:
+		if charge_count >= 2 and heart_charge_can_use_left > 0:
+			animation_player.play("heart_charge")
+			hp += 1
+			charge_count -= 2
+			heart_charge_can_use_left -= 1
+			charge_meter.discharge()
+			charge_meter.discharge()
+			heart_charge_icon.play_pop_up()
 	elif chosen_action == ActionEnum.actions.BLOCK:
 		animation_player.play("block")
 	elif chosen_action == ActionEnum.actions.CHARGE:
@@ -197,8 +209,12 @@ func new_turn():
 		else:
 			big_fireball_button.set_deferred("visible", false)
 
-		if double_fireball_can_use_left <= 0:
+		if double_fireball_can_use_left <= 0 or charge_count < 1:
 			double_fireball_button.set_deferred("disabled", true)
+
+		if heart_charge_can_use_left <= 0 or charge_count < 2:
+			heart_charge_button.set_deferred("disabled", true)
+
 
 #################################################
 ## private functions
@@ -214,6 +230,12 @@ func _spawn_backwind_vfx() -> void:
 		add_child(vfx)
 
 
+func _spawn_heart_charge() -> void:
+	var heart_charge = HEART_CHARGE.instantiate()
+	heart_charge.position += Vector2(0, -200)
+	add_child(heart_charge)
+
+
 #################################################
 ## Signals
 #################################################
@@ -223,11 +245,15 @@ func _on_area_2d_area_entered(area):
 			print_rich("[color=Silver ][b]Hit by fireball action: %s[/b][/color]"%
 			chosen_action)
 			animation_player.play("hitted")
+			if hp > 1:
+				heart_charge_icon.play_pop_down()
 			hp -= 1
 	elif area.is_in_group("big_fireball"):
 		print_rich("[color=Deeppink][b]GOT HIT BY BIG_FIREBALL[/b][/color]")
 		if chosen_action not in [ActionEnum.actions.BIGFIREBALL]:
 			animation_player.play("hitted")
+			if hp > 1:
+				heart_charge_icon.play_pop_down()
 			hp -= 1
 
 
@@ -268,6 +294,14 @@ func _on_double_fireball_button_toggled(toggled_on: bool) -> void:
 		double_fireball_button.set_block_touch(true)
 
 
+func _on_heart_charge_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		rpc("do_the_action", ActionEnum.actions.HEARTCHARGE)
+		set_disable_all_buttons(true)
+		heart_charge_button.set_deferred("disabled", false)
+		heart_charge_button.set_block_touch(true)
+
+
 func _on_block_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		rpc("do_the_action", ActionEnum.actions.BLOCK)
@@ -301,3 +335,4 @@ func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> vo
 		var avatar_texture : ImageTexture = ImageTexture.create_from_image(avatar_image)
 		# Display it
 		avatar_texture_rect.set_texture(avatar_texture)
+
