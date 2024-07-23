@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://c3adto1be3xa2"]
+[gd_scene load_steps=30 format=3 uid="uid://c3adto1be3xa2"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_upm2h"]
 [ext_resource type="PackedScene" uid="uid://km0bq0gsqwmw" path="res://nodes/very_cool_buttons/very_cool_fireball_button.tscn" id="2_hajjj"]
 [ext_resource type="Texture2D" uid="uid://c3prva38mw2hh" path="res://media/SecondChar/SecondChar_idle.png" id="2_noe77"]
 [ext_resource type="PackedScene" uid="uid://cua0jhtddpgu3" path="res://nodes/very_cool_buttons/very_cool_block_button.tscn" id="3_jv1us"]
+[ext_resource type="PackedScene" uid="uid://x56vsw8e3d8j" path="res://nodes/heart_charge_icon.tscn" id="3_l3khg"]
 [ext_resource type="AudioStream" uid="uid://ceqtyf8i6pfjq" path="res://media/sfx/big_fireball.wav" id="4_bcwt1"]
 [ext_resource type="Texture2D" uid="uid://brv7edpwvp45f" path="res://media/SecondChar/SecondChar_block_color.png" id="4_f2nuj"]
 [ext_resource type="PackedScene" uid="uid://bbcwbus8mbbec" path="res://nodes/very_cool_buttons/very_cool_big_fireball_button.tscn" id="4_t01ty"]
@@ -11,10 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://clsmp4hvp8olb" path="res://nodes/very_cool_buttons/very_cool_double_fireball_button.tscn" id="5_n8usj"]
 [ext_resource type="Texture2D" uid="uid://dih8ygxgxsgf2" path="res://media/SecondChar/SecondChar_charge_color.png" id="6_705t5"]
 [ext_resource type="AudioStream" uid="uid://cabk1jmro237s" path="res://media/sfx/charge02.wav" id="6_lkn2m"]
+[ext_resource type="PackedScene" uid="uid://cr7oyuywcdt5v" path="res://nodes/very_cool_buttons/very_cool_heart_charge_button.tscn" id="8_06k11"]
 [ext_resource type="Texture2D" uid="uid://b8p0o1hwd7d2n" path="res://media/SecondChar/SecondChar_hitted_color.png" id="8_h8asg"]
 [ext_resource type="Texture2D" uid="uid://c2vbpwe4nyp2j" path="res://media/SecondChar/SecondChar_fireball_color.png" id="8_keivj"]
 [ext_resource type="AudioStream" uid="uid://b4oglay37sa58" path="res://media/sfx/gura_a.wav" id="9_sqhs7"]
 [ext_resource type="PackedScene" uid="uid://b732gs6p4vb3i" path="res://nodes/charge_meter.tscn" id="10_yss4r"]
+[ext_resource type="AudioStream" uid="uid://dr2dk0uksccql" path="res://media/sfx/laser_start02.wav" id="18_d0uad"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7wuc"]
 size = Vector2(152, 454)
@@ -236,6 +239,22 @@ tracks/3/keys = {
 "values": [Color(0.942774, 0.847968, 0.328243, 0.454902)]
 }
 
+[sub_resource type="Animation" id="Animation_6vnig"]
+resource_name = "double_fireball"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("8_keivj"), ExtResource("2_noe77"), ExtResource("8_keivj")]
+}
+
 [sub_resource type="Animation" id="Animation_pf7un"]
 resource_name = "fireball"
 length = 0.6
@@ -324,9 +343,10 @@ tracks/0/keys = {
 "values": [ExtResource("2_noe77")]
 }
 
-[sub_resource type="Animation" id="Animation_6vnig"]
-resource_name = "double_fireball"
+[sub_resource type="Animation" id="Animation_du5og"]
+resource_name = "heart_charge"
 length = 0.6
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -334,10 +354,63 @@ tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_keivj"), ExtResource("2_noe77"), ExtResource("8_keivj")]
+"values": [ExtResource("6_705t5")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.52, 0.54),
+"transitions": PackedFloat32Array(1, 0, 1),
+"update": 0,
+"values": [Vector2(-203, 231), Vector2(-203, -311), Vector2(-203, 231)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("18_d0uad")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/ColorRect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.942774, 0.847968, 0.328243, 0.454902)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_heart_charge"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jb0rc"]
@@ -348,6 +421,7 @@ _data = {
 "charge": SubResource("Animation_m3swk"),
 "double_fireball": SubResource("Animation_6vnig"),
 "fireball": SubResource("Animation_pf7un"),
+"heart_charge": SubResource("Animation_du5og"),
 "hitted": SubResource("Animation_e0mlr"),
 "idle": SubResource("Animation_08ybx")
 }
@@ -375,6 +449,10 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="HeartChargeIcon" parent="CanvasLayerPublic" instance=ExtResource("3_l3khg")]
+position = Vector2(1240, 72)
+scale = Vector2(0.5, 0.5)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -412,6 +490,7 @@ offset_bottom = 1080.0
 scale = Vector2(0.25, 0.25)
 
 [node name="DoubleFireballButton" parent="CanvasLayer/Buttons" instance=ExtResource("5_n8usj")]
+layout_mode = 0
 offset_left = 760.0
 offset_top = 432.0
 offset_right = 1272.0
@@ -424,6 +503,14 @@ offset_left = 616.0
 offset_top = 432.0
 offset_right = 1128.0
 offset_bottom = 944.0
+scale = Vector2(0.25, 0.25)
+
+[node name="HeartChargeButton" parent="CanvasLayer/Buttons" instance=ExtResource("8_06k11")]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 568.0
+offset_right = 1272.0
+offset_bottom = 1080.0
 scale = Vector2(0.25, 0.25)
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -471,4 +558,5 @@ position = Vector2(168, 152)
 [connection signal="toggled" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/Buttons/DoubleFireballButton" to="." method="_on_double_fireball_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/Buttons/BigFireBallButton" to="." method="_on_big_fire_ball_button_toggled"]
+[connection signal="toggled" from="CanvasLayer/Buttons/HeartChargeButton" to="." method="_on_heart_charge_button_toggled"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

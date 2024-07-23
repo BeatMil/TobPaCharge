@@ -244,6 +244,7 @@ func _on_area_2d_area_entered(area):
 		if chosen_action not in [ActionEnum.actions.BLOCK]:
 			print_rich("[color=Silver ][b]Hit by fireball action: %s[/b][/color]"%
 			chosen_action)
+			animation_player.stop()
 			animation_player.play("hitted")
 			if hp > 1:
 				heart_charge_icon.play_pop_down()
