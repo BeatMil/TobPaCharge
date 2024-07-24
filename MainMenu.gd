@@ -1,7 +1,9 @@
 extends Control
 
 
-# Properties
+#############################################################
+## Nodes References
+#############################################################
 @onready var vbox_member: VBoxContainer = $"VBoxMember"
 @onready var versus_bot_button: Node2D = $MenuButtons/VersusBotButton
 @onready var create_lobby_button: Node2D = $MenuButtons/CreateLobbyButton
@@ -13,6 +15,8 @@ extends Control
 @onready var sound_slider: VSlider = %SoundSlider
 @onready var lobby_panel_player: AnimationPlayer = $LobbyPanel/LobbyPanelPlayer
 @onready var hunter_note: Node2D = $HunterNote
+@onready var skill_menu: Node2D = $SkillMenu
+@onready var menu_waifu_idle: Sprite2D = $MenuButtons/MenuWaifuIdle
 
 
 #################################################
@@ -33,6 +37,9 @@ func _ready():
 
 	OstPlayer.stop_battle_ost()
 	sound_slider.value = SteamNetwork.volume_slider
+	
+	skill_menu.visible = false
+	menu_waifu_idle.connect("on_press", _open_skill_menu)
 
 
 func _process(delta):
@@ -60,6 +67,10 @@ func _outside_lobby_buttons() -> void:
 	invite_friend_button.disable()
 	start_game_button.disable()
 	lobby_panel_player.play("off")
+
+
+func _open_skill_menu() -> void:
+	skill_menu.open()
 
 
 #################################################
