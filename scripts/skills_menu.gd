@@ -6,12 +6,14 @@ extends Node2D
 #############################################################
 var double_fireball_description: String = \
 """
-[color=Paleturquoise ]Double Fireballs[/color]
+[color=Paleturquoise]Double Fireballs[/color]
 
-Double fire deals 2 damage.
-It beats a fireball.
-It also beats heart charge because it deals 2 damage.
-However, it can be blocked and cannot beats Big fireball
+Do a fireball [color=Khaki]twice![/color] (which means that it does 2 damages)
+It [color=Lightcoral]beats a fireball.[/color] (the first one collide the second one hits)
+It also [color=Lightcoral]beats heart charge[/color] because it deals 2 damage.
+However, it [color=Lightcoral]can be blocked[/color] and [color=Lightcoral]cannot beats Big fireball.[/color]
+
+[color=Indianred]Can only use[/color][color=Pink] once[/color] [color=Indianred]per round[/color]
 """
 
 var heart_charge_description: String = \
@@ -19,7 +21,12 @@ var heart_charge_description: String = \
 [color=Paleturquoise ]Heart Charge[/color]
 
 Gain 1 hp
-Big fireball won't kill becaues it only does 1 damage
+Activate at the [color=Lightcoral]start of animation.[/color]
+[color=Lightblue](won't be killed by a fireball while using)[/color]
+
+[color=Lightpink]Big fireball won't kill[/color] because it only does 1 damage
+
+[color=Indianred]Can only use[/color][color=Pink] once[/color] [color=Indianred]per round[/color]
 """
 
 
