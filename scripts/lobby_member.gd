@@ -6,6 +6,7 @@ var steam_name: String = "[empty]"
 var is_ready: bool = false
 @onready var ready_label: RichTextLabel = $ReadyLabel
 @onready var cool_menu_ready_button: Node2D = $CoolMenuReadyButton
+@onready var skill_player: AnimationPlayer = $SkillIcon/AnimationPlayer
 
 
 # signal
@@ -45,6 +46,23 @@ func toggle_ready(toggled_on) -> void:
 		$ReadyLabel/AnimationPlayer.play("stand_by")
 		is_ready = false
 	emit_signal("ready_state_change")
+
+
+@rpc("any_peer", "call_local")
+func show_double_fireball() -> void:
+	if steam_id == Steam.getSteamID():
+		skill_player.play("double_fireball")
+
+
+@rpc("any_peer", "call_local")
+func show_heart_charge() -> void:
+	if steam_id == Steam.getSteamID():
+		skill_player.play("heart_charge")
+
+
+@rpc("any_peer", "call_local")
+func get_current_skill_then_show() -> void:
+	pass
 
 
 #################################################

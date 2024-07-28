@@ -39,6 +39,8 @@ Activate at the [color=Lightcoral]start of animation.[/color]
 @onready var heart_charge_button: TextureButton = $SkillButtons/HeartChargeButton
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var lobby_member_to_show_skill: Control = null
+
 
 func _on_texture_button_button_down() -> void:
 	self.set_deferred("visible", false)
@@ -48,12 +50,21 @@ func _on_double_fireball_button_toggled(toggled_on: bool) -> void:
 	description_text.text  = double_fireball_description
 	_reset_button_except(false, "DoubleFireballButton")
 	SteamNetwork.current_skill = SteamNetwork.skills.DOUBLE_FIREBALL
+	if lobby_member_to_show_skill:
+		if lobby_member_to_show_skill.rpc("show_double_fireball"): 
+			# if error
+			printerr("rpc show_skill double_fireball error!")
+		print_rich("[color=pink]help![/color]")
 
 
 func _on_texture_button_toggled(toggled_on: bool) -> void:
 	description_text.text  = heart_charge_description
 	_reset_button_except(false, "HeartChargeButton")
 	SteamNetwork.current_skill = SteamNetwork.skills.HEART_CHARGE
+	if lobby_member_to_show_skill:
+		if lobby_member_to_show_skill.rpc("show_heart_charge"): 
+			# if error
+			printerr("rpc show_skill heart_charge error!")
 
 
 #################################################

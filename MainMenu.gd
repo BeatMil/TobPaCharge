@@ -97,6 +97,10 @@ func update_lobby_members() -> void:
 		lobby_member.connect("ready_state_change", check_ready)
 		vbox_member.add_child(lobby_member)
 
+		# check steam name here
+		if member_steam_id == Steam.getSteamID():
+			skill_menu.lobby_member_to_show_skill = lobby_member
+
 	# Update buttons disabled mode
 	if SteamNetwork.lobby_members:
 		_in_lobby_buttons()
