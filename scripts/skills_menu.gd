@@ -47,18 +47,20 @@ func _on_texture_button_button_down() -> void:
 func _on_double_fireball_button_toggled(toggled_on: bool) -> void:
 	description_text.text  = double_fireball_description
 	_reset_button_except(false, "DoubleFireballButton")
+	SteamNetwork.is_double_fireball = true
 
 
 func _on_texture_button_toggled(toggled_on: bool) -> void:
 	description_text.text  = heart_charge_description
 	_reset_button_except(false, "HeartChargeButton")
-
+	SteamNetwork.is_heart_charge = true
 
 
 #################################################
 ## private functions
 #################################################
 func _reset_button_except(_value: bool, _name: String) -> void:
+	SteamNetwork.disable_all_skills()
 	for node in skill_buttons.get_children():
 		if node.name != _name:
 			node.set_pressed_no_signal(false)

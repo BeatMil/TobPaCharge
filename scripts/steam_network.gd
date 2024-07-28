@@ -18,7 +18,12 @@ var p1_score: int = 0
 var p2_score: int = 0
 
 # Configs
-var appId: int = 3094590
+var appId: int = 480
+
+
+# skills
+var is_double_fireball = false
+var is_heart_charge = false
 
 
 #Steam Multiplayer thingy
@@ -90,6 +95,11 @@ func update_lobby_members() -> void:
 func clear_score() -> void:
 	p1_score = 0
 	p2_score = 0
+
+
+func disable_all_skills() -> void:
+	is_double_fireball = false
+	is_heart_charge = false
 
 
 @rpc("call_local")

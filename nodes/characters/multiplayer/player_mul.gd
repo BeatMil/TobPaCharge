@@ -209,10 +209,16 @@ func new_turn():
 		else:
 			big_fireball_button.set_deferred("visible", false)
 
-		if double_fireball_can_use_left <= 0 or charge_count < 1:
+		# Double fireball
+		## Disable double ball button when (below)
+		if (double_fireball_can_use_left <= 0 or charge_count < 1) \
+			or not SteamNetwork.is_double_fireball:
 			double_fireball_button.set_deferred("disabled", true)
 
-		if heart_charge_can_use_left <= 0 or charge_count < 2:
+		# Heart charge
+		## Disable heart change button when (below)
+		if (heart_charge_can_use_left <= 0 or charge_count < 2) \
+			or not SteamNetwork.is_heart_charge:
 			heart_charge_button.set_deferred("disabled", true)
 
 
