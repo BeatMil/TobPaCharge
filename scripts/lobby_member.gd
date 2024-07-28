@@ -50,14 +50,14 @@ func toggle_ready(toggled_on) -> void:
 
 @rpc("any_peer", "call_local")
 func show_double_fireball() -> void:
-	if steam_id == Steam.getSteamID():
-		skill_player.play("double_fireball")
+	# if steam_id == Steam.getSteamID():
+	skill_player.play("double_fireball")
 
 
 @rpc("any_peer", "call_local")
 func show_heart_charge() -> void:
-	if steam_id == Steam.getSteamID():
-		skill_player.play("heart_charge")
+	# if steam_id == Steam.getSteamID():
+	skill_player.play("heart_charge")
 
 
 @rpc("any_peer", "call_local")
