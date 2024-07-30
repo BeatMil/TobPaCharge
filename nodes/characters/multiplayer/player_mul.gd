@@ -214,12 +214,16 @@ func new_turn():
 		if (double_fireball_can_use_left <= 0 or charge_count < 1) \
 			or not SteamNetwork.current_skill == SteamNetwork.skills.DOUBLE_FIREBALL:
 			double_fireball_button.set_deferred("disabled", true)
+		if SteamNetwork.current_skill != SteamNetwork.skills.DOUBLE_FIREBALL:
+			double_fireball_button.set_deferred("visible", false)
 
 		# Heart charge
 		## Disable heart change button when (below)
 		if (heart_charge_can_use_left <= 0 or charge_count < 2) \
 				or not SteamNetwork.current_skill == SteamNetwork.skills.HEART_CHARGE:
 			heart_charge_button.set_deferred("disabled", true)
+		if SteamNetwork.current_skill != SteamNetwork.skills.HEART_CHARGE:
+			heart_charge_button.set_deferred("visible", false)
 
 
 #################################################
