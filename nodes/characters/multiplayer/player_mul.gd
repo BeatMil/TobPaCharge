@@ -55,6 +55,7 @@ var steam_id: int = 0:
 			action_label.visible = false
 		charge_button.visible = false # show only in testing
 var is_action_choosed:bool = false
+var heart_charge_require_charges = 1
 @export var is_bot: bool = false
 @export var is_single_player: bool = false
 
@@ -167,12 +168,11 @@ func resolve_phase():
 			double_fireball_can_use_left -= 1
 			charge_meter.discharge()
 	elif chosen_action == ActionEnum.actions.HEARTCHARGE:
-		if charge_count >= 2 and heart_charge_can_use_left > 0:
+		if charge_count >= heart_charge_require_charges and heart_charge_can_use_left > 0:
 			animation_player.play("heart_charge")
 			hp += 1
-			charge_count -= 2
+			charge_count -= heart_charge_require_charges
 			heart_charge_can_use_left -= 1
-			charge_meter.discharge()
 			charge_meter.discharge()
 			heart_charge_icon.play_pop_up()
 	elif chosen_action == ActionEnum.actions.BLOCK:
@@ -219,7 +219,7 @@ func new_turn():
 
 		# Heart charge
 		## Disable heart change button when (below)
-		if (heart_charge_can_use_left <= 0 or charge_count < 2) \
+		if (heart_charge_can_use_left <= 0 or charge_count < heart_charge_require_charges) \
 				or not SteamNetwork.current_skill == SteamNetwork.skills.HEART_CHARGE:
 			heart_charge_button.set_deferred("disabled", true)
 		if SteamNetwork.current_skill != SteamNetwork.skills.HEART_CHARGE:
