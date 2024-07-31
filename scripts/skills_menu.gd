@@ -13,6 +13,7 @@ It [color=Lightcoral]beats a fireball.[/color] (the first one collide the second
 It also [color=Lightcoral]beats heart charge[/color] because it deals 2 damage.
 However, it [color=Lightcoral]can be blocked[/color] and [color=Lightcoral]cannot beats Big fireball.[/color]
 
+requires [color=Burlywood]1 charge[/color]
 [color=Indianred]Can only use[/color][color=Pink] once[/color] [color=Indianred]per round[/color]
 """
 
@@ -26,6 +27,7 @@ Activate at the [color=Lightcoral]start of animation.[/color]
 
 [color=Lightpink]Big fireball won't kill[/color] because it only does 1 damage
 
+requires [color=Burlywood]1 charge[/color]
 [color=Indianred]Can only use[/color][color=Pink] once[/color] [color=Indianred]per round[/color]
 """
 
