@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnood65hv5k6e"]
+[gd_scene load_steps=14 format=3 uid="uid://bnood65hv5k6e"]
 
 [ext_resource type="Script" path="res://scripts/bowtie_type_cosmetic.gd" id="1_8btm6"]
 [ext_resource type="Texture2D" uid="uid://deye5gfphrxm7" path="res://media/sprites/cosmetics/bowtie_64.png" id="1_ve7kt"]
 [ext_resource type="Texture2D" uid="uid://eketevn83mab" path="res://media/sprites/cosmetics/gura_hair_clip.png" id="3_vqwi7"]
+[ext_resource type="Texture2D" uid="uid://c6h3j8au0ihfl" path="res://media/sprites/cosmetics/skull.png" id="4_bi4av"]
 
 [sub_resource type="Animation" id="Animation_t4dir"]
 resource_name = "hitted"
@@ -117,11 +118,28 @@ tracks/0/keys = {
 "values": [ExtResource("3_vqwi7")]
 }
 
+[sub_resource type="Animation" id="Animation_whnvg"]
+resource_name = "skull"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_bi4av")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bcitf"]
 _data = {
 "RESET": SubResource("Animation_mnm5f"),
 "bowtie": SubResource("Animation_oee2v"),
-"gura_hair_clip": SubResource("Animation_2apga")
+"gura_hair_clip": SubResource("Animation_2apga"),
+"skull": SubResource("Animation_whnvg")
 }
 
 [node name="BowtieType" type="Node2D"]
