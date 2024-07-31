@@ -1,0 +1,129 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnood65hv5k6e"]
+
+[ext_resource type="Script" path="res://scripts/bowtie_type_cosmetic.gd" id="1_8btm6"]
+[ext_resource type="Texture2D" uid="uid://deye5gfphrxm7" path="res://media/sprites/cosmetics/bowtie_64.png" id="1_ve7kt"]
+
+[sub_resource type="Animation" id="Animation_t4dir"]
+resource_name = "hitted"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(100, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kjk86"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wrap/Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_eqxj3"]
+resource_name = "block"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -20), Vector2(0, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1own"]
+_data = {
+"RESET": SubResource("Animation_kjk86"),
+"block": SubResource("Animation_eqxj3"),
+"hitted": SubResource("Animation_t4dir")
+}
+
+[sub_resource type="Animation" id="Animation_oee2v"]
+resource_name = "bowtie"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_ve7kt")]
+}
+
+[sub_resource type="Animation" id="Animation_mnm5f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_ve7kt")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bcitf"]
+_data = {
+"RESET": SubResource("Animation_mnm5f"),
+"bowtie": SubResource("Animation_oee2v")
+}
+
+[node name="BowtieType" type="Node2D"]
+script = ExtResource("1_8btm6")
+
+[node name="Wrap" type="Node2D" parent="."]
+editor_description = "For rotating but not move in that rotated direction...
+
+I hope this is understandable XD"
+
+[node name="Sprite" type="Sprite2D" parent="Wrap"]
+self_modulate = Color(0.458824, 0.415686, 0.541176, 1)
+texture = ExtResource("1_ve7kt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b1own")
+}
+
+[node name="SpritePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bcitf")
+}
