@@ -1,11 +1,25 @@
 extends Node2D
 
+#################################################
+## Exports
+#################################################
 @export var position_group: Node2D
 
+
+#################################################
+## Node Ref
+#################################################
 @onready var sprite_player: AnimationPlayer = $SpritePlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var wrap_sprite: Node2D = $Wrap
 @onready var sprite: Sprite2D = $Wrap/Sprite
+
+
+#################################################
+## Built-In
+#################################################
+func _ready() -> void:
+	sprite_player.play("gura_hair_clip")
 
 
 #################################################
