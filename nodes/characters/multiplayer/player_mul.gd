@@ -18,7 +18,8 @@ extends Node2D
 @onready var fireball_button: TextureButton = $CanvasLayer/Buttons/FireballButton
 @onready var block_button: TextureButton = $CanvasLayer/Buttons/BlockButton
 @onready var heart_charge_icon: Node2D = $CanvasLayerPublic/HeartChargeIcon
-@onready var bowtie_type: Node2D = $BowtieType
+@onready var bowtie_pos: Node2D = $BowtiePos
+
 
 #################################################
 ## Bots enums
@@ -62,7 +63,7 @@ var is_action_choosed:bool = false
 var heart_charge_require_charges = 1
 @export var is_bot: bool = false
 @export var is_single_player: bool = false
-@onready var cosmetic: Node2D = bowtie_type
+@onready var cosmetics: Array = []
 
 
 #################################################
@@ -90,6 +91,12 @@ func _ready():
 	get_parent().get_node("TimeControl").connect("timeout", _on_time_control_timeout)
 	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	# print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
+
+	# Cosmetics
+	cosmetics = SteamNetwork.cosmetics_nodes.duplicate()
+	SteamNetwork.cosmetics_nodes.clear()
+	for i in cosmetics:
+		add_child(i)
 
 	if is_bot:
 		canvaslayer.visible = false
@@ -341,15 +348,20 @@ func _on_big_fire_ball_button_toggled(toggled_on: bool) -> void:
 
 func _on_animation_player_current_animation_changed(_name: String) -> void:
 	if _name == "idle":
-		cosmetic.set_pos_idle()
+		for i in cosmetics:
+			i.set_pos_idle()
 	if _name == "charge":
-		cosmetic.set_pos_charge()
+		for i in cosmetics:
+			i.set_pos_charge()
 	if _name == "fireball":
-		cosmetic.set_pos_fireball()
+		for i in cosmetics:
+			i.set_pos_fireball()
 	if _name == "block":
-		cosmetic.set_pos_block()
+		for i in cosmetics:
+			i.set_pos_block()
 	if _name == "hitted":
-		cosmetic.set_pos_hitted()
+		for i in cosmetics:
+			i.set_pos_hitted()
 
 
 #################################################

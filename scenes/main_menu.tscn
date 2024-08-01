@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cc85xyg2whm6b"]
+[gd_scene load_steps=20 format=3 uid="uid://cc85xyg2whm6b"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_bdtlp"]
 [ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="2_7agid"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cvr10ukromojy" path="res://media/sprites/menu/menu_background/volume_icon_smol.png" id="7_6j0oy"]
 [ext_resource type="PackedScene" uid="uid://cfojlnb4ynmtm" path="res://scenes/skills_menu.tscn" id="7_wyy76"]
 [ext_resource type="PackedScene" uid="uid://bkhj34nihcxx5" path="res://scenes/hunter_note.tscn" id="10_qsi8i"]
+[ext_resource type="PackedScene" uid="uid://cukemiiq0jwyt" path="res://scenes/customize_menu.tscn" id="11_x0mrr"]
 
 [sub_resource type="Animation" id="Animation_ag0of"]
 length = 0.001
@@ -108,7 +109,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 568)]
+"values": [Vector2(0, 800)]
 }
 
 [sub_resource type="Animation" id="Animation_2684p"]
@@ -124,7 +125,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(-2, 1),
 "update": 0,
-"values": [Vector2(0, 600), Vector2(0, 0)]
+"values": [Vector2(0, 800), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1t6r3"]
@@ -200,7 +201,11 @@ offset_right = 1792.0
 offset_bottom = 1008.0
 
 [node name="MenuButtons" type="Node2D" parent="."]
-position = Vector2(0, 568)
+position = Vector2(0, 800)
+
+[node name="CustomizeButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
+position = Vector2(64, 456)
+text_on_button = "Customize"
 
 [node name="HunterNotesButton" parent="MenuButtons" instance=ExtResource("4_ofm7h")]
 position = Vector2(64, 512)
@@ -243,6 +248,8 @@ visible = false
 
 [node name="SkillMenu" parent="." instance=ExtResource("7_wyy76")]
 
+[node name="CustomizeMenu" parent="." instance=ExtResource("11_x0mrr")]
+
 [node name="SoundSlider" type="VSlider" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
@@ -260,6 +267,7 @@ texture = ExtResource("7_6j0oy")
 
 [connection signal="animation_finished" from="MenuBackground" to="." method="_on_menu_background_animation_finished"]
 [connection signal="pressed" from="DebugButton" to="." method="_on_debug_button_pressed"]
+[connection signal="on_press" from="MenuButtons/CustomizeButton" to="." method="_on_customize_button_on_press"]
 [connection signal="on_press" from="MenuButtons/HunterNotesButton" to="." method="_on_hunter_notes_button_on_press"]
 [connection signal="on_press" from="MenuButtons/VersusBotButton" to="." method="_on_versus_bot_on_press"]
 [connection signal="on_press" from="MenuButtons/CreateLobbyButton" to="." method="_on_create_lobby_on_press"]

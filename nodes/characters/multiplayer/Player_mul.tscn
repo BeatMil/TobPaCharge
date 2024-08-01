@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d30b2qwpstgt4"]
+[gd_scene load_steps=30 format=3 uid="uid://d30b2qwpstgt4"]
 
 [ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_ep8rt"]
 [ext_resource type="PackedScene" uid="uid://cua0jhtddpgu3" path="res://nodes/very_cool_buttons/very_cool_block_button.tscn" id="3_mim8e"]
@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://km0bq0gsqwmw" path="res://nodes/very_cool_buttons/very_cool_fireball_button.tscn" id="12_7db1n"]
 [ext_resource type="AudioStream" uid="uid://dr2dk0uksccql" path="res://media/sfx/laser_start02.wav" id="17_s0lph"]
 [ext_resource type="PackedScene" uid="uid://x56vsw8e3d8j" path="res://nodes/heart_charge_icon.tscn" id="18_lxxk7"]
-[ext_resource type="PackedScene" uid="uid://bnood65hv5k6e" path="res://nodes/cosmetics/bowtie_64.tscn" id="19_8g134"]
 
 [sub_resource type="Animation" id="Animation_0vekx"]
 length = 0.001
@@ -553,9 +552,6 @@ shape = SubResource("RectangleShape2D_1yon4")
 
 [node name="backwindMarker2D" type="Marker2D" parent="."]
 position = Vector2(-184, 152)
-
-[node name="BowtieType" parent="." node_paths=PackedStringArray("position_group") instance=ExtResource("19_8g134")]
-position_group = NodePath("../BowtiePos")
 
 [node name="BowtiePos" type="Node2D" parent="."]
 

@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://nlvwcfnnwxdq"]
+
+[ext_resource type="Script" path="res://scripts/cosmetic_button.gd" id="1_c1xif"]
+[ext_resource type="Texture2D" uid="uid://deye5gfphrxm7" path="res://media/sprites/cosmetics/bowtie_64.png" id="2_ic8de"]
+[ext_resource type="Texture2D" uid="uid://eketevn83mab" path="res://media/sprites/cosmetics/gura_hair_clip.png" id="3_6qcnf"]
+[ext_resource type="Texture2D" uid="uid://c6h3j8au0ihfl" path="res://media/sprites/cosmetics/skull.png" id="4_3i8sn"]
+
+[sub_resource type="Animation" id="Animation_63rrf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:icon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ic8de")]
+}
+
+[sub_resource type="Animation" id="Animation_rt64m"]
+resource_name = "bowtie"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:icon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ic8de")]
+}
+
+[sub_resource type="Animation" id="Animation_vlqc2"]
+resource_name = "gura_hair_clip"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:icon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_6qcnf")]
+}
+
+[sub_resource type="Animation" id="Animation_qfc1b"]
+resource_name = "skull"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:icon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_3i8sn")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bex1n"]
+_data = {
+"RESET": SubResource("Animation_63rrf"),
+"bowtie": SubResource("Animation_rt64m"),
+"gura_hair_clip": SubResource("Animation_vlqc2"),
+"skull": SubResource("Animation_qfc1b")
+}
+
+[node name="CosmeticButton" type="Node2D"]
+script = ExtResource("1_c1xif")
+gura_hair_clip = true
+
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+toggle_mode = true
+icon = ExtResource("2_ic8de")
+
+[node name="SpritePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bex1n")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

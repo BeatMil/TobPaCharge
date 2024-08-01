@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://cukemiiq0jwyt"]
+
+[ext_resource type="Script" path="res://scripts/customize_menu.gd" id="1_j2erc"]
+[ext_resource type="Texture2D" uid="uid://dt5gwa1lpbmwe" path="res://media/sprites/menu/menu_ready_icon/ready_normal_cross.png" id="3_qptmi"]
+[ext_resource type="Texture2D" uid="uid://b73t1b4tu4n5m" path="res://media/sprites/menu/menu_ready_icon/ready_normal_cross_orange.png" id="4_nc4j8"]
+[ext_resource type="Texture2D" uid="uid://cn45jrmt425rr" path="res://media/FirstChar/FirstChar_idle.png" id="5_ofuwy"]
+[ext_resource type="Texture2D" uid="uid://c3prva38mw2hh" path="res://media/SecondChar/SecondChar_idle.png" id="6_auns6"]
+[ext_resource type="AudioStream" uid="uid://gsdkjmi240ja" path="res://media/sfx/menu_cursor_move.wav" id="7_elotd"]
+[ext_resource type="PackedScene" uid="uid://nlvwcfnnwxdq" path="res://nodes/cosmetic_buttons/cosmetic_button.tscn" id="7_rwce2"]
+
+[sub_resource type="Animation" id="Animation_jbwpw"]
+resource_name = "open_sfx"
+length = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_elotd")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_552ek"]
+_data = {
+"open_sfx": SubResource("Animation_jbwpw")
+}
+
+[node name="CustomizeSkill" type="Node2D"]
+script = ExtResource("1_j2erc")
+
+[node name="BackPanel" type="Panel" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+metadata/_edit_lock_ = true
+
+[node name="DescriptionPanel" type="Panel" parent="."]
+offset_left = 960.0
+offset_top = 32.0
+offset_right = 1896.0
+offset_bottom = 1048.0
+metadata/_edit_lock_ = true
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_right = 192.0
+offset_bottom = 192.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("3_qptmi")
+texture_hover = ExtResource("4_nc4j8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_552ek")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="FirstCharIdle" type="Sprite2D" parent="."]
+position = Vector2(504, 296)
+texture = ExtResource("5_ofuwy")
+
+[node name="SecondCharIdle" type="Sprite2D" parent="."]
+position = Vector2(520, 824)
+texture = ExtResource("6_auns6")
+
+[node name="CosmeticButton" parent="." instance=ExtResource("7_rwce2")]
+position = Vector2(960, 32)
+bowtie = true
+gura_hair_clip = false
+
+[node name="CosmeticButton2" parent="." instance=ExtResource("7_rwce2")]
+position = Vector2(1032, 32)
+gura_hair_clip = false
+skull = true
+
+[connection signal="button_down" from="TextureButton" to="." method="_on_texture_button_button_down"]

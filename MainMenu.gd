@@ -11,12 +11,14 @@ extends Control
 @onready var start_game_button: Node2D = $MenuButtons/StartGameButton
 @onready var leave_lobby_button: Node2D = $MenuButtons/LeaveLobbyButton
 @onready var menu_buttons: Node2D = $MenuButtons
-@onready var menu_buttons_player: AnimationPlayer = $MenuButtons/MenuButtonsPlayer
+@onready var menu_buttons_player: AnimationPlayer = $MenuButtons/MenuButtonsPlayer # no use
 @onready var sound_slider: VSlider = %SoundSlider
 @onready var lobby_panel_player: AnimationPlayer = $LobbyPanel/LobbyPanelPlayer
 @onready var hunter_note: Node2D = $HunterNote
 @onready var skill_menu: Node2D = $SkillMenu
 @onready var menu_waifu_idle: Sprite2D = $MenuButtons/MenuWaifuIdle
+@onready var customize_button: CoolMenuButton = $MenuButtons/CustomizeButton
+@onready var customize_menu: Node2D = $CustomizeMenu
 
 
 #################################################
@@ -177,6 +179,10 @@ func _on_leave_lobby_on_press() -> void:
 func _on_exit_button_on_press() -> void:
 	#get_tree().quit()
 	OS.kill(OS.get_process_id()) # quit game fast!! but there maybe side effects...
+
+
+func _on_customize_button_on_press() -> void:
+	customize_menu.set_deferred("visible", true)
 
 
 #################################################

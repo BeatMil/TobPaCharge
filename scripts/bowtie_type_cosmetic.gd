@@ -5,6 +5,11 @@ extends Node2D
 #################################################
 @export var position_group: Node2D
 
+@export_group("Cosmetic Type")
+@export var bowtie: bool
+@export var gura_hair_clip: bool
+@export var skull: bool
+
 
 #################################################
 ## Node Ref
@@ -19,8 +24,16 @@ extends Node2D
 ## Built-In
 #################################################
 func _ready() -> void:
-	sprite_player.play("gura_hair_clip")
+	if bowtie:
+		sprite_player.play("bowtie")
 
+	if gura_hair_clip:
+		sprite_player.play("gura_hair_clip")
+
+	if skull:
+		sprite_player.play("skull")
+
+	position_group = get_node("../BowtiePos")
 
 #################################################
 ## Public function
