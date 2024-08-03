@@ -1,25 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bnood65hv5k6e"]
+[gd_scene load_steps=16 format=3 uid="uid://bnood65hv5k6e"]
 
 [ext_resource type="Script" path="res://scripts/bowtie_type_cosmetic.gd" id="1_8btm6"]
 [ext_resource type="Texture2D" uid="uid://deye5gfphrxm7" path="res://media/sprites/cosmetics/bowtie_64.png" id="1_ve7kt"]
 [ext_resource type="Texture2D" uid="uid://eketevn83mab" path="res://media/sprites/cosmetics/gura_hair_clip.png" id="3_vqwi7"]
 [ext_resource type="Texture2D" uid="uid://c6h3j8au0ihfl" path="res://media/sprites/cosmetics/skull.png" id="4_bi4av"]
-
-[sub_resource type="Animation" id="Animation_t4dir"]
-resource_name = "hitted"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Wrap:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(100, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_kjk86"]
 length = 0.001
@@ -64,16 +48,66 @@ tracks/0/keys = {
 "values": [Vector2(0, -20), Vector2(0, 20)]
 }
 
+[sub_resource type="Animation" id="Animation_t4dir"]
+resource_name = "hitted"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(100, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rnnia"]
+resource_name = "hitted_p1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(100, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ysxrc"]
+resource_name = "hitted_p2"
+length = 0.33
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-100, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b1own"]
 _data = {
 "RESET": SubResource("Animation_kjk86"),
 "block": SubResource("Animation_eqxj3"),
-"hitted": SubResource("Animation_t4dir")
+"hitted": SubResource("Animation_t4dir"),
+"hitted_p1": SubResource("Animation_rnnia"),
+"hitted_p2": SubResource("Animation_ysxrc")
 }
 
-[sub_resource type="Animation" id="Animation_oee2v"]
-resource_name = "bowtie"
-length = 0.01
+[sub_resource type="Animation" id="Animation_mnm5f"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -87,8 +121,9 @@ tracks/0/keys = {
 "values": [ExtResource("1_ve7kt")]
 }
 
-[sub_resource type="Animation" id="Animation_mnm5f"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_oee2v"]
+resource_name = "bowtie"
+length = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

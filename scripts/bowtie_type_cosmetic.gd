@@ -66,3 +66,15 @@ func set_pos_hitted() -> void:
 	position = position_group.get_node("hitted").position
 	sprite.rotation = position_group.get_node("hitted").rotation
 	animation_player.play("hitted")
+
+
+func set_pos_hitted_p1() -> void:
+	position = position_group.get_node("hitted").position
+	sprite.rotation = position_group.get_node("hitted").rotation
+	animation_player.play("hitted_p1")
+
+
+func set_pos_hitted_p2() -> void:
+	position = position_group.get_node("hitted").position
+	sprite.rotation = position_group.get_node("hitted").rotation
+	animation_player.play("hitted_p2")

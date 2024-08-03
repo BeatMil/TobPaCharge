@@ -34,7 +34,6 @@ func _ready() -> void:
 			for i in SteamNetwork.cosmetic_remember:
 				if i == "bowtie":
 					button.set_pressed_no_signal(true)
-					_add_bowtie_to_steam_network(false)
 
 	if skull:
 		sprite_player.play("skull")
@@ -42,35 +41,18 @@ func _ready() -> void:
 			for i in SteamNetwork.cosmetic_remember:
 				if i == "skull":
 					button.set_pressed_no_signal(true)
-					_add_skull_to_steam_network(false)
 
-	# if gura_hair_clip:
-	# 	sprite_player.play("gura_hair_clip")
-	# 	if SteamNetwork.cosmetics_nodes:
-	# 		for i in SteamNetwork.cosmetics_nodes:
-	# 			if i.name == "gura_hair_clip":
-	# 				button.set_pressed_no_signal(true)
+	if gura_hair_clip:
+		sprite_player.play("gura_hair_clip")
+		if SteamNetwork.cosmetic_remember:
+			for i in SteamNetwork.cosmetic_remember:
+				if i == "gura_hair_clip":
+					button.set_pressed_no_signal(true)
 
 #################################################
 ## Private Functions
 #################################################
-func _add_bowtie_to_steam_network(_remember: bool) -> void:
-	var bowtie_cos = BOWTIE_TYPE.instantiate()
-	bowtie_cos.name = "bowtie"
-	bowtie_cos.bowtie = true
-	SteamNetwork.cosmetics_nodes.append(bowtie_cos)
-	if _remember:
-		SteamNetwork.cosmetic_remember.append("bowtie")
-
-
-func _add_skull_to_steam_network(_remember: bool) -> void:
-	print_rich("[color=Lightblue]SKULL[/color]")
-	var skull_cos = BOWTIE_TYPE.instantiate()
-	skull_cos.name = "skull"
-	skull_cos.skull = true
-	SteamNetwork.cosmetics_nodes.append(skull_cos)
-	if _remember:
-		SteamNetwork.cosmetic_remember.append("skull")
+pass
 
 
 #################################################
@@ -79,24 +61,25 @@ func _add_skull_to_steam_network(_remember: bool) -> void:
 func _on_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		if bowtie:
-			_add_bowtie_to_steam_network(true)
+			SteamNetwork.cosmetic_remember.append("bowtie")
 
 		if skull:
-			_add_skull_to_steam_network(true)
+			SteamNetwork.cosmetic_remember.append("skull")
+
+		if gura_hair_clip:
+			SteamNetwork.cosmetic_remember.append("gura_hair_clip")
 	else:
 		if bowtie:
-			for i in SteamNetwork.cosmetics_nodes:
-				if i.name == "bowtie":
-					SteamNetwork.cosmetics_nodes.erase(i)
 			for i in SteamNetwork.cosmetic_remember:
 				if i == "bowtie":
 					SteamNetwork.cosmetic_remember.erase(i)
 
 		if skull:
-			for i in SteamNetwork.cosmetics_nodes:
-				if i.name == "skull":
-					SteamNetwork.cosmetics_nodes.erase(i)
 			for i in SteamNetwork.cosmetic_remember:
 				if i == "skull":
 					SteamNetwork.cosmetic_remember.erase(i)
 
+		if gura_hair_clip:
+			for i in SteamNetwork.cosmetic_remember:
+				if i == "gura_hair_clip":
+					SteamNetwork.cosmetic_remember.erase(i)

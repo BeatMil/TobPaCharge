@@ -69,14 +69,17 @@ texture = ExtResource("5_ofuwy")
 position = Vector2(520, 824)
 texture = ExtResource("6_auns6")
 
-[node name="CosmeticButton" parent="." instance=ExtResource("7_rwce2")]
+[node name="Bowtie" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(960, 32)
 bowtie = true
 gura_hair_clip = false
 
-[node name="CosmeticButton2" parent="." instance=ExtResource("7_rwce2")]
+[node name="Skull" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1032, 32)
 gura_hair_clip = false
 skull = true
+
+[node name="GuraHairClip" parent="." instance=ExtResource("7_rwce2")]
+position = Vector2(1104, 32)
 
 [connection signal="button_down" from="TextureButton" to="." method="_on_texture_button_button_down"]

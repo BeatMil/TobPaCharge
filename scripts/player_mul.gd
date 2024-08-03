@@ -44,6 +44,7 @@ const BIGFIREBALL = preload("res://nodes/big_fireball.tscn")
 const BACKWIND_VFX_P_1 = preload("res://nodes/particles_effects/backwind_vfx_p1.tscn")
 const BACKWIND_VFX_P_2 = preload("res://nodes/particles_effects/backwind_vfx_p2.tscn")
 const HEART_CHARGE = preload("res://nodes/particles_effects/heart_charge.tscn")
+const BOWTIE_TYPE = preload("res://nodes/cosmetics/bowtie_type.tscn")
 
 
 #################################################
@@ -93,10 +94,34 @@ func _ready():
 	# print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
 
 	# Cosmetics
-	cosmetics = SteamNetwork.cosmetics_nodes.duplicate()
-	SteamNetwork.cosmetics_nodes.clear()
-	for i in cosmetics:
-		add_child(i)
+	# if name == "Player1":
+	# 	print_rich("[color=orange][b]Player1COS %s[/b][/color]"%name)
+	# 	cosmetics = SteamNetwork.cosmetics_nodes_p1.duplicate()
+	# 	for i in cosmetics:
+	# 		add_child(i)
+
+	# if name == "Player2":
+	# 	print_rich("[color=orange][b]Player2COS %s[/b][/color]"%name)
+	# 	cosmetics = SteamNetwork.cosmetics_nodes_p2.duplicate()
+	# 	for i in cosmetics:
+	# 		add_child(i)
+	for i in SteamNetwork.cosmetic_remember:
+		if i == "bowtie":
+			var bowtie = BOWTIE_TYPE.instantiate()
+			bowtie.bowtie = true
+			cosmetics.append(bowtie)
+			add_child(bowtie)
+		if i == "skull":
+			var cosmetic = BOWTIE_TYPE.instantiate()
+			cosmetic.skull = true
+			cosmetics.append(cosmetic)
+			add_child(cosmetic)
+		if i == "gura_hair_clip":
+			var cosmetic = BOWTIE_TYPE.instantiate()
+			cosmetic.gura_hair_clip = true
+			cosmetics.append(cosmetic)
+			add_child(cosmetic)
+
 
 	if is_bot:
 		canvaslayer.visible = false
@@ -360,8 +385,12 @@ func _on_animation_player_current_animation_changed(_name: String) -> void:
 		for i in cosmetics:
 			i.set_pos_block()
 	if _name == "hitted":
-		for i in cosmetics:
-			i.set_pos_hitted()
+		if name == "Player1":
+			for i in cosmetics:
+				i.set_pos_hitted_p1()
+		elif name == "Player2":
+			for i in cosmetics:
+				i.set_pos_hitted_p2()
 
 
 #################################################
@@ -376,4 +405,3 @@ func _on_avatar_loaded(id: int, avatar_size: int, buffer: PackedByteArray) -> vo
 		var avatar_texture : ImageTexture = ImageTexture.create_from_image(avatar_image)
 		# Display it
 		avatar_texture_rect.set_texture(avatar_texture)
-

@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://d30b2qwpstgt4"]
 
-[ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_ep8rt"]
+[ext_resource type="Script" path="res://scripts/player_mul.gd" id="1_ep8rt"]
 [ext_resource type="PackedScene" uid="uid://cua0jhtddpgu3" path="res://nodes/very_cool_buttons/very_cool_block_button.tscn" id="3_mim8e"]
 [ext_resource type="AudioStream" uid="uid://ceqtyf8i6pfjq" path="res://media/sfx/big_fireball.wav" id="4_82uu1"]
 [ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_ifsn1"]

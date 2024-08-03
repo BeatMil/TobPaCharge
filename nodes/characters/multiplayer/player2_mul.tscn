@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://c3adto1be3xa2"]
 
-[ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_upm2h"]
+[ext_resource type="Script" path="res://scripts/player_mul.gd" id="1_upm2h"]
 [ext_resource type="PackedScene" uid="uid://km0bq0gsqwmw" path="res://nodes/very_cool_buttons/very_cool_fireball_button.tscn" id="2_hajjj"]
 [ext_resource type="Texture2D" uid="uid://c3prva38mw2hh" path="res://media/SecondChar/SecondChar_idle.png" id="2_noe77"]
 [ext_resource type="PackedScene" uid="uid://cua0jhtddpgu3" path="res://nodes/very_cool_buttons/very_cool_block_button.tscn" id="3_jv1us"]
@@ -271,6 +271,76 @@ tracks/0/keys = {
 "values": [ExtResource("8_keivj")]
 }
 
+[sub_resource type="Animation" id="Animation_du5og"]
+resource_name = "heart_charge"
+length = 0.6
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_705t5")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.52, 0.54),
+"transitions": PackedFloat32Array(1, 0, 1),
+"update": 0,
+"values": [Vector2(-203, 231), Vector2(-203, -311), Vector2(-203, 231)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("18_d0uad")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/ColorRect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.942774, 0.847968, 0.328243, 0.454902)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_heart_charge"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_e0mlr"]
 resource_name = "hitted"
 length = 0.4
@@ -341,76 +411,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("2_noe77")]
-}
-
-[sub_resource type="Animation" id="Animation_du5og"]
-resource_name = "heart_charge"
-length = 0.6
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("6_705t5")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/ColorRect:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.52, 0.54),
-"transitions": PackedFloat32Array(1, 0, 1),
-"update": 0,
-"values": [Vector2(-203, 231), Vector2(-203, -311), Vector2(-203, 231)]
-}
-tracks/2/type = "audio"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("18_d0uad")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/2/use_blend = true
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite/ColorRect:color")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.942774, 0.847968, 0.328243, 0.454902)]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_spawn_heart_charge"
-}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jb0rc"]
@@ -553,6 +553,30 @@ position = Vector2(-151, -55)
 [node name="backwindMarker2D" type="Marker2D" parent="."]
 position = Vector2(168, 152)
 
+[node name="BowtiePos" type="Node2D" parent="."]
+
+[node name="big_fireball" type="Marker2D" parent="BowtiePos"]
+position = Vector2(56, -160)
+rotation = 0.261799
+
+[node name="fireball" type="Marker2D" parent="BowtiePos"]
+position = Vector2(56, -160)
+rotation = 0.261799
+
+[node name="block" type="Marker2D" parent="BowtiePos"]
+position = Vector2(40, -192)
+
+[node name="charge" type="Marker2D" parent="BowtiePos"]
+position = Vector2(24, -168)
+
+[node name="hitted" type="Marker2D" parent="BowtiePos"]
+position = Vector2(232, -128)
+rotation = 0.261799
+
+[node name="idle" type="Marker2D" parent="BowtiePos"]
+position = Vector2(48, -176)
+rotation = 0.523599
+
 [connection signal="button_down" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_button_down"]
 [connection signal="toggled" from="CanvasLayer/Buttons/FireballButton" to="." method="_on_fireball_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_toggled"]
@@ -560,3 +584,4 @@ position = Vector2(168, 152)
 [connection signal="toggled" from="CanvasLayer/Buttons/BigFireBallButton" to="." method="_on_big_fire_ball_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/Buttons/HeartChargeButton" to="." method="_on_heart_charge_button_toggled"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="current_animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_current_animation_changed"]
