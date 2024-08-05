@@ -5,10 +5,15 @@ extends Node2D
 #################################################
 @export var position_group: Node2D
 
-@export_group("Cosmetic Type")
-@export var bowtie: bool
-@export var gura_hair_clip: bool
-@export var skull: bool
+@export_enum("bowtie", "gura_hair_clip", "skull") var bowtie_type: String
+@export_enum(
+	"blue",
+	"green",
+	"pink",
+	"purple",
+	"red",
+	"yellow",
+) var color: String
 
 
 #################################################
@@ -18,20 +23,18 @@ extends Node2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var wrap_sprite: Node2D = $Wrap
 @onready var sprite: Sprite2D = $Wrap/Sprite
+@onready var color_player: AnimationPlayer = $ColorPlayer
 
 
 #################################################
 ## Built-In
 #################################################
 func _ready() -> void:
-	if bowtie:
-		sprite_player.play("bowtie")
+	# sprite
+	sprite_player.play(bowtie_type)
 
-	if gura_hair_clip:
-		sprite_player.play("gura_hair_clip")
-
-	if skull:
-		sprite_player.play("skull")
+	# color
+	color_player.play(color)
 
 	position_group = get_node("../BowtiePos")
 

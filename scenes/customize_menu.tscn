@@ -71,16 +71,18 @@ texture = ExtResource("6_auns6")
 
 [node name="BowtieButton" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(960, 32)
-bowtie = true
-gura_hair_clip = false
+bowtie_type = "bowtie"
+color = "blue"
 
 [node name="SkullButton" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1032, 32)
-gura_hair_clip = false
-skull = true
+bowtie_type = "skull"
+color = "red"
 
 [node name="GuraHairClipButton" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1104, 32)
+bowtie_type = "gura_hair_clip"
+color = "yellow"
 
 [node name="P1Pos" type="Node2D" parent="."]
 

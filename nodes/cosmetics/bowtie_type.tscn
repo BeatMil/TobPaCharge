@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bnood65hv5k6e"]
+[gd_scene load_steps=24 format=3 uid="uid://bnood65hv5k6e"]
 
 [ext_resource type="Script" path="res://scripts/bowtie_type_cosmetic.gd" id="1_8btm6"]
 [ext_resource type="Texture2D" uid="uid://deye5gfphrxm7" path="res://media/sprites/cosmetics/bowtie_64.png" id="1_ve7kt"]
@@ -177,6 +177,164 @@ _data = {
 "skull": SubResource("Animation_whnvg")
 }
 
+[sub_resource type="Animation" id="Animation_ymnih"]
+resource_name = "purple"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.621836, 0.362143, 0.84375, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b2doq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.175875, 0.3342, 0.776409, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.175875, 0.3342, 0.776409, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_phv1p"]
+resource_name = "red"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.776409, 0.29626, 0.325241, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_m4ffq"]
+resource_name = "green"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.338921, 0.776409, 0.448293, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.338921, 0.776409, 0.448293, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_knb02"]
+resource_name = "blue"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.175875, 0.3342, 0.776409, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.175875, 0.3342, 0.776409, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yj71n"]
+resource_name = "pink"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.898438, 0.565495, 0.872384, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uoyle"]
+resource_name = "yellow"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.976562, 0.957317, 0.400758, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qt8tl"]
+_data = {
+"RESET": SubResource("Animation_b2doq"),
+"blue": SubResource("Animation_knb02"),
+"green": SubResource("Animation_m4ffq"),
+"pink": SubResource("Animation_yj71n"),
+"purple": SubResource("Animation_ymnih"),
+"red": SubResource("Animation_phv1p"),
+"yellow": SubResource("Animation_uoyle")
+}
+
 [node name="BowtieType" type="Node2D"]
 script = ExtResource("1_8btm6")
 
@@ -186,7 +344,7 @@ editor_description = "For rotating but not move in that rotated direction...
 I hope this is understandable XD"
 
 [node name="Sprite" type="Sprite2D" parent="Wrap"]
-self_modulate = Color(0.458824, 0.415686, 0.541176, 1)
+self_modulate = Color(0.175875, 0.3342, 0.776409, 1)
 texture = ExtResource("1_ve7kt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -197,4 +355,9 @@ libraries = {
 [node name="SpritePlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_bcitf")
+}
+
+[node name="ColorPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qt8tl")
 }
