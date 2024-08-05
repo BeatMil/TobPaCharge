@@ -93,34 +93,23 @@ func _ready():
 	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	# print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
 
-	# Cosmetics
-	# if name == "Player1":
-	# 	print_rich("[color=orange][b]Player1COS %s[/b][/color]"%name)
-	# 	cosmetics = SteamNetwork.cosmetics_nodes_p1.duplicate()
-	# 	for i in cosmetics:
-	# 		add_child(i)
-
-	# if name == "Player2":
-	# 	print_rich("[color=orange][b]Player2COS %s[/b][/color]"%name)
-	# 	cosmetics = SteamNetwork.cosmetics_nodes_p2.duplicate()
-	# 	for i in cosmetics:
-	# 		add_child(i)
-	for i in SteamNetwork.cosmetic_remember:
-		if i == "bowtie":
-			var bowtie = BOWTIE_TYPE.instantiate()
-			bowtie.bowtie = true
-			cosmetics.append(bowtie)
-			add_child(bowtie)
-		if i == "skull":
-			var cosmetic = BOWTIE_TYPE.instantiate()
-			cosmetic.skull = true
-			cosmetics.append(cosmetic)
-			add_child(cosmetic)
-		if i == "gura_hair_clip":
-			var cosmetic = BOWTIE_TYPE.instantiate()
-			cosmetic.gura_hair_clip = true
-			cosmetics.append(cosmetic)
-			add_child(cosmetic)
+	if not is_bot:
+		for i in SteamNetwork.cosmetic_remember:
+			if i == "bowtie":
+				var bowtie = BOWTIE_TYPE.instantiate()
+				bowtie.bowtie = true
+				cosmetics.append(bowtie)
+				add_child(bowtie)
+			if i == "skull":
+				var cosmetic = BOWTIE_TYPE.instantiate()
+				cosmetic.skull = true
+				cosmetics.append(cosmetic)
+				add_child(cosmetic)
+			if i == "gura_hair_clip":
+				var cosmetic = BOWTIE_TYPE.instantiate()
+				cosmetic.gura_hair_clip = true
+				cosmetics.append(cosmetic)
+				add_child(cosmetic)
 
 
 	if is_bot:
