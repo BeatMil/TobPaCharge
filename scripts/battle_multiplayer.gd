@@ -46,6 +46,9 @@ func _setup_player() -> void:
 		SteamNetwork.activate_first_achivement("PLAY_WITH_FRIEND")
 	else:
 		printerr("not enough players!")
+		## For Cosmetics
+		player1.steam_id = SteamNetwork.steam_id
+		player2.steam_id = SteamNetwork.steam_id
 		# SceneTransition.change_scene("res://scenes/main_menu.tscn")
 	think_time_display.time_to_think = time_control
 
