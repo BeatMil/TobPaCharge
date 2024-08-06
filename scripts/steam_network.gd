@@ -19,6 +19,7 @@ var p2_score: int = 0
 
 # Configs
 var appId: int = 480
+# 3094590
 
 
 # skills
@@ -27,6 +28,11 @@ enum skills {
 	HEART_CHARGE
 }
 var current_skill = -1
+
+# cosmetics
+# var cosmetics_nodes_p1: Array = []
+# var cosmetics_nodes_p2: Array = []
+var cosmetic_remember: Array = []
 
 
 #Steam Multiplayer thingy
