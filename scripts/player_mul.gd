@@ -59,8 +59,9 @@ var steam_id: int = 0:
 		if _id != SteamNetwork.steam_id:
 			canvaslayer.visible = false
 			action_label.visible = false
-		_show_cosmetic()
 		charge_button.visible = false # show only in testing
+		rpc("_show_cosmetic")
+		# _show_cosmetic()
 var is_action_choosed:bool = false
 var heart_charge_require_charges = 1
 @export var is_bot: bool = false
@@ -254,6 +255,7 @@ func _spawn_heart_charge() -> void:
 	add_child(heart_charge)
 
 
+@rpc("any_peer", "call_local")
 func _show_cosmetic() -> void:
 	if steam_id == 0 or (not is_bot and SteamNetwork.steam_id == steam_id):
 		for i in SteamNetwork.cosmetic_remember:
