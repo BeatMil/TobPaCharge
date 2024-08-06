@@ -36,29 +36,12 @@ const BOWTIE_TYPE = preload("res://nodes/cosmetics/bowtie_type.tscn")
 func _ready() -> void:
 	color_player.play(color)
 
-	if bowtie_type == "bowtie":
-		sprite_player.play("bowtie")
-		if SteamNetwork.cosmetic_remember:
-			for i in SteamNetwork.cosmetic_remember:
-				if i == "bowtie":
-					button.set_pressed_no_signal(true)
-					_show_cosmetic_both_players()
-
-	if bowtie_type == "skull":
-		sprite_player.play("skull")
-		if SteamNetwork.cosmetic_remember:
-			for i in SteamNetwork.cosmetic_remember:
-				if i == "skull":
-					button.set_pressed_no_signal(true)
-					_show_cosmetic_both_players()
-
-	if bowtie_type == "gura_hair_clip":
-		sprite_player.play("gura_hair_clip")
-		if SteamNetwork.cosmetic_remember:
-			for i in SteamNetwork.cosmetic_remember:
-				if i == "gura_hair_clip":
-					button.set_pressed_no_signal(true)
-					_show_cosmetic_both_players()
+	sprite_player.play(bowtie_type)
+	if SteamNetwork.cosmetic_remember:
+		for i in SteamNetwork.cosmetic_remember:
+			if i.type == bowtie_type and i.color == color:
+				button.set_pressed_no_signal(true)
+				_show_cosmetic_both_players()
 
 
 #################################################
@@ -85,11 +68,14 @@ func _show_cosmetic_both_players() -> void:
 #################################################
 func _on_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		SteamNetwork.cosmetic_remember.append(bowtie_type)
+		var cosmetic_data = CosmeticData.new()
+		cosmetic_data.type = bowtie_type
+		cosmetic_data.color = color
+		SteamNetwork.cosmetic_remember.append(cosmetic_data)
 		_show_cosmetic_both_players()
 	else:
 		for i in SteamNetwork.cosmetic_remember:
-			if i == bowtie_type:
+			if i.type == bowtie_type and i.color == color:
 				SteamNetwork.cosmetic_remember.erase(i)
 		for node in $"../DisplayCosmetic".get_children():
 			if bowtie_type in node.name:

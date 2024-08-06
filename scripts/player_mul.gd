@@ -96,7 +96,8 @@ func _ready():
 	if not is_bot:
 		for i in SteamNetwork.cosmetic_remember:
 			var bowtie = BOWTIE_TYPE.instantiate()
-			bowtie.bowtie_type = i
+			bowtie.bowtie_type = i.type
+			bowtie.color = i.color
 			cosmetics.append(bowtie)
 			add_child(bowtie)
 
