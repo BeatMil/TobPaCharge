@@ -59,6 +59,7 @@ var steam_id: int = 0:
 		if _id != SteamNetwork.steam_id:
 			canvaslayer.visible = false
 			action_label.visible = false
+		_show_cosmetic()
 		charge_button.visible = false # show only in testing
 var is_action_choosed:bool = false
 var heart_charge_require_charges = 1
@@ -92,15 +93,6 @@ func _ready():
 	get_parent().get_node("TimeControl").connect("timeout", _on_time_control_timeout)
 	# print_rich("[color=green][b]Nyaaa > w <[/b][/color]")
 	# print_rich("[img]res://media/TobPaCharge_icon.png[/img]")
-
-	if not is_bot:
-		for i in SteamNetwork.cosmetic_remember:
-			var bowtie = BOWTIE_TYPE.instantiate()
-			bowtie.bowtie_type = i.type
-			bowtie.color = i.color
-			cosmetics.append(bowtie)
-			add_child(bowtie)
-
 
 	if is_bot:
 		canvaslayer.visible = false
@@ -260,6 +252,17 @@ func _spawn_heart_charge() -> void:
 	var heart_charge = HEART_CHARGE.instantiate()
 	heart_charge.position += Vector2(0, -200)
 	add_child(heart_charge)
+
+
+func _show_cosmetic() -> void:
+	if steam_id == 0 or (not is_bot and SteamNetwork.steam_id == steam_id):
+		for i in SteamNetwork.cosmetic_remember:
+			var bowtie = BOWTIE_TYPE.instantiate()
+			bowtie.bowtie_type = i.type
+			bowtie.color = i.color
+			cosmetics.append(bowtie)
+			add_child(bowtie)
+
 
 
 #################################################
