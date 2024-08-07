@@ -57,9 +57,8 @@ var steam_id: int = 0:
 	set(_id):
 		steam_id = _id
 		if _id != SteamNetwork.steam_id:
-			pass
-			# canvaslayer.visible = false
-			# action_label.visible = false
+			canvaslayer.visible = false
+			action_label.visible = false
 		charge_button.visible = false # show only in testing
 		if is_single_player:
 			_show_cosmetic()
