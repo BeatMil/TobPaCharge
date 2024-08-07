@@ -38,6 +38,8 @@ func _ready() -> void:
 
 	position_group = get_node("../BowtiePos")
 
+	set_pos_idle()
+
 #################################################
 ## Public function
 #################################################
