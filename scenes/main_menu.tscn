@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://cc85xyg2whm6b"]
 
-[ext_resource type="Script" path="res://MainMenu.gd" id="1_bdtlp"]
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_bdtlp"]
 [ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="2_7agid"]
 [ext_resource type="PackedScene" uid="uid://dvbchwfxrs3w6" path="res://nodes/menu_waifu.tscn" id="3_52upu"]
 [ext_resource type="PackedScene" uid="uid://dl5pewv5dfsfe" path="res://nodes/cool_menu_button.tscn" id="4_ofm7h"]

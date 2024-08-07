@@ -60,7 +60,6 @@ var steam_id: int = 0:
 			canvaslayer.visible = false
 			action_label.visible = false
 		charge_button.visible = false # show only in testing
-		rpc("_show_cosmetic")
 		# _show_cosmetic()
 var is_action_choosed:bool = false
 var heart_charge_require_charges = 1
@@ -233,6 +232,8 @@ func new_turn():
 			heart_charge_button.set_deferred("disabled", true)
 		if SteamNetwork.current_skill != SteamNetwork.skills.HEART_CHARGE:
 			heart_charge_button.set_deferred("visible", false)
+
+		rpc("_show_cosmetic")
 
 
 #################################################
