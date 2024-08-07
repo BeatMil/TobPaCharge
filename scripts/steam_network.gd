@@ -106,6 +106,11 @@ func clear_score() -> void:
 	p2_score = 0
 
 
+@rpc("any_peer", "call_local")
+func send_cosmetic_to_shared_data(steam_id: int, _data: Array) -> void:
+	SharedData.steam_id_to_cosmetic_datas[steam_id] = _data
+
+
 @rpc("call_local")
 func test_show_pic() -> void:
 	print_rich("[img]res://media/TobPaCharge_icon.png[/img]")

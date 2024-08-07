@@ -61,8 +61,10 @@ var steam_id: int = 0:
 			# canvaslayer.visible = false
 			# action_label.visible = false
 		charge_button.visible = false # show only in testing
-		# _show_cosmetic()
-		rpc("_show_cosmetic")
+		if is_single_player:
+			_show_cosmetic()
+		else:
+			rpc("_show_cosmetic")
 var is_action_choosed:bool = false
 var heart_charge_require_charges = 1
 @export var is_bot: bool = false
@@ -265,7 +267,7 @@ func _show_cosmetic() -> void:
 		bowtie.color = i.color
 		cosmetics.append(bowtie)
 		add_child(bowtie)
-	print_rich("[color=Rosybrown][b]_show_cosmetic steam_id: %s[/b][/color]"%Steam.getFriendPersonaName(Steam.getSteamID()))
+	print_rich("[color=Mediumaquamarine ][b]==_show_cosmetic steam_id: %s==[/b][/color]"%Steam.getFriendPersonaName(Steam.getSteamID()))
 
 
 

@@ -120,7 +120,13 @@ func check_ready() -> void:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")
+	SteamNetwork.rpc("send_cosmetic_to_shared_data", 
+		SteamNetwork.steam_id,
+		SteamNetwork.cosmetic_remember
+	)
+	# SteamNetwork.send_cosmetic_to_shared_data()
+	pass
+	# SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")
 
 
 #################################################
