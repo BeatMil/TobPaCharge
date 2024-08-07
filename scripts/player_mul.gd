@@ -261,14 +261,22 @@ func _spawn_heart_charge() -> void:
 @rpc("any_peer", "call_local")
 func _show_cosmetic() -> void:
 	# if steam_id == 0 or (not is_bot and SteamNetwork.steam_id == steam_id):
-	for i in SteamNetwork.cosmetic_remember:
-		var bowtie = BOWTIE_TYPE.instantiate()
-		bowtie.bowtie_type = i.type
-		bowtie.color = i.color
-		cosmetics.append(bowtie)
-		add_child(bowtie)
 	print_rich("[color=Mediumaquamarine ][b]==_show_cosmetic steam_id: %s==[/b][/color]"%Steam.getFriendPersonaName(Steam.getSteamID()))
-
+	if is_single_player:
+		for i in SteamNetwork.cosmetic_remember:
+			var bowtie = BOWTIE_TYPE.instantiate()
+			bowtie.bowtie_type = i.type
+			bowtie.color = i.color
+			cosmetics.append(bowtie)
+			add_child(bowtie)
+	else:
+		var _cosmetics = SharedData.steam_id_to_cosmetic_datas[steam_id]
+		for i in _cosmetics:
+			var bowtie = BOWTIE_TYPE.instantiate()
+			bowtie.bowtie_type = i.type
+			bowtie.color = i.color
+			cosmetics.append(bowtie)
+			add_child(bowtie)
 
 
 #################################################

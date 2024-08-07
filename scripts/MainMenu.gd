@@ -124,9 +124,7 @@ func start_game() -> void:
 		SteamNetwork.steam_id,
 		SteamNetwork.cosmetic_remember
 	)
-	# SteamNetwork.send_cosmetic_to_shared_data()
-	pass
-	# SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")
+	SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")
 
 
 #################################################
