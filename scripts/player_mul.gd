@@ -59,9 +59,9 @@ var steam_id: int = 0:
 		if _id != SteamNetwork.steam_id:
 			canvaslayer.visible = false
 			action_label.visible = false
-			rpc("_show_cosmetic")
 		charge_button.visible = false # show only in testing
 		# _show_cosmetic()
+		rpc("_show_cosmetic")
 var is_action_choosed:bool = false
 var heart_charge_require_charges = 1
 @export var is_bot: bool = false
@@ -257,13 +257,13 @@ func _spawn_heart_charge() -> void:
 
 @rpc("any_peer", "call_local")
 func _show_cosmetic() -> void:
-	if steam_id == 0 or (not is_bot and SteamNetwork.steam_id == steam_id):
-		for i in SteamNetwork.cosmetic_remember:
-			var bowtie = BOWTIE_TYPE.instantiate()
-			bowtie.bowtie_type = i.type
-			bowtie.color = i.color
-			cosmetics.append(bowtie)
-			add_child(bowtie)
+	# if steam_id == 0 or (not is_bot and SteamNetwork.steam_id == steam_id):
+	for i in SteamNetwork.cosmetic_remember:
+		var bowtie = BOWTIE_TYPE.instantiate()
+		bowtie.bowtie_type = i.type
+		bowtie.color = i.color
+		cosmetics.append(bowtie)
+		add_child(bowtie)
 	print_rich("[color=Rosybrown][b]_show_cosmetic steam_id: %s[/b][/color]"%Steam.getFriendPersonaName(Steam.getSteamID()))
 
 
