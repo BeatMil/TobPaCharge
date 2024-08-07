@@ -36,7 +36,8 @@ func _ready() -> void:
 	# color
 	color_player.play(color)
 
-	position_group = get_node("../BowtiePos")
+	if get_node_or_null("../BowtiePos"):
+		position_group = get_node("../BowtiePos")
 
 	set_pos_idle()
 
@@ -44,42 +45,49 @@ func _ready() -> void:
 ## Public function
 #################################################
 func set_pos_idle() -> void:
-	position = position_group.get_node("idle").position
-	sprite.rotation = position_group.get_node("idle").rotation
-	animation_player.play("RESET")
+	if position_group:
+		position = position_group.get_node("idle").position
+		sprite.rotation = position_group.get_node("idle").rotation
+		animation_player.play("RESET")
 
 
 func set_pos_charge() -> void:
-	position = position_group.get_node("charge").position
-	sprite.rotation = position_group.get_node("charge").rotation
-	animation_player.play("RESET")
+	if position_group:
+		position = position_group.get_node("charge").position
+		sprite.rotation = position_group.get_node("charge").rotation
+		animation_player.play("RESET")
 
 
 func set_pos_fireball() -> void:
-	position = position_group.get_node("fireball").position
-	sprite.rotation = position_group.get_node("fireball").rotation
-	animation_player.play("RESET")
+	if position_group:
+		position = position_group.get_node("fireball").position
+		sprite.rotation = position_group.get_node("fireball").rotation
+		animation_player.play("RESET")
 
 
 func set_pos_block() -> void:
-	position = position_group.get_node("block").position
-	sprite.rotation = position_group.get_node("block").rotation
-	animation_player.play("block")
+	if position_group:
+		position = position_group.get_node("block").position
+		sprite.rotation = position_group.get_node("block").rotation
+		animation_player.play("block")
 
 
 func set_pos_hitted() -> void:
-	position = position_group.get_node("hitted").position
-	sprite.rotation = position_group.get_node("hitted").rotation
-	animation_player.play("hitted")
+	if position_group:
+		position = position_group.get_node("hitted").position
+		sprite.rotation = position_group.get_node("hitted").rotation
+		animation_player.play("hitted")
 
 
 func set_pos_hitted_p1() -> void:
-	position = position_group.get_node("hitted").position
-	sprite.rotation = position_group.get_node("hitted").rotation
-	animation_player.play("hitted_p1")
+	if position_group:
+		position = position_group.get_node("hitted").position
+		sprite.rotation = position_group.get_node("hitted").rotation
+		animation_player.play("hitted_p1")
 
 
 func set_pos_hitted_p2() -> void:
-	position = position_group.get_node("hitted").position
-	sprite.rotation = position_group.get_node("hitted").rotation
-	animation_player.play("hitted_p2")
+	if position_group:
+		position = position_group.get_node("hitted").position
+		sprite.rotation = position_group.get_node("hitted").rotation
+		animation_player.play("hitted_p2")
