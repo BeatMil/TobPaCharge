@@ -264,7 +264,7 @@ func _show_cosmetic() -> void:
 			bowtie.color = i.color
 			cosmetics.append(bowtie)
 			add_child(bowtie)
-	print_rich("[color=Rosybrown][b]_show_cosmetic steam_id: %s[/b][/color]"%Steam.getFriendPersonaName(SteamNetwork.steam_id))
+	print_rich("[color=Rosybrown][b]_show_cosmetic steam_id: %s[/b][/color]"%Steam.getFriendPersonaName(Steam.getSteamID()))
 
 
 
