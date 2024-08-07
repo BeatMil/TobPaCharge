@@ -258,7 +258,7 @@ func _spawn_heart_charge() -> void:
 	add_child(heart_charge)
 
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer")
 func _show_cosmetic() -> void:
 	# if steam_id == 0 or (not is_bot and SteamNetwork.steam_id == steam_id):
 	print_rich("[color=Mediumaquamarine ][b]==_show_cosmetic steam_id: %s==[/b][/color]"%Steam.getFriendPersonaName(Steam.getSteamID()))
