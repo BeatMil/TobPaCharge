@@ -122,7 +122,7 @@ func check_ready() -> void:
 func start_game() -> void:
 	SteamNetwork.rpc("send_cosmetic_to_shared_data", 
 		SteamNetwork.steam_id,
-		[SteamNetwork.cosmetic_remember[0].color, SteamNetwork.cosmetic_remember[0].type]
+		SteamNetwork.cosmetic_remember
 	)
 	SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")
 

@@ -68,10 +68,10 @@ func _show_cosmetic_both_players() -> void:
 #################################################
 func _on_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		var cosmetic_data = CosmeticData.new()
-		cosmetic_data.type = bowtie_type
-		cosmetic_data.color = color
-		SteamNetwork.cosmetic_remember.append(cosmetic_data)
+		var cos_dict_data = {}
+		cos_dict_data["type"] = bowtie_type
+		cos_dict_data["color"] = color
+		SteamNetwork.cosmetic_remember.append(cos_dict_data)
 		_show_cosmetic_both_players()
 	else:
 		for i in SteamNetwork.cosmetic_remember:

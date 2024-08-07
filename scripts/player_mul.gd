@@ -265,16 +265,16 @@ func _show_cosmetic() -> void:
 	if is_single_player:
 		for i in SteamNetwork.cosmetic_remember:
 			var bowtie = BOWTIE_TYPE.instantiate()
-			bowtie.bowtie_type = i.type
-			bowtie.color = i.color
+			bowtie.bowtie_type = i["type"]
+			bowtie.color = i["color"]
 			cosmetics.append(bowtie)
 			add_child(bowtie)
 	else:
 		var _cosmetics = SharedData.steam_id_to_cosmetic_datas[steam_id]
 		for i in _cosmetics:
 			var bowtie = BOWTIE_TYPE.instantiate()
-			bowtie.bowtie_type = i.type
-			bowtie.color = i.color
+			bowtie.bowtie_type = i["type"]
+			bowtie.color = i["color"]
 			cosmetics.append(bowtie)
 			add_child(bowtie)
 
