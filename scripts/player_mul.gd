@@ -373,7 +373,7 @@ func _on_animation_player_current_animation_changed(_name: String) -> void:
 	if _name == "charge":
 		for i in cosmetics:
 			i.set_pos_charge()
-	if _name == "fireball":
+	if _name == "fireball" or _name == "big_fireball":
 		for i in cosmetics:
 			i.set_pos_fireball()
 	if _name == "block":
