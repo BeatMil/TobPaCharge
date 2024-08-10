@@ -31,6 +31,10 @@ extends Control
 #################################################
 # Built-in
 #################################################
+func _init() -> void:
+	Data.load_game()
+
+
 func _ready():
 	SteamNetwork.activate_first_achivement("OPEN_GAME")
 	SteamNetwork.clear_score()
@@ -42,7 +46,6 @@ func _ready():
 	
 	skill_menu.visible = false
 	menu_waifu_idle.connect("on_press", _open_skill_menu)
-
 
 func _process(delta):
 	AudioServer.set_bus_volume_db(0, sound_slider.value)
@@ -182,6 +185,7 @@ func _on_leave_lobby_on_press() -> void:
 
 func _on_exit_button_on_press() -> void:
 	#get_tree().quit()
+	Data.save_game()
 	OS.kill(OS.get_process_id()) # quit game fast!! but there maybe side effects...
 
 

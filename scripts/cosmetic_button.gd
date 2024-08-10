@@ -36,6 +36,11 @@ const BOWTIE_TYPE = preload("res://nodes/cosmetics/bowtie_type.tscn")
 func _ready() -> void:
 	color_player.play(color)
 
+	if _is_in_inventory():
+		button.disabled = false
+	else:
+		button.disabled = true
+
 	sprite_player.play(bowtie_type)
 	if SteamNetwork.cosmetic_remember:
 		for i in SteamNetwork.cosmetic_remember:
@@ -61,6 +66,14 @@ func _show_cosmetic_both_players() -> void:
 	_bowtieP2.position = $"../P2Pos/BowtiePos".position
 	_bowtieP2.color = color
 	$"../DisplayCosmetic".add_child(_bowtieP2)
+
+
+func _is_in_inventory() -> bool:
+	# Check if current item is in inventory by bowtie_type and color
+	if Data.inventory["%s_%s"%[bowtie_type, color]]:
+		return true
+	else:
+		return false
 
 
 #################################################

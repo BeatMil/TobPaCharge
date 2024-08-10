@@ -25,6 +25,7 @@ SteamNetwork="*res://scripts/steam_network.gd"
 EscMenu="*res://nodes/esc_menu.tscn"
 OstPlayer="*res://nodes/ost_player.tscn"
 SharedData="*res://nodes/helpers/shared_data.tscn"
+Data="*res://scripts/data.gd"
 
 [debug]
 
