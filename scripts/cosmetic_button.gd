@@ -92,6 +92,6 @@ func _on_button_toggled(toggled_on: bool) -> void:
 			if i.type == bowtie_type and i.color == color:
 				SteamNetwork.cosmetic_remember.erase(i)
 		for node in $"../DisplayCosmetic".get_children():
-			if bowtie_type in node.name:
+			if bowtie_type == node.bowtie_type and color == node.color:
 				node.queue_free()
 		animation_player.play("toggle_off")
