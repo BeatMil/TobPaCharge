@@ -4,7 +4,7 @@ extends Node2D
 #################################################
 ## Exports
 #################################################
-@export_enum("bowtie", "gura_hair_clip", "skull") var bowtie_type: String
+@export_enum("bowtie", "gura", "skull") var bowtie_type: String
 @export_enum(
 	"blue",
 	"green",

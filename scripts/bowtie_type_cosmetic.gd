@@ -5,7 +5,7 @@ extends Node2D
 #################################################
 @export var position_group: Node2D
 
-@export_enum("bowtie", "gura_hair_clip", "skull") var bowtie_type: String
+@export_enum("bowtie", "gura", "skull") var bowtie_type: String
 @export_enum(
 	"blue",
 	"green",
@@ -20,10 +20,10 @@ extends Node2D
 ## Node Ref
 #################################################
 @onready var sprite_player: AnimationPlayer = $SpritePlayer
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var wrap_sprite: Node2D = $Wrap
 @onready var sprite: Sprite2D = $Wrap/Sprite
 @onready var color_player: AnimationPlayer = $ColorPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 #################################################
@@ -91,3 +91,7 @@ func set_pos_hitted_p2() -> void:
 		position = position_group.get_node("hitted").position
 		sprite.rotation = position_group.get_node("hitted").rotation
 		animation_player.play("hitted_p2")
+
+
+func play_dance() -> void:
+	animation_player.play("dance")

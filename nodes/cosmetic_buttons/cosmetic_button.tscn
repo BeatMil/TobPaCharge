@@ -37,7 +37,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_vlqc2"]
-resource_name = "gura_hair_clip"
+resource_name = "gura"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -72,7 +72,7 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_63rrf"),
 "bowtie": SubResource("Animation_rt64m"),
-"gura_hair_clip": SubResource("Animation_vlqc2"),
+"gura": SubResource("Animation_vlqc2"),
 "skull": SubResource("Animation_qfc1b")
 }
 

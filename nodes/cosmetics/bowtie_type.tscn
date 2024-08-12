@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bnood65hv5k6e"]
+[gd_scene load_steps=25 format=3 uid="uid://bnood65hv5k6e"]
 
 [ext_resource type="Script" path="res://scripts/bowtie_type_cosmetic.gd" id="1_8btm6"]
 [ext_resource type="Texture2D" uid="uid://deye5gfphrxm7" path="res://media/sprites/cosmetics/bowtie_64.png" id="1_ve7kt"]
@@ -97,10 +97,28 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(-100, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_dtg87"]
+resource_name = "dance"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b1own"]
 _data = {
 "RESET": SubResource("Animation_kjk86"),
 "block": SubResource("Animation_eqxj3"),
+"dance": SubResource("Animation_dtg87"),
 "hitted": SubResource("Animation_t4dir"),
 "hitted_p1": SubResource("Animation_rnnia"),
 "hitted_p2": SubResource("Animation_ysxrc")
@@ -138,7 +156,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_2apga"]
-resource_name = "gura_hair_clip"
+resource_name = "gura"
 length = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -173,7 +191,7 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_mnm5f"),
 "bowtie": SubResource("Animation_oee2v"),
-"gura_hair_clip": SubResource("Animation_2apga"),
+"gura": SubResource("Animation_2apga"),
 "skull": SubResource("Animation_whnvg")
 }
 

@@ -141,34 +141,34 @@ position = Vector2(1320, 104)
 bowtie_type = "skull"
 color = "yellow"
 
-[node name="GuraHairClipButton" parent="." instance=ExtResource("7_rwce2")]
+[node name="GuraButton1" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(960, 176)
-bowtie_type = "gura_hair_clip"
+bowtie_type = "gura"
 color = "blue"
 
-[node name="GuraHairClipButton2" parent="." instance=ExtResource("7_rwce2")]
+[node name="GuraButton2" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1032, 176)
-bowtie_type = "gura_hair_clip"
+bowtie_type = "gura"
 color = "green"
 
-[node name="GuraHairClipButton3" parent="." instance=ExtResource("7_rwce2")]
+[node name="GuraButton3" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1104, 176)
-bowtie_type = "gura_hair_clip"
+bowtie_type = "gura"
 color = "pink"
 
-[node name="GuraHairClipButton4" parent="." instance=ExtResource("7_rwce2")]
+[node name="GuraButton4" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1176, 176)
-bowtie_type = "gura_hair_clip"
+bowtie_type = "gura"
 color = "purple"
 
-[node name="GuraHairClipButton5" parent="." instance=ExtResource("7_rwce2")]
+[node name="GuraButton5" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1248, 176)
-bowtie_type = "gura_hair_clip"
+bowtie_type = "gura"
 color = "red"
 
-[node name="GuraHairClipButton6" parent="." instance=ExtResource("7_rwce2")]
+[node name="GuraButton6" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1320, 176)
-bowtie_type = "gura_hair_clip"
+bowtie_type = "gura"
 color = "yellow"
 
 [connection signal="button_down" from="TextureButton" to="." method="_on_texture_button_button_down"]
