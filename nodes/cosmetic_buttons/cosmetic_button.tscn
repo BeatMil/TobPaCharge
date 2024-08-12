@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://nlvwcfnnwxdq"]
+[gd_scene load_steps=23 format=3 uid="uid://nlvwcfnnwxdq"]
 
 [ext_resource type="Script" path="res://scripts/cosmetic_button.gd" id="1_c1xif"]
 [ext_resource type="Texture2D" uid="uid://deye5gfphrxm7" path="res://media/sprites/cosmetics/bowtie_64.png" id="2_ic8de"]
 [ext_resource type="Texture2D" uid="uid://eketevn83mab" path="res://media/sprites/cosmetics/gura_hair_clip.png" id="3_6qcnf"]
 [ext_resource type="Texture2D" uid="uid://c6h3j8au0ihfl" path="res://media/sprites/cosmetics/skull.png" id="4_3i8sn"]
+[ext_resource type="AudioStream" uid="uid://cec56ibq6ud66" path="res://media/sfx/equip01.wav" id="5_5s3tn"]
+[ext_resource type="AudioStream" uid="uid://bjmgpfd2fddy7" path="res://media/sfx/unequip01.wav" id="6_rav4n"]
 
 [sub_resource type="Animation" id="Animation_63rrf"]
 length = 0.001
@@ -74,6 +76,50 @@ _data = {
 "bowtie": SubResource("Animation_rt64m"),
 "gura": SubResource("Animation_vlqc2"),
 "skull": SubResource("Animation_qfc1b")
+}
+
+[sub_resource type="Animation" id="Animation_d2tdu"]
+resource_name = "toggle_on"
+length = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_5s3tn")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="Animation" id="Animation_adxs8"]
+resource_name = "toggle_off"
+length = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_rav4n")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tf62i"]
+_data = {
+"toggle_off": SubResource("Animation_adxs8"),
+"toggle_on": SubResource("Animation_d2tdu")
 }
 
 [sub_resource type="Animation" id="Animation_c5ipk"]
@@ -194,6 +240,8 @@ _data = {
 
 [node name="CosmeticButton" type="Node2D"]
 script = ExtResource("1_c1xif")
+bowtie_type = "skull"
+color = "red"
 
 [node name="Button" type="Button" parent="."]
 self_modulate = Color(0.338921, 0.776409, 0.448293, 1)
@@ -209,6 +257,11 @@ libraries = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tf62i")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
 
 [node name="ColorPlayer" type="AnimationPlayer" parent="."]
 libraries = {

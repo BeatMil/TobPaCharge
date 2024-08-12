@@ -86,6 +86,7 @@ func _on_button_toggled(toggled_on: bool) -> void:
 		cos_dict_data["color"] = color
 		SteamNetwork.cosmetic_remember.append(cos_dict_data)
 		_show_cosmetic_both_players()
+		animation_player.play("toggle_on")
 	else:
 		for i in SteamNetwork.cosmetic_remember:
 			if i.type == bowtie_type and i.color == color:
@@ -93,3 +94,4 @@ func _on_button_toggled(toggled_on: bool) -> void:
 		for node in $"../DisplayCosmetic".get_children():
 			if bowtie_type in node.name:
 				node.queue_free()
+		animation_player.play("toggle_off")
