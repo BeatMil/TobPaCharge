@@ -19,7 +19,7 @@ var inventory = {
 	"bowtie_yellow": false,
 	"skull_blue": false,
 	"skull_green": false,
-	"skull_pink": true,
+	"skull_pink": false,
 	"skull_purple": false,
 	"skull_red": false,
 	"skull_yellow": false,
@@ -29,19 +29,19 @@ var inventory = {
 	"gura_purple": false,
 	"gura_red": false,
 	"gura_yellow": false,
-	"gun_blue": true,
+	"gun_blue": false,
 	"gun_green": false,
 	"gun_pink": false,
 	"gun_purple": false,
 	"gun_red": false,
 	"gun_yellow": false,
-	"kunai_blue": true,
+	"kunai_blue": false,
 	"kunai_green": false,
 	"kunai_pink": false,
 	"kunai_purple": false,
 	"kunai_red": false,
 	"kunai_yellow": false,
-	"pouch_blue": true,
+	"pouch_blue": false,
 	"pouch_green": false,
 	"pouch_pink": false,
 	"pouch_purple": false,
@@ -65,6 +65,9 @@ func save_game() -> void:
 
 func load_game() -> void:
 	var file = FileAccess.open(save_path, FileAccess.READ)
+
+	if not file:
+		return
 
 	# Retrieve data
 	var json = JSON.new()
