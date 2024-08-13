@@ -19,7 +19,7 @@ var inventory = {
 	"bowtie_yellow": false,
 	"skull_blue": false,
 	"skull_green": false,
-	"skull_pink": false,
+	"skull_pink": true,
 	"skull_purple": false,
 	"skull_red": false,
 	"skull_yellow": false,

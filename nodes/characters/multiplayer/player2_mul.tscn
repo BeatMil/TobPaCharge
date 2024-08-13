@@ -577,6 +577,29 @@ rotation = 0.261799
 position = Vector2(48, -176)
 rotation = 0.523599
 
+[node name="HipsPos" type="Node2D" parent="."]
+
+[node name="big_fireball" type="Marker2D" parent="HipsPos"]
+position = Vector2(24, 1.90735e-06)
+rotation = 0.261799
+
+[node name="fireball" type="Marker2D" parent="HipsPos"]
+position = Vector2(24, 1.90735e-06)
+rotation = 0.261799
+
+[node name="block" type="Marker2D" parent="HipsPos"]
+position = Vector2(32, 8)
+
+[node name="charge" type="Marker2D" parent="HipsPos"]
+position = Vector2(32, 16)
+
+[node name="hitted" type="Marker2D" parent="HipsPos"]
+position = Vector2(128, 24)
+rotation = 0.261799
+
+[node name="idle" type="Marker2D" parent="HipsPos"]
+position = Vector2(32, 8)
+
 [connection signal="button_down" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_button_down"]
 [connection signal="toggled" from="CanvasLayer/Buttons/FireballButton" to="." method="_on_fireball_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_toggled"]
