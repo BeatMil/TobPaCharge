@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cukemiiq0jwyt"]
+[gd_scene load_steps=11 format=3 uid="uid://cukemiiq0jwyt"]
 
 [ext_resource type="Script" path="res://scripts/customize_menu.gd" id="1_j2erc"]
 [ext_resource type="Texture2D" uid="uid://dt5gwa1lpbmwe" path="res://media/sprites/menu/menu_ready_icon/ready_normal_cross.png" id="3_qptmi"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c3prva38mw2hh" path="res://media/SecondChar/SecondChar_idle.png" id="6_auns6"]
 [ext_resource type="AudioStream" uid="uid://gsdkjmi240ja" path="res://media/sfx/menu_cursor_move.wav" id="7_elotd"]
 [ext_resource type="PackedScene" uid="uid://nlvwcfnnwxdq" path="res://nodes/cosmetic_buttons/cosmetic_button.tscn" id="7_rwce2"]
+[ext_resource type="PackedScene" uid="uid://y4r5asmsfab4" path="res://nodes/cosmetic_buttons/cosmetic_hips_button.tscn" id="8_mblc3"]
 
 [sub_resource type="Animation" id="Animation_jbwpw"]
 resource_name = "open_sfx"
@@ -74,47 +75,45 @@ texture = ExtResource("6_auns6")
 [node name="BowtiePos" type="Marker2D" parent="P1Pos"]
 position = Vector2(448, 128)
 
+[node name="HipsPos" type="Marker2D" parent="P1Pos"]
+position = Vector2(464, 312)
+
 [node name="P2Pos" type="Node2D" parent="."]
 
 [node name="BowtiePos" type="Marker2D" parent="P2Pos"]
 position = Vector2(464, 648)
 
+[node name="HipsPos" type="Marker2D" parent="P2Pos"]
+position = Vector2(480, 840)
+
 [node name="DisplayCosmetic" type="Node2D" parent="."]
 
 [node name="BowtieButton" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(960, 32)
-bowtie_type = "bowtie"
-color = "blue"
 
 [node name="BowtieButton2" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1032, 32)
-bowtie_type = "bowtie"
 color = "green"
 
 [node name="BowtieButton3" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1104, 32)
-bowtie_type = "bowtie"
 color = "pink"
 
 [node name="BowtieButton4" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1176, 32)
-bowtie_type = "bowtie"
 color = "purple"
 
 [node name="BowtieButton5" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1248, 32)
-bowtie_type = "bowtie"
 color = "red"
 
 [node name="BowtieButton6" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1320, 32)
-bowtie_type = "bowtie"
 color = "yellow"
 
 [node name="SkullButton" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(960, 104)
 bowtie_type = "skull"
-color = "blue"
 
 [node name="SkullButton2" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1032, 104)
@@ -144,7 +143,6 @@ color = "yellow"
 [node name="GuraButton1" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(960, 176)
 bowtie_type = "gura"
-color = "blue"
 
 [node name="GuraButton2" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1032, 176)
@@ -169,6 +167,87 @@ color = "red"
 [node name="GuraButton6" parent="." instance=ExtResource("7_rwce2")]
 position = Vector2(1320, 176)
 bowtie_type = "gura"
+color = "yellow"
+
+[node name="GunButton" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(960, 248)
+color = "blue"
+
+[node name="GunButton2" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1032, 248)
+color = "green"
+
+[node name="GunButton3" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1104, 248)
+color = "pink"
+
+[node name="GunButton4" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1176, 248)
+color = "purple"
+
+[node name="GunButton5" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1248, 248)
+
+[node name="GunButton6" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1320, 248)
+color = "yellow"
+
+[node name="KunaiButton" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(960, 320)
+hips_type = "kunai"
+color = "blue"
+
+[node name="KunaiButton2" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1032, 320)
+hips_type = "kunai"
+color = "green"
+
+[node name="KunaiButton3" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1104, 320)
+hips_type = "kunai"
+color = "pink"
+
+[node name="KunaiButton4" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1176, 320)
+hips_type = "kunai"
+color = "purple"
+
+[node name="KunaiButton5" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1248, 320)
+hips_type = "kunai"
+
+[node name="KunaiButton6" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1320, 320)
+hips_type = "kunai"
+color = "yellow"
+
+[node name="PouchButton" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(960, 392)
+hips_type = "pouch"
+color = "blue"
+
+[node name="PouchButton2" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1032, 392)
+hips_type = "pouch"
+color = "green"
+
+[node name="PouchButton3" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1104, 392)
+hips_type = "pouch"
+color = "pink"
+
+[node name="PouchButton4" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1176, 392)
+hips_type = "pouch"
+color = "purple"
+
+[node name="PouchButton5" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1248, 392)
+hips_type = "pouch"
+
+[node name="PouchButton6" parent="." instance=ExtResource("8_mblc3")]
+position = Vector2(1320, 392)
+hips_type = "pouch"
 color = "yellow"
 
 [connection signal="button_down" from="TextureButton" to="." method="_on_texture_button_button_down"]

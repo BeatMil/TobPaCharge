@@ -45,6 +45,7 @@ const BACKWIND_VFX_P_1 = preload("res://nodes/particles_effects/backwind_vfx_p1.
 const BACKWIND_VFX_P_2 = preload("res://nodes/particles_effects/backwind_vfx_p2.tscn")
 const HEART_CHARGE = preload("res://nodes/particles_effects/heart_charge.tscn")
 const BOWTIE_TYPE = preload("res://nodes/cosmetics/bowtie_type.tscn")
+const HIPS_TYPE = preload("res://nodes/cosmetics/hips_type.tscn")
 
 
 #################################################
@@ -263,19 +264,49 @@ func _show_cosmetic() -> void:
 	print_rich("[color=Mediumaquamarine ][b]==_show_cosmetic steam_id: %s==[/b][/color]"%Steam.getFriendPersonaName(Steam.getSteamID()))
 	if is_single_player:
 		for i in SteamNetwork.cosmetic_remember:
-			var bowtie = BOWTIE_TYPE.instantiate()
-			bowtie.bowtie_type = i["type"]
-			bowtie.color = i["color"]
-			cosmetics.append(bowtie)
-			add_child(bowtie)
+			var real_type = _determine_cosmetic_type(i["type"])
+			if real_type == "bowtie":
+				var bowtie = BOWTIE_TYPE.instantiate()
+				bowtie.bowtie_type = i["type"]
+				bowtie.color = i["color"]
+				cosmetics.append(bowtie)
+				add_child(bowtie)
+			elif real_type == "hips":
+				var bowtie = HIPS_TYPE.instantiate()
+				bowtie.bowtie_type = i["type"]
+				bowtie.color = i["color"]
+				cosmetics.append(bowtie)
+				add_child(bowtie)
 	else:
 		var _cosmetics = SharedData.steam_id_to_cosmetic_datas[steam_id]
 		for i in _cosmetics:
-			var bowtie = BOWTIE_TYPE.instantiate()
-			bowtie.bowtie_type = i["type"]
-			bowtie.color = i["color"]
-			cosmetics.append(bowtie)
-			add_child(bowtie)
+			var real_type = _determine_cosmetic_type(i["type"])
+			if real_type == "bowtie":
+				var bowtie = BOWTIE_TYPE.instantiate()
+				bowtie.bowtie_type = i["type"]
+				bowtie.color = i["color"]
+				cosmetics.append(bowtie)
+				add_child(bowtie)
+			elif real_type == "hips":
+				var bowtie = HIPS_TYPE.instantiate()
+				bowtie.bowtie_type = i["type"]
+				bowtie.color = i["color"]
+				cosmetics.append(bowtie)
+				add_child(bowtie)
+
+
+func _determine_cosmetic_type(_cosmetic: String) -> String:
+	var bowtie_type = ["bowtie", "gura", "skull"]
+	var hips_type = ["gun", "kunia", "pouch"]
+
+	if _cosmetic in bowtie_type:
+		return "bowtie"
+	
+	if _cosmetic in hips_type:
+		return "hips"
+	
+	return "Error"
+	
 
 
 #################################################

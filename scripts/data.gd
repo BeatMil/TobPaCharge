@@ -29,6 +29,24 @@ var inventory = {
 	"gura_purple": false,
 	"gura_red": false,
 	"gura_yellow": false,
+	"gun_blue": true,
+	"gun_green": false,
+	"gun_pink": false,
+	"gun_purple": false,
+	"gun_red": false,
+	"gun_yellow": false,
+	"kunai_blue": true,
+	"kunai_green": false,
+	"kunai_pink": false,
+	"kunai_purple": false,
+	"kunai_red": false,
+	"kunai_yellow": false,
+	"pouch_blue": true,
+	"pouch_green": false,
+	"pouch_pink": false,
+	"pouch_purple": false,
+	"pouch_red": false,
+	"pouch_yellow": false,
 }
 
 
@@ -55,7 +73,7 @@ func load_game() -> void:
 		var data_received = json.data
 		if typeof(data_received) == TYPE_DICTIONARY:
 			print(data_received) # Prints array
-			inventory = data_received
+			inventory.merge(data_received, true)
 		else:
 			print("Unexpected data")
 	else:
