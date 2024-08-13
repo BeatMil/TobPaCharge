@@ -77,7 +77,7 @@ func _spawn_hips_gacha(_type, _color) -> void:
 
 func _determine_cosmetic_type(_cosmetic: String) -> String:
 	var bowtie_type = ["bowtie", "gura", "skull"]
-	var hips_type = ["gun", "kunia", "pouch"]
+	var hips_type = ["gun", "kunai", "pouch"]
 
 	if _cosmetic in bowtie_type:
 		return "bowtie"

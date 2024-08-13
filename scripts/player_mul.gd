@@ -263,20 +263,24 @@ func _show_cosmetic() -> void:
 	# if steam_id == 0 or (not is_bot and SteamNetwork.steam_id == steam_id):
 	print_rich("[color=Mediumaquamarine ][b]==_show_cosmetic steam_id: %s==[/b][/color]"%Steam.getFriendPersonaName(Steam.getSteamID()))
 	if is_single_player:
+		print("==BOB1==")
 		for i in SteamNetwork.cosmetic_remember:
 			var real_type = _determine_cosmetic_type(i["type"])
 			if real_type == "bowtie":
+				print("==BOB3==")
 				var bowtie = BOWTIE_TYPE.instantiate()
 				bowtie.bowtie_type = i["type"]
 				bowtie.color = i["color"]
 				cosmetics.append(bowtie)
 				add_child(bowtie)
 			elif real_type == "hips":
+				print("==BOB2==")
 				var bowtie = HIPS_TYPE.instantiate()
 				bowtie.bowtie_type = i["type"]
 				bowtie.color = i["color"]
 				cosmetics.append(bowtie)
 				add_child(bowtie)
+			print("==BOB4==")
 	else:
 		var _cosmetics = SharedData.steam_id_to_cosmetic_datas[steam_id]
 		for i in _cosmetics:
@@ -297,7 +301,7 @@ func _show_cosmetic() -> void:
 
 func _determine_cosmetic_type(_cosmetic: String) -> String:
 	var bowtie_type = ["bowtie", "gura", "skull"]
-	var hips_type = ["gun", "kunia", "pouch"]
+	var hips_type = ["gun", "kunai", "pouch"]
 
 	if _cosmetic in bowtie_type:
 		return "bowtie"
