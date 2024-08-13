@@ -37,6 +37,17 @@ func run_gacha() -> void:
 	animation_player.play("run_gacha")
 	label_player.play("pop_in")
 
+	# Get achievement!
+	if _count_inventory() >= 36:
+		SteamNetwork.activate_first_achivement("COSMETIC_36_GET")
+		print("achivement bob")
+	elif _count_inventory() >= 10:
+		SteamNetwork.activate_first_achivement("COSMETIC_10_GET")
+		print("achivement bob10")
+	elif _count_inventory() >= 5:
+		SteamNetwork.activate_first_achivement("COSMETIC_5_GET")
+		print("achivement bob5")
+
 
 #############################################################
 ## Private functions
@@ -57,6 +68,14 @@ func _random_gacha() -> String:
 	## It should never reach here
 	## But just in case I put bowtie_blue so it doesn't break
 	return "bowtie_blue"
+
+
+func _count_inventory() -> int:
+	var item_amount = 0
+	for i in Data.inventory:
+		if Data.inventory[i]:
+			item_amount += 1
+	return item_amount
 
 
 func _spawn_bowtie_gacha(_type, _color) -> void:
