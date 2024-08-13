@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://y4r5asmsfab4"]
+[gd_scene load_steps=25 format=3 uid="uid://y4r5asmsfab4"]
 
 [ext_resource type="Script" path="res://scripts/cosmetic_hips_button.gd" id="1_du18d"]
 [ext_resource type="Texture2D" uid="uid://df214t6cq1wy2" path="res://media/sprites/cosmetics/hips/gun.png" id="3_2y1wl"]
@@ -6,6 +6,12 @@
 [ext_resource type="AudioStream" uid="uid://bjmgpfd2fddy7" path="res://media/sfx/unequip01.wav" id="5_2bec5"]
 [ext_resource type="Texture2D" uid="uid://dwjl27na3136a" path="res://media/sprites/cosmetics/hips/pouch.png" id="5_4pdb4"]
 [ext_resource type="AudioStream" uid="uid://cec56ibq6ud66" path="res://media/sfx/equip01.wav" id="6_by4gw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gov1"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tylh4"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_63rrf"]
 length = 0.001
@@ -248,6 +254,8 @@ self_modulate = Color(0.338921, 0.776409, 0.448293, 1)
 offset_right = 8.0
 offset_bottom = 8.0
 focus_mode = 0
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3gov1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_tylh4")
 toggle_mode = true
 icon = ExtResource("3_2y1wl")
 

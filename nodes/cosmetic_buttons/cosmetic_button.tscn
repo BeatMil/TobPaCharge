@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://nlvwcfnnwxdq"]
+[gd_scene load_steps=25 format=3 uid="uid://nlvwcfnnwxdq"]
 
 [ext_resource type="Script" path="res://scripts/cosmetic_button.gd" id="1_x0i6a"]
 [ext_resource type="Texture2D" uid="uid://deye5gfphrxm7" path="res://media/sprites/cosmetics/bowtie_64.png" id="2_ic8de"]
@@ -6,6 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://c6h3j8au0ihfl" path="res://media/sprites/cosmetics/skull.png" id="4_3i8sn"]
 [ext_resource type="AudioStream" uid="uid://cec56ibq6ud66" path="res://media/sfx/equip01.wav" id="5_5s3tn"]
 [ext_resource type="AudioStream" uid="uid://bjmgpfd2fddy7" path="res://media/sfx/unequip01.wav" id="6_rav4n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cxwwa"]
+bg_color = Color(1, 1, 1, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_to5wf"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_63rrf"]
 length = 0.001
@@ -248,6 +255,8 @@ self_modulate = Color(0.338921, 0.776409, 0.448293, 1)
 offset_right = 8.0
 offset_bottom = 8.0
 focus_mode = 0
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cxwwa")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_to5wf")
 toggle_mode = true
 icon = ExtResource("2_ic8de")
 
