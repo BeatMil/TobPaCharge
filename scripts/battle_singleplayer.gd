@@ -45,6 +45,9 @@ func _setup_player() -> void:
 		print_rich("[color=orange][b]Game Start!!∑d(°∀°d)[/b][/color]")
 	else:
 		printerr("not enough players!")
+		## For Cosmetics
+		player1.steam_id = SteamNetwork.steam_id
+		# player2.steam_id = SteamNetwork.steam_id
 		# SceneTransition.change_scene("res://scenes/main_menu.tscn")
 	think_time_display.time_to_think = time_control
 

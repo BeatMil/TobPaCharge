@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://2lsddk8e4cj6"]
+[gd_scene load_steps=7 format=3 uid="uid://2lsddk8e4cj6"]
 
 [ext_resource type="AudioStream" uid="uid://v50dvjdagkbe" path="res://media/music/forestSong.wav" id="1_l4q4r"]
+[ext_resource type="AudioStream" uid="uid://bp8o1ckp17mu2" path="res://media/music/beat_river_city_detention.wav" id="2_gggya"]
 [ext_resource type="Script" path="res://scripts/ost_player.gd" id="2_w0idd"]
 
 [sub_resource type="Animation" id="Animation_1j4ry"]
@@ -23,9 +24,30 @@ tracks/0/keys = {
 }
 tracks/0/use_blend = true
 
+[sub_resource type="Animation" id="Animation_hgh6i"]
+resource_name = "battle_ost_beat"
+length = 38.4
+loop_mode = 1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OstPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_gggya")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kwjhh"]
 _data = {
-"battle_ost": SubResource("Animation_1j4ry")
+"battle_ost": SubResource("Animation_1j4ry"),
+"battle_ost_beat": SubResource("Animation_hgh6i")
 }
 
 [node name="OstPlayer" type="AnimationPlayer"]

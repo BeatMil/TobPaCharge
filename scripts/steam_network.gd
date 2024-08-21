@@ -11,6 +11,7 @@ var steam_id: int = 0
 var steam_username: String = ""
 var lobby_id: int = 0
 var lobby_members: Array = []
+var volume_slider: float = -15
 
 # helpers
 var p1_score: int = 0
@@ -18,6 +19,20 @@ var p2_score: int = 0
 
 # Configs
 var appId: int = 480
+# 3094590
+
+
+# skills
+enum skills {
+	DOUBLE_FIREBALL,
+	HEART_CHARGE
+}
+var current_skill = -1
+
+# cosmetics
+# var cosmetics_nodes_p1: Array = []
+# var cosmetics_nodes_p2: Array = []
+var cosmetic_remember: Array = []
 
 
 #Steam Multiplayer thingy
@@ -89,6 +104,11 @@ func update_lobby_members() -> void:
 func clear_score() -> void:
 	p1_score = 0
 	p2_score = 0
+
+
+@rpc("any_peer", "call_local")
+func send_cosmetic_to_shared_data(steam_id: int, _data: Array) -> void:
+	SharedData.steam_id_to_cosmetic_datas[steam_id] = _data
 
 
 @rpc("call_local")

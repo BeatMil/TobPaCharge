@@ -1,0 +1,381 @@
+[gd_scene load_steps=25 format=3 uid="uid://bxle3fb82cp5f"]
+
+[ext_resource type="Script" path="res://scripts/hips_type.gd" id="1_wff2v"]
+[ext_resource type="Texture2D" uid="uid://df214t6cq1wy2" path="res://media/sprites/cosmetics/hips/gun.png" id="2_qhyye"]
+[ext_resource type="Texture2D" uid="uid://dm4jhwllgcuqw" path="res://media/sprites/cosmetics/hips/kunai.png" id="3_wmm0u"]
+[ext_resource type="Texture2D" uid="uid://dwjl27na3136a" path="res://media/sprites/cosmetics/hips/pouch.png" id="4_v48r5"]
+
+[sub_resource type="Animation" id="Animation_kjk86"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wrap/Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_eqxj3"]
+resource_name = "block"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -20), Vector2(0, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_dtg87"]
+resource_name = "dance"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t4dir"]
+resource_name = "hitted"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(100, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rnnia"]
+resource_name = "hitted_p1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(100, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ysxrc"]
+resource_name = "hitted_p2"
+length = 0.33
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-100, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1own"]
+_data = {
+"RESET": SubResource("Animation_kjk86"),
+"block": SubResource("Animation_eqxj3"),
+"dance": SubResource("Animation_dtg87"),
+"hitted": SubResource("Animation_t4dir"),
+"hitted_p1": SubResource("Animation_rnnia"),
+"hitted_p2": SubResource("Animation_ysxrc")
+}
+
+[sub_resource type="Animation" id="Animation_mnm5f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_qhyye")]
+}
+
+[sub_resource type="Animation" id="Animation_oee2v"]
+resource_name = "gun"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_qhyye")]
+}
+
+[sub_resource type="Animation" id="Animation_whnvg"]
+resource_name = "kunai"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_wmm0u")]
+}
+
+[sub_resource type="Animation" id="Animation_yqcig"]
+resource_name = "pouch"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_v48r5")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bcitf"]
+_data = {
+"RESET": SubResource("Animation_mnm5f"),
+"gun": SubResource("Animation_oee2v"),
+"kunai": SubResource("Animation_whnvg"),
+"pouch": SubResource("Animation_yqcig")
+}
+
+[sub_resource type="Animation" id="Animation_b2doq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.175875, 0.3342, 0.776409, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.175875, 0.3342, 0.776409, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_knb02"]
+resource_name = "blue"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.175875, 0.3342, 0.776409, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.175875, 0.3342, 0.776409, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_m4ffq"]
+resource_name = "green"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.338921, 0.776409, 0.448293, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.338921, 0.776409, 0.448293, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yj71n"]
+resource_name = "pink"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.898438, 0.565495, 0.872384, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ymnih"]
+resource_name = "purple"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.621836, 0.362143, 0.84375, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_phv1p"]
+resource_name = "red"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.776409, 0.29626, 0.325241, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uoyle"]
+resource_name = "yellow"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wrap/Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.976562, 0.957317, 0.400758, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qt8tl"]
+_data = {
+"RESET": SubResource("Animation_b2doq"),
+"blue": SubResource("Animation_knb02"),
+"green": SubResource("Animation_m4ffq"),
+"pink": SubResource("Animation_yj71n"),
+"purple": SubResource("Animation_ymnih"),
+"red": SubResource("Animation_phv1p"),
+"yellow": SubResource("Animation_uoyle")
+}
+
+[node name="HipsType" type="Node2D"]
+script = ExtResource("1_wff2v")
+
+[node name="Wrap" type="Node2D" parent="."]
+editor_description = "For rotating but not move in that rotated direction...
+
+I hope this is understandable XD"
+
+[node name="Sprite" type="Sprite2D" parent="Wrap"]
+self_modulate = Color(0.175875, 0.3342, 0.776409, 1)
+texture = ExtResource("2_qhyye")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b1own")
+}
+
+[node name="SpritePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bcitf")
+}
+
+[node name="ColorPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qt8tl")
+}

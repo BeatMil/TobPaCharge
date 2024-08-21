@@ -1,19 +1,23 @@
-[gd_scene load_steps=24 format=3 uid="uid://d30b2qwpstgt4"]
+[gd_scene load_steps=30 format=3 uid="uid://d30b2qwpstgt4"]
 
-[ext_resource type="Script" path="res://nodes/characters/multiplayer/player_mul.gd" id="1_ep8rt"]
+[ext_resource type="Script" path="res://scripts/player_mul.gd" id="1_ep8rt"]
 [ext_resource type="PackedScene" uid="uid://cua0jhtddpgu3" path="res://nodes/very_cool_buttons/very_cool_block_button.tscn" id="3_mim8e"]
 [ext_resource type="AudioStream" uid="uid://ceqtyf8i6pfjq" path="res://media/sfx/big_fireball.wav" id="4_82uu1"]
 [ext_resource type="AudioStream" uid="uid://cs2av37h3qptr" path="res://media/sfx/block.wav" id="4_ifsn1"]
 [ext_resource type="Texture2D" uid="uid://c8ci17o62bjjg" path="res://media/FirstChar/FirstChar_block_color.png" id="4_qfw1n"]
 [ext_resource type="PackedScene" uid="uid://bbcwbus8mbbec" path="res://nodes/very_cool_buttons/very_cool_big_fireball_button.tscn" id="4_s4ucm"]
 [ext_resource type="Texture2D" uid="uid://dc3shpkjxt0c2" path="res://media/FirstChar/FirstChar_charge_color.png" id="6_4c8i3"]
+[ext_resource type="PackedScene" uid="uid://clsmp4hvp8olb" path="res://nodes/very_cool_buttons/very_cool_double_fireball_button.tscn" id="6_fo5cf"]
 [ext_resource type="AudioStream" uid="uid://bocx334wnhp3u" path="res://media/sfx/charge01.wav" id="6_iugao"]
+[ext_resource type="PackedScene" uid="uid://cr7oyuywcdt5v" path="res://nodes/very_cool_buttons/very_cool_heart_charge_button.tscn" id="7_ucawa"]
 [ext_resource type="Texture2D" uid="uid://dwwkvmtef7cqy" path="res://media/FirstChar/FirstChar_hitted_color.png" id="8_c3p1c"]
 [ext_resource type="Texture2D" uid="uid://dctbsxjcvn1hm" path="res://media/FirstChar/FirstChar_fireball_color.png" id="8_rtwa8"]
 [ext_resource type="AudioStream" uid="uid://ntpovytul8qr" path="res://media/sfx/boss_damaged.wav" id="9_ag5du"]
 [ext_resource type="Texture2D" uid="uid://cn45jrmt425rr" path="res://media/FirstChar/FirstChar_idle.png" id="10_bm8lq"]
 [ext_resource type="PackedScene" uid="uid://b732gs6p4vb3i" path="res://nodes/charge_meter.tscn" id="10_dnqw3"]
 [ext_resource type="PackedScene" uid="uid://km0bq0gsqwmw" path="res://nodes/very_cool_buttons/very_cool_fireball_button.tscn" id="12_7db1n"]
+[ext_resource type="AudioStream" uid="uid://dr2dk0uksccql" path="res://media/sfx/laser_start02.wav" id="17_s0lph"]
+[ext_resource type="PackedScene" uid="uid://x56vsw8e3d8j" path="res://nodes/heart_charge_icon.tscn" id="18_lxxk7"]
 
 [sub_resource type="Animation" id="Animation_0vekx"]
 length = 0.001
@@ -231,6 +235,22 @@ tracks/3/keys = {
 "values": [Color(0.942774, 0.847968, 0.328243, 0.454902)]
 }
 
+[sub_resource type="Animation" id="Animation_oeo50"]
+resource_name = "double_fireball"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("8_rtwa8"), ExtResource("10_bm8lq"), ExtResource("8_rtwa8")]
+}
+
 [sub_resource type="Animation" id="Animation_n7kqx"]
 resource_name = "fireball"
 length = 0.6
@@ -245,6 +265,75 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("8_rtwa8")]
+}
+
+[sub_resource type="Animation" id="Animation_wxit1"]
+resource_name = "heart_charge"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_4c8i3")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("17_s0lph")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/ColorRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-203, 276), Vector2(-203, -343)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/ColorRect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.942774, 0.847968, 0.328243, 0.454902)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_heart_charge"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_m2n50"]
@@ -324,7 +413,9 @@ _data = {
 "big_fireball": SubResource("Animation_lptgh"),
 "block": SubResource("Animation_l5ppu"),
 "charge": SubResource("Animation_pfoks"),
+"double_fireball": SubResource("Animation_oeo50"),
 "fireball": SubResource("Animation_n7kqx"),
+"heart_charge": SubResource("Animation_wxit1"),
 "hitted": SubResource("Animation_m2n50"),
 "idle": SubResource("Animation_tv0p2")
 }
@@ -336,6 +427,10 @@ size = Vector2(152, 454)
 script = ExtResource("1_ep8rt")
 
 [node name="CanvasLayerPublic" type="CanvasLayer" parent="."]
+
+[node name="HeartChargeIcon" parent="CanvasLayerPublic" instance=ExtResource("18_lxxk7")]
+position = Vector2(688, 72)
+scale = Vector2(0.5, 0.5)
 
 [node name="ChargeMeter" parent="CanvasLayerPublic" instance=ExtResource("10_dnqw3")]
 unique_name_in_owner = true
@@ -366,27 +461,43 @@ offset_bottom = 424.0
 
 [node name="FireballButton" parent="CanvasLayer/Buttons" instance=ExtResource("12_7db1n")]
 layout_mode = 0
-offset_left = 96.0
+offset_left = 88.0
 offset_top = 376.0
-offset_right = 608.0
+offset_right = 600.0
 offset_bottom = 888.0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.25, 0.25)
 
 [node name="BlockButton" parent="CanvasLayer/Buttons" instance=ExtResource("3_mim8e")]
 layout_mode = 0
-offset_left = 480.0
-offset_top = 376.0
-offset_right = 992.0
-offset_bottom = 888.0
-scale = Vector2(0.5, 0.5)
+offset_left = 88.0
+offset_top = 512.0
+offset_right = 600.0
+offset_bottom = 1024.0
+scale = Vector2(0.25, 0.25)
 
 [node name="BigFireBallButton" parent="CanvasLayer/Buttons" instance=ExtResource("4_s4ucm")]
 layout_mode = 0
-offset_left = 288.0
-offset_top = 200.0
-offset_right = 800.0
-offset_bottom = 712.0
-scale = Vector2(0.5, 0.5)
+offset_left = 376.0
+offset_top = 376.0
+offset_right = 888.0
+offset_bottom = 888.0
+scale = Vector2(0.25, 0.25)
+
+[node name="DoubleFireballButton" parent="CanvasLayer/Buttons" instance=ExtResource("6_fo5cf")]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 376.0
+offset_right = 744.0
+offset_bottom = 888.0
+scale = Vector2(0.25, 0.25)
+
+[node name="HeartChargeButton" parent="CanvasLayer/Buttons" instance=ExtResource("7_ucawa")]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 512.0
+offset_right = 744.0
+offset_bottom = 1024.0
+scale = Vector2(0.25, 0.25)
 
 [node name="ChargeButton" type="Button" parent="CanvasLayer/Buttons"]
 layout_mode = 0
@@ -442,8 +553,60 @@ shape = SubResource("RectangleShape2D_1yon4")
 [node name="backwindMarker2D" type="Marker2D" parent="."]
 position = Vector2(-184, 152)
 
+[node name="BowtiePos" type="Node2D" parent="."]
+
+[node name="big_fireball" type="Marker2D" parent="BowtiePos"]
+position = Vector2(56, -160)
+rotation = 0.261799
+
+[node name="fireball" type="Marker2D" parent="BowtiePos"]
+position = Vector2(56, -160)
+rotation = 0.261799
+
+[node name="block" type="Marker2D" parent="BowtiePos"]
+position = Vector2(-40, -200)
+rotation = 0.261799
+
+[node name="charge" type="Marker2D" parent="BowtiePos"]
+position = Vector2(-40, -200)
+
+[node name="hitted" type="Marker2D" parent="BowtiePos"]
+position = Vector2(-184, -128)
+rotation = 0.261799
+
+[node name="idle" type="Marker2D" parent="BowtiePos"]
+position = Vector2(-56, -176)
+rotation = -0.523598
+
+[node name="HipsPos" type="Node2D" parent="."]
+
+[node name="big_fireball" type="Marker2D" parent="HipsPos"]
+position = Vector2(-32, 32)
+rotation = 0.261799
+
+[node name="fireball" type="Marker2D" parent="HipsPos"]
+position = Vector2(-32, 32)
+rotation = 0.261799
+
+[node name="block" type="Marker2D" parent="HipsPos"]
+position = Vector2(-48, -32)
+rotation = 0.261799
+
+[node name="charge" type="Marker2D" parent="HipsPos"]
+position = Vector2(-32, 8)
+
+[node name="hitted" type="Marker2D" parent="HipsPos"]
+position = Vector2(-208, 48)
+rotation = 0.261799
+
+[node name="idle" type="Marker2D" parent="HipsPos"]
+position = Vector2(-40, 7.99998)
+
 [connection signal="toggled" from="CanvasLayer/Buttons/FireballButton" to="." method="_on_fireball_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/Buttons/BlockButton" to="." method="_on_block_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/Buttons/BigFireBallButton" to="." method="_on_big_fire_ball_button_toggled"]
+[connection signal="toggled" from="CanvasLayer/Buttons/DoubleFireballButton" to="." method="_on_double_fireball_button_toggled"]
+[connection signal="toggled" from="CanvasLayer/Buttons/HeartChargeButton" to="." method="_on_heart_charge_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/Buttons/ChargeButton" to="." method="_on_charge_button_button_down"]
+[connection signal="current_animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_current_animation_changed"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

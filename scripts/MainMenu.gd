@@ -1,7 +1,9 @@
 extends Control
 
 
-# Properties
+#############################################################
+## Nodes References
+#############################################################
 @onready var vbox_member: VBoxContainer = $"VBoxMember"
 @onready var versus_bot_button: Node2D = $MenuButtons/VersusBotButton
 @onready var create_lobby_button: Node2D = $MenuButtons/CreateLobbyButton
@@ -9,10 +11,14 @@ extends Control
 @onready var start_game_button: Node2D = $MenuButtons/StartGameButton
 @onready var leave_lobby_button: Node2D = $MenuButtons/LeaveLobbyButton
 @onready var menu_buttons: Node2D = $MenuButtons
-@onready var menu_buttons_player: AnimationPlayer = $MenuButtons/MenuButtonsPlayer
+@onready var menu_buttons_player: AnimationPlayer = $MenuButtons/MenuButtonsPlayer # no use
 @onready var sound_slider: VSlider = %SoundSlider
 @onready var lobby_panel_player: AnimationPlayer = $LobbyPanel/LobbyPanelPlayer
 @onready var hunter_note: Node2D = $HunterNote
+@onready var skill_menu: Node2D = $SkillMenu
+@onready var menu_waifu_idle: Sprite2D = $MenuButtons/MenuWaifuIdle
+@onready var customize_button: CoolMenuButton = $MenuButtons/CustomizeButton
+@onready var customize_menu: Node2D = $CustomizeMenu
 
 
 #################################################
@@ -25,6 +31,10 @@ extends Control
 #################################################
 # Built-in
 #################################################
+func _init() -> void:
+	Data.load_game()
+
+
 func _ready():
 	SteamNetwork.activate_first_achivement("OPEN_GAME")
 	SteamNetwork.clear_score()
@@ -32,7 +42,10 @@ func _ready():
 	update_lobby_members()
 
 	OstPlayer.stop_battle_ost()
-
+	sound_slider.value = SteamNetwork.volume_slider
+	
+	skill_menu.visible = false
+	menu_waifu_idle.connect("on_press", _open_skill_menu)
 
 func _process(delta):
 	AudioServer.set_bus_volume_db(0, sound_slider.value)
@@ -61,6 +74,10 @@ func _outside_lobby_buttons() -> void:
 	lobby_panel_player.play("off")
 
 
+func _open_skill_menu() -> void:
+	skill_menu.open()
+
+
 #################################################
 # Public functions
 #################################################
@@ -85,6 +102,10 @@ func update_lobby_members() -> void:
 		lobby_member.connect("ready_state_change", check_ready)
 		vbox_member.add_child(lobby_member)
 
+		# check steam name here
+		if member_steam_id == Steam.getSteamID():
+			skill_menu.lobby_member_to_show_skill = lobby_member
+
 	# Update buttons disabled mode
 	if SteamNetwork.lobby_members:
 		_in_lobby_buttons()
@@ -102,6 +123,10 @@ func check_ready() -> void:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
+	SteamNetwork.rpc("send_cosmetic_to_shared_data", 
+		SteamNetwork.steam_id,
+		SteamNetwork.cosmetic_remember
+	)
 	SceneTransition.change_scene("res://scenes/battle_multiplayer.tscn")
 
 
@@ -160,7 +185,12 @@ func _on_leave_lobby_on_press() -> void:
 
 func _on_exit_button_on_press() -> void:
 	#get_tree().quit()
+	Data.save_game()
 	OS.kill(OS.get_process_id()) # quit game fast!! but there maybe side effects...
+
+
+func _on_customize_button_on_press() -> void:
+	customize_menu.set_deferred("visible", true)
 
 
 #################################################
@@ -173,3 +203,7 @@ func _on_menu_background_animation_finished() -> void:
 
 func _on_hunter_notes_button_on_press() -> void:
 	hunter_note.set_deferred("visible", true)
+
+
+func _on_sound_slider_value_changed(value: float) -> void:
+	SteamNetwork.volume_slider = value

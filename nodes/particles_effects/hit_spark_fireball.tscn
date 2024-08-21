@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bs8vtp2yca0ty"]
+[gd_scene load_steps=7 format=3 uid="uid://bs8vtp2yca0ty"]
 
+[ext_resource type="Script" path="res://scripts/particle.gd" id="1_6jd5r"]
 [ext_resource type="Texture2D" uid="uid://fifvaalavhph" path="res://media/sprites/particle_effects/floaty_128.png" id="2_6ck3x"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2qujg"]
@@ -26,12 +27,19 @@ color_initial_ramp = SubResource("GradientTexture1D_c0854")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="Node2D" type="Node2D"]
+[node name="HitSparkFireball" type="Node2D"]
+script = ExtResource("1_6jd5r")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_2qujg")
+emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_bia1m")
 texture = ExtResource("2_6ck3x")
+one_shot = true
 speed_scale = 2.0
 fixed_fps = 0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

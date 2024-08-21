@@ -10,14 +10,20 @@ extends Node2D
 @onready var canvaslayer: CanvasLayer = $CanvasLayer
 @onready var buttons: Control = $CanvasLayer/Buttons
 @onready var big_fireball_button: TextureButton = $CanvasLayer/Buttons/BigFireBallButton
+@onready var double_fireball_button: TextureButton = $CanvasLayer/Buttons/DoubleFireballButton
 @onready var charge_button: Button = $CanvasLayer/Buttons/ChargeButton
-
+@onready var heart_charge_button: TextureButton = $CanvasLayer/Buttons/HeartChargeButton
 @onready var charge_meter = %ChargeMeter
 @onready var backwind_marker_2d = $backwindMarker2D
 @onready var fireball_button: TextureButton = $CanvasLayer/Buttons/FireballButton
 @onready var block_button: TextureButton = $CanvasLayer/Buttons/BlockButton
+@onready var heart_charge_icon: Node2D = $CanvasLayerPublic/HeartChargeIcon
+@onready var bowtie_pos: Node2D = $BowtiePos
 
 
+#################################################
+## Bots enums
+#################################################
 var bot_actions = {
 	0: _on_charge_button_button_down,
 	1: _on_block_button_toggled,
@@ -29,6 +35,7 @@ var bot_actions_defense = {
 	1: _on_block_button_toggled,
 }
 
+
 #################################################
 ## Preloads
 #################################################
@@ -36,12 +43,17 @@ const FIREBALL = preload("res://nodes/fireball.tscn")
 const BIGFIREBALL = preload("res://nodes/big_fireball.tscn")
 const BACKWIND_VFX_P_1 = preload("res://nodes/particles_effects/backwind_vfx_p1.tscn")
 const BACKWIND_VFX_P_2 = preload("res://nodes/particles_effects/backwind_vfx_p2.tscn")
+const HEART_CHARGE = preload("res://nodes/particles_effects/heart_charge.tscn")
+const BOWTIE_TYPE = preload("res://nodes/cosmetics/bowtie_type.tscn")
+const HIPS_TYPE = preload("res://nodes/cosmetics/hips_type.tscn")
 
 
 #################################################
 # properties
 #################################################
 var charge_count: int = 0
+var double_fireball_can_use_left = 1
+var heart_charge_can_use_left = 1
 var steam_id: int = 0:
 	set(_id):
 		steam_id = _id
@@ -49,9 +61,15 @@ var steam_id: int = 0:
 			canvaslayer.visible = false
 			action_label.visible = false
 		charge_button.visible = false # show only in testing
+		if is_single_player:
+			_show_cosmetic()
+		else:
+			rpc("_show_cosmetic")
 var is_action_choosed:bool = false
+var heart_charge_require_charges = 1
 @export var is_bot: bool = false
 @export var is_single_player: bool = false
+@onready var cosmetics: Array = []
 
 
 #################################################
@@ -152,6 +170,23 @@ func resolve_phase():
 			spawn_fireball("normal")
 			charge_count -= 1
 			charge_meter.discharge()
+	elif chosen_action == ActionEnum.actions.DOUBLEFIREBALL:
+		animation_player.play("double_fireball")
+		if charge_count > 0 and double_fireball_can_use_left > 0:
+			spawn_fireball("normal")
+			await get_tree().create_timer(0.2).timeout
+			spawn_fireball("normal")
+			charge_count -= 1
+			double_fireball_can_use_left -= 1
+			charge_meter.discharge()
+	elif chosen_action == ActionEnum.actions.HEARTCHARGE:
+		if charge_count >= heart_charge_require_charges and heart_charge_can_use_left > 0:
+			animation_player.play("heart_charge")
+			hp += 1
+			charge_count -= heart_charge_require_charges
+			heart_charge_can_use_left -= 1
+			charge_meter.discharge()
+			heart_charge_icon.play_pop_up()
 	elif chosen_action == ActionEnum.actions.BLOCK:
 		animation_player.play("block")
 	elif chosen_action == ActionEnum.actions.CHARGE:
@@ -186,6 +221,22 @@ func new_turn():
 		else:
 			big_fireball_button.set_deferred("visible", false)
 
+		# Double fireball
+		## Disable double ball button when (below)
+		if (double_fireball_can_use_left <= 0 or charge_count < 1) \
+			or not SteamNetwork.current_skill == SteamNetwork.skills.DOUBLE_FIREBALL:
+			double_fireball_button.set_deferred("disabled", true)
+		if SteamNetwork.current_skill != SteamNetwork.skills.DOUBLE_FIREBALL:
+			double_fireball_button.set_deferred("visible", false)
+
+		# Heart charge
+		## Disable heart change button when (below)
+		if (heart_charge_can_use_left <= 0 or charge_count < heart_charge_require_charges) \
+				or not SteamNetwork.current_skill == SteamNetwork.skills.HEART_CHARGE:
+			heart_charge_button.set_deferred("disabled", true)
+		if SteamNetwork.current_skill != SteamNetwork.skills.HEART_CHARGE:
+			heart_charge_button.set_deferred("visible", false)
+
 
 #################################################
 ## private functions
@@ -201,6 +252,67 @@ func _spawn_backwind_vfx() -> void:
 		add_child(vfx)
 
 
+func _spawn_heart_charge() -> void:
+	var heart_charge = HEART_CHARGE.instantiate()
+	heart_charge.position += Vector2(0, -200)
+	add_child(heart_charge)
+
+
+@rpc("any_peer")
+func _show_cosmetic() -> void:
+	# if steam_id == 0 or (not is_bot and SteamNetwork.steam_id == steam_id):
+	print_rich("[color=Mediumaquamarine ][b]==_show_cosmetic steam_id: %s==[/b][/color]"%Steam.getFriendPersonaName(Steam.getSteamID()))
+	if is_single_player:
+		print("==BOB1==")
+		for i in SteamNetwork.cosmetic_remember:
+			var real_type = _determine_cosmetic_type(i["type"])
+			if real_type == "bowtie":
+				print("==BOB3==")
+				var bowtie = BOWTIE_TYPE.instantiate()
+				bowtie.bowtie_type = i["type"]
+				bowtie.color = i["color"]
+				cosmetics.append(bowtie)
+				add_child(bowtie)
+			elif real_type == "hips":
+				print("==BOB2==")
+				var bowtie = HIPS_TYPE.instantiate()
+				bowtie.bowtie_type = i["type"]
+				bowtie.color = i["color"]
+				cosmetics.append(bowtie)
+				add_child(bowtie)
+			print("==BOB4==")
+	else:
+		var _cosmetics = SharedData.steam_id_to_cosmetic_datas[steam_id]
+		for i in _cosmetics:
+			var real_type = _determine_cosmetic_type(i["type"])
+			if real_type == "bowtie":
+				var bowtie = BOWTIE_TYPE.instantiate()
+				bowtie.bowtie_type = i["type"]
+				bowtie.color = i["color"]
+				cosmetics.append(bowtie)
+				add_child(bowtie)
+			elif real_type == "hips":
+				var bowtie = HIPS_TYPE.instantiate()
+				bowtie.bowtie_type = i["type"]
+				bowtie.color = i["color"]
+				cosmetics.append(bowtie)
+				add_child(bowtie)
+
+
+func _determine_cosmetic_type(_cosmetic: String) -> String:
+	var bowtie_type = ["bowtie", "gura", "skull"]
+	var hips_type = ["gun", "kunai", "pouch"]
+
+	if _cosmetic in bowtie_type:
+		return "bowtie"
+	
+	if _cosmetic in hips_type:
+		return "hips"
+	
+	return "Error"
+	
+
+
 #################################################
 ## Signals
 #################################################
@@ -209,12 +321,17 @@ func _on_area_2d_area_entered(area):
 		if chosen_action not in [ActionEnum.actions.BLOCK]:
 			print_rich("[color=Silver ][b]Hit by fireball action: %s[/b][/color]"%
 			chosen_action)
+			animation_player.stop()
 			animation_player.play("hitted")
+			if hp > 1:
+				heart_charge_icon.play_pop_down()
 			hp -= 1
 	elif area.is_in_group("big_fireball"):
 		print_rich("[color=Deeppink][b]GOT HIT BY BIG_FIREBALL[/b][/color]")
 		if chosen_action not in [ActionEnum.actions.BIGFIREBALL]:
 			animation_player.play("hitted")
+			if hp > 1:
+				heart_charge_icon.play_pop_down()
 			hp -= 1
 
 
@@ -247,6 +364,22 @@ func _on_fireball_button_toggled(toggled_on):
 		fireball_button.set_block_touch(true)
 
 
+func _on_double_fireball_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		rpc("do_the_action", ActionEnum.actions.DOUBLEFIREBALL)
+		set_disable_all_buttons(true)
+		double_fireball_button.set_deferred("disabled", false)
+		double_fireball_button.set_block_touch(true)
+
+
+func _on_heart_charge_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		rpc("do_the_action", ActionEnum.actions.HEARTCHARGE)
+		set_disable_all_buttons(true)
+		heart_charge_button.set_deferred("disabled", false)
+		heart_charge_button.set_block_touch(true)
+
+
 func _on_block_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		rpc("do_the_action", ActionEnum.actions.BLOCK)
@@ -266,6 +399,28 @@ func _on_big_fire_ball_button_toggled(toggled_on: bool) -> void:
 		set_disable_all_buttons(true)
 		big_fireball_button.set_deferred("disabled", false)
 		big_fireball_button.set_block_touch(true)
+
+
+func _on_animation_player_current_animation_changed(_name: String) -> void:
+	if _name == "idle":
+		for i in cosmetics:
+			i.set_pos_idle()
+	if _name == "charge":
+		for i in cosmetics:
+			i.set_pos_charge()
+	if _name == "fireball" or _name == "big_fireball":
+		for i in cosmetics:
+			i.set_pos_fireball()
+	if _name == "block":
+		for i in cosmetics:
+			i.set_pos_block()
+	if _name == "hitted":
+		if name == "Player1":
+			for i in cosmetics:
+				i.set_pos_hitted_p1()
+		elif name == "Player2":
+			for i in cosmetics:
+				i.set_pos_hitted_p2()
 
 
 #################################################

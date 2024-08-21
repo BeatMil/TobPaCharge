@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvbchwfxrs3w6"]
+[gd_scene load_steps=10 format=3 uid="uid://dvbchwfxrs3w6"]
 
 [ext_resource type="Texture2D" uid="uid://jf1ws6bprf8u" path="res://media/sprites/menu/menu_waifu/menu_waifu_idle.png" id="1_c3fd2"]
 [ext_resource type="Script" path="res://scripts/menu_waifu.gd" id="2_ydwai"]
+[ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="3_d41rl"]
 
 [sub_resource type="Animation" id="Animation_8dl3p"]
 length = 0.001
@@ -16,6 +17,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-96, -296)]
 }
 
 [sub_resource type="Animation" id="Animation_2qef8"]
@@ -34,11 +47,61 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 15), Vector2(0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(-96, -296), Vector2(-96, -281), Vector2(-96, -296)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nou2k"]
 _data = {
 "RESET": SubResource("Animation_8dl3p"),
 "normal": SubResource("Animation_2qef8")
+}
+
+[sub_resource type="Animation" id="Animation_77tnr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.99395, 0.46406, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_t4dd5"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.99395, 0.46406, 1), Color(1, 0.741366, 0.499939, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xec4f"]
+_data = {
+"RESET": SubResource("Animation_77tnr"),
+"idle": SubResource("Animation_t4dd5")
 }
 
 [node name="MenuWaifuIdle" type="Sprite2D"]
@@ -51,3 +114,31 @@ libraries = {
 "": SubResource("AnimationLibrary_nou2k")
 }
 autoplay = "normal"
+
+[node name="Button" type="Button" parent="."]
+offset_left = -96.0
+offset_top = -296.0
+offset_right = 88.0
+offset_bottom = 256.0
+focus_mode = 0
+action_mode = 0
+flat = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -96.0
+offset_top = -296.0
+offset_right = 86.0
+offset_bottom = -249.0
+theme_override_colors/font_color = Color(1, 0.99395, 0.46406, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_d41rl")
+theme_override_font_sizes/font_size = 39
+text = "Skill Menu"
+
+[node name="LabelPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xec4f")
+}
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

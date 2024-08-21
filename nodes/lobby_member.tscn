@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfxbiu6m3gb38"]
+[gd_scene load_steps=17 format=3 uid="uid://bfxbiu6m3gb38"]
 
 [ext_resource type="Script" path="res://scripts/lobby_member.gd" id="1_yyo3l"]
 [ext_resource type="Texture2D" uid="uid://dc2yhjrh18w2f" path="res://media/TobPaCharge_icon.png" id="2_ln01r"]
 [ext_resource type="FontFile" uid="uid://cl02il1o54qfl" path="res://fonts/DroidSansMono.ttf" id="3_j8qj2"]
 [ext_resource type="FontFile" uid="uid://dvjq4m431o2pu" path="res://fonts/Code Vein Fonts/Roboto-Regular.ttf" id="4_lot53"]
 [ext_resource type="PackedScene" uid="uid://dwudxqx2i5jsm" path="res://nodes/cool_menu_ready_button.tscn" id="5_qwk3n"]
+[ext_resource type="Texture2D" uid="uid://ctircf01dgh3u" path="res://media/sprites/very_cool_double_fireball_button/very_cool_double_fireball_button_hover.png" id="6_yap1q"]
+[ext_resource type="AudioStream" uid="uid://c4bfyt0prnn18" path="res://media/sfx/select02.wav" id="7_eo680"]
+[ext_resource type="Texture2D" uid="uid://cakwm1if530kp" path="res://media/sprites/very_cool_heart_charge_button/very_cool_heart_charge_button_hover.png" id="7_lmkia"]
 
 [sub_resource type="Animation" id="Animation_1l3l7"]
 length = 0.001
@@ -134,6 +137,90 @@ _data = {
 "stand_by": SubResource("Animation_2wrth")
 }
 
+[sub_resource type="Animation" id="Animation_il3ik"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_njin8"]
+resource_name = "double_fireball"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_yap1q")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_eo680")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_ksy46"]
+resource_name = "heart_charge"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_lmkia")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_eo680")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yy3ry"]
+_data = {
+"RESET": SubResource("Animation_il3ik"),
+"double_fireball": SubResource("Animation_njin8"),
+"heart_charge": SubResource("Animation_ksy46")
+}
+
 [node name="LobbyMember" type="Control" node_paths=PackedStringArray("username_label")]
 custom_minimum_size = Vector2(528, 192)
 layout_mode = 3
@@ -188,5 +275,16 @@ libraries = {
 position = Vector2(336, -3.8147e-06)
 scale = Vector2(1.45, 1.45)
 text_on_button = "Press me"
+
+[node name="SkillIcon" type="Sprite2D" parent="."]
+position = Vector2(616, 96)
+scale = Vector2(0.328125, 0.328125)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SkillIcon"]
+libraries = {
+"": SubResource("AnimationLibrary_yy3ry")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SkillIcon"]
 
 [connection signal="toggle_pressed" from="CoolMenuReadyButton" to="." method="_on_cool_menu_ready_button_toggle_pressed"]

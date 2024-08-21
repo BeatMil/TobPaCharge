@@ -1,0 +1,279 @@
+[gd_scene load_steps=25 format=3 uid="uid://y4r5asmsfab4"]
+
+[ext_resource type="Script" path="res://scripts/cosmetic_hips_button.gd" id="1_du18d"]
+[ext_resource type="Texture2D" uid="uid://df214t6cq1wy2" path="res://media/sprites/cosmetics/hips/gun.png" id="3_2y1wl"]
+[ext_resource type="Texture2D" uid="uid://dm4jhwllgcuqw" path="res://media/sprites/cosmetics/hips/kunai.png" id="4_gcnma"]
+[ext_resource type="AudioStream" uid="uid://bjmgpfd2fddy7" path="res://media/sfx/unequip01.wav" id="5_2bec5"]
+[ext_resource type="Texture2D" uid="uid://dwjl27na3136a" path="res://media/sprites/cosmetics/hips/pouch.png" id="5_4pdb4"]
+[ext_resource type="AudioStream" uid="uid://cec56ibq6ud66" path="res://media/sfx/equip01.wav" id="6_by4gw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gov1"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tylh4"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_63rrf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:icon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_2y1wl"), ExtResource("3_2y1wl")]
+}
+
+[sub_resource type="Animation" id="Animation_rt64m"]
+resource_name = "gun"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:icon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_2y1wl")]
+}
+
+[sub_resource type="Animation" id="Animation_vlqc2"]
+resource_name = "kunai"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:icon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_gcnma")]
+}
+
+[sub_resource type="Animation" id="Animation_qfc1b"]
+resource_name = "pouch"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:icon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_4pdb4")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bex1n"]
+_data = {
+"RESET": SubResource("Animation_63rrf"),
+"gun": SubResource("Animation_rt64m"),
+"kunai": SubResource("Animation_vlqc2"),
+"pouch": SubResource("Animation_qfc1b")
+}
+
+[sub_resource type="Animation" id="Animation_adxs8"]
+resource_name = "toggle_off"
+length = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_2bec5")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="Animation" id="Animation_d2tdu"]
+resource_name = "toggle_on"
+length = 0.1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_by4gw")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tf62i"]
+_data = {
+"toggle_off": SubResource("Animation_adxs8"),
+"toggle_on": SubResource("Animation_d2tdu")
+}
+
+[sub_resource type="Animation" id="Animation_c5ipk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.338921, 0.776409, 0.448293, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2anvt"]
+resource_name = "blue"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.175875, 0.3342, 0.776409, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w3tdx"]
+resource_name = "green"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.338921, 0.776409, 0.448293, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pm1uu"]
+resource_name = "pink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.898438, 0.565495, 0.872384, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eal24"]
+resource_name = "purple"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.621836, 0.362143, 0.84375, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7hvv8"]
+resource_name = "red"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.776409, 0.29626, 0.325241, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_58qvq"]
+resource_name = "yellow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.976562, 0.957317, 0.400758, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_psgjl"]
+_data = {
+"RESET": SubResource("Animation_c5ipk"),
+"blue": SubResource("Animation_2anvt"),
+"green": SubResource("Animation_w3tdx"),
+"pink": SubResource("Animation_pm1uu"),
+"purple": SubResource("Animation_eal24"),
+"red": SubResource("Animation_7hvv8"),
+"yellow": SubResource("Animation_58qvq")
+}
+
+[node name="CosmeticHipsButton" type="Node2D"]
+script = ExtResource("1_du18d")
+hips_type = "gun"
+color = "red"
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(0.338921, 0.776409, 0.448293, 1)
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3gov1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_tylh4")
+toggle_mode = true
+icon = ExtResource("3_2y1wl")
+
+[node name="SpritePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bex1n")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tf62i")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+
+[node name="ColorPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_psgjl")
+}
+
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

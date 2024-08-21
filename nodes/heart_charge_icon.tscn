@@ -1,0 +1,135 @@
+[gd_scene load_steps=9 format=3 uid="uid://x56vsw8e3d8j"]
+
+[ext_resource type="Texture2D" uid="uid://cakwm1if530kp" path="res://media/sprites/very_cool_heart_charge_button/very_cool_heart_charge_button_hover.png" id="1_8nmlf"]
+[ext_resource type="Script" path="res://scripts/heart_charge_icon.gd" id="1_vumno"]
+[ext_resource type="AudioStream" uid="uid://cody8qi6vx1t1" path="res://media/sfx/wind_up.wav" id="3_5picl"]
+[ext_resource type="AudioStream" uid="uid://bj0rbvkly8vj7" path="res://media/sfx/shield_break.wav" id="4_da2i4"]
+
+[sub_resource type="Animation" id="Animation_nqex7"]
+resource_name = "pop_up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VeryCoolHeartChargeButtonHover:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 512, 0), Rect2(0, 0, 512, 512)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_hit_spark"
+}]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_5picl")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_s4of7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VeryCoolHeartChargeButtonHover:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 512, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_difpd"]
+resource_name = "pop_down"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VeryCoolHeartChargeButtonHover:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 512, 512), Rect2(0, 0, 512, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_hit_spark"
+}]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_da2i4")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i51oq"]
+_data = {
+"RESET": SubResource("Animation_s4of7"),
+"pop_down": SubResource("Animation_difpd"),
+"pop_up": SubResource("Animation_nqex7")
+}
+
+[node name="HeartChargeIcon" type="Node2D"]
+script = ExtResource("1_vumno")
+
+[node name="VeryCoolHeartChargeButtonHover" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_8nmlf")
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 0)
+region_filter_clip_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i51oq")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
